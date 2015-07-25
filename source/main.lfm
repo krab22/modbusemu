@@ -1,0 +1,7 @@
+object Form1: TForm1
+  Left = 342
+  Height = 240
+  Top = 245
+  Width = 320
+  Caption = 'Form1'
+end
