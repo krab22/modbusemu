@@ -20,6 +20,7 @@
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
+      <BuildNr Value="2"/>
       <Attributes pvaDebug="True"/>
       <StringTable ProductVersion=""/>
     </VersionInfo>
@@ -46,12 +47,12 @@
       <Unit0>
         <Filename Value="modbusemu.lpr"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="modbusemu"/>
       </Unit0>
       <Unit1>
         <Filename Value="source/main.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="Form1"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="main"/>
       </Unit1>
@@ -64,6 +65,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
+      <Libraries Value="/usr/lib/codetyphon/binLibraries/x86_64-linux/"/>
       <OtherUnitFiles Value="source;files/lib/CRC16;files/lib/LogUtils;files/lib/ModbusLib;files/lib/ModbusLib/MBFunctions;files/lib/ModbusLib/MBTCPMasterDispatcher;files/lib/SocketUtils"/>
       <UnitOutputDirectory Value="dcu/$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>

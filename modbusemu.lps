@@ -7,8 +7,7 @@
       <Unit0>
         <Filename Value="modbusemu.lpr"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="modbusemu"/>
-        <CursorPos X="35" Y="6"/>
+        <CursorPos Y="20"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -16,6 +15,7 @@
         <Filename Value="source/main.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="Form1"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="main"/>
         <IsVisibleTab Value="True"/>
