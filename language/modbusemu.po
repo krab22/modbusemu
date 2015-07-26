@@ -1,0 +1,87 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: tfrmmain.actdevadd.caption
+msgctxt "TFRMMAIN.ACTDEVADD.CAPTION"
+msgid "Добавить устройство"
+msgstr ""
+
+#: tfrmmain.actdevclearlist.caption
+msgctxt "TFRMMAIN.ACTDEVCLEARLIST.CAPTION"
+msgid "Очистить список устройств"
+msgstr ""
+
+#: tfrmmain.actdevdel.caption
+msgctxt "TFRMMAIN.ACTDEVDEL.CAPTION"
+msgid "Удалить устройство"
+msgstr ""
+
+#: tfrmmain.actdevview.caption
+msgid "Просмотреть устройство"
+msgstr ""
+
+#: tfrmmain.actexit.caption
+msgctxt "TFRMMAIN.ACTEXIT.CAPTION"
+msgid "Выход"
+msgstr ""
+
+#: tfrmmain.actfileloadconf.caption
+msgctxt "TFRMMAIN.ACTFILELOADCONF.CAPTION"
+msgid "Загрузить конфигурацию"
+msgstr ""
+
+#: tfrmmain.actfilesaveconf.caption
+msgctxt "TFRMMAIN.ACTFILESAVECONF.CAPTION"
+msgid "Сохранить конфигурацию"
+msgstr ""
+
+#: tfrmmain.caption
+msgid "Эмулятор Modbus-slave "
+msgstr ""
+
+#: tfrmmain.mmdevices.caption
+msgid "Устройства"
+msgstr ""
+
+#: tfrmmain.mmfiles.caption
+msgid "Файл"
+msgstr ""
+
+#: tfrmmain.tbdevadddev.caption
+msgctxt "tfrmmain.tbdevadddev.caption"
+msgid "Добавить устройство"
+msgstr ""
+
+#: tfrmmain.tbdevcleardevlist.caption
+msgctxt "tfrmmain.tbdevcleardevlist.caption"
+msgid "Очистить список устройств"
+msgstr ""
+
+#: tfrmmain.tbdevdeldev.caption
+msgctxt "tfrmmain.tbdevdeldev.caption"
+msgid "Удалить устройство"
+msgstr ""
+
+#: tfrmmain.tbfileexit.caption
+msgctxt "tfrmmain.tbfileexit.caption"
+msgid "Выход"
+msgstr ""
+
+#: tfrmmain.tbfileloadconf.caption
+msgctxt "tfrmmain.tbfileloadconf.caption"
+msgid "Загрузить конфигурацию"
+msgstr ""
+
+#: tfrmmain.tbfilesaveconf.caption
+msgctxt "tfrmmain.tbfilesaveconf.caption"
+msgid "Сохранить конфигурацию"
+msgstr ""
+
+#: tfrmmain.tbmain.caption
+msgid "tbMain"
+msgstr ""
+
+#: tfrmmain.tbsepor1.caption
+msgid "tbSepor1"
+msgstr ""
+

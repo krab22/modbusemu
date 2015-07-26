@@ -1,7 +1,174 @@
-object Form1: TForm1
-  Left = 342
-  Height = 240
-  Top = 245
-  Width = 320
-  Caption = 'Form1'
+object frmMain: TfrmMain
+  Left = 461
+  Height = 483
+  Top = 281
+  Width = 845
+  Caption = 'Эмулятор Modbus-slave '
+  ClientHeight = 456
+  ClientWidth = 845
+  Menu = mMenu
+  OnClose = FormClose
+  LCLVersion = '1.5'
+  object StatusBar1: TStatusBar
+    Left = 0
+    Height = 23
+    Top = 433
+    Width = 845
+    Panels = <>
+  end
+  object tbMain: TToolBar
+    Left = 0
+    Height = 26
+    Top = 0
+    Width = 845
+    Caption = 'tbMain'
+    TabOrder = 1
+    object tbFileLoadConf: TToolButton
+      Left = 1
+      Top = 2
+      Caption = 'Загрузить конфигурацию'
+      MenuItem = mmFileLoadConf
+    end
+    object tbFileSaveConf: TToolButton
+      Left = 24
+      Top = 2
+      Caption = 'Сохранить конфигурацию'
+      MenuItem = mmFileSaveConf
+    end
+    object tbFileExit: TToolButton
+      Left = 47
+      Top = 2
+      Caption = 'Выход'
+      MenuItem = mmExit
+    end
+    object tbSepor1: TToolButton
+      Left = 70
+      Height = 22
+      Top = 2
+      Width = 8
+      Caption = 'tbSepor1'
+      Style = tbsSeparator
+    end
+    object tbDevAddDev: TToolButton
+      Left = 78
+      Top = 2
+      Caption = 'Добавить устройство'
+      MenuItem = mmDevAddDev
+    end
+    object tbDevDelDev: TToolButton
+      Left = 101
+      Top = 2
+      Caption = 'Удалить устройство'
+      MenuItem = mmDevDelDev
+    end
+    object tbDevClearDevList: TToolButton
+      Left = 124
+      Top = 2
+      Caption = 'Очистить список устройств'
+      MenuItem = mmDevClearDevList
+    end
+  end
+  object lbDeviceList: TListBox
+    Left = 0
+    Height = 407
+    Top = 26
+    Width = 181
+    Align = alLeft
+    ItemHeight = 0
+    OnDblClick = lbDeviceListDblClick
+    ScrollWidth = 179
+    TabOrder = 2
+    TopIndex = -1
+  end
+  object Splitter1: TSplitter
+    Left = 181
+    Height = 407
+    Top = 26
+    Width = 7
+  end
+  object sbMainClientSpace: TScrollBox
+    Left = 188
+    Height = 407
+    Top = 26
+    Width = 657
+    HorzScrollBar.Page = 1
+    VertScrollBar.Page = 1
+    Align = alClient
+    TabOrder = 4
+  end
+  object mMenu: TMainMenu
+    left = 440
+    object mmFiles: TMenuItem
+      Caption = 'Файл'
+      object mmFileLoadConf: TMenuItem
+        Action = actFileLoadConf
+      end
+      object mmFileSaveConf: TMenuItem
+        Action = actFileSaveConf
+      end
+      object mmExit: TMenuItem
+        Action = actExit
+      end
+    end
+    object mmDevices: TMenuItem
+      Caption = 'Устройства'
+      object mmDevAddDev: TMenuItem
+        Action = actDevAdd
+      end
+      object mmDevView: TMenuItem
+        Action = actDevView
+      end
+      object mmDevDelDev: TMenuItem
+        Action = actDevDel
+      end
+      object mmDevClearDevList: TMenuItem
+        Action = actDevClearList
+      end
+    end
+  end
+  object actlMain: TActionList
+    left = 320
+    object actFileLoadConf: TAction
+      Category = 'Files'
+      Caption = 'Загрузить конфигурацию'
+      OnExecute = actFileLoadConfExecute
+      ShortCut = 16460
+    end
+    object actFileSaveConf: TAction
+      Category = 'Files'
+      Caption = 'Сохранить конфигурацию'
+      OnExecute = actFileSaveConfExecute
+      ShortCut = 16467
+    end
+    object actExit: TAction
+      Category = 'Files'
+      Caption = 'Выход'
+      OnExecute = actExitExecute
+      ShortCut = 16465
+    end
+    object actDevAdd: TAction
+      Category = 'Devices'
+      Caption = 'Добавить устройство'
+      OnExecute = actDevAddExecute
+      ShortCut = 32833
+    end
+    object actDevDel: TAction
+      Category = 'Devices'
+      Caption = 'Удалить устройство'
+      OnExecute = actDevDelExecute
+      ShortCut = 32836
+    end
+    object actDevClearList: TAction
+      Category = 'Devices'
+      Caption = 'Очистить список устройств'
+      OnExecute = actDevClearListExecute
+      ShortCut = 32835
+    end
+    object actDevView: TAction
+      Category = 'Devices'
+      Caption = 'Просмотреть устройство'
+      OnExecute = actDevViewExecute
+      ShortCut = 32854
+    end
+  end
 end
