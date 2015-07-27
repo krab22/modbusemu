@@ -1,6 +1,34 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
+#: tfrmmain.actchanneladd.caption
+msgid "Добавить канал"
+msgstr ""
+
+#: tfrmmain.actchannelclose.caption
+msgid "Закрыть канал"
+msgstr ""
+
+#: tfrmmain.actchannelcloseall.caption
+msgid "Закрыть все каналы"
+msgstr ""
+
+#: tfrmmain.actchanneldel.caption
+msgid "Удалить канал"
+msgstr ""
+
+#: tfrmmain.actchanneldelall.caption
+msgid "Удалить все каналы"
+msgstr ""
+
+#: tfrmmain.actchannelopen.caption
+msgid "Открыть канал"
+msgstr ""
+
+#: tfrmmain.actchannelopenall.caption
+msgid "Отарыть все каналы"
+msgstr ""
+
 #: tfrmmain.actdevadd.caption
 msgctxt "TFRMMAIN.ACTDEVADD.CAPTION"
 msgid "Добавить устройство"
@@ -35,8 +63,44 @@ msgctxt "TFRMMAIN.ACTFILESAVECONF.CAPTION"
 msgid "Сохранить конфигурацию"
 msgstr ""
 
+#: tfrmmain.actlogclear.caption
+msgid "Очистить"
+msgstr ""
+
+#: tfrmmain.actlogsave.caption
+msgid "Сохранить"
+msgstr ""
+
 #: tfrmmain.caption
 msgid "Эмулятор Modbus-slave "
+msgstr ""
+
+#: tfrmmain.cblogdebug.caption
+msgid "Отладка"
+msgstr ""
+
+#: tfrmmain.cblogerror.caption
+msgid "Ошибки"
+msgstr ""
+
+#: tfrmmain.cbloginfo.caption
+msgid "Инфо"
+msgstr ""
+
+#: tfrmmain.cblogwarn.caption
+msgid "Предупреждения"
+msgstr ""
+
+#: tfrmmain.cmbloglinecount.hint
+msgid "Количество строк протокола"
+msgstr ""
+
+#: tfrmmain.cmbloglinecount.text
+msgid "1000"
+msgstr ""
+
+#: tfrmmain.mmchannels.caption
+msgid "Каналы"
 msgstr ""
 
 #: tfrmmain.mmdevices.caption
@@ -47,34 +111,8 @@ msgstr ""
 msgid "Файл"
 msgstr ""
 
-#: tfrmmain.tbdevadddev.caption
-msgctxt "tfrmmain.tbdevadddev.caption"
-msgid "Добавить устройство"
-msgstr ""
-
-#: tfrmmain.tbdevcleardevlist.caption
-msgctxt "tfrmmain.tbdevcleardevlist.caption"
-msgid "Очистить список устройств"
-msgstr ""
-
-#: tfrmmain.tbdevdeldev.caption
-msgctxt "tfrmmain.tbdevdeldev.caption"
-msgid "Удалить устройство"
-msgstr ""
-
-#: tfrmmain.tbfileexit.caption
-msgctxt "tfrmmain.tbfileexit.caption"
-msgid "Выход"
-msgstr ""
-
-#: tfrmmain.tbfileloadconf.caption
-msgctxt "tfrmmain.tbfileloadconf.caption"
-msgid "Загрузить конфигурацию"
-msgstr ""
-
-#: tfrmmain.tbfilesaveconf.caption
-msgctxt "tfrmmain.tbfilesaveconf.caption"
-msgid "Сохранить конфигурацию"
+#: tfrmmain.mmlog.caption
+msgid "Протокол"
 msgstr ""
 
 #: tfrmmain.tbmain.caption
@@ -83,5 +121,13 @@ msgstr ""
 
 #: tfrmmain.tbsepor1.caption
 msgid "tbSepor1"
+msgstr ""
+
+#: tfrmmain.tbsplitter2.caption
+msgid "tbSplitter2"
+msgstr ""
+
+#: tfrmmain.tbsplitter3.caption
+msgid "tbSplitter3"
 msgstr ""
 

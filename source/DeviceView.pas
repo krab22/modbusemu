@@ -5,20 +5,26 @@ unit DeviceView;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
+  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls, syncobjs,
   MBDeviceClasses;
 
 type
+
+  { TfrmDeviceView }
 
   TfrmDeviceView = class(TForm)
      edDevNum : TEdit;
      lbDevNum : TLabel;
    private
-     FDevice : TMBDevice;
+     FDevice   : TMBDevice;
+     FCSection : TCriticalSection;
      procedure SetDevice(AValue : TMBDevice);
      procedure ClearForm;
+     procedure Lock;
+     procedure UnLock;
    public
-     property Device : TMBDevice read FDevice write SetDevice;
+     property Device   : TMBDevice read FDevice write SetDevice;
+     property CSection : TCriticalSection read FCSection write FCSection;
   end;
 
 var frmDeviceView : TfrmDeviceView;
@@ -40,12 +46,27 @@ begin
    end;
   FDevice := AValue;
 
-  edDevNum.Text := IntToStr(FDevice.DeviceNum);
+  Lock;
+  try
+   edDevNum.Text := IntToStr(FDevice.DeviceNum);
+  finally
+    UnLock;
+  end;
 end;
 
 procedure TfrmDeviceView.ClearForm;
 begin
   edDevNum.Text := '';
+end;
+
+procedure TfrmDeviceView.Lock;
+begin
+  if Assigned(FCSection) then FCSection.Enter;
+end;
+
+procedure TfrmDeviceView.UnLock;
+begin
+  if Assigned(FCSection) then FCSection.Leave;
 end;
 
 end.

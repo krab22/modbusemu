@@ -1,44 +1,48 @@
 object frmMain: TfrmMain
-  Left = 461
-  Height = 483
-  Top = 281
-  Width = 845
+  Left = 503
+  Height = 585
+  Top = 247
+  Width = 900
   Caption = 'Эмулятор Modbus-slave '
-  ClientHeight = 456
-  ClientWidth = 845
+  ClientHeight = 558
+  ClientWidth = 900
+  Constraints.MinHeight = 585
+  Constraints.MinWidth = 900
   Menu = mMenu
   OnClose = FormClose
-  LCLVersion = '1.5'
+  OnCreate = FormCreate
+  OnShow = FormShow
+  LCLVersion = '1.3'
   object StatusBar1: TStatusBar
     Left = 0
     Height = 23
-    Top = 433
-    Width = 845
+    Top = 535
+    Width = 900
     Panels = <>
   end
   object tbMain: TToolBar
     Left = 0
     Height = 26
     Top = 0
-    Width = 845
+    Width = 900
     Caption = 'tbMain'
-    TabOrder = 1
+    TabOrder = 0
     object tbFileLoadConf: TToolButton
       Left = 1
       Top = 2
-      Caption = 'Загрузить конфигурацию'
+      Action = actFileLoadConf
       MenuItem = mmFileLoadConf
     end
     object tbFileSaveConf: TToolButton
       Left = 24
       Top = 2
-      Caption = 'Сохранить конфигурацию'
+      Action = actFileSaveConf
       MenuItem = mmFileSaveConf
     end
     object tbFileExit: TToolButton
       Left = 47
       Top = 2
-      Caption = 'Выход'
+      Action = actExit
       MenuItem = mmExit
     end
     object tbSepor1: TToolButton
@@ -52,52 +56,254 @@ object frmMain: TfrmMain
     object tbDevAddDev: TToolButton
       Left = 78
       Top = 2
-      Caption = 'Добавить устройство'
+      Action = actDevAdd
       MenuItem = mmDevAddDev
     end
     object tbDevDelDev: TToolButton
       Left = 101
       Top = 2
-      Caption = 'Удалить устройство'
+      Action = actDevDel
       MenuItem = mmDevDelDev
     end
     object tbDevClearDevList: TToolButton
       Left = 124
       Top = 2
-      Caption = 'Очистить список устройств'
+      Action = actDevClearList
       MenuItem = mmDevClearDevList
+    end
+    object tbSplitter2: TToolButton
+      Left = 147
+      Height = 22
+      Top = 2
+      Width = 10
+      Caption = 'tbSplitter2'
+      Style = tbsSeparator
+    end
+    object tbLogSave: TToolButton
+      Left = 157
+      Top = 2
+      Action = actLogSave
+    end
+    object tbLogClear: TToolButton
+      Left = 180
+      Top = 2
+      Action = actLogClear
+    end
+    object tbSplitter3: TToolButton
+      Left = 203
+      Height = 22
+      Top = 2
+      Width = 10
+      Caption = 'tbSplitter3'
+      Style = tbsSeparator
+    end
+    object tbChannelAdd: TToolButton
+      Left = 213
+      Top = 2
+      Action = actChannelAdd
+    end
+    object tbChamnnelDel: TToolButton
+      Left = 236
+      Top = 2
+      Action = actChannelDel
+    end
+    object tbChannelClose: TToolButton
+      Left = 259
+      Top = 2
+      Action = actChannelClose
+    end
+    object tbChannelOpen: TToolButton
+      Left = 282
+      Top = 2
+      Action = actChannelOpen
+    end
+    object tbChannelDelAll: TToolButton
+      Left = 305
+      Top = 2
+      Action = actChannelDelAll
+    end
+    object tbChannelCloseAll: TToolButton
+      Left = 328
+      Top = 2
+      Action = actChannelCloseAll
+    end
+    object tbChannelOpenAll: TToolButton
+      Left = 351
+      Top = 2
+      Action = actChannelOpenAll
     end
   end
   object lbDeviceList: TListBox
     Left = 0
-    Height = 407
+    Height = 509
     Top = 26
-    Width = 181
+    Width = 201
     Align = alLeft
+    Constraints.MinHeight = 509
+    Constraints.MinWidth = 201
     ItemHeight = 0
     OnDblClick = lbDeviceListDblClick
-    ScrollWidth = 179
-    TabOrder = 2
+    ScrollWidth = 199
+    TabOrder = 1
     TopIndex = -1
   end
   object Splitter1: TSplitter
-    Left = 181
-    Height = 407
+    Left = 201
+    Height = 509
     Top = 26
     Width = 7
   end
   object sbMainClientSpace: TScrollBox
-    Left = 188
-    Height = 407
+    Left = 208
+    Height = 509
     Top = 26
-    Width = 657
-    HorzScrollBar.Page = 1
-    VertScrollBar.Page = 1
+    Width = 692
+    HorzScrollBar.Page = 283
+    VertScrollBar.Page = 240
     Align = alClient
+    Anchors = [akTop, akLeft, akRight]
+    ClientHeight = 507
+    ClientWidth = 690
+    Constraints.MinHeight = 509
+    Constraints.MinWidth = 300
     TabOrder = 4
+    object memLog: TMemo
+      Left = -1
+      Height = 240
+      Top = 267
+      Width = 691
+      Anchors = [akLeft, akRight, akBottom]
+      OnChange = memLogChange
+      ScrollBars = ssAutoBoth
+      TabOrder = 11
+    end
+    object cmbLogLineCount: TComboBox
+      Left = 185
+      Height = 29
+      Hint = 'Количество строк протокола'
+      Top = 236
+      Width = 120
+      Anchors = [akLeft, akBottom]
+      ItemHeight = 0
+      ItemIndex = 3
+      Items.Strings = (
+        '100'
+        '200'
+        '500'
+        '1000'
+        '5000'
+      )
+      OnChange = cmbLogLineCountChange
+      ParentShowHint = False
+      ShowHint = True
+      Style = csDropDownList
+      TabOrder = 6
+      Text = '1000'
+    end
+    object cbLogDebug: TCheckBox
+      Left = 309
+      Height = 25
+      Top = 236
+      Width = 81
+      Anchors = [akLeft, akBottom]
+      Caption = 'Отладка'
+      Checked = True
+      OnChange = cbLogDebugChange
+      State = cbChecked
+      TabOrder = 7
+    end
+    object cbLogInfo: TCheckBox
+      Left = 391
+      Height = 25
+      Top = 236
+      Width = 66
+      Anchors = [akLeft, akBottom]
+      Caption = 'Инфо'
+      Checked = True
+      OnChange = cbLogInfoChange
+      State = cbChecked
+      TabOrder = 8
+    end
+    object cbLogWarn: TCheckBox
+      Left = 459
+      Height = 25
+      Top = 236
+      Width = 142
+      Anchors = [akLeft, akBottom]
+      Caption = 'Предупреждения'
+      Checked = True
+      OnChange = cbLogWarnChange
+      State = cbChecked
+      TabOrder = 9
+    end
+    object cbLogError: TCheckBox
+      Left = 603
+      Height = 25
+      Top = 236
+      Width = 79
+      Anchors = [akLeft, akBottom]
+      Caption = 'Ошибки'
+      Checked = True
+      OnChange = cbLogErrorChange
+      State = cbChecked
+      TabOrder = 10
+    end
+    object btLogClear: TButton
+      Left = 4
+      Height = 25
+      Top = 236
+      Width = 75
+      Action = actLogClear
+      Anchors = [akLeft, akBottom]
+      TabOrder = 5
+    end
+    object btLogSave: TButton
+      Left = 88
+      Height = 25
+      Top = 236
+      Width = 84
+      Action = actLogSave
+      Anchors = [akLeft, akBottom]
+      TabOrder = 4
+    end
+    object btChannelAdd: TButton
+      Left = 4
+      Height = 25
+      Top = 8
+      Width = 124
+      Action = actChannelAdd
+      TabOrder = 0
+    end
+    object btChannelClerList: TButton
+      Left = 136
+      Height = 25
+      Top = 8
+      Width = 147
+      Action = actChannelDelAll
+      TabOrder = 1
+    end
+    object btChanelStartAll: TButton
+      Left = 392
+      Height = 25
+      Top = 8
+      Width = 146
+      Action = actChannelOpenAll
+      Anchors = [akTop, akRight]
+      TabOrder = 2
+    end
+    object btChannelCloseAll: TButton
+      Left = 544
+      Height = 25
+      Top = 8
+      Width = 138
+      Action = actChannelCloseAll
+      Anchors = [akTop, akRight]
+      TabOrder = 3
+    end
   end
   object mMenu: TMainMenu
-    left = 440
+    left = 360
+    top = 176
     object mmFiles: TMenuItem
       Caption = 'Файл'
       object mmFileLoadConf: TMenuItem
@@ -125,9 +331,43 @@ object frmMain: TfrmMain
         Action = actDevClearList
       end
     end
+    object mmLog: TMenuItem
+      Caption = 'Протокол'
+      object mmLogSave: TMenuItem
+        Action = actLogSave
+      end
+      object mmLogClear: TMenuItem
+        Action = actLogClear
+      end
+    end
+    object mmChannels: TMenuItem
+      Caption = 'Каналы'
+      object mmChannelAdd: TMenuItem
+        Action = actChannelAdd
+      end
+      object mmChannelDel: TMenuItem
+        Action = actChannelDel
+      end
+      object mmChannelClose: TMenuItem
+        Action = actChannelClose
+      end
+      object mmChannelOpen: TMenuItem
+        Action = actChannelOpen
+      end
+      object mmChannelDelAll: TMenuItem
+        Action = actChannelDelAll
+      end
+      object mmChannelStopAll: TMenuItem
+        Action = actChannelCloseAll
+      end
+      object mmChannelOpenAll: TMenuItem
+        Action = actChannelOpenAll
+      end
+    end
   end
   object actlMain: TActionList
-    left = 320
+    left = 296
+    top = 176
     object actFileLoadConf: TAction
       Category = 'Files'
       Caption = 'Загрузить конфигурацию'
@@ -170,5 +410,70 @@ object frmMain: TfrmMain
       OnExecute = actDevViewExecute
       ShortCut = 32854
     end
+    object actLogClear: TAction
+      Category = 'Log'
+      Caption = 'Очистить'
+      OnExecute = actLogClearExecute
+      ShortCut = 32856
+    end
+    object actLogSave: TAction
+      Category = 'Log'
+      Caption = 'Сохранить'
+      OnExecute = actLogSaveExecute
+      ShortCut = 32858
+    end
+    object actChannelAdd: TAction
+      Category = 'Channel'
+      Caption = 'Добавить канал'
+      OnExecute = actChannelAddExecute
+    end
+    object actChannelDel: TAction
+      Category = 'Channel'
+      Caption = 'Удалить канал'
+      OnExecute = actChannelDelExecute
+    end
+    object actChannelClose: TAction
+      Category = 'Channel'
+      Caption = 'Закрыть канал'
+      OnExecute = actChannelCloseExecute
+    end
+    object actChannelOpen: TAction
+      Category = 'Channel'
+      Caption = 'Открыть канал'
+      OnExecute = actChannelOpenExecute
+    end
+    object actChannelDelAll: TAction
+      Category = 'Channel'
+      Caption = 'Удалить все каналы'
+      OnExecute = actChannelDelAllExecute
+    end
+    object actChannelCloseAll: TAction
+      Category = 'Channel'
+      Caption = 'Закрыть все каналы'
+      OnExecute = actChannelCloseAllExecute
+    end
+    object actChannelOpenAll: TAction
+      Category = 'Channel'
+      Caption = 'Отарыть все каналы'
+      OnExecute = actChannelOpenAllExecute
+    end
+  end
+  object sdLog: TSaveDialog
+    DefaultExt = '.log'
+    Filter = 'Файлы протокола(*.log)|*.log|Все файлы(*.*)|*.*'
+    left = 440
+    top = 176
+  end
+  object sdConf: TSaveDialog
+    DefaultExt = '.xml'
+    Filter = 'XML файлы(*.xml)|*.xml|Все файлы(*.*)|*.*'
+    left = 512
+    top = 176
+  end
+  object odConf: TOpenDialog
+    DefaultExt = '.xml'
+    Filter = 'XML файлы(*.xml)|*.xml|Все файлы(*.*)|*.*'
+    left = 576
+    top = 176
   end
 end

@@ -33,3 +33,7 @@
 /MBResourceString.o
 /MBResourceString.ppu
 /MBResourceString.rsj
+/LoggerItf.o
+/LoggerItf.ppu
+/LoggerLazarusGtkApplication.o
+/LoggerLazarusGtkApplication.ppu
