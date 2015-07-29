@@ -37,3 +37,15 @@
 /LoggerItf.ppu
 /LoggerLazarusGtkApplication.o
 /LoggerLazarusGtkApplication.ppu
+/formChennelRSAdd.lfm
+/formChennelRSAdd.o
+/formChennelRSAdd.ppu
+/formChennelTCPAdd.lfm
+/formChennelTCPAdd.o
+/formChennelTCPAdd.ppu
+/framChennelRSClasses.lfm
+/framChennelRSClasses.o
+/framChennelRSClasses.ppu
+/framChennelTCPClasses.lfm
+/framChennelTCPClasses.o
+/framChennelTCPClasses.ppu

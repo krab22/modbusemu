@@ -1,0 +1,8 @@
+object frmChennelTCPAdd: TfrmChennelTCPAdd
+  Left = 1998
+  Height = 240
+  Top = 726
+  Width = 320
+  Caption = 'frmChennelTCPAdd'
+  LCLVersion = '1.5'
+end

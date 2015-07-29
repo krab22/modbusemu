@@ -1,0 +1,23 @@
+unit framChennelTCPClasses;
+
+{$mode objfpc}{$H+}
+
+interface
+
+uses
+  Classes, SysUtils, FileUtil, Forms, Controls;
+
+type
+  TframeChennelTCP = class(TFrame)
+  private
+    { private declarations }
+  public
+    { public declarations }
+  end;
+
+implementation
+
+{$R *.lfm}
+
+end.
+

@@ -1,7 +1,7 @@
 object frmMain: TfrmMain
-  Left = 503
+  Left = 707
   Height = 585
-  Top = 247
+  Top = 288
   Width = 900
   Caption = 'Эмулятор Modbus-slave '
   ClientHeight = 558
@@ -12,7 +12,7 @@ object frmMain: TfrmMain
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  LCLVersion = '1.3'
+  LCLVersion = '1.5'
   object StatusBar1: TStatusBar
     Left = 0
     Height = 23
@@ -158,7 +158,7 @@ object frmMain: TfrmMain
     Height = 509
     Top = 26
     Width = 692
-    HorzScrollBar.Page = 283
+    HorzScrollBar.Page = 387
     VertScrollBar.Page = 240
     Align = alClient
     Anchors = [akTop, akLeft, akRight]
@@ -275,7 +275,7 @@ object frmMain: TfrmMain
       TabOrder = 0
     end
     object btChannelClerList: TButton
-      Left = 136
+      Left = 240
       Height = 25
       Top = 8
       Width = 147
@@ -299,6 +299,43 @@ object frmMain: TfrmMain
       Action = actChannelCloseAll
       Anchors = [akTop, akRight]
       TabOrder = 3
+    end
+    object btChennelDel: TButton
+      Left = 134
+      Height = 25
+      Top = 8
+      Width = 103
+      Action = actChannelDel
+      TabOrder = 12
+    end
+    object lbChennelList: TLabel
+      Left = 4
+      Height = 21
+      Top = 40
+      Width = 104
+      Caption = 'Список каналов'
+      ParentColor = False
+    end
+    object libChennelList: TListBox
+      Left = 4
+      Height = 168
+      Top = 64
+      Width = 220
+      Anchors = [akTop, akLeft, akBottom]
+      ItemHeight = 0
+      ScrollWidth = 218
+      TabOrder = 13
+      TopIndex = -1
+    end
+    object scrbChennelParams: TScrollBox
+      Left = 228
+      Height = 168
+      Top = 64
+      Width = 454
+      HorzScrollBar.Page = 1
+      VertScrollBar.Page = 1
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      TabOrder = 14
     end
   end
   object mMenu: TMainMenu

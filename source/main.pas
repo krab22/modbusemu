@@ -38,12 +38,15 @@ type
      btChannelClerList : TButton;
      btChanelStartAll  : TButton;
      btChannelCloseAll : TButton;
+     btChennelDel      : TButton;
      cbLogDebug        : TCheckBox;
      cbLogInfo         : TCheckBox;
      cbLogWarn         : TCheckBox;
      cbLogError        : TCheckBox;
      cmbLogLineCount   : TComboBox;
+     lbChennelList     : TLabel;
      lbDeviceList      : TListBox;
+     libChennelList    : TListBox;
      memLog            : TMemo;
      mmChannelDel      : TMenuItem;
      mmChannelOpen     : TMenuItem;
@@ -67,6 +70,7 @@ type
      mmFiles           : TMenuItem;
      mMenu             : TMainMenu;
      odConf            : TOpenDialog;
+     scrbChennelParams : TScrollBox;
      sdConf            : TSaveDialog;
      sdLog             : TSaveDialog;
      sbMainClientSpace : TScrollBox;
@@ -136,6 +140,8 @@ implementation
 {$R *.lfm}
 
 uses DeviceAdd,
+     framChennelRSClasses,framChennelTCPClasses,
+     formChennelRSAdd,formChennelTCPAdd,
      LoggerLazarusGtkApplication,
      LoggerItf;
 

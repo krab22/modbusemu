@@ -99,6 +99,10 @@ msgstr ""
 msgid "1000"
 msgstr ""
 
+#: tfrmmain.lbchennellist.caption
+msgid "Список каналов"
+msgstr ""
+
 #: tfrmmain.mmchannels.caption
 msgid "Каналы"
 msgstr ""
