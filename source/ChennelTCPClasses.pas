@@ -24,6 +24,8 @@ type
 
 implementation
 
+uses LoggerItf;
+
 { TChennelTCP }
 
 procedure TChennelTCP.SetActiveTrue;

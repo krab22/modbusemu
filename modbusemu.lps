@@ -8,7 +8,7 @@
         <Filename Value="modbusemu.lpr"/>
         <IsPartOfProject Value="True"/>
         <CursorPos X="56" Y="9"/>
-        <UsageCount Value="45"/>
+        <UsageCount Value="60"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -19,12 +19,23 @@
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="43"/>
-        <CursorPos X="41" Y="144"/>
-        <UsageCount Value="45"/>
+        <TopLine Value="269"/>
+        <CursorPos X="58" Y="269"/>
+        <UsageCount Value="60"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
     </Units>
   </ProjectSession>
+  <Debugging>
+    <BreakPoints Count="1">
+      <Item1>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="/usr/lib/codetyphon/typhon/lcl/stdctrls.pp"/>
+        <Line Value="1631"/>
+      </Item1>
+    </BreakPoints>
+  </Debugging>
 </CONFIG>

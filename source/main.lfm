@@ -1,7 +1,7 @@
 object frmMain: TfrmMain
-  Left = 707
+  Left = 659
   Height = 585
-  Top = 288
+  Top = 285
   Width = 900
   Caption = 'Эмулятор Modbus-slave '
   ClientHeight = 558
@@ -323,6 +323,7 @@ object frmMain: TfrmMain
       Width = 220
       Anchors = [akTop, akLeft, akBottom]
       ItemHeight = 0
+      OnSelectionChange = libChennelListSelectionChange
       ScrollWidth = 218
       TabOrder = 13
       TopIndex = -1

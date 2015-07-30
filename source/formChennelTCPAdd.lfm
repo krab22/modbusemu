@@ -1,8 +1,32 @@
 object frmChennelTCPAdd: TfrmChennelTCPAdd
-  Left = 1998
-  Height = 240
-  Top = 726
+  Left = 1945
+  Height = 236
+  Top = 254
   Width = 320
-  Caption = 'frmChennelTCPAdd'
+  BorderStyle = bsDialog
+  Caption = 'Добавить сетевой канал'
+  ClientHeight = 236
+  ClientWidth = 320
+  Position = poOwnerFormCenter
   LCLVersion = '1.5'
+  object btOk: TButton
+    Left = 146
+    Height = 25
+    Top = 199
+    Width = 80
+    Anchors = [akRight, akBottom]
+    Caption = 'Добавить'
+    ModalResult = 1
+    OnClick = btOkClick
+    TabOrder = 0
+  end
+  object btCancel: TButton
+    Left = 234
+    Height = 25
+    Top = 199
+    Width = 75
+    Anchors = [akRight, akBottom]
+    Caption = 'Отмена'
+    TabOrder = 1
+  end
 end

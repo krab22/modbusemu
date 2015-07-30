@@ -1,0 +1,30 @@
+object TfrmChennelRSAdd: TTfrmChennelRSAdd
+  Left = 2271
+  Height = 240
+  Top = 534
+  Width = 320
+  Caption = 'Добавить последовательный канал'
+  ClientHeight = 240
+  ClientWidth = 320
+  LCLVersion = '1.5'
+  object btOk: TButton
+    Left = 146
+    Height = 25
+    Top = 203
+    Width = 80
+    Anchors = [akRight, akBottom]
+    Caption = 'Добавить'
+    ModalResult = 1
+    OnClick = btOkClick
+    TabOrder = 0
+  end
+  object btCancel: TButton
+    Left = 234
+    Height = 25
+    Top = 203
+    Width = 75
+    Anchors = [akRight, akBottom]
+    Caption = 'Отмена'
+    TabOrder = 1
+  end
+end

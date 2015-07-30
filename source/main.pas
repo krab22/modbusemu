@@ -8,6 +8,8 @@ uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, Menus,
   ComCtrls, ActnList, StdCtrls, ExtCtrls, syncobjs,
   DeviceView,
+  framChennelRSClasses,framChennelTCPClasses,
+  ChennelClasses,
   MBDeviceClasses;
 
 type
@@ -120,16 +122,22 @@ type
      procedure FormCreate(Sender: TObject);
      procedure FormShow(Sender: TObject);
      procedure lbDeviceListDblClick(Sender : TObject);
+     procedure libChennelListSelectionChange(Sender : TObject; User : boolean);
      procedure memLogChange(Sender: TObject);
    private
      FDevArray     : TDeviceArray;
      FIsConfModify : Boolean;
      FDevView      : TfrmDeviceView;
      FCSection     : TCriticalSection;
+     FChenRSFrame  : TframeChennelRS;
+     FChenTCPFrame : TframeChennelTCP;
 
      procedure ClearDevices;
+     procedure ClearFrames;
+     procedure ClearChennals;
      procedure Lock;
      procedure UnLock;
+     procedure SetChennelFrame(AChennel : TChannelBase);
    public
   end;
 
@@ -140,47 +148,12 @@ implementation
 {$R *.lfm}
 
 uses DeviceAdd,
-     framChennelRSClasses,framChennelTCPClasses,
-     formChennelRSAdd,formChennelTCPAdd,
+     ChennelRSClasses, ChennelTCPClasses,
+     formChennelAdd,
      LoggerLazarusGtkApplication,
      LoggerItf;
 
 { TfrmMain }
-
-procedure TfrmMain.actChannelAddExecute(Sender: TObject);
-begin
-
-end;
-
-procedure TfrmMain.actChannelDelExecute(Sender: TObject);
-begin
-
-end;
-
-procedure TfrmMain.actChannelOpenExecute(Sender: TObject);
-begin
-
-end;
-
-procedure TfrmMain.actChannelCloseExecute(Sender: TObject);
-begin
-
-end;
-
-procedure TfrmMain.actChannelOpenAllExecute(Sender: TObject);
-begin
-
-end;
-
-procedure TfrmMain.actChannelCloseAllExecute(Sender: TObject);
-begin
-
-end;
-
-procedure TfrmMain.actChannelDelAllExecute(Sender: TObject);
-begin
-
-end;
 
 procedure TfrmMain.actFileLoadConfExecute(Sender : TObject);
 begin
@@ -194,6 +167,122 @@ begin
 
 end;
 
+procedure TfrmMain.actChannelAddExecute(Sender: TObject);
+var TempFrm : TformChenAdd;
+    TempIndex : PtrInt;
+    TempChenName : String;
+begin
+  TempFrm := TformChenAdd.Create(Self);
+  try
+   TempFrm.ChennelList := libChennelList.Items;
+   TempFrm.ShowModal;
+   TempIndex := TempFrm.Tag;
+  finally
+   FreeAndNil(TempFrm);
+  end;
+  libChennelList.ItemIndex := TempIndex;
+  TempChenName :=libChennelList.Items.Strings[TempIndex];
+  LoggerObj.info('ChannelAdd',Format('Добавлен канал: %s',[TempChenName]));
+  FIsConfModify := True;
+end;
+
+procedure TfrmMain.actChannelDelExecute(Sender: TObject);
+var TempChen : TObject;
+    TempChenName : String;
+begin
+  if libChennelList.ItemIndex = -1 then
+   begin
+    libChennelList.SetFocus;
+    raise Exception.Create('Удаление канала. Не выбран канал для удаления.');
+   end;
+  TempChen := libChennelList.Items.Objects[libChennelList.ItemIndex];
+  TempChenName := libChennelList.Items.Strings[libChennelList.ItemIndex];;
+  if not Assigned(TempChen) then Exit;
+  libChennelList.Items.Objects[libChennelList.ItemIndex] := nil;
+  libChennelList.Items.Delete(libChennelList.ItemIndex);
+  FreeAndNil(TempChen);
+  if libChennelList.Items.Count > 0 then libChennelList.ItemIndex := 0
+   else libChennelList.ItemIndex := -1;
+  LoggerObj.info('ChannelDel',Format('Удален канал: %s',[TempChenName]));
+  FIsConfModify := True;
+end;
+
+procedure TfrmMain.actChannelOpenExecute(Sender: TObject);
+var TempChen  : TChannelBase;
+    TempChenName : String;
+begin
+  if libChennelList.ItemIndex = -1 then
+   begin
+    libChennelList.SetFocus;
+    raise Exception.Create('Удаление канала. Не выбран канал для открытия.');
+   end;
+  TempChen := TChannelBase(libChennelList.Items.Objects[libChennelList.ItemIndex]);
+  if not Assigned(TempChen) then Exit;
+  TempChen.Active := True;
+  TempChenName :=libChennelList.Items.Strings[libChennelList.ItemIndex];
+  if TempChen.Active then LoggerObj.info('ChannelOpen',Format('Открыт канал: %s',[TempChenName]))
+   else LoggerObj.info('ChannelOpen',Format('Не удалось открыть канал: %s',[TempChenName]));
+end;
+
+procedure TfrmMain.actChannelCloseExecute(Sender: TObject);
+var TempChen  : TChannelBase;
+    TempChenName : String;
+begin
+  if libChennelList.ItemIndex = -1 then
+   begin
+    libChennelList.SetFocus;
+    raise Exception.Create('Удаление канала. Не выбран канал для закрытия.');
+   end;
+  TempChen := TChannelBase(libChennelList.Items.Objects[libChennelList.ItemIndex]);
+  if not Assigned(TempChen) then Exit;
+  TempChen.Active := False;
+  TempChenName :=libChennelList.Items.Strings[libChennelList.ItemIndex];
+  if TempChen.Active then LoggerObj.info('ChannelClose',Format('Не удалось закрыть канал: %s',[TempChenName]))
+   else LoggerObj.info('ChannelClose',Format('Закрыли канал канал: %s',[TempChenName]));
+end;
+
+procedure TfrmMain.actChannelOpenAllExecute(Sender: TObject);
+var TempChen  : TChannelBase;
+    i, Count  : Integer;
+begin
+  Count := libChennelList.Items.Count-1;
+  for i := 0 to Count do
+   begin
+    TempChen := TChannelBase(libChennelList.Items.Objects[i]);
+    if not Assigned(TempChen) then Continue;
+    TempChen.Active := True;
+   end;
+  LoggerObj.info('ChannelOpenAll','Все каналы открыты');
+end;
+
+procedure TfrmMain.actChannelCloseAllExecute(Sender: TObject);
+var TempChen  : TChannelBase;
+    i, Count  : Integer;
+begin
+  Count := libChennelList.Items.Count-1;
+  for i := 0 to Count do
+   begin
+    TempChen := TChannelBase(libChennelList.Items.Objects[i]);
+    if not Assigned(TempChen) then Continue;
+    TempChen.Active := False;
+   end;
+  LoggerObj.info('ChannelCloseAll','Все каналы закрыты');
+end;
+
+procedure TfrmMain.actChannelDelAllExecute(Sender: TObject);
+var i, Count : Integer;
+begin
+  if Assigned(FChenRSFrame) then FChenRSFrame.Parent := nil;
+  if Assigned(FChenTCPFrame) then FChenTCPFrame.Parent := nil;
+  Count := libChennelList.Items.Count-1;
+  if Count = -1 then Exit;
+  for i := Count downto 0 do if Assigned(libChennelList.Items.Objects[i]) then libChennelList.Items.Objects[i].Free;
+  libChennelList.ItemIndex := -1;
+  libChennelList.Items.Clear;
+  LoggerObj.info('ChannelDelAll','Все каналы удалены');
+  FIsConfModify := True;
+end;
+
 procedure TfrmMain.actLogClearExecute(Sender: TObject);
 begin
   memLog.Lines.Clear;
@@ -203,6 +292,41 @@ procedure TfrmMain.actLogSaveExecute(Sender: TObject);
 begin
   if not sdLog.Execute then Exit;
   memLog.Lines.SaveToFile(sdLog.FileName);
+end;
+
+procedure TfrmMain.libChennelListSelectionChange(Sender : TObject; User : boolean);
+var TempChen  : TChannelBase;
+    TempIndex : Integer;
+begin
+  TempIndex := libChennelList.ItemIndex;
+  if TempIndex = -1 then
+   begin
+    if Assigned(FChenRSFrame) then FChenRSFrame.Parent := nil;
+    if Assigned(FChenTCPFrame) then FChenTCPFrame.Parent := nil;
+    Exit;
+   end;
+  TempChen := TChannelBase(libChennelList.Items.Objects[TempIndex]);
+  if not Assigned(TempChen) then Exit;
+  SetChennelFrame(TempChen);
+end;
+
+procedure TfrmMain.SetChennelFrame(AChennel : TChannelBase);
+begin
+  if AChennel.ClassType = TChennelRS then
+   begin
+    if not Assigned(FChenRSFrame) then FChenRSFrame := TframeChennelRS.Create(Self);
+    if Assigned(FChenTCPFrame) then FChenTCPFrame.Parent := nil;
+    FChenRSFrame.Chennel := AChennel;
+    FChenRSFrame.Parent  := scrbChennelParams;
+   end;
+
+  if AChennel.ClassType = TChennelTCP then
+   begin
+    if not Assigned(FChenTCPFrame) then FChenTCPFrame := TframeChennelTCP.Create(Self);
+    if Assigned(FChenRSFrame) then FChenRSFrame.Parent := nil;
+    FChenTCPFrame.Chennel := AChennel;
+    FChenTCPFrame.Parent  := scrbChennelParams;
+   end;
 end;
 
 procedure TfrmMain.cbLogDebugChange(Sender: TObject);
@@ -237,7 +361,6 @@ begin
   TempAddForm := TfrmAddDevice.Create(nil);
   try
    if TempAddForm.ShowModal <> mrOK then Exit;
-
    try
     TempDevNum := StrToInt(TempAddForm.edDevNumber.Text);
    except
@@ -246,11 +369,8 @@ begin
       raise Exception.CreateFmt('Ошибка ввода номера устройства. Вами введен некорректный номер устройства - %s'#10'Номер должен быть числом от 1 до 255' ,[TempAddForm.edDevNumber.Text]);
      end;
    end;
-
    if (TempDevNum < 1) or (TempDevNum > 255) then raise Exception.CreateFmt('Ошибка ввода номера устройства. Вами введен некорректный номер устройства - %s'#10'Номер должен быть числом от 1 до 255' ,[TempAddForm.edDevNumber.Text]);
-
    if Assigned(FDevArray[TempDevNum]) then Exit;
-
    Lock;
    try
     FDevArray[TempDevNum] := TMBDevice.Create(nil);
@@ -258,10 +378,8 @@ begin
    finally
     UnLock;
    end;
-
    TempDevNum := lbDeviceList.Items.AddObject(Format('Устройство: %d',[TempDevNum]),FDevArray[TempDevNum]);
    lbDeviceList.ItemIndex := TempDevNum;
-
    FIsConfModify := True;
   finally
     FreeAndNil(TempAddForm);
@@ -329,6 +447,27 @@ begin
  end;
 end;
 
+procedure TfrmMain.ClearFrames;
+begin
+  if Assigned(FChenTCPFrame) then
+   begin
+    FChenTCPFrame.Chennel := nil;
+    FChenTCPFrame.Parent := nil;
+    FreeAndNil(FChenTCPFrame);
+   end;
+  if Assigned(FChenRSFrame) then
+   begin
+    FChenRSFrame.Chennel := nil;
+    FChenRSFrame.Parent := nil;
+    FreeAndNil(FChenRSFrame);
+   end;
+end;
+
+procedure TfrmMain.ClearChennals;
+begin
+  actChannelDelAll.Execute;
+end;
+
 procedure TfrmMain.Lock;
 begin
   FCSection.Enter;
@@ -351,6 +490,8 @@ begin
     FDevView.Device := nil;
     FDevView.Free;
    end;
+  ClearChennals;
+  ClearFrames;
   ClearDevices;
   FreeAndNil(FCSection);
   CloseAction := caFree;

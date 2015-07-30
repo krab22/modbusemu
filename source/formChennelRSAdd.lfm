@@ -1,8 +1,0 @@
-object frmChennelRSAdd: TfrmChennelRSAdd
-  Left = 2331
-  Height = 240
-  Top = 719
-  Width = 320
-  Caption = 'frmChennelRSAdd'
-  LCLVersion = '1.5'
-end
