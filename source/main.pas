@@ -149,7 +149,7 @@ implementation
 
 uses DeviceAdd,
      ChennelRSClasses, ChennelTCPClasses,
-     formChennelAdd,
+     formChennelAdd, ModbusEmuResStr,
      LoggerLazarusGtkApplication,
      LoggerItf;
 
@@ -182,7 +182,7 @@ begin
   end;
   libChennelList.ItemIndex := TempIndex;
   TempChenName :=libChennelList.Items.Strings[TempIndex];
-  LoggerObj.info('ChannelAdd',Format('Добавлен канал: %s',[TempChenName]));
+  LoggerObj.info(rsAddChennel,Format(rsAddChennel1,[TempChenName]));
   FIsConfModify := True;
 end;
 
@@ -193,7 +193,7 @@ begin
   if libChennelList.ItemIndex = -1 then
    begin
     libChennelList.SetFocus;
-    raise Exception.Create('Удаление канала. Не выбран канал для удаления.');
+    raise Exception.Create(rsDelChannel1);
    end;
   TempChen := libChennelList.Items.Objects[libChennelList.ItemIndex];
   TempChenName := libChennelList.Items.Strings[libChennelList.ItemIndex];;
@@ -203,7 +203,7 @@ begin
   FreeAndNil(TempChen);
   if libChennelList.Items.Count > 0 then libChennelList.ItemIndex := 0
    else libChennelList.ItemIndex := -1;
-  LoggerObj.info('ChannelDel',Format('Удален канал: %s',[TempChenName]));
+  LoggerObj.info(rsDelChannel2,Format(rsDelChannel3,[TempChenName]));
   FIsConfModify := True;
 end;
 
@@ -214,14 +214,14 @@ begin
   if libChennelList.ItemIndex = -1 then
    begin
     libChennelList.SetFocus;
-    raise Exception.Create('Удаление канала. Не выбран канал для открытия.');
+    raise Exception.Create(rsOpenChennel1);
    end;
   TempChen := TChannelBase(libChennelList.Items.Objects[libChennelList.ItemIndex]);
   if not Assigned(TempChen) then Exit;
   TempChen.Active := True;
   TempChenName :=libChennelList.Items.Strings[libChennelList.ItemIndex];
-  if TempChen.Active then LoggerObj.info('ChannelOpen',Format('Открыт канал: %s',[TempChenName]))
-   else LoggerObj.info('ChannelOpen',Format('Не удалось открыть канал: %s',[TempChenName]));
+  if TempChen.Active then LoggerObj.info(rsOpenChennel2,Format(rsOpenChennel3,[TempChenName]))
+   else LoggerObj.info(rsOpenChennel2,Format(rsOpenChennel4,[TempChenName]));
 end;
 
 procedure TfrmMain.actChannelCloseExecute(Sender: TObject);
@@ -231,14 +231,14 @@ begin
   if libChennelList.ItemIndex = -1 then
    begin
     libChennelList.SetFocus;
-    raise Exception.Create('Удаление канала. Не выбран канал для закрытия.');
+    raise Exception.Create(rsCloseChennel1);
    end;
   TempChen := TChannelBase(libChennelList.Items.Objects[libChennelList.ItemIndex]);
   if not Assigned(TempChen) then Exit;
   TempChen.Active := False;
   TempChenName :=libChennelList.Items.Strings[libChennelList.ItemIndex];
-  if TempChen.Active then LoggerObj.info('ChannelClose',Format('Не удалось закрыть канал: %s',[TempChenName]))
-   else LoggerObj.info('ChannelClose',Format('Закрыли канал канал: %s',[TempChenName]));
+  if TempChen.Active then LoggerObj.info(rsCloseChennel2,Format(rsCloseChennel3,[TempChenName]))
+   else LoggerObj.info(rsCloseChennel2,Format(rsCloseChennel4,[TempChenName]));
 end;
 
 procedure TfrmMain.actChannelOpenAllExecute(Sender: TObject);
@@ -252,7 +252,7 @@ begin
     if not Assigned(TempChen) then Continue;
     TempChen.Active := True;
    end;
-  LoggerObj.info('ChannelOpenAll','Все каналы открыты');
+  LoggerObj.info(rsOpenChennelAll1,rsOpenChennelAll2);
 end;
 
 procedure TfrmMain.actChannelCloseAllExecute(Sender: TObject);
@@ -266,7 +266,7 @@ begin
     if not Assigned(TempChen) then Continue;
     TempChen.Active := False;
    end;
-  LoggerObj.info('ChannelCloseAll','Все каналы закрыты');
+  LoggerObj.info(rsCloseChennelAll1,rsCloseChennelAll2);
 end;
 
 procedure TfrmMain.actChannelDelAllExecute(Sender: TObject);
@@ -279,7 +279,7 @@ begin
   for i := Count downto 0 do if Assigned(libChennelList.Items.Objects[i]) then libChennelList.Items.Objects[i].Free;
   libChennelList.ItemIndex := -1;
   libChennelList.Items.Clear;
-  LoggerObj.info('ChannelDelAll','Все каналы удалены');
+  LoggerObj.info(rsDelChennelAll1,rsDelChennelAll2);
   FIsConfModify := True;
 end;
 
@@ -366,10 +366,10 @@ begin
    except
     on E : Exception do
      begin
-      raise Exception.CreateFmt('Ошибка ввода номера устройства. Вами введен некорректный номер устройства - %s'#10'Номер должен быть числом от 1 до 255' ,[TempAddForm.edDevNumber.Text]);
+      raise Exception.CreateFmt(rsDevAdd1 ,[TempAddForm.edDevNumber.Text]);
      end;
    end;
-   if (TempDevNum < 1) or (TempDevNum > 255) then raise Exception.CreateFmt('Ошибка ввода номера устройства. Вами введен некорректный номер устройства - %s'#10'Номер должен быть числом от 1 до 255' ,[TempAddForm.edDevNumber.Text]);
+   if (TempDevNum < 1) or (TempDevNum > 255) then raise Exception.CreateFmt(rsDevAdd1 ,[TempAddForm.edDevNumber.Text]);
    if Assigned(FDevArray[TempDevNum]) then Exit;
    Lock;
    try
@@ -378,7 +378,7 @@ begin
    finally
     UnLock;
    end;
-   TempDevNum := lbDeviceList.Items.AddObject(Format('Устройство: %d',[TempDevNum]),FDevArray[TempDevNum]);
+   TempDevNum := lbDeviceList.Items.AddObject(Format(rsDevAdd2,[TempDevNum]),FDevArray[TempDevNum]);
    lbDeviceList.ItemIndex := TempDevNum;
    FIsConfModify := True;
   finally
