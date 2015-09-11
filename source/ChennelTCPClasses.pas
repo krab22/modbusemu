@@ -24,7 +24,7 @@ type
 
 implementation
 
-uses LoggerItf;
+uses LoggerItf, ModbusEmuResStr;
 
 { TChennelTCP }
 
@@ -33,6 +33,7 @@ begin
   if Active then Exit;
   FChannelThread := TChennelTCPThread.Create(True);
   FChannelThread.Logger := Logger;
+  FChannelThread.DeviceArray := DeviceArray;
 
   FChannelThread.Start;
 end;
@@ -59,7 +60,7 @@ begin
   except
    on E : Exception do
     begin
-     SendLogMessage(llError,'Поток TCP канала',Format('Инициализация. Ошибка: %s',[E.Message]));
+     SendLogMessage(llError,rsChanTCP1,Format(rsChanThreadIni,[E.Message]));
     end;
   end;
 end;
@@ -71,7 +72,7 @@ begin
   except
    on E : Exception do
     begin
-     SendLogMessage(llError,'Поток TCP канала',Format('Финализация. Ошибка: %s',[E.Message]));
+     SendLogMessage(llError,rsChanTCP1,Format(rsChanThreadClose,[E.Message]));
     end;
   end;
 end;

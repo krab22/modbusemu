@@ -34,6 +34,13 @@ resourcestring
  rsDevAdd1 = 'Ошибка ввода номера устройства. Вами введен некорректный номер устройства - %s'#10'Номер должен быть числом от 1 до 255';
  rsDevAdd2 = 'Устройство: %d';
 
+ rsChanRS1  = 'Поток RS канала';
+ rsChanTCP1 = 'Поток TCP канала';
+
+ rsChanThreadIni   = 'Инициализация. Ошибка: %s';
+ rsChanThreadClose = 'Финализация. Ошибка: %s';
+
+
 
 implementation
 

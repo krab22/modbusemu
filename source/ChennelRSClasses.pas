@@ -24,7 +24,7 @@ type
 
 implementation
 
-uses LoggerItf;
+uses LoggerItf, ModbusEmuResStr;
 
 { TChennelRS }
 
@@ -33,6 +33,7 @@ begin
   if Active then Exit;
   FChannelThread := TChennelRSThread.Create(True);
   FChannelThread.Logger := Logger;
+  FChannelThread.DeviceArray := DeviceArray;
 
   FChannelThread.Start;
 end;
@@ -59,7 +60,7 @@ begin
   except
    on E : Exception do
     begin
-     SendLogMessage(llError,'Поток RS канала',Format('Инициализация. Ошибка: %s',[E.Message]));
+     SendLogMessage(llError,rsChanRS1,Format(rsChanThreadIni,[E.Message]));
     end;
   end;
 end;
@@ -71,7 +72,7 @@ begin
   except
    on E : Exception do
     begin
-     SendLogMessage(llError,'Поток RS канала',Format('Финализация. Ошибка: %s',[E.Message]));
+     SendLogMessage(llError,rsChanRS1,Format(rsChanThreadClose,[E.Message]));
     end;
   end;
 end;
