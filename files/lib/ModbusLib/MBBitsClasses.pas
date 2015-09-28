@@ -1,8 +1,3 @@
-{
-$Author: npcprom\fomin_k $
-$Date: 2014-09-22 11:41:05 +0600 (Mon, 22 Sep 2014) $
-$Rev: 277 $
-}
 unit MBBitsClasses;
 
 {$mode objfpc}{$H+}
@@ -465,4 +460,4 @@ begin
   OnChangeProc;
 end;
 
-end.
+end.

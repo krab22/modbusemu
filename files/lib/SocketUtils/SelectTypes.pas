@@ -6,17 +6,12 @@ interface
 
 uses Classes, SysUtils, syncobjs,
      Sockets,
-     SocketSimpleTypes,
      {$IFDEF UNIX}
      BaseUnix,
      {$ELSE}
      winsock,
      {$ENDIF}
      LoggerItf;
-
-resourcestring
-
-  rsErrorSocketDescr = 'SelectThread. Должен быть передан действующий дескриптор сокета.';
 
 type
 
@@ -45,6 +40,8 @@ type
 
 implementation
 
+uses SocketMisc, SocketResStrings;
+
 { TSelectThread }
 
 constructor TSelectThread.Create(ASocket: TSocket; ACSection: TCriticalSection);
@@ -69,6 +66,7 @@ var TempTimeval   : timeval;
     Res           : Integer;
     TempReadFDSet : TFDSet;
 begin
+  {$IFDEF WINDOWS} TempReadFDSet.fd_count := 0; {$ELSE} TempReadFDSet[0] := 0; {$ENDIF}
   while not Terminated do
    begin
     TempTimeval.tv_sec := FTimeOut div 1000;

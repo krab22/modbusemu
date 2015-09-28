@@ -1,8 +1,3 @@
-{
-$Author: npcprom\fomin_k $
-$Date: 2014-12-20 15:24:37 +0500 (Sat, 20 Dec 2014) $
-$Rev: 599 $
-}
 unit SocketMyTypes;
 
 {$mode objfpc}{$H+}
@@ -167,7 +162,7 @@ type
 
 implementation
 
-uses resolve;
+uses resolve, SocketResStrings;
 
 { TBaseSocketEventThread }
 
@@ -244,6 +239,9 @@ end;
 
 procedure TBaseSocketEventThread.Execute;
 var SelRes : Integer;
+    {$IFDEF WINDOWS}
+    SelRes1 : Boolean;
+    {$ENDIF}
     TempTimeOut : Cardinal;
     TempReadFDSet,
     TempWriteFDSet,
@@ -674,6 +672,7 @@ var TempWriteFDSet : TFDSet;
     TempRes, TempErr,TempErrLen : Integer;
 begin
     FLastError := 0;
+    {$IFDEF WINDOWS} TempWriteFDSet.fd_count := 0; {$ELSE} TempWriteFDSet[0] := 0; {$ENDIF}
 
     TempTimeVal.tv_sec := 5;
     TempTimeVal.tv_usec := 0;
@@ -945,9 +944,10 @@ var TempReadFDSet : TFDSet;
     TempTimeVal   : TTimeVal;
 begin
   Result := wrError;
+  {$IFDEF WINDOWS} TempReadFDSet.fd_count := 0; {$ELSE} TempReadFDSet[0] := 0; {$ENDIF}
   if FSelectEnable then
    begin  // событие взводится в потоке
-    if FIsRiseException then raise Exception.Create('Требуется использовать блокирующий сокет(BlockingSocket = True), без использования потока отслеживания состояний (SelectEnable := False).');
+    if FIsRiseException then raise Exception.Create(rsWRData1);
    end
   else
    begin // если отслеживаение приходаданных через поток не используется

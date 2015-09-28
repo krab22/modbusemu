@@ -1,8 +1,3 @@
-{
-$Author: npcprom\fomin_k $
-$Date: 2013-11-20 16:51:41 +0600 (Wed, 20 Nov 2013) $
-$Rev: 450 $
-}
 unit LogTypes;
 
 {$mode objfpc}{$H+}
@@ -36,4 +31,4 @@ const
 
 implementation
 
-end.
+end.

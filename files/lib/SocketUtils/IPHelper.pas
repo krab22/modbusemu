@@ -1,66 +1,8 @@
-{
-$Author: npcprom\fomin_k $
-$Date: 2014-06-10 14:16:28 +0600 (Tue, 10 Jun 2014) $
-$Rev: 547 $
-}
 unit IPHelper;
 
 interface
 
 uses Windows, WinSock;
-
-resourcestring
-  rsMIB_IF_OPER_STATUS_NON_OPERATIONAL = 'LAN-адаптер отключен';
-  rsMIB_IF_OPER_STATUS_UNREACHABLE     = 'WAN-адаптер отключен';
-  rsMIB_IF_OPER_STATUS_DISCONNECTED    = 'Кабель отключен или нет сигнала';
-  rsMIB_IF_OPER_STATUS_CONNECTING      = 'WAN-адаптер в процессе подключения';
-  rsMIB_IF_OPER_STATUS_CONNECTED       = 'WAN-адаптер установил соединение';
-  rsMIB_IF_OPER_STATUS_LAN_CONNECTED   = 'Кабель подключен';
-  rsMIB_IF_OPER_STATUS_LAN_OPERATIONAL = 'LAN-адаптер OPERATIONAL';
-  rsMIB_IF_OPER_STATUS_LAN_UNKNOWN     = 'Не известный статус';
-
-  rsMIB_IF_ADMIN_STATUS_UP      = 'Включен';
-  rsMIB_IF_ADMIN_STATUS_DOWN    = 'Выключен';
-  rsMIB_IF_ADMIN_STATUS_CHACKED = 'Проверка';
-
-  rsMIB_IF_TYPE_ETHERNET  = 'Ethernet';
-  rsMIB_IF_TYPE_TOKENRING = 'Token ring';
-  rsMIB_IF_TYPE_FDDI      = 'FDDI';
-  rsMIB_IF_TYPE_PPP       = 'PPP';
-  rsMIB_IF_TYPE_LOOPBACK  = 'Замыкание на себя';
-  rsMIB_IF_TYPE_SLIP      = 'Подключение к UNIX';
-  rsMIB_IF_TYPE_ATM       = 'ATM';
-  rsMIB_IF_TYPE_IEEE80211 = 'An IEEE 802.11 wireless network interface';
-  rsMIB_IF_TYPE_TUNNEL    = 'A tunnel type encapsulation network interface.';
-  rsMIB_IF_TYPE_IEEE1394  = 'An IEEE 1394 (Firewire) high performance serial bus network interface.';
-  rsMIB_IF_TYPE_IEEE80216 = 'A mobile broadband interface for WiMax devices.';
-  rsMIB_IF_TYPE_WWANP     = 'A mobile broadband interface for GSM-based devices.';
-  rsMIB_IF_TYPE_WWANP2    = 'An mobile broadband interface for CDMA-based devices.';
-
-  rsMIB_IF_TYPE_UNKNOWN   = 'Неизвестный тип';
-
-  rsMsgStatusChange    = 'Административный статус изменен.';
-  rsMsgStatusNotChange = 'Не удалось изменить административный статус интерфейса!';
-  rsLanItfNotChange    = 'Не выбран сетевой интерфейс!';
-  rsFormatOutQLen      = 'Байт в очереди на отправку: %d';
-  rsFormatErrors       = 'Ошибок пакетов: %d';
-  rsFormatDiscards     = 'Пакетов отклонено: %d';
-  rsFormatOctetsM      = 'Отправлено, Мбайт: %d';
-  rsFormatOctets       = 'Отправлено, байт: %d';
-  rsFormatOut          = 'Исходящий трафик';
-  rsFormatInUnknProts  = 'Пакетов, полученных по неизвестным протоколам: %d';
-  rsFormatIn           = 'Входящий трафик';
-  rsFormatOperStatus   = 'Оперативный статус: %s';
-  rsFormatAdminStatus  = 'Административный статус: %s';
-  rsFormatMACAddress   = 'MAC-адрес: %s';
-  rsFormatMTU          = 'MTU: %d';
-  rsFormatSpeedM       = 'Скорость подключения, МБит/с.: %d';
-  rsFormatSpeed        = 'Cкорость подключения, бит/с.: %d';
-  rsFormatType         = 'Тип: %s';
-  rsFormatGetIfError   = 'Ошибки во время вызова GetIfTable. Код ошибки: %d';
-  rsFormatUnicast      = 'Число одноадресных пакетов: %d';
-  rsFormatNUnicast     = 'Число не одноадресных пакетов: %d';
-  rsFormatIndex        = 'Индекс интерфейса: %d';
 
 const
  NO_ERROR = 0;
@@ -236,16 +178,16 @@ function GetLocalIP: String;
 
 implementation
 
-uses SysUtils;
+uses SysUtils, SocketResStrings;
 
 function GetIfRow(pIfTable: PMIB_IFTABLE; const dwIndex: Cardinal): MIB_IFROW;
 begin
- Result := PMIB_IFROW(Cardinal(pIfTable) + SizeOf(Cardinal) + dwIndex * SizeOf(MIB_IFROW))^;
+ Result := PMIB_IFROW(PtrUInt(pIfTable) + SizeOf(Cardinal) + dwIndex * SizeOf(MIB_IFROW))^;
 end;
 
 function GetIfRowP(pIfTable: PMIB_IFTABLE; const dwIndex: Cardinal): PMIB_IFROW;
 begin
- Result := PMIB_IFROW(Cardinal(pIfTable) + SizeOf(Cardinal) + dwIndex * SizeOf(MIB_IFROW));
+ Result := PMIB_IFROW(PtrUInt(pIfTable) + SizeOf(Cardinal) + dwIndex * SizeOf(MIB_IFROW));
 end;
 
 function IfTypeToStr(IfRow: MIB_IFROW): String;
@@ -360,6 +302,7 @@ var
   i       : Integer;
 begin
   Result := False;
+  WSAData.wVersion := 0;
   if WSAStartup($0101, WSAData) <> 0 then
    begin
     WSAErr := 'Winsock is not responding."';
@@ -392,12 +335,12 @@ end;
 
 function GetLocalIP: String;
 const WSVer = $101;
-var
-  wsaData: TWSAData;
-  P: PHostEnt;
-  Buf: array [0..127] of Char;
+var wsaData: TWSAData;
+    P: PHostEnt;
+    Buf: array [0..127] of Char;
 begin
   Result := '';
+  wsaData.wVersion := 0;
   if WSAStartup(WSVer, wsaData) = 0 then
    begin
     if GetHostName(@Buf, 128) = 0 then

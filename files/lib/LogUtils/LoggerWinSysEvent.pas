@@ -1,8 +1,3 @@
-{
-$Author: npcprom\fomin_k $
-$Date: 2014-08-01 14:25:18 +0600 (Fri, 01 Aug 2014) $
-$Rev: 559 $
-}
 unit LoggerWinSysEvent;
 
 {$mode objfpc}{$H+}
@@ -200,7 +195,7 @@ var P: Pointer;
 begin
  FCSection.Enter;
  try
-  P := PChar(Utf8ToAnsi(Format('(Поток 0x%s)%s',[IntToHex(GetThreadID,8),Message])));
+  P := PChar(Utf8ToAnsi(Format('(Thread 0x%s)%s',[IntToHex(GetThreadID,8),Message])));
   if FEventLog = 0 then FEventLog := RegisterEventSource(nil, PChar(Utf8ToAnsi(FName)));
   if FEventLog = 0 then RaiseLastOSError;
   ReportEvent(FEventLog, EventType, Category, ID, nil, 1, 0, @P, nil);

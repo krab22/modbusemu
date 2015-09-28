@@ -1,8 +1,3 @@
-{
-$Author: npcprom\fomin_k $
-$Date: 2014-09-30 15:02:47 +0600 (Tue, 30 Sep 2014) $
-$Rev: 573 $
-}
 unit SocketErrorCode;
 
 interface
@@ -265,4 +260,4 @@ implementation
   wsa_wait_timeout        = wait_timeout;
   wsa_infinite            = infinite;}
 
-end.
+end.

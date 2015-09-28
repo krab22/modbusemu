@@ -100,7 +100,6 @@ end;
 
 procedure TChannelBase.SetDeviceArray(AValue : TDeviceArray);
 begin
-//  if FDeviceArray = AValue then Exit;
   FDeviceArray := AValue;
   Lock;
   try

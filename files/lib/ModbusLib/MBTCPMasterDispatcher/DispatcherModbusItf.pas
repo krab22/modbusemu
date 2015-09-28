@@ -1,8 +1,3 @@
-{
-$Author: npcprom\fomin_k $
-$Date: 2014-04-11 11:52:45 +0600 (Fri, 11 Apr 2014) $
-$Rev: 259 $
-}
 unit DispatcherModbusItf;
 
 {$mode objfpc}{$H+}
@@ -106,4 +101,4 @@ type
 
 implementation
 
-end.
+end.

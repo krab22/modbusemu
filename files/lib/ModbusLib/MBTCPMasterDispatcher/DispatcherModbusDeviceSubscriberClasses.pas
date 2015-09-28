@@ -382,6 +382,7 @@ function TDeviceSubscribers.GetChengedSubscribers: TSubscribersArray;
 var i,Count    : Integer;
     TempSubscr : TDeviceSubscriber;
 begin
+  SetLength(Result,0);
   Count := SubscribersCount-1;
   for i := 0 to Count do
    begin

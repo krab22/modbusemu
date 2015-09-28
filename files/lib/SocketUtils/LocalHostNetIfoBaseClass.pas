@@ -1,8 +1,3 @@
-{
-$Author: npcprom\fomin_k $
-$Date: 2014-12-18 14:28:21 +0500 (Thu, 18 Dec 2014) $
-$Rev: 596 $
-}
 unit LocalHostNetIfoBaseClass;
 
 {$mode objfpc}{$H+}

@@ -528,10 +528,10 @@ begin
      except
       on E : Exception do
        begin
-        raise Exception.CreateFmt('SetCoilValue. При записи значения регистра %d возникло исключение: %s',[ARegNumber,E.Message]);
+        raise Exception.CreateFmt(rsSetCoilValue1,[ARegNumber,E.Message]);
        end;
      end;
-     if not Res then raise Exception.CreateFmt('SetCoilValue. Не удалось записать значение регистра %d',[ARegNumber]);
+     if not Res then raise Exception.CreateFmt(rsSetCoilValue2,[ARegNumber]);
     end;
   finally
    UnLock;
@@ -555,10 +555,10 @@ begin
      except
       on E : Exception do
        begin
-        raise Exception.CreateFmt('SetInputValue. При записи значения регистра %d возникло исключение: %s',[ARegNumber,E.Message]);
+        raise Exception.CreateFmt(rsSetInputValue1,[ARegNumber,E.Message]);
        end;
      end;
-     if not Res then raise Exception.CreateFmt('SetInputValue. Не удалось записать значение регистра %d',[ARegNumber]);
+     if not Res then raise Exception.CreateFmt(rsSetInputValue2,[ARegNumber]);
     end;
   finally
    UnLock;
@@ -568,7 +568,7 @@ end;
 procedure TDispatcherModbusDevice.SetDiscretValue(ARegNumber: Word; AValue: Boolean); stdcall;
 begin
 
-  raise Exception.Create('Modbus Discret-регистры являются регистрами только для чтения.');
+  raise Exception.Create(rsSetDiskretValue1);
 
 {  Lock;
   try
@@ -589,7 +589,7 @@ end;
 procedure TDispatcherModbusDevice.SetHoldingValue(ARegNumber: Word; AValue: Word); stdcall;
 begin
 
-  raise Exception.Create('Modbus Holding-регистры являются регистрами только для чтения.');
+  raise Exception.Create(rsSetHoldingValue1);
 
 {  Lock;
   try

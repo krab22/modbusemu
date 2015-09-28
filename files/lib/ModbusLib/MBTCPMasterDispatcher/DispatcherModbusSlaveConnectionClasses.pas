@@ -1,8 +1,3 @@
-{
-$Author: npcprom\fomin_k $
-$Date: 2014-04-28 14:14:46 +0600 (Mon, 28 Apr 2014) $
-$Rev: 269 $
-}
 unit DispatcherModbusSlaveConnectionClasses;
 
 {$mode objfpc}{$H+}
@@ -203,4 +198,4 @@ begin
   StopPollingThread;
 end;
 
-end.
+end.

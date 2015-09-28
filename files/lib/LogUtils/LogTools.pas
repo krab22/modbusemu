@@ -1,8 +1,3 @@
-{
-$Author: npcprom\fomin_k $
-$Date: 2013-11-20 16:51:41 +0600 (Wed, 20 Nov 2013) $
-$Rev: 450 $
-}
 unit LogTools;
 
 {$mode objfpc}{$H+}
@@ -15,11 +10,7 @@ uses
      {$ENDIF}
      Classes, SyncObjs, ExtCtrls,
      FileUtils,
-     LogItf, LogConst, LogTypes;
-
-resourcestring
-     rsFileReopen = 'Перезапуск лога.';
-     rsFileClose  = 'Остановка ведения лога.';
+     LogItf, LogConst, LogTypes, LogResStrings;
 
 type
 
@@ -265,7 +256,7 @@ begin
   FCurrentFile:=GetCurrentFile;
   if FCurrentFile=nil then
    begin
-    OnLogErrorProc(Now,msgError,'TStreamLogObject.GetCurrentFile','Новый файл не создан.');
+    OnLogErrorProc(Now,msgError,'TStreamLogObject.GetCurrentFile',rsGenCurFile1);
     Exit;
    end;
   FCurrentFile.FromDisk    := True;
@@ -592,7 +583,7 @@ end;
 procedure TFileLogObject.ReopenCurrentFile;
 begin
   CloseCurrentFile(true);
-  if not OpenCurrentFile then OnLogErrorProc(Now, msgError, 'TFileLogObject.OpenCurrentFile', 'Новый файл не создан.');
+  if not OpenCurrentFile then OnLogErrorProc(Now, msgError, 'TFileLogObject.OpenCurrentFile', rsGenCurFile1);
 end;
 
 function TFileLogObject.OpenCurrentFile: boolean;
@@ -618,7 +609,7 @@ begin
     except
       on E:Exception do
       begin
-        OnLogErrorProc(Now, msgError, 'TFileLogObject.OpenCurrentFile (Исключение)',E.message);
+        OnLogErrorProc(Now, msgError, 'TFileLogObject.OpenCurrentFile',E.message);
         Exit;
       end;
     end;
@@ -643,7 +634,7 @@ begin
     except
       on E:Exception do
       begin
-        OnLogErrorProc(Now, msgError, 'TFileLogObject.CloseCurrentFile (Исключение)',E.message);
+        OnLogErrorProc(Now, msgError, 'TFileLogObject.CloseCurrentFile',E.message);
         Exit;
       end;
     end;
@@ -693,7 +684,7 @@ begin
     except
       on E:Exception do
       begin
-        OnLogErrorProc(Now, msgError, 'TFileLogObject.Write (Исключение)',E.message);
+        OnLogErrorProc(Now, msgError, 'TFileLogObject.Write',E.message);
         Result:= GetLastError;
       end;
     end;
@@ -731,4 +722,4 @@ begin
   Result:=FLogPath;
 end;
 
-end.
+end.

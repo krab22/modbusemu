@@ -1,8 +1,3 @@
-{
-$Author: npcprom\fomin_k $
-$Date: 2014-04-24 16:48:48 +0600 (Thu, 24 Apr 2014) $
-$Rev: 265 $
-}
 unit MBRegistersCalsses;
 
 {$mode objfpc}{$H+}
@@ -736,4 +731,4 @@ begin
   if Assigned(FOnChange) then FOnChange(Self, TempBits);
 end;
 
-end.
+end.

@@ -1,8 +1,3 @@
-{
-$Author: npcprom\fomin_k $
-$Date: 2014-04-21 08:42:52 +0600 (Mon, 21 Apr 2014) $
-$Rev: 263 $
-}
 unit MBReaderBase;
 
 {$mode objfpc}{$H+}
@@ -64,4 +59,4 @@ begin
   Result := FReaderType;
 end;
 
-end.
+end.

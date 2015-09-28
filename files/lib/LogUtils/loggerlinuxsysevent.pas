@@ -1,8 +1,3 @@
-{
-$Author: npcprom\fomin_k $
-$Date: 2014-04-30 15:38:32 +0600 (Wed, 30 Apr 2014) $
-$Revision: 526 $
-}
 unit LoggerLinuxSysEvent ;
 
 {$mode objfpc}{$H+}

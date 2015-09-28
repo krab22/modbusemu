@@ -34,7 +34,7 @@ type
 
    FSelectThread     : TSelectThread;
    FValidIpList      : TListOfValidAddressesIP4;
-   FCSection         : TCriticalSection;
+   FCSection         : syncobjs.TCriticalSection;
 
    FOnClose          : TNotifyEvent;
    FOnOpen           : TNotifyEvent;
@@ -51,7 +51,7 @@ type
   protected
    property Socket   : TSocket read FSocket;
    property Addr     : sockaddr read FAddr;
-   property CSection : TCriticalSection read FCSection;
+   property CSection : syncobjs.TCriticalSection read FCSection;
 
    procedure SetLogger(const Value: IDLogger); override;
    procedure SetLastError(ALastError : Cardinal);
@@ -110,7 +110,7 @@ uses SocketMisc, SocketResStrings;
 
 constructor TUDPServer.Create;
 begin
-  FCSection := TCriticalSection.Create;
+  FCSection := syncobjs.TCriticalSection.Create;
   FValidIpList := TListOfValidAddressesIP4.Create;
   FSocket := INVALID_SOCKET;
   FillByte(FAddr,sizeof(sockaddr),0);
@@ -136,7 +136,11 @@ end;
 procedure TUDPServer.Open;
 var Res       : Integer;
     TempOpt   : Integer;
+    {$IFDEF WINDOWS}
+    nb : Integer;
+    {$ELSE}
     TempFlags : Integer;
+    {$ENDIF}
 begin
   SetLastError(0);
 
@@ -257,7 +261,7 @@ begin
 
   if (not Assigned(Buff)) or (BuffLen = 0) then
    begin
-    SendLogMessage(llDebug,'UDP server. SentPackege','Попытка отослать пустой пакет');
+    SendLogMessage(llDebug,rsUDPSendPackage1,rsUDPSendPackage2);
     Exit;
    end;
   Lock;
@@ -268,17 +272,21 @@ begin
      if Res = -1 then
       begin
        TempErr := {$IFDEF UNIX}fpgeterrno{$ELSE}GetLastOSError{$ENDIF};
+       {$IFDEF UNIX}
        if TempErr <> ESysEAGAIN then
         begin
+       {$ENDIF}
          SetLastError(TempErr);
          Exit;
+       {$IFDEF UNIX}
         end;
+       {$ENDIF}
       end;
     end
    else
     begin
      // необходимо разработать алгоритм отправки больших буферов
-     SetLastError(ESysEMSGSIZE);
+     SetLastError({$IFDEF UNIX}ESysEMSGSIZE{$ELSE}EMSGSIZE{$ENDIF});
      Exit;
     end;
    Result := True;
@@ -291,6 +299,7 @@ function TUDPServer.ReceivePackage(const Buff: Pointer; BuffSize: Cardinal; out 
 var Res : Integer;
 begin
   Result := False;
+  AAddr.sin_port := 0;
 
   if not Active then Exit;
 
@@ -316,6 +325,7 @@ var TempTimeval   : timeval;
     TempReadFDSet : TFDSet;
 begin
     Result := wrError;
+    {$IFDEF WINDOWS} TempReadFDSet.fd_count := 0; {$ELSE} TempReadFDSet[0] := 0; {$ENDIF}
 
     if not Active then Exit;
 
@@ -345,6 +355,7 @@ var Res         : Integer;
     TempAddrLen : LongInt;
 begin
   TempBuff := Getmem(FBuffSize);
+  TempAddr.sin_port := 0;
   try
    FillChar(TempBuff^,SizeOf(FBuffSize),$00);
 
@@ -366,7 +377,7 @@ begin
     begin
      if not FValidIpList.IsAddressValid(ntohl(TempAddr.sin_addr.s_addr)) then
       begin
-       SendLogMessage(llDebug,'UDP server','Пакет отброшен');
+       SendLogMessage(llDebug,rsOnUDPSign1,rsOnUDPSign3);
        Exit;
       end;
     end;
@@ -375,11 +386,11 @@ begin
 
    try
     if Assigned(FOnRecvPackage) then FOnRecvPackage(Self,TempAddr,TempBuff,Res)
-     else SendLogMessage(llError,'UDP server. Получение пакета','Не установлен робработчик пакетов.');
+     else SendLogMessage(llError,rsOnUDPSign2,rsOnUDPSign4);
    except
     on E : Exception do
      begin
-      SendLogMessage(llError,'UDP server. Получение пакета',Format('Ошибка обработчика пришедшего пакета: %s',[E.Message]));
+      SendLogMessage(llError,rsOnUDPSign2,Format(rsOnUDPSign5,[E.Message]));
      end;
    end;
 

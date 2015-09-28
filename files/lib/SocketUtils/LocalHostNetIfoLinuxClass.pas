@@ -1,8 +1,3 @@
-{
-$Author: npcprom\fomin_k $
-$Date: 2014-12-18 14:28:21 +0500 (Thu, 18 Dec 2014) $
-$Rev: 596 $
-}
 unit LocalHostNetIfoLinuxClass;
 
 {$mode objfpc}{$H+}
@@ -61,7 +56,7 @@ implementation
 {$IFDEF UNIX}
 
 uses BaseUnix,
-     SocketMisc;
+     SocketMisc, SocketResStrings;
 
 { TLocalHostNetLinuxInfo }
 
@@ -191,7 +186,7 @@ end;
 
 constructor TNetItfLinuxInfo.Create(ASocket: TSocket; AReq: Tifreq);
 begin
-  if ASocket = INVALID_SOCKET then raise Exception.Create('Сокет для получения информации не задан.');
+  if ASocket = INVALID_SOCKET then raise Exception.Create(rsLinNetInfo1);
   inherited Create;
   FSocket := ASocket;
   FIfReq  := AReq;

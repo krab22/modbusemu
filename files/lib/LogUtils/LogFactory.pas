@@ -1,22 +1,10 @@
-{
-$Author: npcprom\fomin_k $
-$Date: 2013-10-15 16:24:14 +0600 (Tue, 15 Oct 2013) $
-$Rev: 424 $
-}
 unit LogFactory;
 
 {$mode objfpc}{$H+}
 
 interface
 
-uses
-     LogItf;
-
-resourcestring
-   rsLogFileType = '- Файловый';
- rsLogSteramType = '- Потоковый';
-   rsUnknownType = 'не определен';
-        rsHeader = '%s (Тип данных лога %s)';
+uses LogItf;
 
 type
    TLoggerType = (ltFile,ltStream);
@@ -38,7 +26,7 @@ type
 
 implementation
 
-uses LogTools, DateUtils, SysUtils;
+uses LogTools, DateUtils, SysUtils, LogResStrings;
 
 var Log        : TCustomLogObject;
     LogHeader  : String;
@@ -128,4 +116,4 @@ end;
 initialization
   LoggerType:=ltFile;
 
-end.
+end.

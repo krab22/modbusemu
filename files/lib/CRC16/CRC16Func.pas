@@ -2,11 +2,6 @@
 // The Module contains functions for  checking and counting
 // CRC sum of some data array from external applications
 //===========================================================
-{
-$Author: npcprom\fomin_k $
-$Date: 2014-04-09 12:42:08 +0600 (Wed, 09 Apr 2014) $
-$Rev: 508 $
-}
 unit CRC16Func;
 
 interface
@@ -143,4 +138,4 @@ begin
   CRC_Hi:= BufTbl_Lo[Addr];
 end;
 
-end.
+end.

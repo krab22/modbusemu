@@ -1,8 +1,3 @@
-{
-$Author: npcprom\fomin_k $
-$Date: 2014-01-22 14:37:04 +0600 (Wed, 22 Jan 2014) $
-$Rev: 253 $
-}
 unit MBRegistersListClasses;
 
 {$mode objfpc}{$H+}
@@ -11,15 +6,6 @@ interface
 
 uses Windows, IniFiles, Classes,
      MBDefine, MBRegistersCalsses;
-
-resourcestring
- rsBitToWordTransformationError = 'Не возможно преобразовать список битовых регистров в список регистров типа Word';
- rsWordToBitTransformationError = 'Не возможно преобразовать список регистров типа Word в список битовых регистров';
- rsListTypeError                = 'Не задан тип списка.';
- rsRegNotExists                 = 'Регистр %d, заданный в параметрах, не найден. Создание массива значений прекращено.';
- rsRegNotExist1                 = 'Регистр с номером %d не существует.';
- rsRegIsReadOnly                = 'Регистры предназначены только для чтения.';
- rsDataArrayIsEmpty             = 'Масив данных предназначенных для записи пуст.';
 
 type
    { Абстрактный класс реализующий упорядоченный список регистров.
@@ -117,7 +103,7 @@ type
 
 implementation
 
-uses SysUtils;
+uses SysUtils, MBResourceString;
 
 { TRegistersListBase }
 
@@ -509,4 +495,4 @@ begin
    end;
 end;
 
-end.
+end.

@@ -1,8 +1,3 @@
-{
-$Author: npcprom\fomin_k $
-$Date: 2014-04-25 16:37:06 +0600 (Fri, 25 Apr 2014) $
-$Rev: 266 $
-}
 unit MBBuilderPacketClasses;
 
 {$mode objfpc}{$H+}
@@ -73,7 +68,7 @@ type
 implementation
 
 uses SysUtils, {$IFDEF WINDOWS} Windows,{$ENDIF}
-     MBBuilderStrings, MBDefine;
+     MBResourceString, MBDefine;
 
 { TBuilderMBRTUPacket }
 
@@ -228,4 +223,4 @@ begin
 end;
 
 
-end.
+end.

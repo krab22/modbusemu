@@ -1,8 +1,3 @@
-{
-$Author: npcprom\fomin_k $
-$Date: 2014-01-22 14:37:38 +0600 (Wed, 22 Jan 2014) $
-$Rev: 479 $
-}
 unit Logger;
 
 {$mode objfpc}{$H+}
@@ -322,4 +317,4 @@ finalization
 
  instance := nil;
 
-end.
+end.

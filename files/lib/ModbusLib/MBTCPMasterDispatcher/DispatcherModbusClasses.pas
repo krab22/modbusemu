@@ -1,8 +1,3 @@
-{
-$Author: npcprom\fomin_k $
-$Date: 2014-04-28 10:54:55 +0600 (Mon, 28 Apr 2014) $
-$Rev: 268 $
-}
 unit DispatcherModbusClasses;
 
 {$mode objfpc}{$H+}
@@ -62,7 +57,7 @@ type
 
 implementation
 
-uses SysUtils, SocketMisc;
+uses SysUtils, SocketMisc, DispatcherResStrings;
 
 { TDispatcherModbusSlave }
 
@@ -123,8 +118,8 @@ end;
 function TDispatcherModbusMaster.SetCoilValue(ADevItf: IMBDispDeviceTCPItf; ARegAddress: Word; ARegValue: Boolean): Boolean; stdcall;
 begin
   Result := False;
-  if not Assigned(ADevItf) then raise Exception.Create('TDispatcherModbusMaster.SetCoilValue Интерфейс устройства не задан.');
-  if not Assigned(FSetThread) then raise Exception.Create('TDispatcherModbusMaster.SetCoilValue Пток отправки данных не активен.');
+  if not Assigned(ADevItf) then raise Exception.Create(rsSetCoilValue11);
+  if not Assigned(FSetThread) then raise Exception.Create(rsSetCoilValue12);
   FSetThread.AddCoilMessage(ADevItf.GetDeviceIP,
                             ADevItf.GetDevicePort,
                             ADevItf.GetDeviceNum,
@@ -136,8 +131,8 @@ end;
 function TDispatcherModbusMaster.SetInputValue(ADevItf: IMBDispDeviceTCPItf; ARegAddress: Word; ARegValue: Word): Boolean; stdcall;
 begin
   Result := False;
-  if not Assigned(ADevItf) then raise Exception.Create('TDispatcherModbusMaster.SetInputValue Интерфейс устройства не задан.');
-  if not Assigned(FSetThread) then raise Exception.Create('TDispatcherModbusMaster.SetInputValue Пток отправки данных не активен.');
+  if not Assigned(ADevItf) then raise Exception.Create(rsSetInputValue11);
+  if not Assigned(FSetThread) then raise Exception.Create(rsSetInputValue12);
   FSetThread.AddInputMessage(ADevItf.GetDeviceIP,
                              ADevItf.GetDevicePort,
                              ADevItf.GetDeviceNum,
@@ -226,4 +221,4 @@ begin
   end;
 end;
 
-end.
+end.

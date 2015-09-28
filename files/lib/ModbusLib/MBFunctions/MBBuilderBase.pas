@@ -1,8 +1,3 @@
-{
-$Author: npcprom\fomin_k $
-$Date: 2014-04-25 16:37:06 +0600 (Fri, 25 Apr 2014) $
-$Rev: 266 $
-}
 unit MBBuilderBase;
 
 {$mode objfpc}{$H+}
@@ -56,4 +51,4 @@ begin
   Result := FBuilderType;
 end;
 
-end.
+end.

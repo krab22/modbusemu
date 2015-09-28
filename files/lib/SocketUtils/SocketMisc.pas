@@ -6,13 +6,12 @@ uses SysUtils, Classes
      {$IFDEF WINDOWS}
      , SocketSimpleTypes
      {$ENDIF}
-     ;
+     ,SocketResStrings;
 
-resourcestring
-  rsSocketNotExist = 'Socket is not exists';
-  rsConnected      = 'Connected';
-  rsDisConnected   = 'Disonnected';
-  rsSocket         = 'Socket %s (%s);';
+{$IFDEF UNIX}
+const
+  INVALID_SOCKET = LongInt(-1);
+{$ENDIF}
 
 type
    PIPRecord = ^TIPRecord;
@@ -144,6 +143,8 @@ function GetLocalHostName : String;
 var hostName : array [0..255] of AnsiChar;
     wsdata : TWSAData;
 begin
+  wsdata.wVersion := 0;
+  hostName[0] := #0;
   FillByte(wsdata,sizeof(TWSAData),0);
   WSAStartup ($0101, wsdata);
   try
@@ -392,4 +393,4 @@ begin
 end;
 {$ENDIF}
 
-end.
+end.

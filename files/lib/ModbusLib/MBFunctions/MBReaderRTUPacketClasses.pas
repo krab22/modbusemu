@@ -1,8 +1,3 @@
-{
-$Author: npcprom\fomin_k $
-$Date: 2014-04-22 15:22:44 +0600 (Tue, 22 Apr 2014) $
-$Rev: 264 $
-}
 unit MBReaderRTUPacketClasses;
 
 {$mode objfpc}{$H+}
@@ -304,7 +299,7 @@ implementation
 
 uses SysUtils,
      MBDefine,
-     MBReaderBase, MBErrorCode, MBReaderStrings;
+     MBReaderBase, MBErrorCode, MBResourceString;
 
 { TReaderMBF1Packet }
 
@@ -1016,4 +1011,4 @@ begin
   FExpectedKey := Value;
 end;
 
-end.
+end.

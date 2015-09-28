@@ -1,8 +1,3 @@
-{
-$Author: npcprom\fomin_k $
-$Date: 2014-04-28 10:54:55 +0600 (Mon, 28 Apr 2014) $
-$Rev: 268 $
-}
 unit DispatcherModbusSlaveProxyClasses;
 
 {$mode objfpc}{$H+}
@@ -168,4 +163,4 @@ begin
   TempConnection.AddPollingItem(ItemProp,CallBack);
 end;
 
-end.
+end.

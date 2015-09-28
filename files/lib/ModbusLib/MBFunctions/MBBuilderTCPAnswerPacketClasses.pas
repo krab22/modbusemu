@@ -1,8 +1,3 @@
-{
-$Author: npcprom\fomin_k $
-$Date: 2014-04-25 16:37:06 +0600 (Fri, 25 Apr 2014) $
-$Rev: 266 $
-}
 unit MBBuilderTCPAnswerPacketClasses;
 
 {$mode objfpc}{$H+}
@@ -11,9 +6,6 @@ interface
 
 uses Classes,
      MBDefine, MBInterfaces, MBBuilderPacketClasses;
-
-resourcestring
-  rsIllegalFunctionNumber = 'Не допустимый номер функции.';     
 
 type
   TBuilderMBTCPAswerPacket = class(TBuilderMBTCPPacket, IBuilderTCPAnswerPacket)
@@ -63,7 +55,8 @@ type
 implementation
 
 uses SysUtils,
-     MBRequestTypes, MBResponseTypes, MBBuilderBase;
+     MBRequestTypes, MBResponseTypes, MBBuilderBase,
+     MBResourceString;
 
 { TBuilderMBTCPErrorPacket }
 
@@ -258,4 +251,4 @@ begin
   FLen := TempLenght*2+3;
 end;
 
-end.
+end.

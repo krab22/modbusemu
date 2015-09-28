@@ -6,7 +6,7 @@ interface
 
 uses Classes, SysUtils, syncobjs,
      Sockets,
-     SocketSimpleTypes, SelectTypes,
+     SelectTypes,
      UDPMiscTypes,
      LoggerItf
      {$IFDEF UNIX}
@@ -111,7 +111,11 @@ end;
 procedure TUDPClient.Open;
 var Res       : Integer;
     TempOpt   : Integer;
+    {$IFDEF WINDOWS}
+    nb : Integer;
+    {$ELSE}
     TempFlags : Integer;
+    {$ENDIF}
 begin
   SetLastError(0);
 
@@ -220,7 +224,7 @@ begin
 
   if (not Assigned(Buff)) or (BuffLen = 0) then
    begin
-    SendLogMessage(llDebug,'UDP client. SentPackege','Попытка отослать пустой пакет');
+    SendLogMessage(llDebug,rsUDPClSentPack1,rsUDPClSentPack2);
     Exit;
    end;
   Lock;
@@ -231,18 +235,22 @@ begin
      if Res = -1 then
       begin
        TempErr := {$IFDEF UNIX}fpgeterrno{$ELSE}GetLastOSError{$ENDIF};
+       {$IFDEF UNIX}
        if TempErr <> ESysEAGAIN then
         begin
+       {$ENDIF}
          SetLastError(TempErr);
          Exit;
+       {$IFDEF UNIX}
         end;
+       {$ENDIF}
       end;
     end
    else
     begin
-     SendLogMessage(llDebug,'UDP client. SentPackege',Format('Пакет слишком большой: %d',[BuffLen]));
+     SendLogMessage(llDebug,rsUDPClSentPack1,Format(rsUDPClSentPack3,[BuffLen]));
      // необходимо разработать алгоритм отправки больших буферов
-     SetLastError(ESysEMSGSIZE);
+     SetLastError({$IFDEF UNIX}ESysEMSGSIZE{$ELSE}EMSGSIZE{$ENDIF});
      Exit;
     end;
    Result := True;
@@ -255,6 +263,7 @@ function TUDPClient.ReceivePackage(const Buff: Pointer; BuffSize: Cardinal; out 
 var Res : Integer;
 begin
   Result := False;
+  AAddr.sin_port := 0;
 
   if not Active then Exit;
 
@@ -280,6 +289,7 @@ var TempTimeval   : timeval;
     TempReadFDSet : TFDSet;
 begin
     Result := wrError;
+    {$IFDEF WINDOWS} TempReadFDSet.fd_count := 0; {$ELSE} TempReadFDSet[0] := 0; {$ENDIF}
 
     if not Active then Exit;
 
@@ -309,6 +319,7 @@ var Res         : Integer;
     TempAddrLen : LongInt;
 begin
   TempBuff := Getmem(FBuffSize);
+  TempAddr.sin_port := 0;
   try
    FillChar(TempBuff^,SizeOf(FBuffSize),$00);
 
@@ -333,7 +344,7 @@ begin
    except
     on E : Exception do
      begin
-      SendLogMessage(llError,'UDP client. Получение пакета',Format('Ошибка обработчика пришедшего пакета: %s',[E.Message]));
+      SendLogMessage(llError,rsUDPClGetPack1,Format(rsUDPClGetPack2,[E.Message]));
      end;
    end;
 

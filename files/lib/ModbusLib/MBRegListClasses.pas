@@ -1,8 +1,3 @@
-{
-$Author: npcprom\fomin_k $
-$Date: 2014-04-15 11:41:08 +0600 (Tue, 15 Apr 2014) $
-$Rev: 260 $
-}
 unit MBRegListClasses;
 
 {$mode objfpc}{$H+}
@@ -796,4 +791,4 @@ begin
   if MBRegister[Address] <> nil then MBRegister[Address].Value:= Value;
 end;
 
-end.
+end.

@@ -1,8 +1,3 @@
-{
-$Author: npcprom\fomin_k $
-$Date: 2014-04-22 15:22:44 +0600 (Tue, 22 Apr 2014) $
-$Rev: 264 $
-}
 unit MBReaderPacketClasses;
 
 {$mode objfpc}{$H+}
@@ -13,10 +8,6 @@ uses Classes,
      MBDefine,
      MBResponseTypes, MBRequestTypes,
      MBReaderBase, MBInterfaces;
-
-resourcestring
-   rsMBTCPPacketLenError  = 'Длинна пакета не соответствует заявленной';
-   rsMBTCPPacketTrasError = 'Пакет не принадлежит текущей транзакции.';
 
 type
 
@@ -73,7 +64,8 @@ type
 
 implementation
 
-uses SysUtils, {$IFDEF WINDOWS} Windows, {$ENDIF}
+uses SysUtils,
+     MBResourceString,
      MBErrorCode,
      CRC16Func;
 
@@ -290,4 +282,4 @@ begin
  Notify(rpEndRead);
 end;
 
-end.
+end.

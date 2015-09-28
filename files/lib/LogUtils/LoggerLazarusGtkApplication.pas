@@ -1,8 +1,3 @@
-{
-$Author: npcprom\fomin_k $
-$Date: 2014-11-06 16:41:57 +0500 (Thu, 06 Nov 2014) $
-$Rev: 585 $
-}
 unit LoggerLazarusGtkApplication;
 
 {$mode objfpc}{$H+}

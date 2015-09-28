@@ -1,8 +1,3 @@
-{
-$Author$
-$Date$
-$Rev$
-}
 unit SocketMyServerTypes;
 
 {$mode objfpc}
@@ -447,7 +442,7 @@ begin
                        try
                         FClientObject.OnClientReceiveData(FClientObject, TempBuff, Cardinal(ReadRes),Cardinal(TempDadaCame));
                        except
-                        on E : Exception do SendLogMessage(llError,rsClientConnectionName,Format('ClientObject.OnClientReceiveData. Ошибка: %s',[E.Message]));
+                        on E : Exception do SendLogMessage(llError,rsClientConnectionName,Format(rsClOnResData1,[E.Message]));
                        end;
                        if Terminated then Break;
                        // чистим буфер
@@ -459,7 +454,7 @@ begin
                         try
                          FClientObject.OnClientReceiveInfo(FClientObject.Owner,FClientObject)
                         except
-                         on E : Exception do SendLogMessage(llError,rsClientConnectionName,Format('ClientObject.OnClientReceiveInfo. Ошибка: %s',[E.Message]));
+                         on E : Exception do SendLogMessage(llError,rsClientConnectionName,Format(rsClOnResData2,[E.Message]));
                         end;
                        end
                       else
@@ -516,7 +511,7 @@ begin
        {$IFDEF UNIX}FpClose(TempCliHandle){$ELSE}closesocket(TempCliHandle){$ENDIF};
        Sleep(TempSleepTime);
 
-       SendLogMessage(llError,rsServerSocketName,'Превышено допустимое количество одновременных соединений.');
+       SendLogMessage(llError,rsServerSocketName,rsSrvAccept1);
 
        Continue;
       end;
@@ -907,7 +902,7 @@ begin
 
   FreeAndNil(aClient);
 
-  SendLogMessage(llInfo,rsServerSocketName,Format('Клиент удален.Количество соединений: %d',[FClientList.Count]));
+  SendLogMessage(llInfo,rsServerSocketName,Format(rsBSrvSockRemCl1,[FClientList.Count]));
 end;
 
 procedure TBaseServerSocket.CloseAllClientSockets;
@@ -963,7 +958,7 @@ begin
      if (FLastError = aError) then Exit;
      FLastError      := aError;
      FLastErrorDescr := SocketErrorToString(aError);
-     SendLogMessage(llError,rsClientConnectionName,Format('Клиент: %s:%d - Ошибка: %s - %s',[aClient.ClientAddr,aClient.ClientPort,IntToStr(aError),FLastErrorDescr]));
+     SendLogMessage(llError,rsClientConnectionName,Format(rsClLasrErrSet1,[aClient.ClientAddr,aClient.ClientPort,IntToStr(aError),FLastErrorDescr]));
     finally
      Unlock;
     end;
@@ -1016,7 +1011,7 @@ begin
      Result.Start;
     end;
 
-   SendLogMessage(llInfo,rsServerSocketName,Format('Присоеденился клиент. Количество соединений: %d',[FClientList.Count]));
+   SendLogMessage(llInfo,rsServerSocketName,Format(rsClConnect1,[FClientList.Count]));
 
    if Assigned(FOnClientConnect) then FOnClientConnect(Self,Result);
 

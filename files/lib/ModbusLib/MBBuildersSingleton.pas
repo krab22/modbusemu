@@ -1,8 +1,3 @@
-{
-$Author: npcprom\fomin_k $
-$Date: 2014-04-15 11:41:08 +0600 (Tue, 15 Apr 2014) $
-$Rev: 260 $
-}
 unit MBBuildersSingleton;
 
 {$mode objfpc}{$H+}
@@ -533,4 +528,4 @@ finalization
   DestroyRTUBuilders;
   DestroyTCPBuilders;
 
-end.
+end.

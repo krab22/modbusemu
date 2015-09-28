@@ -1,8 +1,3 @@
-{
-$Author: npcprom\fomin_k $
-$Date: 2014-09-10 11:01:18 +0600 (Wed, 10 Sep 2014) $
-$Rev: 562 $
-}
 unit LocalHostNetIfoWinclass;
 
 {$mode objfpc}{$H+}
@@ -14,10 +9,6 @@ uses Classes, Contnrs,
      IPHelper;
 const
   cLocalhoctIP = '127.0.0.1';
-
-resourcestring
-
- rsROWNotInstalled = 'Структура параметров интерфейса не установлена.';
 
 type
   {
@@ -71,7 +62,7 @@ type
     function GetItfDescription: String; override;
     function GetItfName: String; override;
    public
-    constructor Create(ItfInfo : PMIB_IFROW); virtual;
+    constructor Create(ItfInfo : PMIB_IFROW); reintroduce;
     destructor  Destroy; override;
 
     procedure Start;
@@ -143,7 +134,7 @@ type
 implementation
 
 uses SysUtils,
-     SocketMisc, TypInfo;
+     SocketMisc, TypInfo, SocketResStrings;
 
 { TLocalHostNetWinInfo }
 
@@ -366,7 +357,7 @@ var i : Integer;
 begin
   if FItfRow = nil then raise Exception.Create(rsROWNotInstalled);
 
-  Result := Format('Имя: %s',[ItfAdapterName+#13#10]);
+  Result := Format(rsGetInf1,[ItfAdapterName+#13#10]);
 
   Result := Result+ Format('Описание: %s',[StrPas(@FItfRow^.bDescr)+#13#10]);
 
@@ -399,34 +390,34 @@ begin
   Result:= Result + #9+Format(rsFormatErrors,[FItfRow^.dwOutErrors])+#13#10;
   Result:= Result + #9+Format(rsFormatOutQLen,[FItfRow^.dwOutQLen])+#13#10;
 
-  Result:= Result + 'IP адреса:' + #13#10;
+  Result:= Result + rsGetInf2 + #13#10;
   for i := 0 to ItfIPCount-1 do
   begin
-   Result:= Result + #9+Format('IP: %s',[ItfIPAddress[i].IP])+#13#10;
-   Result:= Result + #9+Format('Маска IP: %s',[ItfIPAddress[i].Mask])+#13#10;
+   Result:= Result + #9+Format(rsGetInf3,[ItfIPAddress[i].IP])+#13#10;
+   Result:= Result + #9+Format(rsGetInf4,[ItfIPAddress[i].Mask])+#13#10;
   end;
 
-  Result:= Result + 'Шлюзы:' + #13#10;
+  Result:= Result + rsGetInf5 + #13#10;
   for i := 0 to ItfGWCount-1 do
   begin
-   Result:= Result + #9+Format('IP: %s',[ItfGWAddress[i].IP])+#13#10;
-   Result:= Result + #9+Format('Маска IP: %s',[ItfGWAddress[i].Mask])+#13#10;
+   Result:= Result + #9+Format(rsGetInf3,[ItfGWAddress[i].IP])+#13#10;
+   Result:= Result + #9+Format(rsGetInf4,[ItfGWAddress[i].Mask])+#13#10;
   end;
 
-  Result:= Result + 'DHSP: ' + #13#10;
+  Result:= Result + rsGetInf6 + #13#10;
 
-  Result:= Result + #9+Format('Разрешен: %s',[BoolToStr(ItfDHCPEnabled, True)])+#13#10;
+  Result:= Result + #9+Format(rsGetInf7,[BoolToStr(ItfDHCPEnabled, True)])+#13#10;
   if ItfDHCPEnabled then Result:= Result + #9+Format('IP: %s',[ItfDHSPServerIP])+#13#10;
 
-  Result:= Result + 'WINS: ' + #13#10;
+  Result:= Result + rsGetInf8 + #13#10;
 
-  Result:= Result + #9+Format('Разрешен: %s',[BoolToStr(ItfHaveWINS, True)])+#13#10;
+  Result:= Result + #9+Format(rsGetInf7,[BoolToStr(ItfHaveWINS, True)])+#13#10;
   if ItfHaveWINS then
    begin
-    Result:= Result + #9+Format('IP первичного: %s',[ItfPrimaryWINS])+#13#10;
-    Result:= Result + #9+Format('Маска первичного: %s',[ItfPrimaryWINSMask])+#13#10;
-    Result:= Result + #9+Format('IP вторичного: %s',[ItfSecondaryWINS])+#13#10;
-    Result:= Result + #9+Format('Маска вторичного: %s',[ItfSecondaryWINSMask])+#13#10;
+    Result:= Result + #9+Format(rsGetInf9,[ItfPrimaryWINS])+#13#10;
+    Result:= Result + #9+Format(rsGetInf10,[ItfPrimaryWINSMask])+#13#10;
+    Result:= Result + #9+Format(rsGetInf11,[ItfSecondaryWINS])+#13#10;
+    Result:= Result + #9+Format(rsGetInf12,[ItfSecondaryWINSMask])+#13#10;
    end; 
 
 end;

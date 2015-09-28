@@ -1,8 +1,3 @@
-{
-$Author: npcprom\fomin_k $
-$Date: 2014-05-30 16:51:29 +0600 (Fri, 30 May 2014) $
-$Rev: 275 $
-}
 unit DispatcherMBSlavePollingItemClasses;
 
 {$mode objfpc}{$H+}
@@ -173,4 +168,4 @@ begin
 end;
 
 
-end.
+end.

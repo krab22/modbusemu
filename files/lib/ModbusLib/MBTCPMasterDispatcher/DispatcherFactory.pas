@@ -1,8 +1,3 @@
-{
-$Author: npcprom\fomin_k $
-$Date: 2014-06-02 16:44:03 +0600 (Mon, 02 Jun 2014) $
-$Rev: 276 $
-}
 unit DispatcherFactory;
 
 {$mode objfpc}{$H+}
@@ -54,8 +49,8 @@ begin
   Result := nil;
   if not Assigned(ModbusDispatcher) then
    begin
-    ModbusDispatcher        := TDispatcherModbusMaster.Create;
-    ModbusDispatcher.AddRef;
+    ModbusDispatcher        := TDispatcherModbusMaster.Create(nil);
+//    ModbusDispatcher.AddRef;
     ModbusDispatcher.Logger := LoggerItfVar;
    end;
   Result := ModbusDispatcher as IMBDispatcherItf;
@@ -78,8 +73,8 @@ begin
 
   if Assigned(ModbusDispatcher) then
    begin
-    ModbusDispatcher.Release;
-    ModbusDispatcher := nil;
+//    ModbusDispatcher.Release;
+    FreeAndNil(ModbusDispatcher); //ModbusDispatcher := nil;
    end;
 
   LoggerItfVar := nil;
@@ -91,4 +86,4 @@ initialization
  LoggerItfVar      := nil;
 finalization
  TTrasmitterDispFactory.DestroyAllDispatchers;
-end.
+end.

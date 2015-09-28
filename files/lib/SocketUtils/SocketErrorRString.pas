@@ -1,8 +1,3 @@
-{
-$Author: npcprom\fomin_k $
-$Date: 2014-06-10 14:16:28 +0600 (Tue, 10 Jun 2014) $
-$Rev: 547 $
-}
 unit SocketErrorRString;
 
 interface

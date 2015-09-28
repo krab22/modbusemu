@@ -1,8 +1,3 @@
-{
-$Author: npcprom\fomin_k $
-$Date: 2014-12-20 14:12:18 +0500 (Sat, 20 Dec 2014) $
-$Rev: 278 $
-}
 unit DispatcherMBSlavePollingThreadClasses;
 
 {$mode objfpc}{$H+}
@@ -15,6 +10,9 @@ uses Classes, SyncObjs,
      DispatcherDictionaryesClasses,
      SocketMyTypes, SocketSimpleTypes,
      LoggerItf;
+
+const
+  cLocalHostAddr = '127.0.0.1';
 
 type
 
@@ -352,7 +350,7 @@ begin
  try
   FSlaveConnection := TBaseClientSocket.Create;
   FSlaveConnection.Logger         := Logger;
-  if FConnectionParam.SlaveAddr.IP.Addr = 0 then FSlaveConnection.Address := '127.0.0.1'
+  if FConnectionParam.SlaveAddr.IP.Addr = 0 then FSlaveConnection.Address := cLocalHostAddr
    else FSlaveConnection.Address := GetIPStr(FConnectionParam.SlaveAddr.IP.Addr);
   FSlaveConnection.Port           := FConnectionParam.SlaveAddr.Port;
   FSlaveConnection.SelectEnable   := False;
@@ -496,4 +494,4 @@ begin
   FItemDictinary := Value;
 end;
 
-end.
+end.

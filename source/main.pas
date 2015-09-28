@@ -171,15 +171,17 @@ procedure TfrmMain.actChannelAddExecute(Sender: TObject);
 var TempFrm : TformChenAdd;
     TempIndex : PtrInt;
     TempChenName : String;
+    TempRes  : TModalResult;
 begin
   TempFrm := TformChenAdd.Create(Self);
   try
    TempFrm.ChennelList := libChennelList.Items;
-   TempFrm.ShowModal;
+   TempRes := TempFrm.ShowModal;
    TempIndex := TempFrm.Tag;
   finally
    FreeAndNil(TempFrm);
   end;
+  if TempRes <> mrOK then Exit;
   libChennelList.ItemIndex := TempIndex;
   TempChenName :=libChennelList.Items.Strings[TempIndex];
   LoggerObj.info(rsAddChennel,Format(rsAddChennel1,[TempChenName]));

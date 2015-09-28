@@ -45,6 +45,21 @@ resourcestring
   rsESetThread8  = 'CloseThread error: %s';
   rsESetThread9  = 'Сокет: %s:%d Ошибка: %d - %s';
 
+  rsSetCoilValue1 = 'SetCoilValue. При записи значения регистра %d возникло исключение: %s';
+  rsSetCoilValue2 = 'SetCoilValue. Не удалось записать значение регистра %d';
+
+  rsSetInputValue1 = 'SetInputValue. При записи значения регистра %d возникло исключение: %s';
+  rsSetInputValue2 = 'SetInputValue. Не удалось записать значение регистра %d';
+
+  rsSetDiskretValue1 = 'Modbus Discret-регистры являются регистрами только для чтения.';
+
+  rsSetHoldingValue1 = 'Modbus Holding-регистры являются регистрами только для чтения.';
+
+  rsSetCoilValue11 = 'TDispatcherModbusMaster.SetCoilValue Интерфейс устройства не задан.';
+  rsSetCoilValue12 = 'TDispatcherModbusMaster.SetCoilValue Пток отправки данных не активен.';
+
+  rsSetInputValue11 = 'TDispatcherModbusMaster.SetInputValue Интерфейс устройства не задан.';
+  rsSetInputValue12 = 'TDispatcherModbusMaster.SetInputValue Пток отправки данных не активен.';
 
 implementation
 

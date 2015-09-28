@@ -1,8 +1,3 @@
-{
-$Author: npcprom\fomin_k $
-$Date: 2014-04-22 15:22:44 +0600 (Tue, 22 Apr 2014) $
-$Rev: 264 $
-}
 unit MBRequestReaderTCPClasses;
 
 {$mode objfpc}{$H+}
@@ -165,4 +160,4 @@ begin
   FErrorCode := 0;
 end;
 
-end.
+end.

@@ -1,20 +1,10 @@
-{
-$Author: npcprom\fomin_k $
-$Date: 2014-04-29 13:49:13 +0600 (Tue, 29 Apr 2014) $
-$Rev: 270 $
-}
 unit MBRegListSimpleClasses;
 
 {$mode objfpc}{$H+}
 
 interface
 
-uses {$IFDEF WINDOWS}
-     Windows,
-     {$ELSE}
-
-     {$ENDIF}
-     Classes,
+uses Classes,
      MBDefine, MBRegistersCalsses;
 
 resourcestring
@@ -622,4 +612,4 @@ begin
    if FRegArray[i]<>nil then (FRegArray[i] as TMBWordRegister).OnChange:=Value;
 end;
 
-end.
+end.
