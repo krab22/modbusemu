@@ -4,7 +4,8 @@ unit formChennelAdd;
 
 interface
 
-uses Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls;
+uses Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
+     MBDeviceClasses;
 
 type
   TformChenAdd = class(TForm)
@@ -15,8 +16,10 @@ type
     procedure btAddTCPChennelClick(Sender : TObject);
    private
     FChennelList : TStrings;
+    FDevArray    : TDeviceArray;
    public
     property ChennelList : TStrings read FChennelList write FChennelList;
+    property DevArray    : TDeviceArray read FDevArray write FDevArray;
   end;
 
 var formChenAdd : TformChenAdd;
@@ -24,7 +27,8 @@ var formChenAdd : TformChenAdd;
 implementation
 
 uses {$IFDEF UNIX}formChennelRSLinuxAdd{$ELSE}formChennelRSWindowsAdd{$ENDIF}, formChennelTCPAdd,
-     LoggerLazarusGtkApplication;
+     LoggerLazarusGtkApplication,
+     ModbusEmuResStr;
 
 {$R *.lfm}
 
@@ -37,10 +41,11 @@ begin
   TempRes := mrCancel;
   TempForm := TfrmChennelRSAdd.Create(Self);
   try
-   TempForm.ChennelList := FChennelList;
-   TempForm.ShowModal;
-   TempRes := TempForm.ModalResult;
-   Tag := TempForm.Tag;
+    TempForm.ChennelList := FChennelList;
+    TempForm.DevArray := FDevArray;
+    TempForm.ShowModal;
+    TempRes := TempForm.ModalResult;
+    Tag := TempForm.Tag;
   finally
    FreeAndNil(TempForm);
   end;
@@ -54,10 +59,11 @@ begin
   TempRes := mrCancel;
   TempForm := TfrmChennelTCPAdd.Create(Self);
   try
-   TempForm.ChennelList := FChennelList;
-   TempForm.ShowModal;
-   TempRes := TempForm.ModalResult;
-   Tag := TempForm.Tag;
+    TempForm.ChennelList := FChennelList;
+    TempForm.DevArray := FDevArray;
+    TempForm.ShowModal;
+    TempRes := TempForm.ModalResult;
+    Tag := TempForm.Tag;
   finally
    FreeAndNil(TempForm);
   end;

@@ -260,6 +260,9 @@ type
    // акдивизация/деактивизация серверного сокета
    property Active             : Boolean read GetActive write SetActive;
 
+   property LastError          : Cardinal read FLastError;
+   property LastErrorDescr     : String read FLastErrorDescr;
+
    // количество подключенных клиентов
    property ClientCount        : Integer read GetClientCount;
    // список объетов клиентских соединений
@@ -754,7 +757,7 @@ end;
 procedure TBaseServerSocket.Open;
 var Res : Integer;
     TempOpt : Integer;
-    nb,TempFlags : Integer;
+    {$IFDEF WINDOWS}nb,{$ENDIF}TempFlags : Integer;
 begin
   FClosing := False;
 

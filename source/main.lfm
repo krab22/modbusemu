@@ -176,6 +176,7 @@ object frmMain: TfrmMain
       OnChange = memLogChange
       ScrollBars = ssAutoBoth
       TabOrder = 11
+      WordWrap = False
     end
     object cmbLogLineCount: TComboBox
       Left = 185

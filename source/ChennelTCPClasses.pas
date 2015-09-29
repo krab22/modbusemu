@@ -4,9 +4,11 @@ unit ChennelTCPClasses;
 
 interface
 
-uses Classes, SysUtils, syncobjs,
+uses Classes, SysUtils,
      ChennelClasses,
-     SocketMyServerTypes;
+     SocketMyServerTypes,
+     MBDeviceClasses,
+     MBRequestReaderTCPClasses, MBBuilderTCPAnswerPacketClasses;
 
 type
   TChennelTCPThread = class(TChannelBaseThread)
@@ -14,6 +16,10 @@ type
     FBindAddress : String;
     FPort        : Word;
     FSrvSocket   : TBaseServerSocket;
+
+    FReader      : TMBTCPRequestReader;
+    FAnswBits    : TBuilderMBTCPBitAswerPacket;
+    FAnswWord    : TBuilderMBTCPWordAswerPacket;
    protected
     procedure Execute; override; // вертит путой цикл в 500 мс
     procedure InitThread;        // создает серверное соединение
@@ -22,8 +28,21 @@ type
     procedure OnClientConnectProc(Sender : TBaseServerSocket; aClient : TServerClientObj);
     procedure OnClientDisconnectProc(Sender : TBaseServerSocket; aClient : TServerClientObj);
     procedure OnClientReceiveDataProc(Sender : TServerClientObj; Buff : array of Byte; DataSize : Cardinal; QuantityDataCame : Cardinal);
+
+    procedure SendErrorMsg(ATaransID,AProtID : Word; ADevNum,AFuncNum,AError: Byte; AClient : TServerClientObj);
+
+    procedure ResponseF1(ADev : TMBDevice; AClient : TServerClientObj); virtual;
+    procedure ResponseF2(ADev : TMBDevice; AClient : TServerClientObj); virtual;
+    procedure ResponseF3(ADev : TMBDevice; AClient : TServerClientObj); virtual;
+    procedure ResponseF4(ADev : TMBDevice; AClient : TServerClientObj); virtual;
+    procedure ResponseF5(ADev : TMBDevice; AClient : TServerClientObj); virtual;
+    procedure ResponseF6(ADev : TMBDevice; AClient : TServerClientObj); virtual;
+    procedure ResponseF15(ADev : TMBDevice; AClient : TServerClientObj); virtual;
+    procedure ResponseF16(ADev : TMBDevice; AClient : TServerClientObj); virtual;
+    procedure ResponseF17(ADev : TMBDevice; AClient : TServerClientObj); virtual;
    public
     constructor Create(CreateSuspended: Boolean; const StackSize: SizeUInt = 65535); reintroduce;
+    destructor  Destroy; override;
     property BindAddress : String read FBindAddress write FBindAddress;
     property Port        : Word read FPort write FPort;
   end;
@@ -42,7 +61,9 @@ type
 
 implementation
 
-uses LoggerItf, ModbusEmuResStr;
+uses LoggerItf, ModbusEmuResStr,
+     MBDefine, MBErrorCode,
+     MBRequestTypes, MBResponseTypes;
 
 { TChennelTCP }
 
@@ -73,11 +94,450 @@ begin
   inherited Create(CreateSuspended,StackSize);
   FPort        := 502;
   FBindAddress := '0.0.0.0';
+  FSrvSocket   := nil;
+  FReader      := TMBTCPRequestReader.Create;
+  FAnswBits    := TBuilderMBTCPBitAswerPacket.Create;
+  FAnswWord    := TBuilderMBTCPWordAswerPacket.Create;
+end;
+
+destructor TChennelTCPThread.Destroy;
+begin
+  FreeAndNil(FReader);
+  FreeAndNil(FAnswBits);
+  FreeAndNil(FAnswWord);
+  inherited Destroy;
 end;
 
 procedure TChennelTCPThread.OnClientReceiveDataProc(Sender : TServerClientObj; Buff : array of Byte; DataSize : Cardinal; QuantityDataCame : Cardinal);
+var TempDevice : TMBDevice;
 begin
+  TempDevice := nil;
 
+  if (Length(Buff) = 0) or (DataSize = 0) then Exit;
+
+  // читаем пакет
+  try
+   FReader.RequestRead(@Buff[0],DataSize);
+  except
+   on E : Exception do
+   begin
+    SendLogMessage(llError,rsChanTCP1,Format('Клиент: %s:%d. Ошибка разбора пакета: %s',[Sender.ClientAddr,Sender.ClientPort,E.Message]));
+    Exit;
+   end;
+  end;
+  Lock; // в ходим в критическую секцию для работы с массивом устройств
+  try
+    // получаем требуемый девайс
+    try
+     TempDevice := DeviceArray[FReader.DeviceAddress];
+    except
+     on E : Exception do
+      begin
+       SendLogMessage(llError,rsChanTCP1,Format('Клиент: %s:%d. Ошибка получения устройства: %s',[Sender.ClientAddr,Sender.ClientPort,E.Message]));
+       Exit;
+      end;
+    end;
+    if not Assigned(TempDevice) then
+     begin
+      SendLogMessage(llDebug,rsChanTCP1,Format('Клиент: %s:%d. Запрашивается несуществующее устройство - %d',[Sender.ClientAddr,Sender.ClientPort,FReader.DeviceAddress]));
+      Exit;
+     end;
+    if not(TMBFunctionsEnum(FReader.FunctionCode) in TempDevice.DeviceFunctions) then
+     begin
+      SendLogMessage(llDebug, rsChanTCP1,Format('Клиент: %s:%d. Запрашиваемая функция(%d) не поддерживается устройством %d',[Sender.ClientAddr,Sender.ClientPort,FReader.FunctionCode,FReader.DeviceAddress]));
+      SendErrorMsg(FReader.TransactionID,FReader.ProtocolID,FReader.DeviceAddress,FReader.FunctionCode,ERR_MB_ILLEGAL_FUNCTION - ERR_MB_ERR_CUSTOM,Sender);
+      Exit;
+     end;
+    case FReader.FunctionCode of
+     1  : begin // чтение Coils rw
+           ResponseF1(TempDevice,Sender);
+          end;
+     2  : begin // чтение Discrete r
+           ResponseF2(TempDevice,Sender);
+          end;
+     3  : begin // чтение Holdings rw
+           ResponseF3(TempDevice,Sender);
+          end;
+     4  : begin // чтение Input r
+           ResponseF4(TempDevice,Sender);
+          end;
+     5  : begin // запись одного Coil
+           ResponseF5(TempDevice,Sender);
+          end;
+     6  : begin // запись одного Holding
+           ResponseF6(TempDevice,Sender);
+          end;
+     15 : begin // запись множества Coils
+           ResponseF15(TempDevice,Sender);
+          end;
+     16 : begin // запись множества Holding
+           ResponseF16(TempDevice,Sender);
+          end;
+     17 : begin // Чтение/запись Holdong регистров одним вызовом
+           ResponseF17(TempDevice,Sender);
+          end;
+    end;
+  finally
+   UnLock;
+  end;
+end;
+
+procedure TChennelTCPThread.SendErrorMsg(ATaransID, AProtID : Word; ADevNum, AFuncNum, AError : Byte; AClient : TServerClientObj);
+var TempErrResp : TMBTCPErrorHeder;
+    TempSendRes : Integer;
+begin
+  TempErrResp.TransactioID           := Swap(ATaransID);
+  TempErrResp.ProtocolID             := Swap(AProtID);
+  TempErrResp.Length                 := 3;
+  TempErrResp.DeviceID               := ADevNum;
+  TempErrResp.ErrorData.FunctionCode := $80 or AFuncNum;
+  TempErrResp.ErrorData.ErrorCode    := AError;
+
+  TempSendRes := AClient.SendDada(TempErrResp,9);
+  if TempSendRes = -1 then SendLogMessage(llError,rsChanTCP1,Format('Клиент: %s:%d. Ошибка отправки пответа: %d',[AClient.ClientAddr,AClient.ClientPort,AClient.LastError]));
+end;
+
+procedure TChennelTCPThread.ResponseF1(ADev : TMBDevice; AClient : TServerClientObj);
+var TempStartAddr    : Word;
+    TempQuantity     : Word;
+    TempBits         : TBits;
+    TempPackData     : Pointer;
+    TempPackDataSize : Cardinal;
+    TempSendRes      : Integer;
+begin
+   TempPackData := FReader.GetPacketData(TempPackDataSize);
+
+   TempStartAddr := swap(PMBF1_6FRequestData(TempPackData)^.StartingAddress);
+   TempQuantity  := swap(PMBF1_6FRequestData(TempPackData)^.Quantity);
+
+   Freemem(TempPackData);
+
+   try
+    TempBits := ADev.GetCoilRegValues(TempStartAddr,TempQuantity);
+   except
+    on E : Exception do
+     begin
+      SendLogMessage(llError,rsChanTCP1, Format('Клиент: %s:%d. Ошибка получения значений Coil регистров(%d:%d:%d): %s',[AClient.ClientAddr,AClient.ClientPort,FReader.DeviceAddress, TempStartAddr,TempQuantity,E.Message]));
+      SendErrorMsg(FReader.TransactionID,FReader.ProtocolID,FReader.DeviceAddress,FReader.FunctionCode,ERR_MB_SLAVE_DEVICE_FAILURE - ERR_MB_ERR_CUSTOM,AClient);
+      Exit;
+     end;
+   end;
+
+   try
+    FAnswBits.BitData := TempBits;
+   finally
+    if Assigned(TempBits) then FreeAndNil(TempBits);
+   end;
+
+   FAnswBits.StartingAddress := TempStartAddr;
+   FAnswBits.Quantity        := TempQuantity;
+   FAnswBits.TransactionID   := FReader.TransactionID;
+   FAnswBits.ProtocolID      := FReader.ProtocolID;
+   FAnswBits.DeviceAddress   := FReader.DeviceAddress;
+   FAnswBits.FunctionNum     := TMBFunctionsEnum(FReader.FunctionCode);
+   // строим ответный пакет
+   FAnswBits.Build;
+   // получаем паект от построителя для отправки
+   TempPackData     := FAnswBits.Packet;
+   TempPackDataSize := FAnswBits.Len;
+   try
+    // посылаем ответ
+    TempSendRes := AClient.SendDada(TempPackData^,TempPackDataSize);
+    if TempSendRes = -1 then
+     begin
+      SendLogMessage(llDebug, rsChanTCP1,Format('Клиент: %s:%d. Read Coils. Не удалось отправить ответ на запрос.',[AClient.ClientAddr,AClient.ClientPort]));
+     end
+    else
+     begin
+      SendLogMessage(llDebug, rsChanTCP1,Format('Клиент: %s:%d. Read Coils. Отправили ответ на запрос клиента.',[AClient.ClientAddr,AClient.ClientPort]));
+     end;
+   finally
+    // освобождаем память выделенную для пакета
+    Freemem(TempPackData);
+   end;
+end;
+
+procedure TChennelTCPThread.ResponseF2(ADev : TMBDevice; AClient : TServerClientObj);
+var TempStartAddr    : Word;
+    TempQuantity     : Word;
+    TempBits         : TBits;
+    TempPackData     : Pointer;
+    TempPackDataSize : Cardinal;
+    TempSendRes      : Integer;
+begin
+  TempPackData := FReader.GetPacketData(TempPackDataSize);
+
+  TempStartAddr := swap(PMBF1_6FRequestData(TempPackData)^.StartingAddress);
+  TempQuantity  := swap(PMBF1_6FRequestData(TempPackData)^.Quantity);
+
+  Freemem(TempPackData);
+
+  try
+   TempBits := ADev.GetDiscretRegValues(TempStartAddr,TempQuantity);
+  except
+   on E : Exception do
+    begin
+     SendLogMessage(llError,rsChanTCP1, Format('Клиент: %s:%d. Ошибка получения значений Diskrete регистров(%d:%d:%d): %s',[AClient.ClientAddr,AClient.ClientPort,FReader.DeviceAddress, TempStartAddr,TempQuantity,E.Message]));
+     SendErrorMsg(FReader.TransactionID,FReader.ProtocolID,FReader.DeviceAddress,FReader.FunctionCode,ERR_MB_SLAVE_DEVICE_FAILURE - ERR_MB_ERR_CUSTOM,AClient);
+     Exit;
+    end;
+  end;
+
+  try
+   FAnswBits.BitData := TempBits;
+  finally
+   if Assigned(TempBits) then FreeAndNil(TempBits);
+  end;
+
+  FAnswBits.StartingAddress := TempStartAddr;
+  FAnswBits.Quantity        := TempQuantity;
+  FAnswBits.TransactionID   := FReader.TransactionID;
+  FAnswBits.ProtocolID      := FReader.ProtocolID;
+  FAnswBits.DeviceAddress   := FReader.DeviceAddress;
+  FAnswBits.FunctionNum     := TMBFunctionsEnum(FReader.FunctionCode);
+  FAnswBits.Build;
+
+  TempPackData     := FAnswBits.Packet;
+  TempPackDataSize := FAnswBits.Len;
+  try
+   TempSendRes := AClient.SendDada(TempPackData^,TempPackDataSize);
+   if TempSendRes = -1 then
+    begin
+     SendLogMessage(llDebug, rsChanTCP1,Format('Клиент: %s:%d. Read Diskrets. Не удалось отправить ответ на запрос.',[AClient.ClientAddr,AClient.ClientPort]));
+    end
+   else
+    begin
+     SendLogMessage(llDebug, rsChanTCP1,Format('Клиент: %s:%d. Read Diskrets. Отправили ответ на запрос клиента.',[AClient.ClientAddr,AClient.ClientPort]));
+    end;
+  finally
+   Freemem(TempPackData);
+  end;
+end;
+
+procedure TChennelTCPThread.ResponseF3(ADev : TMBDevice; AClient : TServerClientObj);
+var TempStartAddr    : Word;
+    TempQuantity     : Word;
+    TempWords        : TWordRegsValues;
+    TempPackData     : Pointer;
+    TempPackDataSize : Cardinal;
+    TempSendRes      : Integer;
+begin
+  TempPackData := FReader.GetPacketData(TempPackDataSize);
+
+  TempStartAddr := swap(PMBF1_6FRequestData(TempPackData)^.StartingAddress);
+  TempQuantity  := swap(PMBF1_6FRequestData(TempPackData)^.Quantity);
+
+  Freemem(TempPackData);
+
+  try
+   TempWords := ADev.GetHoldingRegValues(TempStartAddr,TempQuantity);
+  except
+   on E : Exception do
+    begin
+     SendLogMessage(llError,rsChanTCP1, Format('Клиент: %s:%d. Ошибка получения значений Holding регистров(%d:%d:%d): %s',[AClient.ClientAddr,AClient.ClientPort,FReader.DeviceAddress, TempStartAddr,TempQuantity,E.Message]));
+     SendErrorMsg(FReader.TransactionID,FReader.ProtocolID,FReader.DeviceAddress,FReader.FunctionCode,ERR_MB_SLAVE_DEVICE_FAILURE - ERR_MB_ERR_CUSTOM,AClient);
+     Exit;
+    end;
+  end;
+
+  try
+   FAnswWord.WordData := TempWords;
+  finally
+   SetLength(TempWords,0);
+  end;
+
+  FAnswWord.StartingAddress := TempStartAddr;
+  FAnswWord.Quantity        := TempQuantity;
+  FAnswWord.TransactionID   := FReader.TransactionID;
+  FAnswWord.ProtocolID      := FReader.ProtocolID;
+  FAnswWord.DeviceAddress   := FReader.DeviceAddress;
+  FAnswWord.FunctionNum     := TMBFunctionsEnum(FReader.FunctionCode);
+  FAnswWord.Build;
+
+  TempPackData     := FAnswWord.Packet;
+  TempPackDataSize := FAnswWord.Len;
+  try
+   TempSendRes := AClient.SendDada(TempPackData^,TempPackDataSize);
+   if TempSendRes = -1 then
+    begin
+     SendLogMessage(llDebug, rsChanTCP1,Format('Клиент: %s:%d. Read Holding. Не удалось отправить ответ на запрос.',[AClient.ClientAddr,AClient.ClientPort]));
+    end
+   else
+    begin
+     SendLogMessage(llDebug, rsChanTCP1,Format('Клиент: %s:%d. Read Holding. Отправили ответ на запрос клиента.',[AClient.ClientAddr,AClient.ClientPort]));
+    end;
+  finally
+   Freemem(TempPackData);
+  end;
+end;
+
+procedure TChennelTCPThread.ResponseF4(ADev : TMBDevice; AClient : TServerClientObj);
+var TempStartAddr    : Word;
+    TempQuantity     : Word;
+    TempWords        : TWordRegsValues;
+    TempPackData     : Pointer;
+    TempPackDataSize : Cardinal;
+    TempSendRes      : Integer;
+begin
+  TempPackData := FReader.GetPacketData(TempPackDataSize);
+
+  TempStartAddr := swap(PMBF1_6FRequestData(TempPackData)^.StartingAddress);
+  TempQuantity  := swap(PMBF1_6FRequestData(TempPackData)^.Quantity);
+
+  Freemem(TempPackData);
+
+  try
+   TempWords := ADev.GetInputRegValues(TempStartAddr,TempQuantity);
+  except
+   on E : Exception do
+    begin
+     SendLogMessage(llError,rsChanTCP1, Format('Клиент: %s:%d. Ошибка получения значений Input регистров(%d:%d:%d): %s',[AClient.ClientAddr,AClient.ClientPort,FReader.DeviceAddress, TempStartAddr,TempQuantity,E.Message]));
+     SendErrorMsg(FReader.TransactionID,FReader.ProtocolID,FReader.DeviceAddress,FReader.FunctionCode,ERR_MB_SLAVE_DEVICE_FAILURE - ERR_MB_ERR_CUSTOM,AClient);
+     Exit;
+    end;
+  end;
+
+  try
+   FAnswWord.WordData := TempWords;
+  finally
+   SetLength(TempWords,0);
+  end;
+
+  FAnswWord.StartingAddress := TempStartAddr;
+  FAnswWord.Quantity        := TempQuantity;
+  FAnswWord.TransactionID   := FReader.TransactionID;
+  FAnswWord.ProtocolID      := FReader.ProtocolID;
+  FAnswWord.DeviceAddress   := FReader.DeviceAddress;
+  FAnswWord.FunctionNum     := TMBFunctionsEnum(FReader.FunctionCode);
+  FAnswWord.Build;
+
+  TempPackData     := FAnswWord.Packet;
+  TempPackDataSize := FAnswWord.Len;
+  try
+   TempSendRes := AClient.SendDada(TempPackData^,TempPackDataSize);
+   if TempSendRes = -1 then
+    begin
+     SendLogMessage(llDebug, rsChanTCP1,Format('Клиент: %s:%d. Read Input. Не удалось отправить ответ на запрос.',[AClient.ClientAddr,AClient.ClientPort]));
+    end
+   else
+    begin
+     SendLogMessage(llDebug, rsChanTCP1,Format('Клиент: %s:%d. Read Input. Отправили ответ на запрос клиента.',[AClient.ClientAddr,AClient.ClientPort]));
+    end;
+  finally
+   Freemem(TempPackData);
+  end;
+end;
+
+procedure TChennelTCPThread.ResponseF5(ADev : TMBDevice; AClient : TServerClientObj);
+var TempStartAddr    : Word;
+    TempQuantity     : Word;
+    TempBool         : Boolean;
+    TempPackData     : Pointer;
+    TempPackDataSize : Cardinal;
+    TempSendRes      : Integer;
+    TempResp5_6      : TMBTCPF1RequestNew;
+begin
+  TempPackData := FReader.GetPacketData(TempPackDataSize);
+
+  try
+   TempStartAddr := swap(PMBF1_6FRequestData(TempPackData)^.StartingAddress); // адрес
+   TempQuantity  := swap(PMBF1_6FRequestData(TempPackData)^.Quantity);        // значение - должно быть либо $0000 - False либо $FF00 - True
+
+   if TempQuantity = 0 then TempBool := False
+    else TempBool := True;
+
+   try
+    ADev.Coils[TempStartAddr].Value := TempBool;
+
+    TempResp5_6.TCPHeader.TransactioID := Swap(FReader.TransactionID);
+    TempResp5_6.TCPHeader.ProtocolID   := Swap(FReader.ProtocolID);
+    TempResp5_6.TCPHeader.Length       := Swap(FReader.Len);
+    TempResp5_6.Header.DeviceInfo.DeviceAddress := FReader.DeviceAddress;
+    TempResp5_6.Header.DeviceInfo.FunctionCode  := 5;
+    TempResp5_6.Header.RequestData.StartingAddress := PMBF1_6FRequestData(TempPackData)^.StartingAddress;
+    TempResp5_6.Header.RequestData.Quantity        := PMBF1_6FRequestData(TempPackData)^.Quantity;
+
+    TempSendRes := AClient.SendDada(TempResp5_6,SizeOf(TempResp5_6));
+    if TempSendRes = -1 then
+     begin
+      SendLogMessage(llDebug, rsChanTCP1,Format('Клиент: %s:%d. Write Coil. Не удалось отправить ответ на запрос.',[AClient.ClientAddr,AClient.ClientPort]));
+     end
+    else
+     begin
+      SendLogMessage(llDebug, rsChanTCP1,Format('Клиент: %s:%d. Write Coil. Отправили ответ на запрос клиента.',[AClient.ClientAddr,AClient.ClientPort]));
+     end;
+   except
+    on E : Exception do
+     begin
+      SendLogMessage(llError,rsChanTCP1,Format('Клиент: %s:%d. Ошибка записи Coil регистра(%d:%d:%d): %s',[AClient.ClientAddr,AClient.ClientPort,FReader.DeviceAddress, TempStartAddr,TempQuantity,E.Message]));
+      SendErrorMsg(FReader.TransactionID,FReader.ProtocolID,FReader.DeviceAddress,FReader.FunctionCode,ERR_MB_SLAVE_DEVICE_FAILURE - ERR_MB_ERR_CUSTOM,AClient);
+     end;
+   end;
+  finally
+   Freemem(TempPackData);
+  end;
+end;
+
+procedure TChennelTCPThread.ResponseF6(ADev : TMBDevice; AClient : TServerClientObj);
+var TempStartAddr    : Word;
+    TempQuantity     : Word;
+    TempPackData     : Pointer;
+    TempPackDataSize : Cardinal;
+    TempSendRes      : Integer;
+    TempResp5_6      : TMBTCPF1RequestNew;
+begin
+  TempPackData := FReader.GetPacketData(TempPackDataSize);
+  try
+   TempStartAddr := swap(PMBF1_6FRequestData(TempPackData)^.StartingAddress); // адрес
+   TempQuantity  := swap(PMBF1_6FRequestData(TempPackData)^.Quantity);        // значение
+   try
+    ADev.Inputs[TempStartAddr].Value := TempQuantity;
+
+    TempResp5_6.TCPHeader.TransactioID := Swap(FReader.TransactionID);
+    TempResp5_6.TCPHeader.ProtocolID   := Swap(FReader.ProtocolID);
+    TempResp5_6.TCPHeader.Length       := Swap(FReader.Len);
+    TempResp5_6.Header.DeviceInfo.DeviceAddress := FReader.DeviceAddress;
+    TempResp5_6.Header.DeviceInfo.FunctionCode  := 6;
+    TempResp5_6.Header.RequestData.StartingAddress := PMBF1_6FRequestData(TempPackData)^.StartingAddress;
+    TempResp5_6.Header.RequestData.Quantity        := PMBF1_6FRequestData(TempPackData)^.Quantity;
+
+    TempSendRes := AClient.SendDada(TempResp5_6,SizeOf(TempResp5_6));
+    if TempSendRes = -1 then
+     begin
+      SendLogMessage(llDebug, rsChanTCP1,Format('Клиент: %s:%d. Write Input. Не удалось отправить ответ на запрос.',[AClient.ClientAddr,AClient.ClientPort]));
+     end
+    else
+     begin
+      SendLogMessage(llDebug, rsChanTCP1,Format('Клиент: %s:%d. Write Input. Отправили ответ на запрос клиента.',[AClient.ClientAddr,AClient.ClientPort]));
+     end;
+   except
+    on E : Exception do
+     begin
+      SendLogMessage(llError,rsChanTCP1,Format('Клиент: %s:%d. Ошибка получения значений Input регистра(%d:%d:%d): %s',[AClient.ClientAddr,AClient.ClientPort,FReader.DeviceAddress, TempStartAddr,TempQuantity,E.Message]));
+      SendErrorMsg(FReader.TransactionID,FReader.ProtocolID,FReader.DeviceAddress,FReader.FunctionCode,ERR_MB_SLAVE_DEVICE_FAILURE - ERR_MB_ERR_CUSTOM,AClient);
+     end;
+   end;
+  finally
+   Freemem(TempPackData);
+  end;
+end;
+
+procedure TChennelTCPThread.ResponseF15(ADev : TMBDevice; AClient : TServerClientObj);
+begin
+  SendLogMessage(llError,rsChanTCP1,Format('Клиент: %s:%d. Попытка вызова нереализованной функции 15',[AClient.ClientAddr,AClient.ClientPort]));
+  SendErrorMsg(FReader.TransactionID,FReader.ProtocolID,FReader.DeviceAddress,FReader.FunctionCode,ERR_MB_ILLEGAL_FUNCTION - ERR_MB_ERR_CUSTOM,AClient);
+end;
+
+procedure TChennelTCPThread.ResponseF16(ADev : TMBDevice; AClient : TServerClientObj);
+begin
+  SendLogMessage(llError,rsChanTCP1,Format('Клиент: %s:%d. Попытка вызова нереализованной функции 16',[AClient.ClientAddr,AClient.ClientPort]));
+  SendErrorMsg(FReader.TransactionID,FReader.ProtocolID,FReader.DeviceAddress,FReader.FunctionCode,ERR_MB_ILLEGAL_FUNCTION - ERR_MB_ERR_CUSTOM,AClient);
+end;
+
+procedure TChennelTCPThread.ResponseF17(ADev : TMBDevice; AClient : TServerClientObj);
+begin
+  SendLogMessage(llError,rsChanTCP1,Format('Клиент: %s:%d. Попытка вызова нереализованной функции 17',[AClient.ClientAddr,AClient.ClientPort]));
+  SendErrorMsg(FReader.TransactionID,FReader.ProtocolID,FReader.DeviceAddress,FReader.FunctionCode,ERR_MB_ILLEGAL_FUNCTION - ERR_MB_ERR_CUSTOM,AClient);
 end;
 
 procedure TChennelTCPThread.OnClientConnectProc(Sender : TBaseServerSocket; aClient : TServerClientObj);

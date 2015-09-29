@@ -4,7 +4,8 @@ unit formChennelRSLinuxAdd;
 
 interface
 
-uses Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls;
+uses Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
+     MBDeviceClasses;
 
 type
   TfrmChennelRSAdd = class(TForm)
@@ -13,8 +14,10 @@ type
     procedure btOkClick(Sender : TObject);
    private
     FChennelList : TStrings;
+    FDevArray    : TDeviceArray;
    public
     property ChennelList : TStrings read FChennelList write FChennelList;
+    property DevArray    : TDeviceArray read FDevArray write FDevArray;
   end;
 
 var frmChennelRSAdd : TfrmChennelRSAdd;
@@ -29,9 +32,12 @@ uses LoggerLazarusGtkApplication,
 { TfrmChennelRSAdd }
 
 procedure TfrmChennelRSAdd.btOkClick(Sender : TObject);
+var TempChen : TChennelRS;
 begin
   LoggerObj.info('TfrmChennelRSAdd', 'Добавили последовательный канал');
-  Tag := FChennelList.AddObject('RS канал',TChennelRS.Create);
+  TempChen := TChennelRS.Create;
+  TempChen.DeviceArray := FDevArray;
+  Tag := FChennelList.AddObject('RS канал',TempChen);
 end;
 
 end.
