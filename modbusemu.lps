@@ -7,12 +7,7 @@
       <Unit0>
         <Filename Value="modbusemu.lpr"/>
         <IsPartOfProject Value="True"/>
-        <CursorPos X="56" Y="9"/>
-<<<<<<< HEAD
-        <UsageCount Value="116"/>
-=======
-        <UsageCount Value="97"/>
->>>>>>> refs/remotes/origin/master
+        <UsageCount Value="20"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -21,46 +16,13 @@
         <ComponentName Value="frmMain"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-<<<<<<< HEAD
-        <TopLine Value="152"/>
-        <CursorPos Y="178"/>
-        <ComponentState Value="1"/>
-        <UsageCount Value="116"/>
-=======
-        <TopLine Value="4"/>
-        <CursorPos X="34" Y="128"/>
-        <ComponentState Value="1"/>
-        <UsageCount Value="97"/>
->>>>>>> refs/remotes/origin/master
+        <TopLine Value="196"/>
+        <CursorPos X="39" Y="151"/>
+        <UsageCount Value="20"/>
         <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit1>
     </Units>
   </ProjectSession>
-  <Debugging>
-    <BreakPoints Count="3">
-      <Item1>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="/usr/lib/codetyphon/typhon/lcl/stdctrls.pp"/>
-        <Line Value="1631"/>
-      </Item1>
-      <Item2>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="files/lib/ModbusLib/MBFunctions/MBRequestTypes.pas"/>
-        <Line Value="79"/>
-      </Item2>
-      <Item3>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="files/lib/ModbusLib/MBFunctions/MBRequestTypes.pas"/>
-        <Line Value="55"/>
-      </Item3>
-    </BreakPoints>
-  </Debugging>
 </CONFIG>
