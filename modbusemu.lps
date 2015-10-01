@@ -8,7 +8,11 @@
         <Filename Value="modbusemu.lpr"/>
         <IsPartOfProject Value="True"/>
         <CursorPos X="56" Y="9"/>
+<<<<<<< HEAD
         <UsageCount Value="116"/>
+=======
+        <UsageCount Value="97"/>
+>>>>>>> refs/remotes/origin/master
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -18,10 +22,17 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="1"/>
+<<<<<<< HEAD
         <TopLine Value="152"/>
         <CursorPos Y="178"/>
         <ComponentState Value="1"/>
         <UsageCount Value="116"/>
+=======
+        <TopLine Value="4"/>
+        <CursorPos X="34" Y="128"/>
+        <ComponentState Value="1"/>
+        <UsageCount Value="97"/>
+>>>>>>> refs/remotes/origin/master
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
