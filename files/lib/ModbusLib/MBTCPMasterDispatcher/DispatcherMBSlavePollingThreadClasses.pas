@@ -97,12 +97,9 @@ begin
     begin
      Sleep(TempInterval);
      if Terminated then Break;
-
      try
-
      Lock;
      try
-
       // пытаемся восстановить соединение
       if not FSlaveConnection.Active then
        begin
@@ -124,8 +121,6 @@ begin
 
         // пропускаем не активные итемы
         if not TMBSlavePollingItem(TempItem).Active then Continue;
-
-//        SendLogMessage(llDebug,rsDispThread, Format('StartAddr: %d',[TMBSlavePollingItem(TempItem).ItemProp.Item.StartAddr]));
 
         // получаем запрос
         TempRequest  := TMBSlavePollingItem(TempItem).Request;
@@ -161,13 +156,11 @@ begin
            SendError(TMBSlavePollingItem(TempItem),mdeeSend,ER_SLAVE_SENT_NOT_FULL);
           end;
          end;
-
         // устанавливаем время ожидания
         FSlaveConnection.SelectTimeOut  := TMBSlavePollingItem(TempItem).ItemProp.SlaveParams.PoolingTimeParam.TimeOut;
         // ждем прихода ответа
         WaitRes := wrAbandoned;
         Counter := 0;
-
         while (Counter <= 5) do
          begin
           WaitRes := FSlaveConnection.WaiteReceiveData;
@@ -175,17 +168,18 @@ begin
           Inc(Counter);
           if Terminated then Break;
          end;
-
         // проверяем на то что не дождались ответа
         if (WaitRes <> wrSignaled) or (Counter >=5) then
          begin
-          SendLogMessage(llError,rsDispThread,rsEDispThread4);
-
-          SendErrorToAll(mdeeSocketError,ER_SLAVE_ANSVER_TIMEOUT);
+           SendLogMessage(llDebug,rsDispThread,Format(rsEDispThread4,
+                                                      [TempRequest^.Header.DeviceInfo.DeviceAddress,
+                                                       swap(TempRequest^.Header.RequestData.StartingAddress),
+                                                       swap(TempRequest^.Header.RequestData.Quantity)
+                                                      ]));
+           SendError(TMBSlavePollingItem(TempItem),mdeeReceive,ER_SLAVE_ANSVER_TIMEOUT);
           FSlaveConnection.Active := False;
           Break; // не дождались ответа - пробуем следующий итем
          end;
-
         // читаем ответ
         ReadRes := FSlaveConnection.GetQuantityDataCame; // получаем количество пришедших данных
         if CheckResultNil(ReadRes,ER_SLAVE_CONNECT_BROKEN) then // проверяем количество на 0
@@ -195,21 +189,15 @@ begin
           Break;
          end;
         if ReadRes > TempBuffSize then ReadRes := TempBuffSize; // надо подумать об вычитке всего блока пришедших данных - иначе часть данных теряется
-
         ReadRes := FSlaveConnection.ReceiveBuf(TempBuff^, ReadRes);
-
         if Terminated then Break;
-
         if CheckResultNil(ReadRes,ER_SLAVE_CONNECT_BROKEN) then
          begin
-
           SendLogMessage(llError,rsDispThread,rsEDispThread5);
-
           // скорей всего соединение с сервером разорвано
           FSlaveConnection.Active := False; // закрываем соединение и выходим из цикла
           Break;
          end;
-
         // разбираем ответ и отсылаем подписчикам оповещение об изменении состояния объекта
         try
          ReadResponse(TempBuff,ReadRes,TMBSlavePollingItem(TempItem));
@@ -222,20 +210,16 @@ begin
 
         if Terminated then Break;
      end;
-
     finally
      UnLock;
     end;
-
     except
      on E : Exception do
       begin
        SendLogMessage(llError,rsDispThread, Format(rsEDispThread7,[E.Message]));
       end;
-    end
-
    end;
-
+   end;
   finally
    FreeMem(TempBuff);
    CloseThread;
@@ -356,9 +340,7 @@ begin
   FSlaveConnection.SelectEnable   := False;
   FSlaveConnection.BlockingSocket := False;
   FSlaveConnection.OnError        := @OnSocketErrorProc;
-
   FSlaveConnection.Open;
-
   if FSlaveConnection.Active then
    begin
     SendErrorToAll(mdeeConnect,0);

@@ -95,9 +95,9 @@ begin
   FPort        := 502;
   FBindAddress := '0.0.0.0';
   FSrvSocket   := nil;
-  FReader      := TMBTCPRequestReader.Create;
-  FAnswBits    := TBuilderMBTCPBitAswerPacket.Create;
-  FAnswWord    := TBuilderMBTCPWordAswerPacket.Create;
+  FReader      := TMBTCPRequestReader.Create(nil);
+  FAnswBits    := TBuilderMBTCPBitAswerPacket.Create(nil);
+  FAnswWord    := TBuilderMBTCPWordAswerPacket.Create(nil);
 end;
 
 destructor TChennelTCPThread.Destroy;
@@ -120,7 +120,7 @@ begin
   except
    on E : Exception do
    begin
-    SendLogMessage(llError,rsChanTCP1,Format('Клиент: %s:%d. Ошибка разбора пакета: %s',[Sender.ClientAddr,Sender.ClientPort,E.Message]));
+    SendLogMessage(llError,rsChanTCP1,Format(rsOnClientReceiveDataProc1,[Sender.ClientAddr,Sender.ClientPort,E.Message]));
     Exit;
    end;
   end;
@@ -132,18 +132,18 @@ begin
     except
      on E : Exception do
       begin
-       SendLogMessage(llError,rsChanTCP1,Format('Клиент: %s:%d. Ошибка получения устройства: %s',[Sender.ClientAddr,Sender.ClientPort,E.Message]));
+       SendLogMessage(llError,rsChanTCP1,Format(rsOnClientReceiveDataProc2,[Sender.ClientAddr,Sender.ClientPort,E.Message]));
        Exit;
       end;
     end;
     if not Assigned(TempDevice) then
      begin
-      SendLogMessage(llDebug,rsChanTCP1,Format('Клиент: %s:%d. Запрашивается несуществующее устройство - %d',[Sender.ClientAddr,Sender.ClientPort,FReader.DeviceAddress]));
+      SendLogMessage(llDebug,rsChanTCP1,Format(rsOnClientReceiveDataProc3,[Sender.ClientAddr,Sender.ClientPort,FReader.DeviceAddress]));
       Exit;
      end;
     if not(TMBFunctionsEnum(FReader.FunctionCode) in TempDevice.DeviceFunctions) then
      begin
-      SendLogMessage(llDebug, rsChanTCP1,Format('Клиент: %s:%d. Запрашиваемая функция(%d) не поддерживается устройством %d',[Sender.ClientAddr,Sender.ClientPort,FReader.FunctionCode,FReader.DeviceAddress]));
+      SendLogMessage(llDebug, rsChanTCP1,Format(rsOnClientReceiveDataProc4,[Sender.ClientAddr,Sender.ClientPort,FReader.FunctionCode,FReader.DeviceAddress]));
       SendErrorMsg(FReader.TransactionID,FReader.ProtocolID,FReader.DeviceAddress,FReader.FunctionCode,ERR_MB_ILLEGAL_FUNCTION - ERR_MB_ERR_CUSTOM,Sender);
       Exit;
      end;
@@ -193,7 +193,7 @@ begin
   TempErrResp.ErrorData.ErrorCode    := AError;
 
   TempSendRes := AClient.SendDada(TempErrResp,9);
-  if TempSendRes = -1 then SendLogMessage(llError,rsChanTCP1,Format('Клиент: %s:%d. Ошибка отправки пответа: %d',[AClient.ClientAddr,AClient.ClientPort,AClient.LastError]));
+  if TempSendRes = -1 then SendLogMessage(llError,rsChanTCP1,Format(rsSendErrorMsg1,[AClient.ClientAddr,AClient.ClientPort,AClient.LastError]));
 end;
 
 procedure TChennelTCPThread.ResponseF1(ADev : TMBDevice; AClient : TServerClientObj);
@@ -216,7 +216,7 @@ begin
    except
     on E : Exception do
      begin
-      SendLogMessage(llError,rsChanTCP1, Format('Клиент: %s:%d. Ошибка получения значений Coil регистров(%d:%d:%d): %s',[AClient.ClientAddr,AClient.ClientPort,FReader.DeviceAddress, TempStartAddr,TempQuantity,E.Message]));
+      SendLogMessage(llError,rsChanTCP1, Format(rsResponseF1_1,[AClient.ClientAddr,AClient.ClientPort,FReader.DeviceAddress, TempStartAddr,TempQuantity,E.Message]));
       SendErrorMsg(FReader.TransactionID,FReader.ProtocolID,FReader.DeviceAddress,FReader.FunctionCode,ERR_MB_SLAVE_DEVICE_FAILURE - ERR_MB_ERR_CUSTOM,AClient);
       Exit;
      end;
@@ -244,11 +244,11 @@ begin
     TempSendRes := AClient.SendDada(TempPackData^,TempPackDataSize);
     if TempSendRes = -1 then
      begin
-      SendLogMessage(llDebug, rsChanTCP1,Format('Клиент: %s:%d. Read Coils. Не удалось отправить ответ на запрос.',[AClient.ClientAddr,AClient.ClientPort]));
+      SendLogMessage(llDebug, rsChanTCP1,Format(rsResponseF1_2,[AClient.ClientAddr,AClient.ClientPort]));
      end
     else
      begin
-      SendLogMessage(llDebug, rsChanTCP1,Format('Клиент: %s:%d. Read Coils. Отправили ответ на запрос клиента.',[AClient.ClientAddr,AClient.ClientPort]));
+      SendLogMessage(llDebug, rsChanTCP1,Format(rsResponseF1_3,[AClient.ClientAddr,AClient.ClientPort]));
      end;
    finally
     // освобождаем память выделенную для пакета
@@ -276,7 +276,7 @@ begin
   except
    on E : Exception do
     begin
-     SendLogMessage(llError,rsChanTCP1, Format('Клиент: %s:%d. Ошибка получения значений Diskrete регистров(%d:%d:%d): %s',[AClient.ClientAddr,AClient.ClientPort,FReader.DeviceAddress, TempStartAddr,TempQuantity,E.Message]));
+     SendLogMessage(llError,rsChanTCP1, Format(rsResponseF2_1,[AClient.ClientAddr,AClient.ClientPort,FReader.DeviceAddress, TempStartAddr,TempQuantity,E.Message]));
      SendErrorMsg(FReader.TransactionID,FReader.ProtocolID,FReader.DeviceAddress,FReader.FunctionCode,ERR_MB_SLAVE_DEVICE_FAILURE - ERR_MB_ERR_CUSTOM,AClient);
      Exit;
     end;
@@ -302,11 +302,11 @@ begin
    TempSendRes := AClient.SendDada(TempPackData^,TempPackDataSize);
    if TempSendRes = -1 then
     begin
-     SendLogMessage(llDebug, rsChanTCP1,Format('Клиент: %s:%d. Read Diskrets. Не удалось отправить ответ на запрос.',[AClient.ClientAddr,AClient.ClientPort]));
+     SendLogMessage(llDebug, rsChanTCP1,Format(rsResponseF2_2,[AClient.ClientAddr,AClient.ClientPort]));
     end
    else
     begin
-     SendLogMessage(llDebug, rsChanTCP1,Format('Клиент: %s:%d. Read Diskrets. Отправили ответ на запрос клиента.',[AClient.ClientAddr,AClient.ClientPort]));
+     SendLogMessage(llDebug, rsChanTCP1,Format(rsResponseF2_3,[AClient.ClientAddr,AClient.ClientPort]));
     end;
   finally
    Freemem(TempPackData);
@@ -333,7 +333,7 @@ begin
   except
    on E : Exception do
     begin
-     SendLogMessage(llError,rsChanTCP1, Format('Клиент: %s:%d. Ошибка получения значений Holding регистров(%d:%d:%d): %s',[AClient.ClientAddr,AClient.ClientPort,FReader.DeviceAddress, TempStartAddr,TempQuantity,E.Message]));
+     SendLogMessage(llError,rsChanTCP1, Format(rsResponseF3_1,[AClient.ClientAddr,AClient.ClientPort,FReader.DeviceAddress, TempStartAddr,TempQuantity,E.Message]));
      SendErrorMsg(FReader.TransactionID,FReader.ProtocolID,FReader.DeviceAddress,FReader.FunctionCode,ERR_MB_SLAVE_DEVICE_FAILURE - ERR_MB_ERR_CUSTOM,AClient);
      Exit;
     end;
@@ -359,11 +359,11 @@ begin
    TempSendRes := AClient.SendDada(TempPackData^,TempPackDataSize);
    if TempSendRes = -1 then
     begin
-     SendLogMessage(llDebug, rsChanTCP1,Format('Клиент: %s:%d. Read Holding. Не удалось отправить ответ на запрос.',[AClient.ClientAddr,AClient.ClientPort]));
+     SendLogMessage(llDebug, rsChanTCP1,Format(rsResponseF3_2,[AClient.ClientAddr,AClient.ClientPort]));
     end
    else
     begin
-     SendLogMessage(llDebug, rsChanTCP1,Format('Клиент: %s:%d. Read Holding. Отправили ответ на запрос клиента.',[AClient.ClientAddr,AClient.ClientPort]));
+     SendLogMessage(llDebug, rsChanTCP1,Format(rsResponseF3_3,[AClient.ClientAddr,AClient.ClientPort]));
     end;
   finally
    Freemem(TempPackData);
@@ -390,7 +390,7 @@ begin
   except
    on E : Exception do
     begin
-     SendLogMessage(llError,rsChanTCP1, Format('Клиент: %s:%d. Ошибка получения значений Input регистров(%d:%d:%d): %s',[AClient.ClientAddr,AClient.ClientPort,FReader.DeviceAddress, TempStartAddr,TempQuantity,E.Message]));
+     SendLogMessage(llError,rsChanTCP1, Format(rsResponseF4_1,[AClient.ClientAddr,AClient.ClientPort,FReader.DeviceAddress, TempStartAddr,TempQuantity,E.Message]));
      SendErrorMsg(FReader.TransactionID,FReader.ProtocolID,FReader.DeviceAddress,FReader.FunctionCode,ERR_MB_SLAVE_DEVICE_FAILURE - ERR_MB_ERR_CUSTOM,AClient);
      Exit;
     end;
@@ -416,11 +416,11 @@ begin
    TempSendRes := AClient.SendDada(TempPackData^,TempPackDataSize);
    if TempSendRes = -1 then
     begin
-     SendLogMessage(llDebug, rsChanTCP1,Format('Клиент: %s:%d. Read Input. Не удалось отправить ответ на запрос.',[AClient.ClientAddr,AClient.ClientPort]));
+     SendLogMessage(llDebug, rsChanTCP1,Format(rsResponseF4_2,[AClient.ClientAddr,AClient.ClientPort]));
     end
    else
     begin
-     SendLogMessage(llDebug, rsChanTCP1,Format('Клиент: %s:%d. Read Input. Отправили ответ на запрос клиента.',[AClient.ClientAddr,AClient.ClientPort]));
+     SendLogMessage(llDebug, rsChanTCP1,Format(rsResponseF4_3,[AClient.ClientAddr,AClient.ClientPort]));
     end;
   finally
    Freemem(TempPackData);
@@ -459,16 +459,16 @@ begin
     TempSendRes := AClient.SendDada(TempResp5_6,SizeOf(TempResp5_6));
     if TempSendRes = -1 then
      begin
-      SendLogMessage(llDebug, rsChanTCP1,Format('Клиент: %s:%d. Write Coil. Не удалось отправить ответ на запрос.',[AClient.ClientAddr,AClient.ClientPort]));
+      SendLogMessage(llDebug, rsChanTCP1,Format(rsResponseF5_2,[AClient.ClientAddr,AClient.ClientPort]));
      end
     else
      begin
-      SendLogMessage(llDebug, rsChanTCP1,Format('Клиент: %s:%d. Write Coil. Отправили ответ на запрос клиента.',[AClient.ClientAddr,AClient.ClientPort]));
+      SendLogMessage(llDebug, rsChanTCP1,Format(rsResponseF5_3,[AClient.ClientAddr,AClient.ClientPort]));
      end;
    except
     on E : Exception do
      begin
-      SendLogMessage(llError,rsChanTCP1,Format('Клиент: %s:%d. Ошибка записи Coil регистра(%d:%d:%d): %s',[AClient.ClientAddr,AClient.ClientPort,FReader.DeviceAddress, TempStartAddr,TempQuantity,E.Message]));
+      SendLogMessage(llError,rsChanTCP1,Format(rsResponseF5_1,[AClient.ClientAddr,AClient.ClientPort,FReader.DeviceAddress, TempStartAddr,TempQuantity,E.Message]));
       SendErrorMsg(FReader.TransactionID,FReader.ProtocolID,FReader.DeviceAddress,FReader.FunctionCode,ERR_MB_SLAVE_DEVICE_FAILURE - ERR_MB_ERR_CUSTOM,AClient);
      end;
    end;
@@ -503,16 +503,16 @@ begin
     TempSendRes := AClient.SendDada(TempResp5_6,SizeOf(TempResp5_6));
     if TempSendRes = -1 then
      begin
-      SendLogMessage(llDebug, rsChanTCP1,Format('Клиент: %s:%d. Write Input. Не удалось отправить ответ на запрос.',[AClient.ClientAddr,AClient.ClientPort]));
+      SendLogMessage(llDebug, rsChanTCP1,Format(rsResponseF6_2,[AClient.ClientAddr,AClient.ClientPort]));
      end
     else
      begin
-      SendLogMessage(llDebug, rsChanTCP1,Format('Клиент: %s:%d. Write Input. Отправили ответ на запрос клиента.',[AClient.ClientAddr,AClient.ClientPort]));
+      SendLogMessage(llDebug, rsChanTCP1,Format(rsResponseF6_3,[AClient.ClientAddr,AClient.ClientPort]));
      end;
    except
     on E : Exception do
      begin
-      SendLogMessage(llError,rsChanTCP1,Format('Клиент: %s:%d. Ошибка получения значений Input регистра(%d:%d:%d): %s',[AClient.ClientAddr,AClient.ClientPort,FReader.DeviceAddress, TempStartAddr,TempQuantity,E.Message]));
+      SendLogMessage(llError,rsChanTCP1,Format(rsResponseF6_1,[AClient.ClientAddr,AClient.ClientPort,FReader.DeviceAddress, TempStartAddr,TempQuantity,E.Message]));
       SendErrorMsg(FReader.TransactionID,FReader.ProtocolID,FReader.DeviceAddress,FReader.FunctionCode,ERR_MB_SLAVE_DEVICE_FAILURE - ERR_MB_ERR_CUSTOM,AClient);
      end;
    end;
@@ -523,30 +523,30 @@ end;
 
 procedure TChennelTCPThread.ResponseF15(ADev : TMBDevice; AClient : TServerClientObj);
 begin
-  SendLogMessage(llError,rsChanTCP1,Format('Клиент: %s:%d. Попытка вызова нереализованной функции 15',[AClient.ClientAddr,AClient.ClientPort]));
+  SendLogMessage(llError,rsChanTCP1,Format(rsResponseF15_1,[AClient.ClientAddr,AClient.ClientPort]));
   SendErrorMsg(FReader.TransactionID,FReader.ProtocolID,FReader.DeviceAddress,FReader.FunctionCode,ERR_MB_ILLEGAL_FUNCTION - ERR_MB_ERR_CUSTOM,AClient);
 end;
 
 procedure TChennelTCPThread.ResponseF16(ADev : TMBDevice; AClient : TServerClientObj);
 begin
-  SendLogMessage(llError,rsChanTCP1,Format('Клиент: %s:%d. Попытка вызова нереализованной функции 16',[AClient.ClientAddr,AClient.ClientPort]));
+  SendLogMessage(llError,rsChanTCP1,Format(rsResponseF16_1,[AClient.ClientAddr,AClient.ClientPort]));
   SendErrorMsg(FReader.TransactionID,FReader.ProtocolID,FReader.DeviceAddress,FReader.FunctionCode,ERR_MB_ILLEGAL_FUNCTION - ERR_MB_ERR_CUSTOM,AClient);
 end;
 
 procedure TChennelTCPThread.ResponseF17(ADev : TMBDevice; AClient : TServerClientObj);
 begin
-  SendLogMessage(llError,rsChanTCP1,Format('Клиент: %s:%d. Попытка вызова нереализованной функции 17',[AClient.ClientAddr,AClient.ClientPort]));
+  SendLogMessage(llError,rsChanTCP1,Format(rsResponseF17_1,[AClient.ClientAddr,AClient.ClientPort]));
   SendErrorMsg(FReader.TransactionID,FReader.ProtocolID,FReader.DeviceAddress,FReader.FunctionCode,ERR_MB_ILLEGAL_FUNCTION - ERR_MB_ERR_CUSTOM,AClient);
 end;
 
 procedure TChennelTCPThread.OnClientConnectProc(Sender : TBaseServerSocket; aClient : TServerClientObj);
 begin
-  SendLogMessage(llError,rsChanTCP1,Format('Канал: %s:%d. Присоеденился клиент: %s:%d',[Sender.BindAddress,Sender.Port,aClient.ClientAddr,aClient.ClientPort]));
+  SendLogMessage(llError,rsChanTCP1,Format(rsClientConnect1,[Sender.BindAddress,Sender.Port,aClient.ClientAddr,aClient.ClientPort]));
 end;
 
 procedure TChennelTCPThread.OnClientDisconnectProc(Sender : TBaseServerSocket;aClient : TServerClientObj);
 begin
-  SendLogMessage(llError,rsChanTCP1,Format('Канал: %s:%d. Отсоеденился клиент: %s:%d',[Sender.BindAddress,Sender.Port,aClient.ClientAddr,aClient.ClientPort]));
+  SendLogMessage(llError,rsChanTCP1,Format(rsClientDisconnect1,[Sender.BindAddress,Sender.Port,aClient.ClientAddr,aClient.ClientPort]));
 end;
 
 procedure TChennelTCPThread.Execute;
@@ -566,6 +566,7 @@ procedure TChennelTCPThread.InitThread;
 begin
   try
    FSrvSocket := TBaseServerSocket.Create;
+   FSrvSocket.Logger := Logger;
    FSrvSocket.BindAddress := FBindAddress;
    FSrvSocket.Port        := FPort;
    FSrvSocket.OnClientConnect     := @OnClientConnectProc;

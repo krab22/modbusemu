@@ -25,10 +25,10 @@ type
     procedure Notify(EventType : TReadPacketEventType ;AMessage : String = ''); override; //
     procedure ReadData(Buff : Pointer; BuffSize : Cardinal); virtual; abstract;           //
 
-    function  GetDeviceAddress  : Byte; virtual; stdcall;     //
-    function  GetFunctionCode   : Byte; virtual; stdcall;     //
+    function  GetDeviceAddress  : Byte; virtual;      //
+    function  GetFunctionCode   : Byte; virtual;      //
    public
-    constructor Create; override;                                          //
+    constructor Create(AOwner : TComponent); override;                                          //
     destructor  Destroy; override;                                         //
     procedure Response(Buff : Pointer; BuffSize : Cardinal); override;     //
     property DeviceAddress  : Byte read GetDeviceAddress;                  //
@@ -50,11 +50,11 @@ type
     function  CheckSourceDevice(Buff : Pointer): Boolean; override;                //
     function  CheckSourceFunction(Buff : Pointer): Boolean; override;              //
 
-    function  GetTransactionID : Word; virtual; stdcall;
-    function  GetProtocolID    : Word; virtual; stdcall;
-    function  GetLen           : Word; virtual; stdcall;
+    function  GetTransactionID : Word; virtual;
+    function  GetProtocolID    : Word; virtual;
+    function  GetLen           : Word; virtual;
   public
-    constructor Create; override;
+    constructor Create(AOwner : TComponent); override;
     procedure Response(Buff : Pointer; BuffSize : Cardinal); override;
     property SourceTransID : Word read FSourceTransID write FSourceTransID;
     property TransactionID : Word read GetTransactionID;
@@ -71,9 +71,9 @@ uses SysUtils,
 
 { TReaderMBRTUPacket }
 
-constructor TReaderMBRTUPacket.Create;
+constructor TReaderMBRTUPacket.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FFunctionCode  := 0;
   FDeviceAddress := 0;
   FReaderType := rtMBRTU;
@@ -113,7 +113,7 @@ begin
   inherited;
 end;
 
-procedure TReaderMBRTUPacket.Response(Buff: Pointer; BuffSize: Cardinal); stdcall;
+procedure TReaderMBRTUPacket.Response(Buff: Pointer; BuffSize: Cardinal);
 begin
  Notify(rpStartRead);
  FErrorCode:=0;
@@ -137,7 +137,7 @@ begin
  Notify(rpEndRead);
 end;
 
-procedure TReaderMBRTUPacket.Notify(EventType: TReadPacketEventType; AMessage: String); stdcall;
+procedure TReaderMBRTUPacket.Notify(EventType: TReadPacketEventType; AMessage: String);
 begin
   case EventType of
    rpError     : begin
@@ -173,21 +173,21 @@ begin
 end;
 
 
-function TReaderMBRTUPacket.GetDeviceAddress: Byte; stdcall;
+function TReaderMBRTUPacket.GetDeviceAddress: Byte;
 begin
   Result:= FDeviceAddress;
 end;
 
-function TReaderMBRTUPacket.GetFunctionCode: Byte; stdcall;
+function TReaderMBRTUPacket.GetFunctionCode: Byte;
 begin
   Result:=FFunctionCode;
 end;
 
 { TReaderMBTCPPacket }
 
-constructor TReaderMBTCPPacket.Create;
+constructor TReaderMBTCPPacket.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FReaderType    := rtMBTCP;
   FTransactionID := 0;
   FProtocolID    := 0;
@@ -243,22 +243,22 @@ begin
  if not Result then  FErrorCode:=ERR_MASTER_FUNCTION_CODE;
 end;
 
-function TReaderMBTCPPacket.GetLen: Word; stdcall;
+function TReaderMBTCPPacket.GetLen: Word;
 begin
   Result := FLen;
 end;
 
-function TReaderMBTCPPacket.GetProtocolID: Word; stdcall;
+function TReaderMBTCPPacket.GetProtocolID: Word;
 begin
   Result := FProtocolID;
 end;
 
-function TReaderMBTCPPacket.GetTransactionID: Word; stdcall;
+function TReaderMBTCPPacket.GetTransactionID: Word;
 begin
   Result := FTransactionID;
 end;
 
-procedure TReaderMBTCPPacket.Response(Buff: Pointer; BuffSize: Cardinal); stdcall;
+procedure TReaderMBTCPPacket.Response(Buff: Pointer; BuffSize: Cardinal);
 begin
  Notify(rpStartRead);
  FErrorCode:=0;

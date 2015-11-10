@@ -65,47 +65,47 @@ var RTUF1Builder   : TBuilderMBF1Request;
 
 procedure InitRTUBuilders;
 begin
-  RTUF1Builder   := TBuilderMBF1Request.Create;
-  RTUF2Builder   := TBuilderMBF2Request.Create;
-  RTUF3Builder   := TBuilderMBF3Request.Create;
-  RTUF4Builder   := TBuilderMBF4Request.Create;
-  RTUF5Builder   := TBuilderMBF5Request.Create;
-  RTUF6Builder   := TBuilderMBF6Request.Create;
-  RTUF7Builder   := TBuilderMBF7Request.Create;
-  RTUF8Builder   := TBuilderMBF8Request.Create;
-  RTUF11Builder  := TBuilderMBF11Request.Create;
-  RTUF12Builder  := TBuilderMBF12Request.Create;
-  RTUF15Builder  := TBuilderMBF15Request.Create;
-  RTUF16Builder  := TBuilderMBF16Request.Create;
-  RTUF17Builder  := TBuilderMBF17Request.Create;
-  RTUF20Builder  := nil;//TBuilderMBF20Request.Create;
-  RTUF21Builder  := nil;//TBuilderMBF21Request.Create;
-  RTUF22Builder  := TBuilderMBF22Request.Create;
-  RTUF23Builder  := TBuilderMBF23Request.Create;
-  RTUF24Builder  := TBuilderMBF24Request.Create;
-  RTUF43Builder  := TBuilderMBF43Request.Create;
-  RTUF72Builder  := TBuilderMBF72Request.Create;
-  RTUF110Builder := TBuilderMBF110Request.Create;
+  RTUF1Builder   := TBuilderMBF1Request.Create(nil);
+  RTUF2Builder   := TBuilderMBF2Request.Create(nil);
+  RTUF3Builder   := TBuilderMBF3Request.Create(nil);
+  RTUF4Builder   := TBuilderMBF4Request.Create(nil);
+  RTUF5Builder   := TBuilderMBF5Request.Create(nil);
+  RTUF6Builder   := TBuilderMBF6Request.Create(nil);
+  RTUF7Builder   := TBuilderMBF7Request.Create(nil);
+  RTUF8Builder   := TBuilderMBF8Request.Create(nil);
+  RTUF11Builder  := TBuilderMBF11Request.Create(nil);
+  RTUF12Builder  := TBuilderMBF12Request.Create(nil);
+  RTUF15Builder  := TBuilderMBF15Request.Create(nil);
+  RTUF16Builder  := TBuilderMBF16Request.Create(nil);
+  RTUF17Builder  := TBuilderMBF17Request.Create(nil);
+  RTUF20Builder  := nil;//TBuilderMBF20Request.Create(nil);
+  RTUF21Builder  := nil;//TBuilderMBF21Request.Create(nil);
+  RTUF22Builder  := TBuilderMBF22Request.Create(nil);
+  RTUF23Builder  := TBuilderMBF23Request.Create(nil);
+  RTUF24Builder  := TBuilderMBF24Request.Create(nil);
+  RTUF43Builder  := TBuilderMBF43Request.Create(nil);
+  RTUF72Builder  := TBuilderMBF72Request.Create(nil);
+  RTUF110Builder := TBuilderMBF110Request.Create(nil);
 end;
 
 procedure InitTCPBuilders;
 begin
-  TCPF1Builder   := TBuilderMBTCPF1Request.Create;
-  TCPF2Builder   := TBuilderMBTCPF2Request.Create;
-  TCPF3Builder   := TBuilderMBTCPF3Request.Create;
-  TCPF4Builder   := TBuilderMBTCPF4Request.Create;
-  TCPF5Builder   := TBuilderMBTCPF5Request.Create;
-  TCPF6Builder   := TBuilderMBTCPF6Request.Create;
-  TCPF15Builder  := TBuilderMBTCPF15Request.Create;
-  TCPF16Builder  := TBuilderMBTCPF16Request.Create;
-  TCPF20Builder  := TBuilderMBTCPF20Request.Create;
-  TCPF21Builder  := TBuilderMBTCPF21Request.Create;
-  TCPF22Builder  := TBuilderMBTCPF22Request.Create;
-  TCPF23Builder  := TBuilderMBTCPF23Request.Create;
-  TCPF24Builder  := TBuilderMBTCPF24Request.Create;
-  TCPF43Builder  := TBuilderMBTCPF43Request.Create;
-  TCPF72Builder  := TBuilderMBTCPF72Request.Create;
-  TCPF110Builder := TBuilderMBTCPF110Request.Create;
+  TCPF1Builder   := TBuilderMBTCPF1Request.Create(nil);
+  TCPF2Builder   := TBuilderMBTCPF2Request.Create(nil);
+  TCPF3Builder   := TBuilderMBTCPF3Request.Create(nil);
+  TCPF4Builder   := TBuilderMBTCPF4Request.Create(nil);
+  TCPF5Builder   := TBuilderMBTCPF5Request.Create(nil);
+  TCPF6Builder   := TBuilderMBTCPF6Request.Create(nil);
+  TCPF15Builder  := TBuilderMBTCPF15Request.Create(nil);
+  TCPF16Builder  := TBuilderMBTCPF16Request.Create(nil);
+  TCPF20Builder  := TBuilderMBTCPF20Request.Create(nil);
+  TCPF21Builder  := TBuilderMBTCPF21Request.Create(nil);
+  TCPF22Builder  := TBuilderMBTCPF22Request.Create(nil);
+  TCPF23Builder  := TBuilderMBTCPF23Request.Create(nil);
+  TCPF24Builder  := TBuilderMBTCPF24Request.Create(nil);
+  TCPF43Builder  := TBuilderMBTCPF43Request.Create(nil);
+  TCPF72Builder  := TBuilderMBTCPF72Request.Create(nil);
+  TCPF110Builder := TBuilderMBTCPF110Request.Create(nil);
 end;
 
 procedure DestroyRTUBuilders;
@@ -182,7 +182,7 @@ begin
              RTUF1Builder.Quantity        := Params.MBRegcount;
              RTUF1Builder.Build;
             end;
-           Result := RTUF1Builder;
+           Result := RTUF1Builder as IBuilderPacket;
          end;
    2   : begin
            if (Params.MBDevID<>RTUF2Builder.DeviceAddress) or
@@ -195,7 +195,7 @@ begin
              RTUF2Builder.Quantity        := Params.MBRegcount;
              RTUF2Builder.Build;
             end;
-           Result := RTUF2Builder;
+           Result := RTUF2Builder as IBuilderPacket;
          end;
    3   : begin
            if (Params.MBDevID<>RTUF3Builder.DeviceAddress) or
@@ -208,7 +208,7 @@ begin
              RTUF3Builder.Quantity        := Params.MBRegcount;
              RTUF3Builder.Build;
             end;
-           Result := RTUF3Builder;
+           Result := RTUF3Builder as IBuilderPacket;
          end;
    4   : begin
            if (Params.MBDevID<>RTUF4Builder.DeviceAddress) or
@@ -221,7 +221,7 @@ begin
              RTUF4Builder.Quantity        := Params.MBRegcount;
              RTUF4Builder.Build;
             end;
-           Result := RTUF4Builder;
+           Result := RTUF4Builder as IBuilderPacket;
          end;
    5   : begin
            if (Params.MBDevID<>RTUF5Builder.DeviceAddress) or
@@ -234,7 +234,7 @@ begin
              RTUF5Builder.OutputValue   := Boolean(Params.MBRegcount);
              RTUF5Builder.Build;
             end;
-           Result := RTUF5Builder;
+           Result := RTUF5Builder as IBuilderPacket;
          end;
    6   : begin
            if (Params.MBDevID<>RTUF6Builder.DeviceAddress) or
@@ -247,7 +247,7 @@ begin
              RTUF6Builder.RegisterValue   := Params.MBRegcount;
              RTUF6Builder.Build;
             end;
-           Result := RTUF6Builder;
+           Result := RTUF6Builder as IBuilderPacket;
          end;
    7   : begin
            if (Params.MBDevID<>RTUF7Builder.DeviceAddress) or
@@ -256,7 +256,7 @@ begin
              RTUF7Builder.DeviceAddress   := Params.MBDevID;
              RTUF7Builder.Build;
             end;
-           Result := RTUF7Builder;
+           Result := RTUF7Builder as IBuilderPacket;
          end;
    8   : begin
            if (Params.MBDevID<>RTUF8Builder.DeviceAddress) or
@@ -272,7 +272,7 @@ begin
              end;
              RTUF8Builder.Build;
             end;
-           Result := RTUF8Builder;
+           Result := RTUF8Builder as IBuilderPacket;
          end;
    11  : begin
            if (Params.MBDevID<>RTUF11Builder.DeviceAddress) or
@@ -281,7 +281,7 @@ begin
              RTUF11Builder.DeviceAddress   := Params.MBDevID;
              RTUF11Builder.Build;
             end;
-           Result := RTUF11Builder;
+           Result := RTUF11Builder as IBuilderPacket;
          end;
    12  : begin
            if (Params.MBDevID<>RTUF12Builder.DeviceAddress) or
@@ -290,7 +290,7 @@ begin
              RTUF12Builder.DeviceAddress   := Params.MBDevID;
              RTUF12Builder.Build;
             end;
-           Result := RTUF12Builder;
+           Result := RTUF12Builder as IBuilderPacket;
          end;
    15  : begin
            if (Params.MBDevID<>RTUF15Builder.DeviceAddress) or
@@ -302,7 +302,7 @@ begin
              RTUF15Builder.Assign(Params.DataBits);
              RTUF15Builder.Build;
             end;
-           Result := RTUF15Builder;
+           Result := RTUF15Builder as IBuilderPacket;
          end;
    16  : begin
            TempByteArray := Params.GetDataArray;
@@ -320,7 +320,7 @@ begin
              RTUF16Builder.Build;
              SetLength(TempByteArray,0);
             end;
-           Result := RTUF16Builder;
+           Result := RTUF16Builder as IBuilderPacket;
          end;
    17  : begin
            if (Params.MBDevID<>RTUF17Builder.DeviceAddress) or
@@ -329,7 +329,7 @@ begin
              RTUF17Builder.DeviceAddress   := Params.MBDevID;
              RTUF17Builder.Build;
             end;
-           Result := RTUF17Builder;
+           Result := RTUF17Builder as IBuilderPacket;
          end;
    20  : begin
 
@@ -353,7 +353,7 @@ begin
              RTUF22Builder.Build;
             end;
 
-           Result := RTUF22Builder;
+           Result := RTUF22Builder as IBuilderPacket;
          end;
    23  : begin
            TempByteArray := Params.GetDataArray;
@@ -375,7 +375,7 @@ begin
              SetLength(TempByteArray,0);
             end;
 
-           Result := RTUF23Builder;
+           Result := RTUF23Builder as IBuilderPacket;
          end;
    24  : begin
            if (RTUF24Builder.DeviceAddress <> Params.MBDevID) or
@@ -387,7 +387,7 @@ begin
              RTUF24Builder.Build;
             end;
 
-           Result := RTUF24Builder;
+           Result := RTUF24Builder as IBuilderPacket;
          end;
    43  : begin
            case Params.MBMEIType of
@@ -407,7 +407,7 @@ begin
                       RTUF43Builder.Build;
                      end;
 
-                    Result := RTUF43Builder;
+                    Result := RTUF43Builder as IBuilderPacket;
                    end;
            end;
          end;
@@ -424,7 +424,7 @@ begin
              RTUF72Builder.Build;
             end;
 
-           Result := RTUF72Builder;
+           Result := RTUF72Builder as IBuilderPacket;
          end;
    110 : begin
            TempByteArray := Params.GetDataArray;
@@ -442,7 +442,7 @@ begin
              RTUF110Builder.Build;
             end;
 
-           Result := RTUF110Builder;
+           Result := RTUF110Builder as IBuilderPacket;
          end;
   end;
 end;
@@ -453,67 +453,67 @@ begin
   case Params.MBFunction of
    1   : begin
 
-          Result:=TCPF1Builder;
+          Result:=TCPF1Builder as IBuilderPacket;
          end;
    2   : begin
 
-          Result:=TCPF2Builder;
+          Result:=TCPF2Builder as IBuilderPacket;
          end;
    3   : begin
 
-          Result:=TCPF3Builder;
+          Result:=TCPF3Builder as IBuilderPacket;
          end;
    4   : begin
 
-          Result:=TCPF4Builder;
+          Result:=TCPF4Builder as IBuilderPacket;
          end;
    5   : begin
 
-          Result:=TCPF5Builder;
+          Result:=TCPF5Builder as IBuilderPacket;
          end;
    6   : begin
 
-          Result:=TCPF6Builder;
+          Result:=TCPF6Builder as IBuilderPacket;
          end;
    15  : begin
 
-          Result:=TCPF15Builder;
+          Result:=TCPF15Builder as IBuilderPacket;
          end;
    16  : begin
 
-          Result:=TCPF16Builder;
+          Result:=TCPF16Builder as IBuilderPacket;
          end;
    20  : begin
 
-          Result:=TCPF20Builder;
+          Result:=TCPF20Builder as IBuilderPacket;
          end;
    21  : begin
 
-          Result:=TCPF21Builder;
+          Result:=TCPF21Builder as IBuilderPacket;
          end;
    22  : begin
 
-          Result:=TCPF22Builder;
+          Result:=TCPF22Builder as IBuilderPacket;
          end;
    23  : begin
 
-          Result:=TCPF23Builder;
+          Result:=TCPF23Builder as IBuilderPacket;
          end;
    24  : begin
 
-          Result:=TCPF24Builder;
+          Result:=TCPF24Builder as IBuilderPacket;
          end;
    43  : begin
 
-          Result:=TCPF43Builder;
+          Result:=TCPF43Builder as IBuilderPacket;
          end;
    72  : begin
 
-          Result:=TCPF72Builder;
+          Result:=TCPF72Builder as IBuilderPacket;
          end;
    110 : begin
 
-          Result:=TCPF110Builder;
+          Result:=TCPF110Builder as IBuilderPacket;
          end;
   else
    Result := nil;

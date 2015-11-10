@@ -65,7 +65,7 @@
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
       <Libraries Value="/usr/lib/codetyphon/binLibraries/x86_64-linux/"/>
-      <OtherUnitFiles Value="source;files/lib/CRC16;files/lib/LogUtils;files/lib/ModbusLib;files/lib/ModbusLib/MBFunctions;files/lib/ModbusLib/MBTCPMasterDispatcher;files/lib/SocketUtils"/>
+      <OtherUnitFiles Value="source;files/lib/CRC16;files/lib/LogUtils;files/lib/ModbusLib;files/lib/ModbusLib/MBFunctions;files/lib/ModbusLib/MBTCPMasterDispatcher;files/lib/SocketUtils;files/lib/COMPort"/>
       <UnitOutputDirectory Value="dcu/$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <CodeGeneration>

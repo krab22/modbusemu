@@ -5,7 +5,8 @@ interface
 uses SysUtils, Classes
      {$IFDEF WINDOWS}
      , SocketSimpleTypes
-     {$ENDIF};
+     {$ENDIF}
+     ;
 
 {$IFDEF UNIX}
 const

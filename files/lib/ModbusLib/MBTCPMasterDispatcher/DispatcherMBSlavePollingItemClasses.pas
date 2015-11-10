@@ -90,22 +90,22 @@ procedure TMBSlavePollingItem.CreateMBTCPReader;
 begin
   case FItemProp.Item.FunctNum of
    1 : begin
-        FResponseReader := TReaderMBTCPF1Packet.Create;
+        FResponseReader := TReaderMBTCPF1Packet.Create(nil);
        end;
    2 : begin
-        FResponseReader := TReaderMBTCPF2Packet.Create;
+        FResponseReader := TReaderMBTCPF2Packet.Create(nil);
        end;
    3 : begin
-        FResponseReader := TReaderMBTCPF3Packet.Create;
+        FResponseReader := TReaderMBTCPF3Packet.Create(nil);
        end;
    4 : begin
-        FResponseReader := TReaderMBTCPF4Packet.Create;
+        FResponseReader := TReaderMBTCPF4Packet.Create(nil);
        end;
    5 : begin
-        FResponseReader := TReaderMBTCPF5Packet.Create;
+        FResponseReader := TReaderMBTCPF5Packet.Create(nil);
        end;
    6 : begin
-        FResponseReader := TReaderMBTCPF6Packet.Create;
+        FResponseReader := TReaderMBTCPF6Packet.Create(nil);
        end;
   else
    raise Exception.CreateFmt(rsECreateReader,[FItemProp.Item.FunctNum]);

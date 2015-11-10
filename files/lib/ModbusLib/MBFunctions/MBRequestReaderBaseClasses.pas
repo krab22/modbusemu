@@ -8,7 +8,7 @@ uses Classes,
      MBInterfaces,MBDefine;
 
 type
-  TMBRequestReaderBase = class(TInterfacedObject,IMBReuqestReader)
+  TMBRequestReaderBase = class(TComponent,IMBReuqestReader)
    protected
     FPacket         : Pointer;
     FPacketSize     : Cardinal;
@@ -21,20 +21,20 @@ type
     FOnReadEnd      : TNotifyEvent;
     FOnReadStart    : TNotifyEvent;
 
-    function  GetReaderType    : TReaderTypeEnum; stdcall;
-    function  GetDeviceAddress : Byte; stdcall;
-    function  GetFunctionCode  : Byte; stdcall;
-    function  GetErrorCode     : Cardinal; stdcall;
-    function  GetMessage       : String; stdcall;
+    function  GetReaderType    : TReaderTypeEnum;
+    function  GetDeviceAddress : Byte;
+    function  GetFunctionCode  : Byte;
+    function  GetErrorCode     : Cardinal;
+    function  GetMessage       : String;
 
     procedure Notify(EventType : TReadPacketEventType ;AMessage : String = ''); virtual;
     procedure FreePacket; virtual;
     procedure CopyPacket(Buff : Pointer; BuffSize : Cardinal);
   public
-    constructor Create; virtual;
+    constructor Create(AOwner : TComponent); virtual;
     destructor  Destroy; override;
-    function  GetPacketData(out DataSize : Cardinal): Pointer; virtual; stdcall; abstract;
-    procedure RequestRead(Packet : Pointer; PacketSize : Cardinal); virtual; stdcall; abstract;
+    function  GetPacketData(out DataSize : Cardinal): Pointer; virtual; abstract;
+    procedure RequestRead(Packet : Pointer; PacketSize : Cardinal); virtual;  abstract;
 
     property ReaderType    : TReaderTypeEnum read GetReaderType;
     property DeviceAddress : Byte read GetDeviceAddress;
@@ -52,9 +52,9 @@ uses SysUtils;
 
 { TMBRequestReaderBase }
 
-constructor TMBRequestReaderBase.Create;
+constructor TMBRequestReaderBase.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FPacket        := nil;
   FPacketSize    := 0;
   FReaderType    := rtUnknown;
@@ -90,27 +90,27 @@ begin
   FMessage        := '';
 end;
 
-function TMBRequestReaderBase.GetDeviceAddress: Byte; stdcall;
+function TMBRequestReaderBase.GetDeviceAddress: Byte;
 begin
   Result := FDeviceAddress;
 end;
 
-function TMBRequestReaderBase.GetErrorCode: Cardinal; stdcall;
+function TMBRequestReaderBase.GetErrorCode: Cardinal;
 begin
   Result := FErrorCode;
 end;
 
-function TMBRequestReaderBase.GetFunctionCode: Byte; stdcall;
+function TMBRequestReaderBase.GetFunctionCode: Byte;
 begin
   Result := FFunctionCode;
 end;
 
-function TMBRequestReaderBase.GetMessage: String; stdcall;
+function TMBRequestReaderBase.GetMessage: String;
 begin
   Result := FMessage;
 end;
 
-function TMBRequestReaderBase.GetReaderType: TReaderTypeEnum; stdcall;
+function TMBRequestReaderBase.GetReaderType: TReaderTypeEnum;
 begin
   Result := FReaderType;
 end;

@@ -731,4 +731,4 @@ begin
   if Assigned(FOnChange) then FOnChange(Self, TempBits);
 end;
 
-end.
+end.

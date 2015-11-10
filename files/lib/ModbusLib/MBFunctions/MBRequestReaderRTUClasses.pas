@@ -4,7 +4,7 @@ unit MBRequestReaderRTUClasses;
 
 interface
 
-uses
+uses Classes,
      MBInterfaces, MBRequestReaderBaseClasses;
 
 type
@@ -12,17 +12,17 @@ type
    private
      FPacketCRC : Word;
    protected
-    function GetPacketCRC : Word; stdcall;
-
     procedure FreePacket; override;
     procedure InitHeader;
     function  CheckPacketNil(Packet : Pointer): Boolean;
     function  CheckPacketLen(PacketLen : Cardinal): Boolean;
     function  CheckCRC(Packet : Pointer; PacketLen : Cardinal): Boolean;
    public
-    constructor Create; override;
-    function  GetPacketData(out DataSize : Cardinal): Pointer; override; stdcall;      // требует освобождения памяти после использования
-    procedure RequestRead(Packet : Pointer; PacketSize : Cardinal); override; stdcall;
+    constructor Create(AOwner : TComponent); override;
+
+    function  GetPacketCRC : Word;
+    function  GetPacketData(out DataSize : Cardinal): Pointer; override;      // требует освобождения памяти после использования
+    procedure RequestRead(Packet : Pointer; PacketSize : Cardinal); override;
 
     property PacketCRC : Word read GetPacketCRC;
   end;
@@ -35,9 +35,9 @@ uses SysUtils,
 
 { TMBRTURequestReader }
 
-constructor TMBRTURequestReader.Create;
+constructor TMBRTURequestReader.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FPacketCRC := 0;
 end;
 

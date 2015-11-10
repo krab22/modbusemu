@@ -20,7 +20,7 @@ type
     procedure ReadData(Buff : Pointer; BuffSize : Cardinal); override;
     function  GetRegisterCount: Word; override;
    public
-    constructor Create; override;
+    constructor Create(AOwner : TComponent); override;
     destructor  Destroy; override;
     property BitCount : Integer read GetBitCount;
     property Bits[Index : Integer] : Boolean read GetBits;
@@ -28,7 +28,7 @@ type
 
   TReaderMBF2Packet = class(TReaderMBF1Packet)
    public
-    constructor Create; override;
+    constructor Create(AOwner : TComponent); override;
   end;
 
   TReaderMBF3Packet = class(TReaderMBRTUPacket)
@@ -41,14 +41,14 @@ type
     procedure ReadData(Buff : Pointer; BuffSize : Cardinal); override;
     function  GetRegisterCount: Word; override;
    public
-    constructor Create; override;
+    constructor Create(AOwner : TComponent); override;
     property RegCount : Integer read GetRegCount;
     property RegValues [Index: Integer] : Word read GetRegValues;
   end;
 
   TReaderMBF4Packet = class(TReaderMBF3Packet)
    public
-    constructor Create; override;
+    constructor Create(AOwner : TComponent); override;
   end;
 
   TReaderMBF5Packet = class(TReaderMBRTUPacket)
@@ -60,7 +60,7 @@ type
     procedure ReadData(Buff : Pointer; BuffSize : Cardinal); override;
     function  GetRegisterCount: Word; override;
    public
-    constructor Create; override;
+    constructor Create(AOwner : TComponent); override;
     property Address : Word read FOutputAddress;
     property Value   : Boolean read GetOutputValue;
   end;
@@ -73,7 +73,7 @@ type
     procedure ReadData(Buff : Pointer; BuffSize : Cardinal); override;
     function  GetRegisterCount: Word; override;
    public
-    constructor Create; override;
+    constructor Create(AOwner : TComponent); override;
     property Address : Word read FWriteAddress;
     property Value   : Word read FWriteValue;
   end;
@@ -86,7 +86,7 @@ type
     procedure ReadData(Buff : Pointer; BuffSize : Cardinal); override;
     function  GetRegisterCount: Word; override;
    public
-    constructor Create; override;
+    constructor Create(AOwner : TComponent); override;
     property OutputData : Boolean read GetOutputData;
   end;
 
@@ -101,7 +101,7 @@ type
     procedure ReadData(Buff : Pointer; BuffSize : Cardinal); override;
     function  GetRegisterCount: Word; override;
    public
-    constructor Create; override;
+    constructor Create(AOwner : TComponent); override;
     property SubFunction : TMBF8SubfunctionType read GetSubFunction;
     property DataCount   : Byte read FDataCount;
     property Data[Index : Byte] : Word read GetData;
@@ -115,7 +115,7 @@ type
     procedure ReadData(Buff : Pointer; BuffSize : Cardinal); override;
     function  GetRegisterCount: Word; override;
    public
-    constructor Create; override;
+    constructor Create(AOwner : TComponent); override;
     property Status     : Word read FStatus;
     property EventCount : Word read FEventCount;
   end;
@@ -133,7 +133,7 @@ type
     procedure ReadData(Buff : Pointer; BuffSize : Cardinal); override;
     function  GetRegisterCount: Word; override;
    public
-    constructor Create; override;
+    constructor Create(AOwner : TComponent); override;
     property ByteCount    : Byte read FByteCount;
     property Status       : Word read FStatus;
     property EventCount   : Word read FEventCount;
@@ -150,14 +150,14 @@ type
     procedure ReadData(Buff : Pointer; BuffSize : Cardinal); override;
     function  GetRegisterCount: Word; override;
    public
-    constructor Create; override;
+    constructor Create(AOwner : TComponent); override;
     property StartingAddress : Word read FStartingAddress;
     property QuantityOutputs : Word read FQuantityOutputs;
   end;
 
   TReaderMBF16Packet = class(TReaderMBF15Packet)
   public
-    constructor Create; override;
+    constructor Create(AOwner : TComponent); override;
   end;
 
   TReaderMBF17Packet = class(TReaderMBRTUPacket)  // содержимое поля данных зависит от конкретного устройства
@@ -169,7 +169,7 @@ type
     procedure ReadData(Buff : Pointer; BuffSize : Cardinal); override;
     function  GetRegisterCount: Word; override;
    public
-    constructor Create; override;
+    constructor Create(AOwner : TComponent); override;
     property DataLen               : Byte read FByteCount;
     property Data[Index : Integer] : Byte read GetData;
   end;
@@ -193,7 +193,7 @@ type
     procedure ReadData(Buff : Pointer; BuffSize : Cardinal); override;
     function  GetRegisterCount: Word; override;
    public
-    constructor Create; override;
+    constructor Create(AOwner : TComponent); override;
     property ReferenceAddress : Word read FReferenceAddress;
     property And_Mask         : Word read FAnd_Mask;
     property Or_Mask          : Word read FOr_Mask;
@@ -209,7 +209,7 @@ type
     procedure ReadData(Buff : Pointer; BuffSize : Cardinal); override;
     function  GetRegisterCount: Word; override;
    public
-    constructor Create; override;
+    constructor Create(AOwner : TComponent); override;
     property RegCount : Byte read GetRegCount;
     property RegValues[Index : Integer] : Word read GetValues;
   end;
@@ -225,7 +225,7 @@ type
     procedure ReadData(Buff : Pointer; BuffSize : Cardinal); override;
     function  GetRegisterCount: Word; override;
    public
-    constructor Create; override;
+    constructor Create(AOwner : TComponent); override;
     property FIFOCount : Word read GetRegCount;
     property FIFORegisters[Index : Integer] : Word read GetValues;
   end;
@@ -244,7 +244,7 @@ type
     procedure ReadData(Buff : Pointer; BuffSize : Cardinal); override;
     function  GetRegisterCount: Word; override;
    public
-    constructor Create; override;
+    constructor Create(AOwner : TComponent); override;
     property MEIType          : TMEIType read FMEIType;
     property ReadDeviceIDCode : TReadDeviceIDCode read FReadDeviceIDCode;
     property ConformityLevel  : TConformityLevel read FConformityLevel;
@@ -267,7 +267,7 @@ type
     procedure ReadData(Buff : Pointer; BuffSize : Cardinal); override;
     function  GetRegisterCount: Word; override;
    public
-    constructor Create; override;
+    constructor Create(AOwner : TComponent); override;
     procedure Response(Buff : Pointer; BuffSize : Cardinal); override;
     property RegCount    : Byte read GetRegCount;
     property RegValues [Index: Integer] : Word read GetRegValues;
@@ -286,7 +286,7 @@ type
    protected
     function  GetRegisterCount: Word; override;
    public
-    constructor Create; override;
+    constructor Create(AOwner : TComponent); override;
     procedure Response(Buff : Pointer; BuffSize : Cardinal); override;     //
     property StartAddress : Word read FStartAddress;
     property ChkRKey      : Byte read FChkRKey;
@@ -303,9 +303,9 @@ uses SysUtils,
 
 { TReaderMBF1Packet }
 
-constructor TReaderMBF1Packet.Create;
+constructor TReaderMBF1Packet.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FBits:=TBits.Create;
   FSourceFunction:=1;
 end;
@@ -326,7 +326,7 @@ begin
   Result:=FBits.Bits[Index];
 end;
 
-function TReaderMBF1Packet.GetRegisterCount: Word; stdcall;
+function TReaderMBF1Packet.GetRegisterCount: Word;
 begin
   Result:=GetBitCount;
 end;
@@ -356,9 +356,9 @@ end;
 
 { TReaderMBF3Packet }
 
-constructor TReaderMBF3Packet.Create;
+constructor TReaderMBF3Packet.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FRegCount:=0;
   FSourceFunction:=3;
 end;
@@ -368,7 +368,7 @@ begin
   Result:=FRegCount;
 end;
 
-function TReaderMBF3Packet.GetRegisterCount: Word; stdcall;
+function TReaderMBF3Packet.GetRegisterCount: Word;
 begin
   Result:=GetRegCount;
 end;
@@ -404,9 +404,9 @@ end;
 
 { TReaderMBF5Packet }
 
-constructor TReaderMBF5Packet.Create;
+constructor TReaderMBF5Packet.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FSourceFunction:=5;
 end;
 
@@ -415,7 +415,7 @@ begin
   Result:=FOutputValue<>0;
 end;
 
-function TReaderMBF5Packet.GetRegisterCount: Word; stdcall;
+function TReaderMBF5Packet.GetRegisterCount: Word;
 begin
   Result:=0;
 end;
@@ -434,13 +434,13 @@ end;
 
 { TReaderMBF6Packet }
 
-constructor TReaderMBF6Packet.Create;
+constructor TReaderMBF6Packet.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FSourceFunction:=6;
 end;
 
-function TReaderMBF6Packet.GetRegisterCount: Word; stdcall;
+function TReaderMBF6Packet.GetRegisterCount: Word;
 begin
   Result:=0;
 end;
@@ -459,9 +459,9 @@ end;
 
 { TReaderMBF7Packet }
 
-constructor TReaderMBF7Packet.Create;
+constructor TReaderMBF7Packet.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FSourceFunction:=7;
 end;
 
@@ -470,7 +470,7 @@ begin
   Result:=FOutputData<>0;
 end;
 
-function TReaderMBF7Packet.GetRegisterCount: Word; stdcall;
+function TReaderMBF7Packet.GetRegisterCount: Word;
 begin
   Result:=0;
 end;
@@ -488,9 +488,9 @@ end;
 
 { TReaderMBF8Packet }
 
-constructor TReaderMBF8Packet.Create;
+constructor TReaderMBF8Packet.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FSourceFunction:=8;
 end;
 
@@ -499,7 +499,7 @@ begin
   Result:=FData[Index];
 end;
 
-function TReaderMBF8Packet.GetRegisterCount: Word; stdcall;
+function TReaderMBF8Packet.GetRegisterCount: Word;
 begin
   Result:=FDataCount;
 end;
@@ -527,13 +527,13 @@ end;
 
 { TReaderMBF11Packet }
 
-constructor TReaderMBF11Packet.Create;
+constructor TReaderMBF11Packet.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FSourceFunction:=11;
 end;
 
-function TReaderMBF11Packet.GetRegisterCount: Word; stdcall;
+function TReaderMBF11Packet.GetRegisterCount: Word;
 begin
   Result:=FEventCount;
 end;
@@ -552,9 +552,9 @@ end;
 
 { TReaderMBF12Packet }
 
-constructor TReaderMBF12Packet.Create;
+constructor TReaderMBF12Packet.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FSourceFunction:=12;
 end;
 
@@ -563,7 +563,7 @@ begin
   Result:= FEvents[Index];
 end;
 
-function TReaderMBF12Packet.GetRegisterCount: Word; stdcall;
+function TReaderMBF12Packet.GetRegisterCount: Word;
 begin
   Result:=FByteCount;
 end;
@@ -589,13 +589,13 @@ end;
 
 { TReaderMBF15Packet }
 
-constructor TReaderMBF15Packet.Create;
+constructor TReaderMBF15Packet.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FSourceFunction:=15;
 end;
 
-function TReaderMBF15Packet.GetRegisterCount: Word; stdcall;
+function TReaderMBF15Packet.GetRegisterCount: Word;
 begin
   Result:=FQuantityOutputs;
 end;
@@ -624,9 +624,9 @@ end;
 
 { TReaderMBF17Packet }
 
-constructor TReaderMBF17Packet.Create;
+constructor TReaderMBF17Packet.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FSourceFunction:=17;
 end;
 
@@ -639,7 +639,7 @@ begin
   Result:= FDataBuff[Index];
 end;
 
-function TReaderMBF17Packet.GetRegisterCount: Word; stdcall;
+function TReaderMBF17Packet.GetRegisterCount: Word;
 begin
   Result:=FByteCount;
 end;
@@ -662,13 +662,13 @@ end;
 
 { TReaderMBF22Packet }
 
-constructor TReaderMBF22Packet.Create;
+constructor TReaderMBF22Packet.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FSourceFunction:=22;
 end;
 
-function TReaderMBF22Packet.GetRegisterCount: Word; stdcall;
+function TReaderMBF22Packet.GetRegisterCount: Word;
 begin
   Result:=0;
 end;
@@ -688,9 +688,9 @@ end;
 
 { TReaderMBF23Packet }
 
-constructor TReaderMBF23Packet.Create;
+constructor TReaderMBF23Packet.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FSourceFunction:=23;
 end;
 
@@ -699,7 +699,7 @@ begin
   Result:=FByteCount div 2;
 end;
 
-function TReaderMBF23Packet.GetRegisterCount: Word; stdcall;
+function TReaderMBF23Packet.GetRegisterCount: Word;
 begin
  Result:=GetRegCount;
 end;
@@ -728,9 +728,9 @@ end;
 
 { TReaderMBF24Packet }
 
-constructor TReaderMBF24Packet.Create;
+constructor TReaderMBF24Packet.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FSourceFunction:=24;
 end;
 
@@ -739,7 +739,7 @@ begin
   Result:=FFIFOCount;
 end;
 
-function TReaderMBF24Packet.GetRegisterCount: Word; stdcall;
+function TReaderMBF24Packet.GetRegisterCount: Word;
 begin
   Result:=GetRegCount;
 end;
@@ -777,9 +777,9 @@ end;
 
 { TReaderMBF43Packet }
 
-constructor TReaderMBF43Packet.Create;
+constructor TReaderMBF43Packet.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FSourceFunction:=43;
 end;
 
@@ -789,7 +789,7 @@ begin
  Result:=FListOfObjects[Index];
 end;
 
-function TReaderMBF43Packet.GetRegisterCount: Word; stdcall;
+function TReaderMBF43Packet.GetRegisterCount: Word;
 begin
  Result:=0;
 end;
@@ -853,33 +853,33 @@ end;}
 
 { TReaderMBF4Packet }
 
-constructor TReaderMBF4Packet.Create;
+constructor TReaderMBF4Packet.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FSourceFunction:=4;
 end;
 
 { TReaderMBF2Packet }
 
-constructor TReaderMBF2Packet.Create;
+constructor TReaderMBF2Packet.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FSourceFunction:=2;
 end;
 
 { TReaderMBF16Packet }
 
-constructor TReaderMBF16Packet.Create;
+constructor TReaderMBF16Packet.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FSourceFunction:=16;
 end;
 
 { TReaderMBF72Packet }
 
-constructor TReaderMBF72Packet.Create;
+constructor TReaderMBF72Packet.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FFunctionCode   := 72;
   FSourceFunction := 72;
   FChkRKey        := $55;
@@ -891,7 +891,7 @@ begin
   Result := FRegCount;
 end;
 
-function TReaderMBF72Packet.GetRegisterCount: Word; stdcall;
+function TReaderMBF72Packet.GetRegisterCount: Word;
 begin
   Result:=GetRegCount;
 end;
@@ -910,7 +910,7 @@ begin
   Move(Buff^,FRegValues,BuffSize);
 end;
 
-procedure TReaderMBF72Packet.Response(Buff: Pointer; BuffSize: Cardinal); stdcall;
+procedure TReaderMBF72Packet.Response(Buff: Pointer; BuffSize: Cardinal);
 begin
  Notify(rpStartRead);
  FErrorCode:=0;
@@ -954,9 +954,9 @@ end;
 
 { TReaderMBF110Packet }
 
-constructor TReaderMBF110Packet.Create;
+constructor TReaderMBF110Packet.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FFunctionCode   := 110;
   FSourceFunction := 110;
   FChkRKey        := $55;
@@ -968,12 +968,12 @@ begin
   Result:=FRegCount;
 end;
 
-function TReaderMBF110Packet.GetRegisterCount: Word; stdcall;
+function TReaderMBF110Packet.GetRegisterCount: Word;
 begin
   Result:=GetRegCount;
 end;
 
-procedure TReaderMBF110Packet.Response(Buff: Pointer; BuffSize: Cardinal); stdcall;
+procedure TReaderMBF110Packet.Response(Buff: Pointer; BuffSize: Cardinal);
 begin
  Notify(rpStartRead);
  FErrorCode:=0;

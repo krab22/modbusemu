@@ -108,8 +108,8 @@ begin
   FQueue                := TSetMsgQueue.Create;
   FEvent                := TEvent.Create(nil,True,False,'SlaveSetEvent');
   FPollingIntervalQueue := 50;
-  FCoilRespReader       := TReaderMBTCPF5Packet.Create;
-  FInputRespReader      := TReaderMBTCPF6Packet.Create;
+  FCoilRespReader       := TReaderMBTCPF5Packet.Create(nil);
+  FInputRespReader      := TReaderMBTCPF6Packet.Create(nil);
 end;
 
 destructor TMBSlaveSetThread.Destroy;

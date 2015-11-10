@@ -9,8 +9,8 @@ unit MBBuilderPacketClasses;
 
 interface
 
-uses Classes,
-     MBBuilderBase, MBInterfaces;
+uses Types, Classes,
+     MBRequestTypes, MBBuilderBase, MBInterfaces;
 
 const
   cMaxBitRegCount  = 2000;
@@ -28,18 +28,18 @@ type
     procedure GetPacketMem; virtual;
     procedure ClearPacket; virtual;
 
-    procedure SetQuantity(const Value: Word); virtual; stdcall;
-    procedure SetStartingAddress(const Value: Word); virtual; stdcall;
-    procedure SetDeviceAddress(const Value: Byte); virtual; stdcall;
-    function  GetPacket : Pointer; override; stdcall;
-    function  GetPacketLen : WORD; override; stdcall;
-    function  GetResponseSize: Word; override; stdcall;
-    function  GetDeviceID : Byte; virtual; stdcall;
-    function  GetFunctionCode : Byte; virtual; stdcall;
+    procedure SetQuantity(const Value: Word); virtual;
+    procedure SetStartingAddress(const Value: Word); virtual;
+    procedure SetDeviceAddress(const Value: Byte); virtual;
+    function  GetPacket : Pointer; override;
+    function  GetPacketLen : WORD; override;
+    function  GetResponseSize: Word; override;
+    function  GetDeviceID : Byte; virtual;
+    function  GetFunctionCode : Byte; virtual;
     procedure Notify(EventType : TBuilderEventType); virtual;
     procedure ChackOutRange(AStartingAddress : Word; var AQuantity : Word); virtual;
    public
-    constructor Create; override;
+    constructor Create(AOwner : TComponent); override;
     destructor  Destroy; override;
     property DeviceAddress   : Byte read FDeviceAddress write SetDeviceAddress;
     property FunctionNum     : Byte read FFunctionNum;
@@ -53,13 +53,13 @@ type
    FTransactionID : Word;
    FProtocolID    : Word;
    FLen           : Word;
-   procedure SetTransactionID(const Value: Word); stdcall;
-   procedure SetProtocolID(const Value: Word); stdcall;
-   function  GetTransactionID : Word; stdcall;
-   function  GetProtocolID    : Word; stdcall;
-   function  GetLen           : Word; stdcall;
+   procedure SetTransactionID(const Value: Word);
+   procedure SetProtocolID(const Value: Word);
+   function  GetTransactionID : Word;
+   function  GetProtocolID    : Word;
+   function  GetLen           : Word;
   public
-   constructor Create; override;
+   constructor Create(AOwner : TComponent); override;
    property TransactionID : Word read FTransactionID write SetTransactionID;
    property ProtocolID    : Word read FProtocolID write SetProtocolID;
    property Len           : Word read FLen;
@@ -72,9 +72,9 @@ uses SysUtils, {$IFDEF WINDOWS} Windows,{$ENDIF}
 
 { TBuilderMBRTUPacket }
 
-constructor TBuilderMBRTUPacket.Create;
+constructor TBuilderMBRTUPacket.Create(AOwner : TComponent);
 begin
- inherited;
+ inherited Create(AOwner);
  FBuilderType := btMBRTU;
  FLenPacket:=0;
  FPacket:=nil;
@@ -89,9 +89,9 @@ var TempWord : Word;
 begin
   TempWord := 0;
   try
-   TempWord:=AStartingAddress+AQuantity;
+   TempWord := AStartingAddress + AQuantity;
   except
-   AQuantity:=wcMAXWORD-AStartingAddress;
+   AQuantity := wcMAXWORD - AStartingAddress;
   end;
 end;
 
@@ -101,17 +101,17 @@ begin
   inherited;
 end;
 
-function TBuilderMBRTUPacket.GetDeviceID: Byte; stdcall;
+function TBuilderMBRTUPacket.GetDeviceID: Byte;
 begin
  Result:=FDeviceAddress;
 end;
 
-function TBuilderMBRTUPacket.GetFunctionCode: Byte; stdcall;
+function TBuilderMBRTUPacket.GetFunctionCode: Byte;
 begin
  Result:=FFunctionNum;
 end;
 
-function TBuilderMBRTUPacket.GetPacket: Pointer; stdcall;
+function TBuilderMBRTUPacket.GetPacket: Pointer;
 begin
   Result := nil;
  try
@@ -123,20 +123,29 @@ begin
  end;
 end;
 
-function TBuilderMBRTUPacket.GetPacketLen: WORD; stdcall;
+function TBuilderMBRTUPacket.GetPacketLen: WORD;
 begin
   Result:= FLenPacket;
 end;
 
 procedure TBuilderMBRTUPacket.GetPacketMem;
 begin
-  if FLenPacket = 0 then ClearPacket
+  if FLenPacket = 0 then
+   begin
+    ClearPacket;
+   end
    else
     begin
-     if FPacket<>nil then FillChar(FPacket^, FLenPacket, 0)
-      else FPacket:=AllocMem(FLenPacket);
-     if FPacket=nil then raise Exception.Create(erMBFOutOfMemory);
+    if FPacket <> nil then
+     begin
+      FillChar(FPacket^, FLenPacket, 0);
+     end
+    else
+     begin
+      FPacket := AllocMem(FLenPacket);
     end; 
+    if FPacket = nil then raise Exception.Create(erMBFOutOfMemory);
+end;
 end;
 
 procedure TBuilderMBRTUPacket.ClearPacket;
@@ -148,7 +157,7 @@ begin
    end;
 end;
 
-function TBuilderMBRTUPacket.GetResponseSize: Word; stdcall;
+function TBuilderMBRTUPacket.GetResponseSize: Word;
 begin
  Result:=FResponseSize;
 end;
@@ -165,21 +174,21 @@ begin
  end;
 end;
 
-procedure TBuilderMBRTUPacket.SetDeviceAddress(const Value: Byte); stdcall;
+procedure TBuilderMBRTUPacket.SetDeviceAddress(const Value: Byte);
 begin
   if (Value>247) then raise Exception.Create(erMBDeviceAddress);
   if FDeviceAddress=Value then Exit;
   FDeviceAddress := Value;
 end;
 
-procedure TBuilderMBRTUPacket.SetQuantity(const Value: Word); stdcall;
+procedure TBuilderMBRTUPacket.SetQuantity(const Value: Word);
 begin
   if Value = FQuantity then Exit;
   FQuantity := Value;
   ChackOutRange(FStartingAddress,FQuantity);
 end;
 
-procedure TBuilderMBRTUPacket.SetStartingAddress(const Value: Word); stdcall;
+procedure TBuilderMBRTUPacket.SetStartingAddress(const Value: Word);
 begin
   if Value = FStartingAddress then Exit;
   FStartingAddress:=Value;
@@ -188,36 +197,36 @@ end;
 
 { TBuilderMBTCPPacket }
 
-constructor TBuilderMBTCPPacket.Create;
+constructor TBuilderMBTCPPacket.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FBuilderType   := btMBTCP;
   FTransactionID := 0;
   FProtocolID    := 0; // Modbus protocol
   FLen           := 0;
 end;
 
-function TBuilderMBTCPPacket.GetLen: Word; stdcall;
+function TBuilderMBTCPPacket.GetLen: Word;
 begin
   Result:=FLen;
 end;
 
-function TBuilderMBTCPPacket.GetProtocolID: Word; stdcall;
+function TBuilderMBTCPPacket.GetProtocolID: Word;
 begin
   Result:=FProtocolID;
 end;
 
-function TBuilderMBTCPPacket.GetTransactionID: Word; stdcall;
+function TBuilderMBTCPPacket.GetTransactionID: Word;
 begin
   Result:=FTransactionID;
 end;
 
-procedure TBuilderMBTCPPacket.SetProtocolID(const Value: Word); stdcall;
+procedure TBuilderMBTCPPacket.SetProtocolID(const Value: Word);
 begin
   FProtocolID := Value;
 end;
 
-procedure TBuilderMBTCPPacket.SetTransactionID(const Value: Word); stdcall;
+procedure TBuilderMBTCPPacket.SetTransactionID(const Value: Word);
 begin
   FTransactionID := Value;
 end;

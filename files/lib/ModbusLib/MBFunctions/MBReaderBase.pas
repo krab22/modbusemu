@@ -9,8 +9,7 @@ uses Classes,
 
 type
    
-
-   TReaderBase = class(TInterfacedObject, IReaderPacket)
+   TReaderBase = class(TComponent, IReaderPacket)
     protected
      FErrorCode      : Cardinal;
      FMessage        : String;
@@ -18,13 +17,13 @@ type
      FOnError        : TNotifyEvent;
      FOnReadEnd      : TNotifyEvent;
      FOnReadStart    : TNotifyEvent;
-     procedure Notify(EventType : TReadPacketEventType ;AMessage : String = ''); virtual; stdcall; abstract;
-     function  GetRegisterCount: Word; virtual; stdcall; abstract;
-     function  GetReaderType : TReaderTypeEnum; stdcall;
+     procedure Notify(EventType : TReadPacketEventType ;AMessage : String = ''); virtual; abstract;
+     function  GetRegisterCount: Word; virtual; abstract;
+     function  GetReaderType : TReaderTypeEnum;
     public
-     constructor Create; virtual;
-     procedure Response(Buff : Pointer; BuffSize : Cardinal); virtual; stdcall; abstract;
-     function  GetLastErrorCode : Cardinal; virtual; stdcall;
+     constructor Create(AOwner : TComponent); override;
+     procedure Response(Buff : Pointer; BuffSize : Cardinal); virtual; abstract;
+     function  GetLastErrorCode : Cardinal; virtual;
      property ReadderType            : TReaderTypeEnum read GetReaderType;
      property ErrorCode              : Cardinal read FErrorCode;
      property EventMessage           : String read FMessage;
@@ -39,8 +38,9 @@ implementation
 
 { TReaderBase }
 
-constructor TReaderBase.Create;
+constructor TReaderBase.Create(AOwner : TComponent);
 begin
+  inherited Create(AOwner);
   FErrorCode  := 0;
   FMessage    := '';
   FReaderType := rtUnknown;
@@ -49,12 +49,12 @@ begin
   FOnReadStart:= nil;
 end;
 
-function TReaderBase.GetLastErrorCode: Cardinal; stdcall;
+function TReaderBase.GetLastErrorCode: Cardinal;
 begin
   Result:=FErrorCode;
 end;
 
-function TReaderBase.GetReaderType: TReaderTypeEnum; stdcall;
+function TReaderBase.GetReaderType: TReaderTypeEnum;
 begin
   Result := FReaderType;
 end;

@@ -4,7 +4,7 @@ unit MBRequestReaderTCPClasses;
 
 interface
 
-uses
+uses Classes,
      MBInterfaces,MBRequestReaderBaseClasses;
 
 type
@@ -30,20 +30,20 @@ type
     FProtocolID    : Word;
     FLen           : Word;
   protected
-    function  GetTransactionID : Word; stdcall;
-    function  GetProtocolID    : Word; stdcall;
-    function  GetLen           : Word; stdcall;
+    function  GetTransactionID : Word;
+    function  GetProtocolID    : Word;
+    function  GetLen           : Word;
 
     procedure FreePacket; override;
     procedure InitHeader;
     function  CheckPacketNil(Packet : Pointer): Boolean;
     function  CheckPacketLen(Packet : Pointer; PacketLen : Cardinal): Boolean;
   public
-    constructor Create; override;
+    constructor Create(AOwner : TComponent); override;
     constructor CreateOnPacket(Packet : Pointer; PacketSize : Cardinal); virtual;
 
-    function  GetPacketData(out DataSize : Cardinal): Pointer; override; stdcall;
-    procedure RequestRead(Packet : Pointer; PacketSize : Cardinal); override; stdcall;
+    function  GetPacketData(out DataSize : Cardinal): Pointer; override;
+    procedure RequestRead(Packet : Pointer; PacketSize : Cardinal); override;
 
     property TransactionID : Word read GetTransactionID;
     property ProtocolID    : Word read GetProtocolID;
@@ -58,16 +58,16 @@ uses SysUtils,
 
 { TMBTCPRequestReader }
 
-constructor TMBTCPRequestReader.Create;
+constructor TMBTCPRequestReader.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FReaderType := rtMBTCP;
   InitHeader;
 end;
 
 constructor TMBTCPRequestReader.CreateOnPacket(Packet: Pointer; PacketSize: Cardinal);
 begin
-  Create;
+  Create(nil);
   RequestRead(Packet,PacketSize);
 end;
 
@@ -77,12 +77,12 @@ begin
   InitHeader;
 end;
 
-function TMBTCPRequestReader.GetLen: Word; stdcall;
+function TMBTCPRequestReader.GetLen: Word;
 begin
   Result := FLen;
 end;
 
-function TMBTCPRequestReader.GetPacketData( out DataSize: Cardinal): Pointer; stdcall;
+function TMBTCPRequestReader.GetPacketData( out DataSize: Cardinal): Pointer;
 begin
   Result:=nil;
   if FPacket = nil then Exit;
@@ -91,12 +91,12 @@ begin
   Move(Pointer(PtrUInt(FPacket)+8)^,Result^, DataSize);
 end;
 
-function TMBTCPRequestReader.GetProtocolID: Word; stdcall;
+function TMBTCPRequestReader.GetProtocolID: Word;
 begin
   Result := FProtocolID;
 end;
 
-function TMBTCPRequestReader.GetTransactionID: Word; stdcall;
+function TMBTCPRequestReader.GetTransactionID: Word;
 begin
   Result := FTransactionID;
 end;
@@ -108,7 +108,7 @@ begin
   FLen           := 0;
 end;
 
-procedure TMBTCPRequestReader.RequestRead(Packet: Pointer; PacketSize: Cardinal); stdcall;
+procedure TMBTCPRequestReader.RequestRead(Packet: Pointer; PacketSize: Cardinal);
 var TempHeaderFN : PMBTCPHeaderFullFName;
 begin
   FreePacket;

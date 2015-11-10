@@ -373,7 +373,11 @@ begin
   for i := 0 to Count do
    begin
     TempSubscr := Subscribers[i];
-    if not IsAddressInArray(ARegAddres, TempSubscr.HoldingRegs) then Continue;
+    if not IsAddressInArray(ARegAddres, TempSubscr.HoldingRegs) then
+     begin
+//      SendLogMessage(llDebug,'TDeviceSubscribers.CheckHoldingReg',Format('изменения не найдены %d в %s',[ARegAddres,GetAddressArrayAsString(TempSubscr.HoldingRegs)]));
+      Continue;
+     end;
     TempSubscr.IsDataChenge := True;
    end;
 end;

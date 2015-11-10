@@ -285,7 +285,7 @@ begin
   Lock;
   try
     AssignFile(logFile, fileName);
-    if FileExists(fileName) then Append(logFile)
+    if {$IFDEF UNIX}FileExists{$ELSE}FileExistsUTF8{$ENDIF}(fileName) then Append(logFile)
      else Rewrite(logFile);
 
     i := 0;

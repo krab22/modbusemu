@@ -202,6 +202,8 @@ type
 
    FLastError               : Cardinal;
    FLastErrorDescr          : String;
+   FOnError                 : TNotifyEvent;
+   FOnClientError           : TNotifyEvent;
 
    FOnClientReceiveData     : TOnClientReceiveData;
    FOnClientReceiveInfo     : TOnClientReceiveInfo;
@@ -279,7 +281,7 @@ type
    // размер входных/выходных буферов клиентского сокета
    property SocketBuffSize          : Word read FSockBuffSize write SetSockBuffSize default 4096;
    // максимальный размер буфера при приеме данных от клиента
-   property SizeOfReceiveDataBuffer : Cardinal read FSizeOfReceiveDataBuffer write SetSizeOfReceiveDataBuffer default 1024;
+   property SizeOfReceiveDataBuffer : Cardinal read FSizeOfReceiveDataBuffer write SetSizeOfReceiveDataBuffer default 1500;
    // запускать мониторинг прихода данных в клиентский сокет сразу после создания или нет
    property ClientCreateStopped     : Boolean read FClientCreateStopped write FClientCreateStopped default False;
    // таймаут ожидания прихода данных от клиента
@@ -290,7 +292,7 @@ type
    property MaxNumberSimultaneousConnections : Word read FMaxConnNumber write SetMaxConnNumber default MAX_NUM_PARALLEL_CON;
 
    // время "сна" потока для снижения нагрузки на процессор
-   property AcceptTheradSleepTime   : Word read FAcceptTheradSleepTime write SetAcceptTheradSleepTime default 10;
+   property AcceptTheradSleepTime   : Word read FAcceptTheradSleepTime write SetAcceptTheradSleepTime default 100;
    // интевал времени между опросами очереди удаляемых соединений
    property KillTheradWaitTime      : Word read FKillTheradWaitTime write SetKillTheradWaitTime default 20;
 
@@ -308,6 +310,9 @@ type
    property OnClientReceiveData     : TOnClientReceiveData read FOnClientReceiveData write SetOnClientReceiveData;
    // только оповещение о приходе данных
    property OnClientReceiveInfo     : TOnClientReceiveInfo read FOnClientReceiveInfo write SetOnClientReceiveInfo;
+
+   property OnError                 : TNotifyEvent read FOnError write FOnError;
+   property OnClientError           : TNotifyEvent read FOnClientError write FOnClientError;
   end;
 
 implementation
@@ -404,6 +409,7 @@ begin
   TempFlag    := False;
   while not Terminated do
    begin
+   try
     TempTick := GetTickCount64;
 
     Res := FClientObject.WaitReceiveData;
@@ -455,7 +461,7 @@ begin
                       if Assigned(FClientObject.OnClientReceiveInfo) then
                        begin
                         try
-                         FClientObject.OnClientReceiveInfo(FClientObject.Owner,FClientObject)
+                         FClientObject.OnClientReceiveInfo(FClientObject.Owner,FClientObject);
                         except
                          on E : Exception do SendLogMessage(llError,rsClientConnectionName,Format(rsClOnResData2,[E.Message]));
                         end;
@@ -467,7 +473,15 @@ begin
     else
      Continue;
     end;
+
+   except
+    on E : Exception do
+     begin
+      SendLogMessage(llError,rsClientConnectionName,Format('TServerClientThread.Execute. Ошибка: %s',[E.Message]));
+      Sleep(200);
    end;
+   end;
+  end;
   SetLength(TempBuff,0);
 end;
 
@@ -485,7 +499,9 @@ begin
   TempSleepTime := FOwner.AcceptTheradSleepTime;
   while not Terminated do
    begin
-
+   try
+    TempCliHandle := INVALID_SOCKET;
+    TempCliAddr.sin_addr.s_addr := 0;
     FillByte(TempCliAddr,SizeOf(TempCliAddr),0);
     try
     TempCliHandle := {$IFDEF WINDOWS}accept(FSocket,@TempCliAddr,@TempLenAddr);{$ELSE}fpaccept(FSocket,@TempCliAddr,@TempLenAddr);{$ENDIF}
@@ -512,6 +528,7 @@ begin
      if (FOwner.ClientCount+1) >= TempMaxConn then
       begin
        {$IFDEF UNIX}FpClose(TempCliHandle){$ELSE}closesocket(TempCliHandle){$ENDIF};
+       TempCliHandle := INVALID_SOCKET;
        Sleep(TempSleepTime);
 
        SendLogMessage(llError,rsServerSocketName,rsSrvAccept1);
@@ -524,7 +541,15 @@ begin
 
     end;
     Sleep(TempSleepTime);
+
+   except
+    on E : Exception do
+     begin
+      SendLogMessage(llError,'AcceptThread',E.Message);
+      Sleep(TempSleepTime);
    end;
+end;
+  end;
 end;
 
 constructor TServerAcceptThread.Create(aOwner : TBaseServerSocket; aServerSocket: TSocket; aConnectProc: TServerClientConnect; aCSection : TCriticalSection; aSetErrorProc : TServerSetErrorProc);
@@ -738,11 +763,11 @@ begin
   FClosing                 := False;
   FCSection                := TCriticalSection.Create;
   FClientCreateStopped     := False;
-  FSizeOfReceiveDataBuffer := 1024;
+  FSizeOfReceiveDataBuffer := 1500;
   FSockBuffSize            := 4096;
   FSelectTimeOut           := 1000;
   FMaxConnNumber           := MAX_NUM_PARALLEL_CON;
-  FAcceptTheradSleepTime   := 10;
+  FAcceptTheradSleepTime   := 100;
   FKillTheradWaitTime      := 20;
 end;
 
@@ -860,23 +885,19 @@ procedure TBaseServerSocket.Close;
 var Res : Integer;
 begin
   FClosing := True;
-
   if Assigned(FAcceptThread) then
    begin;
     FAcceptThread.Terminate;
     FAcceptThread.WaitFor;
     FreeAndNil(FAcceptThread);
    end;
-
   if Assigned(FKillThread) then
    begin;
     FKillThread.Terminate;
     FKillThread.WaitFor;
     FreeAndNil(FKillThread);
    end;
-
   CloseAllClientSockets;
-
   try
   Res := {$IFDEF UNIX}FpClose{$ELSE}closesocket{$ENDIF}(FSocket);
   if Res = -1 then
@@ -887,7 +908,6 @@ begin
   finally
    FSocket := INVALID_SOCKET;
   end;
-
   if Assigned(FOnClose) then FOnClose(Self);
 end;
 
@@ -936,6 +956,12 @@ begin
      FLastError      := ALastError;
      FLastErrorDescr := SocketErrorToString(ALastError);
      SendLogMessage(llError,rsServerSocketName,FLastErrorDescr);
+
+     try
+      if Assigned(FOnError) then FOnError(Self);
+     except
+     end;
+
     finally
      Unlock;
     end;
@@ -962,6 +988,12 @@ begin
      FLastError      := aError;
      FLastErrorDescr := SocketErrorToString(aError);
      SendLogMessage(llError,rsClientConnectionName,Format(rsClLasrErrSet1,[aClient.ClientAddr,aClient.ClientPort,IntToStr(aError),FLastErrorDescr]));
+
+     try
+      if Assigned(FOnClientError) then FOnClientError(Self);
+     except
+     end;
+
     finally
      Unlock;
     end;
@@ -1017,7 +1049,6 @@ begin
    SendLogMessage(llInfo,rsServerSocketName,Format(rsClConnect1,[FClientList.Count]));
 
    if Assigned(FOnClientConnect) then FOnClientConnect(Self,Result);
-
   finally
    Unlock;
   end;

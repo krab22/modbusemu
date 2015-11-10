@@ -4,25 +4,25 @@ unit MBBuilderBase;
 
 interface
 
-uses Classes,
+uses Types, Classes,
      MBInterfaces, MBDefine;
 
 type
   TBuilderEventType = (betBuild, betRead);
 
-  TBuilderPacketBase = class(TInterfacedObject, IBuilderPacket)
+  TBuilderPacketBase = class(TComponent, IBuilderPacket)
    protected
     FLenPacket     : WORD;
     FPacket        : Pointer;
     FBuilderType   : TBuilderTypeEnum;
     FOnPacketBuild : TNotifyEvent;
     FOnPacketRead  : TNotifyEvent;
-    function  GetPacket       : Pointer; virtual; stdcall; abstract;
-    function  GetPacketLen    : WORD; virtual; stdcall; abstract;
-    function  GetResponseSize : WORD; virtual; stdcall; abstract;
-    function  GetBuilderType  : TBuilderTypeEnum; stdcall;
+    function  GetPacket       : Pointer; virtual; abstract;
+    function  GetPacketLen    : WORD; virtual; abstract;
+    function  GetResponseSize : WORD; virtual; abstract;
+    function  GetBuilderType  : TBuilderTypeEnum;
    public
-    constructor Create; virtual;
+    constructor Create(AOwner : TComponent); override;
     procedure Build; virtual; abstract;
     property BuilderType   : TBuilderTypeEnum read GetBuilderType;
     property LenPacket     : WORD read GetPacketLen;
@@ -37,8 +37,9 @@ implementation
 
 { TBuilderPacketBase }
 
-constructor TBuilderPacketBase.Create;
+constructor TBuilderPacketBase.Create(AOwner : TComponent);
 begin
+  inherited Create(AOwner);
   FLenPacket := 0;
   FPacket    := nil;
   FBuilderType   := btUnknown;
@@ -46,7 +47,7 @@ begin
   FOnPacketRead  := nil;
 end;
 
-function TBuilderPacketBase.GetBuilderType: TBuilderTypeEnum; stdcall;
+function TBuilderPacketBase.GetBuilderType: TBuilderTypeEnum;
 begin
   Result := FBuilderType;
 end;

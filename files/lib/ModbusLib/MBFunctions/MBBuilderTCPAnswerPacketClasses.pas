@@ -12,9 +12,9 @@ type
   protected
    FSubFunction : Byte;
    function  GetFunctionNum: TMBFunctionsEnum;
-   procedure SetFunctionNumber(const Value : TMBFunctionsEnum); stdcall;
+   procedure SetFunctionNumber(const Value : TMBFunctionsEnum);
   public
-   constructor Create; override;
+   constructor Create(AOwner : TComponent); override;
    property FunctionNum : TMBFunctionsEnum read GetFunctionNum write SetFunctionNumber;
   end;
 
@@ -22,9 +22,9 @@ type
   private
    FErrorCode   : Byte;
   protected
-   procedure SetErrorCode(const Value : Byte); stdcall;
+   procedure SetErrorCode(const Value : Byte);
   public
-   constructor Create; override;
+   constructor Create(AOwner : TComponent); override;
    procedure Build; override;
    property ErrorCode   : Byte read FErrorCode write SetErrorCode;
   end;
@@ -33,9 +33,9 @@ type
   private
     FBitData : TBits;
   protected
-    procedure SetBitData(const BitList : TBits); stdcall;
+    procedure SetBitData(const BitList : TBits);
   public
-    constructor Create; override;
+    constructor Create(AOwner : TComponent); override;
     destructor Destroy; override;
     procedure Build; override;
     property BitData : TBits read FBitData write SetBitData;
@@ -45,7 +45,7 @@ type
   private
     FWordData : TWordRegsValues;
   protected
-    procedure SetWordData(const WordList : TWordRegsValues); stdcall;
+    procedure SetWordData(const WordList : TWordRegsValues);
   public
     destructor Destroy; override;
     procedure Build; override;
@@ -60,20 +60,20 @@ uses SysUtils,
 
 { TBuilderMBTCPErrorPacket }
 
-constructor TBuilderMBTCPErrorPacket.Create;
+constructor TBuilderMBTCPErrorPacket.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FErrorCode   := 0;
 end;
 
 procedure TBuilderMBTCPErrorPacket.Build;
 var TempW : Word;
 begin
-  FLenPacket:=sizeof(TMBTCPErrorHeder);
+  FLenPacket := sizeof(TMBTCPErrorHeder);
   GetPacketMem;
   PMBTCPErrorHeder(FPacket)^.TransactioID := Swap(FTransactionID);
   PMBTCPErrorHeder(FPacket)^.ProtocolID   := Swap(FProtocolID);
-  TempW := FLenPacket-6;
+  TempW := FLenPacket - 6;
   PMBTCPErrorHeder(FPacket)^.Length       := swap(TempW);
   PMBTCPErrorHeder(FPacket)^.DeviceID     := FDeviceAddress;
   PMBTCPErrorHeder(FPacket)^.ErrorData.FunctionCode := FFunctionNum+$80;
@@ -81,16 +81,16 @@ begin
   Notify(betBuild);
 end;
 
-procedure TBuilderMBTCPErrorPacket.SetErrorCode(const Value: Byte); stdcall;
+procedure TBuilderMBTCPErrorPacket.SetErrorCode(const Value: Byte);
 begin
   FErrorCode := Value;
 end;
 
 { TBuilderMBTCPAswerPacket }
 
-constructor TBuilderMBTCPAswerPacket.Create;
+constructor TBuilderMBTCPAswerPacket.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FFunctionNum := 0;
   FSubFunction := 0;
 end;
@@ -109,7 +109,7 @@ begin
   end
 end;
 
-procedure TBuilderMBTCPAswerPacket.SetFunctionNumber(const Value: TMBFunctionsEnum); stdcall;
+procedure TBuilderMBTCPAswerPacket.SetFunctionNumber(const Value: TMBFunctionsEnum);
 begin
   if Value = fnNon then raise Exception.Create(rsIllegalFunctionNumber);
   case Value of
@@ -127,9 +127,9 @@ end;
 
 { TBuilderMBTCPBitAswerPacket }
 
-constructor TBuilderMBTCPBitAswerPacket.Create;
+constructor TBuilderMBTCPBitAswerPacket.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FBitData := TBits.Create;
 end;
 
@@ -190,9 +190,10 @@ begin
   Notify(betBuild);
 end;
 
-procedure TBuilderMBTCPBitAswerPacket.SetBitData(const BitList: TBits); stdcall;
+procedure TBuilderMBTCPBitAswerPacket.SetBitData(const BitList: TBits);
 var i,Count : Integer;
     TemDataByteCount : Byte;
+    TempLenPack : Word;
 begin
   FBitData.Size := 0;
   Count := BitList.Size-1;
@@ -202,7 +203,13 @@ begin
   TemDataByteCount:=FBitData.Size div 8;
   if (FBitData.Size mod 8)>0 then TemDataByteCount:=TemDataByteCount+1;
   // определяем размер пакета
-  FLenPacket:=SizeOf(TMBTCPAnswerHeader)+TemDataByteCount;
+
+  TempLenPack := SizeOf(TMBTCPAnswerHeader) + TemDataByteCount;
+
+  if FLenPacket <> TempLenPack then ClearPacket;
+
+  FLenPacket := TempLenPack;
+
   FLen := Word(FLenPacket) - 6;
 end;
 
@@ -219,7 +226,9 @@ var TempBuff  : PByteArray;
     i, Count : Integer;
 begin
   // получаем память под пакет
+
   GetPacketMem;
+
   // формируем пакет
   PMBTCPAnswerHeader(FPacket)^.HeaderFullFName.TCPHeaderFull.TransactioID := Swap(FTransactionID);
   PMBTCPAnswerHeader(FPacket)^.HeaderFullFName.TCPHeaderFull.ProtocolID   := Swap(FProtocolID);
@@ -227,27 +236,37 @@ begin
   PMBTCPAnswerHeader(FPacket)^.HeaderFullFName.TCPHeaderFull.DeviceID     := FDeviceAddress;
   PMBTCPAnswerHeader(FPacket)^.HeaderFullFName.FunctionNum                := FFunctionNum;
   PMBTCPAnswerHeader(FPacket)^.ByteCount                                  := Byte(FLenPacket-9);
+
   // получаем указатель на область памяти под значения регистров
-  TempBuff:=Pointer(PtrUInt(@PMBTCPAnswerHeader(FPacket)^.ByteCount) + 1);
+  TempBuff := Pointer(PtrUInt(@PMBTCPAnswerHeader(FPacket)^.ByteCount) + 1);
+
+  // переносим значения регистров
   Count := (PMBTCPAnswerHeader(FPacket)^.ByteCount div 2)-1;
   for i := 0 to Count do
    begin
      PWordArray(TempBuff)^[i] := Swap(FWordData[i]);
    end;
-  // переносим значения регистров
-  //Move(FWordData[0],TempBuff^[0],PMBTCPAnswerHeader(FPacket)^.ByteCount);
+
   Notify(betBuild);
 end;
 
-procedure TBuilderMBTCPWordAswerPacket.SetWordData(const WordList: TWordRegsValues); stdcall;
+procedure TBuilderMBTCPWordAswerPacket.SetWordData(const WordList: TWordRegsValues);
 var TempLenght : Word;
+    TempLenPack : Word;
 begin
   SetLength(FWordData,0);
   TempLenght := Length(WordList);
   if TempLenght = 0 then Exit;
+
   SetLength(FWordData,TempLenght);
-  Move(WordList[0],FWordData[0],TempLenght*2);
-  FLenPacket := SizeOf(TMBTCPAnswerHeader)+TempLenght*2;
+  Move(WordList[0],FWordData[0],TempLenght * 2);
+
+  TempLenPack := SizeOf(TMBTCPAnswerHeader) + TempLenght*2;
+
+  if FLenPacket <> TempLenPack then ClearPacket;
+
+  FLenPacket := TempLenPack;
+
   FLen := TempLenght*2+3;
 end;
 

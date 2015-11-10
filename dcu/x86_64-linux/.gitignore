@@ -94,3 +94,14 @@
 /SocketResStrings.rsj
 /SocketSimpleTypes.o
 /SocketSimpleTypes.ppu
+/COMCrossTypes.o
+/COMCrossTypes.ppu
+/COMPortParamTypes.o
+/COMPortParamTypes.ppu
+/COMPortResStr.o
+/COMPortResStr.ppu
+/COMPortResStr.rsj
+/CRC16Func.o
+/CRC16Func.ppu
+/MBRequestReaderRTUClasses.o
+/MBRequestReaderRTUClasses.ppu

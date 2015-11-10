@@ -11,7 +11,7 @@ resourcestring
   rsEDispThread1  = 'Соединение с сервером %s разорвано. Пауза до попытки восстановления %g сек.';
   rsEDispThread2  = 'Не удалось восстановить соединение с сервером %s';
   rsEDispThread3  = 'Ошибка отправки запроса: %u';
-  rsEDispThread4  = 'Ответ не пришел';
+  rsEDispThread4  = 'Не пришел ответ на запрос: %d::%d::%d';
   rsEDispThread5  = 'Ответ нулевой длинны';
   rsEDispThread6  = 'Разбор сообщения. Исключение: %s';
   rsEDispThread7  = 'Исключение: %s';

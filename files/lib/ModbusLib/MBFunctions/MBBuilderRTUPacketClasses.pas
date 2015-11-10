@@ -17,25 +17,25 @@ uses Classes,
 type
   TBuilderMBF1Request = class(TBuilderMBRTUPacket)
   protected
-   procedure SetQuantity(const Value: Word); override; stdcall;
+   procedure SetQuantity(const Value: Word); override;
   public
-   constructor Create; override;
+   constructor Create(AOwner : TComponent); override;
    procedure Build; override;
  end;
 
  TBuilderMBF2Request = class(TBuilderMBF1Request)
-  constructor Create; override;
+  constructor Create(AOwner : TComponent); override;
  end;
 
  TBuilderMBF3Request = class(TBuilderMBF1Request)
   protected
-   procedure SetQuantity(const Value: Word); override; stdcall;
+   procedure SetQuantity(const Value: Word); override;
   public
-   constructor Create; override;
+   constructor Create(AOwner : TComponent); override;
  end;
 
  TBuilderMBF4Request = class(TBuilderMBF3Request)
-  constructor Create; override;
+  constructor Create(AOwner : TComponent); override;
  end;
 
  TBuilderMBF5Request = class(TBuilderMBRTUPacket)
@@ -46,7 +46,7 @@ type
    FOutputAddress : Word;
    FOutputValue   : Word;
   public
-   constructor Create; override;
+   constructor Create(AOwner : TComponent); override;
    procedure Build; override;
    property OutputAddress : Word read FOutputAddress write FOutputAddress;
    property OutputValue   : Boolean read GetOutputValue write SetOutputValue;
@@ -58,7 +58,7 @@ type
    FRegisterValue   : Word;
    procedure SetRegisterValue(const Value: Word);
   public
-   constructor Create; override;
+   constructor Create(AOwner : TComponent); override;
    procedure Build; override;
    property RegisterAddress : Word read FRegisterAddress write FRegisterAddress;
    property RegisterValue   : Word read FRegisterValue write SetRegisterValue;
@@ -66,7 +66,7 @@ type
 
  TBuilderMBF7Request = class(TBuilderMBRTUPacket)
   public
-   constructor Create; override;
+   constructor Create(AOwner : TComponent); override;
    procedure Build; override;
  end;
 
@@ -81,7 +81,7 @@ type
    procedure SetRestartData(const Value: Boolean);
    procedure SetSubFunctionNum(const Value: TMBF8SubfunctionType);
   public
-   constructor Create; override;
+   constructor Create(AOwner : TComponent); override;
    procedure Build; override;
    property SubFunctionNum : TMBF8SubfunctionType read GetSubFunctionNum write SetSubFunctionNum;
    property Sub_00_LoopBackData   : Word read FData write FData;
@@ -90,11 +90,11 @@ type
   end;
 
   TBuilderMBF11Request = class(TBuilderMBF7Request)
-   constructor Create; override;
+   constructor Create(AOwner : TComponent); override;
   end;
 
   TBuilderMBF12Request = class(TBuilderMBF7Request)
-   constructor Create; override;
+   constructor Create(AOwner : TComponent); override;
   end;
 
   TBuilderMBF15Request = class(TBuilderMBF1Request)
@@ -104,9 +104,9 @@ type
     function  GetBits(Index: Integer): Boolean;
     procedure SetBits(Index: Integer; const Value: Boolean);
    protected
-    procedure SetQuantity(const Value: Word); override;  stdcall;
+    procedure SetQuantity(const Value: Word); override;
    public
-    constructor Create; override;
+    constructor Create(AOwner : TComponent); override;
     destructor  Destroy; override;
     procedure Assign(Source : TBits); reintroduce;
     function  AreEquivalent(Source : TBits): Boolean;
@@ -121,9 +121,9 @@ type
     function  GetRegValues(Index: Integer): Word;
     procedure SetRegValues(Index: Integer; const Value: Word);
    protected
-    procedure SetQuantity(const Value: Word); override; stdcall;
+    procedure SetQuantity(const Value: Word); override;
    public
-    constructor Create; override;
+    constructor Create(AOwner : TComponent); override;
     function  AreEquivalent(Source : array of Byte): Boolean;
     procedure Assign(Source : array of Byte); reintroduce;
     procedure Build; override;
@@ -131,7 +131,7 @@ type
   end;
 
   TBuilderMBF17Request = class(TBuilderMBF7Request)
-   constructor Create; override;
+   constructor Create(AOwner : TComponent); override;
   end;
 
   TBuilderMBF20Request = class(TBuilderPacketBase) // пока не реализовано
@@ -151,7 +151,7 @@ type
     FAndMask          : Word;
     FOrMask           : Word;
    public
-    constructor Create; override;
+    constructor Create(AOwner : TComponent); override;
     procedure Build; override;
     property ReferenceAddress : Word read FReferenceAddress write FReferenceAddress;
     property AndMask          : Word read FAndMask write FAndMask;
@@ -172,7 +172,7 @@ type
     procedure SetWriteQuantity(const Value: Word);
     procedure SetWriteValues(Index: Integer; const Value: Word);
    public
-    constructor Create; override;
+    constructor Create(AOwner : TComponent); override;
     function  AreEquivalent(Source : array of Byte): Boolean;
     procedure Assign(Source : array of Byte); reintroduce;
     procedure Build; override;
@@ -188,7 +188,7 @@ type
     FFunctionCode        : Byte;
     FFIFOPointerAddress  : Word;
    public
-    constructor Create; override;
+    constructor Create(AOwner : TComponent); override;
     procedure Build; override;
     property FIFOPointerAddress  : Word read FFIFOPointerAddress write FFIFOPointerAddress;
    end;
@@ -206,7 +206,7 @@ type
     procedure SetObjectID(const Value: TObjectID);
     procedure SetReadDeviceIDCode(const Value: TReadDeviceIDCode);
    public
-    constructor Create; override;
+    constructor Create(AOwner : TComponent); override;
     procedure Build; override;
     property MEIType          : TMEIType read GetMEIType write SetMEIType;
     property ReadDeviceIDCode : TReadDeviceIDCode read GetReadDeviceIDCode write SetReadDeviceIDCode;
@@ -219,9 +219,9 @@ type
     FExpectedKey : Byte;
     procedure SetChkRKey(const Value: Byte);
   protected
-    procedure SetQuantity(const Value: Word); override; stdcall;
+    procedure SetQuantity(const Value: Word); override;
   public
-    constructor Create; override;
+    constructor Create(AOwner : TComponent); override;
     procedure Build; override;
     procedure RebuilAtNextKey;
     property ChkRKey     : Byte read FChkRKey write SetChkRKey default $55;
@@ -238,9 +238,9 @@ type
     procedure SetRegValues(Index: Integer; const Value: Word);
     procedure SetChkWKey(const Value: Byte);
   protected
-    procedure SetQuantity(const Value: Word); override; stdcall;
+    procedure SetQuantity(const Value: Word); override;
   public
-    constructor Create; override;
+    constructor Create(AOwner : TComponent); override;
     function  AreEquivalent(Source : array of Byte): Boolean;
     procedure Assign(Source : array of Byte); reintroduce;
     procedure Build; override;
@@ -270,13 +270,13 @@ begin
   Notify(betBuild);
 end;
 
-constructor TBuilderMBF1Request.Create;
+constructor TBuilderMBF1Request.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FFunctionNum:=1;
 end;
 
-procedure TBuilderMBF1Request.SetQuantity(const Value: Word); stdcall;
+procedure TBuilderMBF1Request.SetQuantity(const Value: Word);
 begin
   if (Value<1) or (Value>cMaxBitRegCount) then raise Exception.Create(erMBF1PacketBuild);
   inherited SetQuantity(Value);
@@ -284,21 +284,21 @@ end;
 
 { TBuildMBF2Request }
 
-constructor TBuilderMBF2Request.Create;
+constructor TBuilderMBF2Request.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FFunctionNum:=2;
 end;
 
 { TBuildMBF3Request }
 
-constructor TBuilderMBF3Request.Create;
+constructor TBuilderMBF3Request.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FFunctionNum:=3;
 end;
 
-procedure TBuilderMBF3Request.SetQuantity(const Value: Word); stdcall;
+procedure TBuilderMBF3Request.SetQuantity(const Value: Word);
 begin
   if (Value<1) or (Value>cMaxWordRegCount) then raise Exception.Create(erMBF3PacketBuild);
   inherited SetQuantity(Value);
@@ -307,9 +307,9 @@ end;
 
 { TBuildMBF4Request }
 
-constructor TBuilderMBF4Request.Create;
+constructor TBuilderMBF4Request.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FFunctionNum:=4;
 end;
 
@@ -327,9 +327,9 @@ begin
   Notify(betBuild);
 end;
 
-constructor TBuilderMBF5Request.Create;
+constructor TBuilderMBF5Request.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FFunctionNum:=5;
 end;
 
@@ -358,9 +358,9 @@ begin
   Notify(betBuild);
 end;
 
-constructor TBuilderMBF6Request.Create;
+constructor TBuilderMBF6Request.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FFunctionNum:=6;
 end;
 
@@ -381,9 +381,9 @@ begin
   Notify(betBuild);
 end;
 
-constructor TBuilderMBF7Request.Create;
+constructor TBuilderMBF7Request.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FFunctionNum:=7;
 end;
 
@@ -401,9 +401,9 @@ begin
  Notify(betBuild);
 end;
 
-constructor TBuilderMBF8Request.Create;
+constructor TBuilderMBF8Request.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FFunctionNum:=8;
   FData:=0;
 end;
@@ -458,17 +458,17 @@ end;
 
 { TBuilderMBF11Request }
 
-constructor TBuilderMBF11Request.Create;
+constructor TBuilderMBF11Request.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FFunctionNum:=11;
 end;
 
 { TBuilderMBF12Request }
 
-constructor TBuilderMBF12Request.Create;
+constructor TBuilderMBF12Request.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FFunctionNum:=12;
 end;
 
@@ -543,9 +543,9 @@ begin
  Notify(betBuild);
 end;
 
-constructor TBuilderMBF15Request.Create;
+constructor TBuilderMBF15Request.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FFunctionNum:=15;
   FBits:=TBits.Create;
 end;
@@ -566,7 +566,7 @@ begin
   FBits.Bits[Index]:=Value;
 end;
 
-procedure TBuilderMBF15Request.SetQuantity(const Value: Word); stdcall;
+procedure TBuilderMBF15Request.SetQuantity(const Value: Word);
 begin
   inherited;
   FByteCount:= FQuantity div 8;
@@ -576,9 +576,9 @@ end;
 
 { TBuilderMBF16Request }
 
-constructor TBuilderMBF16Request.Create;
+constructor TBuilderMBF16Request.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FFunctionNum:=16;
 end;
 
@@ -592,7 +592,7 @@ begin
   FRegValues[Index]:=Value;
 end;
 
-procedure TBuilderMBF16Request.SetQuantity(const Value: Word); stdcall;
+procedure TBuilderMBF16Request.SetQuantity(const Value: Word);
 begin
   if (Value<1) or (Value>123) then raise Exception.Create(erMBF16PacketBuild);
   if Value=FQuantity then Exit;
@@ -640,9 +640,9 @@ end;
 
 { TBuilderMBF17Request }
 
-constructor TBuilderMBF17Request.Create;
+constructor TBuilderMBF17Request.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FFunctionNum:=17;
 end;
 
@@ -661,17 +661,17 @@ begin
  Notify(betBuild);
 end;
 
-constructor TBuilderMBF22Request.Create;
+constructor TBuilderMBF22Request.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FFunctionCode:=22;
 end;
 
 { TBuilderMBF23Request }
 
-constructor TBuilderMBF23Request.Create;
+constructor TBuilderMBF23Request.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FFunctionCode:=23;
   FReadStartAddress:=0;
   FReadQuantity:=1;
@@ -758,17 +758,17 @@ begin
   Notify(betBuild);
 end;
 
-constructor TBuilderMBF24Request.Create;
+constructor TBuilderMBF24Request.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FFunctionCode:=24;
 end;
 
 { TBuilderMBF43Request }
 
-constructor TBuilderMBF43Request.Create;
+constructor TBuilderMBF43Request.Create(AOwner : TComponent);
 begin
-  inherited;
+  inherited Create(AOwner);
   FFunctionCode:=43;
   FMEIType:=$0E;
   FReadDeviceIDCode:=1;
@@ -842,9 +842,9 @@ begin
   Notify(betBuild);
 end;
 
-constructor TBuilderMBF72Request.Create;
+constructor TBuilderMBF72Request.Create(AOwner : TComponent);
 begin
-  inherited Create;
+  inherited Create(AOwner);
   FChkRKey     := $55;
   FExpectedKey := $AA;
   FFunctionNum := 72;
@@ -870,7 +870,7 @@ begin
   end;
 end;
 
-procedure TBuilderMBF72Request.SetQuantity(const Value: Word); stdcall;
+procedure TBuilderMBF72Request.SetQuantity(const Value: Word);
 begin
   if (Value<1) or (Value>8) then raise Exception.Create(erMBF72PacketBuild);
   inherited SetQuantity(Value);
@@ -924,9 +924,9 @@ begin
  Notify(betBuild);
 end;
 
-constructor TBuilderMBF110Request.Create;
+constructor TBuilderMBF110Request.Create(AOwner : TComponent);
 begin
-  inherited Create;
+  inherited Create(AOwner);
   FFunctionNum := 110;
   FChkWKey     := $55;
   FExpectedKey := $AA;
@@ -957,7 +957,7 @@ begin
   end;
 end;
 
-procedure TBuilderMBF110Request.SetQuantity(const Value: Word); stdcall;
+procedure TBuilderMBF110Request.SetQuantity(const Value: Word);
 begin
   if (Value<1) or (Value>8) then raise Exception.Create(erMBF110PacketBuild);
   if Value = FQuantity then Exit;

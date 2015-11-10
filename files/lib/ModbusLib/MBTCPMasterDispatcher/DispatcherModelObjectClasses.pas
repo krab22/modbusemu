@@ -248,6 +248,8 @@ begin
         TempDevice.PoolingTimeOut           := FPoolingTimeOut;
         TempDevice.LoadFromXML(TempIP,TempPort,TempNode3);
 
+        SendLogMessage(llDebug,'TDispatcherModelObject.LoadFromXML', Format('Добавлено устройство: %d',[TempDevice.Device.DeviceNum]));
+
         FObjectDevices.Add(TempDevice);
        end;
      end;

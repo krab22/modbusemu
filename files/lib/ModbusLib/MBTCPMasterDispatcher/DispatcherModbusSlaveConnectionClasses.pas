@@ -84,7 +84,7 @@ end;
 procedure TMBSlaveConnection.StartPollingThread;
 begin
   if Assigned(FPollingThread) then Exit;
-  FPollingThread := TMBSlavePollingThread.Create(True,32768);
+  FPollingThread := TMBSlavePollingThread.Create(True);//,65535);
   FPollingThread.Logger          := Logger;
   FPollingThread.CSection        := FCSection;
   FPollingThread.ItemDictinary   := FPollingItemDictinary;

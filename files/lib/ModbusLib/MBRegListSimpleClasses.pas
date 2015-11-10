@@ -232,19 +232,28 @@ var i, Count, Distance: Integer;
     TempRange1: TMBRegistersRangeClassic;
 begin
   if RegRangeCount < 2 then Exit;
+
   TempRange := nil;
+
   Count:=Length(RangeArray)-1;
   for i:=1 to Count do
    begin
     TempRange1:=RangeArray[i];
+
     if RangeArray[i-1].Count<>0 then TempRange:=@RangeArray[i-1]
      else Continue;
+
     Distance:=TempRange1.StartAddres -(TempRange^.StartAddres+TempRange^.Count);
+
     if Distance > 1 then Continue;
+
     TempRange^.Count := (TempRange1.StartAddres+TempRange1.Count)-TempRange^.StartAddres;
-    RangeArray[i].Count:=0;
+
+    RangeArray[i].Count := 0;
    end;
-  for i:=Count downto 1 do if RangeArray[i].Count=0 then DeleteRangeFromArray(i);
+
+  for i := Count downto 1 do
+   if RangeArray[i].Count = 0 then DeleteRangeFromArray(i);
 end;
 
 function TMBRegSimpleList.OptimizeRange(Range : TMBRegistersRangeClassic; out Ranges : TMBRegistersRangeClassicArray): Boolean;
@@ -255,12 +264,15 @@ begin
   Result:=False;
   SetLength(Ranges,0);
   SetLength(TempRangeArray,0);
-  if RegRangeCount=0 then
+
+  if RegRangeCount = 0 then
    begin
     Result := True;
     Exit;
    end;
+
   if IsRangeOnTheList(Range.StartAddres,Range.Count,Index) then Exit;
+
   Count:=RegRangeCount-1;
   for i:=0 to Count do // выбираем диапазоны с которыми пересекается диапазон
    begin
@@ -274,6 +286,7 @@ begin
                            end;
     end;
    end;
+
   if Length(TempRangeArray)=0 then
    begin
     Result:=True;
@@ -283,7 +296,7 @@ begin
   //собственно проведение оптимизации
   Count:=Length(TempRangeArray)-1;
   SortArray(0,Count,TempRangeArray);
-  for i:=0 to Count do
+  for i := 0 to Count do
    begin
     if i=0 then
      begin
@@ -304,7 +317,8 @@ begin
                                SetLength(Ranges,Length(Ranges)+1);
                                Ranges[Length(Ranges)-1].StartAddres := Range.StartAddres;
                                Ranges[Length(Ranges)-1].Count       := TempRangeArray[i].StartAddres-Range.StartAddres;
-                               if Count>0 then Continue;
+
+                               if Count > 0 then Continue;
                                SetLength(Ranges,Length(Ranges)+1);
                                Ranges[Length(Ranges)-1].StartAddres := TempRangeArray[i].StartAddres+TempRangeArray[i].Count;
                                Ranges[Length(Ranges)-1].Count       := (Range.StartAddres+Range.Count)-Ranges[Length(Ranges)-1].StartAddres;
@@ -322,13 +336,13 @@ begin
           Ranges[Length(Ranges)-1].Count       := (Range.StartAddres+Range.Count)- Ranges[Length(Ranges)-1].StartAddres;
         end;
       end
-       else
-        begin
-          if (TempRangeArray[i].StartAddres-(TempRangeArray[i-1].StartAddres + TempRangeArray[i-1].Count))<=1 then Continue;
-          SetLength(Ranges,Length(Ranges)+1);
-          Ranges[Length(Ranges)-1].StartAddres := TempRangeArray[i-1].StartAddres + TempRangeArray[i-1].Count;
-          Ranges[Length(Ranges)-1].Count       := Ranges[Length(Ranges)-1].StartAddres - TempRangeArray[i].StartAddres;
-        end;
+     else
+      begin
+       if (TempRangeArray[i].StartAddres-(TempRangeArray[i-1].StartAddres + TempRangeArray[i-1].Count))<=1 then Continue;
+       SetLength(Ranges,Length(Ranges)+1);
+       Ranges[Length(Ranges)-1].StartAddres := TempRangeArray[i-1].StartAddres + TempRangeArray[i-1].Count;
+       Ranges[Length(Ranges)-1].Count       := Ranges[Length(Ranges)-1].StartAddres - TempRangeArray[i].StartAddres;
+      end;
    end;
 
   SortArray(0,Length(Ranges)-1, Ranges);

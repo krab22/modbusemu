@@ -168,4 +168,4 @@ begin
   Result:= GetStringAddress(MakeAddress(AddressType,RegNumber));
 end;
 
-end.
+end.

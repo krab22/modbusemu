@@ -45,14 +45,14 @@ var TempChen : TChennelTCP;
     TempPort : Word;
 begin
   Tag := -1;
-  if (edName.Text = '') or (edAddress.Text = '') or (edPort.Text = '') then raise Exception.Create('Все поля должны быть заполнены.');
+  if (edName.Text = '') or (edAddress.Text = '') or (edPort.Text = '') then raise Exception.Create(rsFrmAddTCPChannel2);
   try
    TempAddr := GetIPFromStr(edAddress.Text);
   except
    on E : Exception do
     begin
-     LoggerObj.debug('Добавление сетевого канала',Format('Ошибка во введенном адресе: %s',[edAddress.Text]));
-     raise Exception.CreateFmt('Вы совершили ошибку при вводе адреса канала: %s. Должен быть введен корректный IP-адрес.',[edAddress.Text]);
+     LoggerObj.debug(rsFrmAddTCPChannel1,Format(rsFrmAddTCPChannel3,[edAddress.Text]));
+     raise Exception.CreateFmt(rsFrmAddTCPChannel4,[edAddress.Text]);
     end;
   end;
   try
@@ -60,13 +60,13 @@ begin
   except
    on E : Exception do
     begin
-     LoggerObj.debug('Добавление сетевого канала',Format('Ошибка во введенном номере порта: %s',[edPort.Text]));
-     raise Exception.CreateFmt('Вы совершили ошибку при вводе номере порта канала: %s. Должен быть введен корректный номер порта в диапазоне от 1 до 65535.',[edPort.Text]);
+     LoggerObj.debug(rsFrmAddTCPChannel1,Format(rsFrmAddTCPChannel5,[edPort.Text]));
+     raise Exception.CreateFmt(rsFrmAddTCPChannel6,[edPort.Text]);
     end;
   end;
   try
 
-   if IsChannelExist then raise Exception.CreateFmt('Канал с указанными параметрами (%s:%s:%s) уже существует.',[edName.Text,edAddress.Text,edPort.Text]);
+   if IsChannelExist then raise Exception.CreateFmt(rsFrmAddTCPChannel7,[edName.Text,edAddress.Text,edPort.Text]);
 
    TempChen := TChennelTCP.Create;
    TempChen.DeviceArray := FDevArray;
@@ -76,12 +76,12 @@ begin
 
    Tag := FChennelList.AddObject(edName.Text,TempChen);
 
-   LoggerObj.info('TfrmChennelTCPAdd',Format('Добавили сетевой канал: %s:%s:%d',[edName.Text,edAddress.Text,TempPort]));
+   LoggerObj.info(rsFrmAddTCPChannel1,Format(rsFrmAddTCPChannel8,[edName.Text,edAddress.Text,TempPort]));
 
   except
     on E : Exception do
      begin
-      LoggerObj.error(rsAddChennel,Format('При добавлении канала произошла ошибка: %s',[E.Message]));
+      LoggerObj.error(rsFrmAddTCPChannel1,Format(rsFrmAddTCPChannel9,[E.Message]));
       Exit;
      end;
   end;
