@@ -7,7 +7,7 @@ interface
 uses Classes, SysUtils,
      ChennelClasses,
      COMCrossTypes, COMPortParamTypes,
-     MBRequestReaderRTUClasses,
+     MBRequestReaderRTUClasses, MBBuilderRTUAnswerPacketClasses,
      MBDeviceClasses;
 
 type
@@ -15,6 +15,9 @@ type
    private
     FCOMPort         : TNPCCustomCOMPort;
     FRequestReader   : TMBRTURequestReader;
+    FAnswError       : TBuilderMBRTUErrorPacket;
+    FAnswBit         : TBuilderMBRTUBitAswerPacket;
+    FAnswWord        : TBuilderMBRTUWordAswerPacket;
 
     FBaudRate        : TComPortBaudRate;
     FByteSize        : TComPortDataBits;
@@ -138,11 +141,19 @@ begin
   FStopBits        := sb1BITS;
 
   FRequestReader   := TMBRTURequestReader.Create(nil);
+
+  FAnswError       := TBuilderMBRTUErrorPacket.Create(nil);
+  FAnswBit         := TBuilderMBRTUBitAswerPacket.Create(nil);
+  FAnswWord        := TBuilderMBRTUWordAswerPacket.Create(nil);
 end;
 
 destructor TChennelRSThread.Destroy;
 begin
   FreeAndNil(FRequestReader);
+
+  FreeAndNil(FAnswError);
+  FreeAndNil(FAnswBit);
+  FreeAndNil(FAnswWord);
   inherited Destroy;
 end;
 
@@ -235,23 +246,49 @@ var TempPackData     : Pointer;
     TempStartAddr    : Word;
     TempQuantity     : Word;
     TempBits         : TBits;
+    TempRes          : Integer;
 begin
+  TempBits := nil;
+  TempPackData := nil;
+
   TempPackData := FRequestReader.GetPacketData(TempPackDataSize);
+
+  if not Assigned(TempPackData) then Exit;
 
   TempStartAddr := swap(PMBF1_6FRequestData(TempPackData)^.StartingAddress);
   TempQuantity  := swap(PMBF1_6FRequestData(TempPackData)^.Quantity);
 
-  Freemem(TempPackData);
+  if Assigned(TempPackData) then Freemem(TempPackData);
 
   try
-   TempBits := ADev.GetCoilRegValues(TempStartAddr,TempQuantity);
-  except
-   on E : Exception do
-    begin
-     SendLogMessage(llError,rsChanRS1, Format('Порт %d. Ошибка получения значений Coil регистров(%d:%d:%d): %s',[FCOMPort.PortNumber,FRequestReader.DeviceAddress, TempStartAddr,TempQuantity,E.Message]));
-     SendErrorMsg(FRequestReader.DeviceAddress,FRequestReader.FunctionCode,ERR_MB_SLAVE_DEVICE_FAILURE - ERR_MB_ERR_CUSTOM);
-     Exit;
-    end;
+   try
+    TempBits := ADev.GetCoilRegValues(TempStartAddr,TempQuantity);
+   except
+    on E : Exception do
+     begin
+      SendLogMessage(llError,rsChanRS1, Format('Порт %d. Ошибка получения значений Coil регистров(%d:%d:%d): %s',[FCOMPort.PortNumber,FRequestReader.DeviceAddress, TempStartAddr,TempQuantity,E.Message]));
+      SendErrorMsg(FRequestReader.DeviceAddress,FRequestReader.FunctionCode,ERR_MB_SLAVE_DEVICE_FAILURE - ERR_MB_ERR_CUSTOM);
+      Exit;
+     end;
+   end;
+
+   FAnswBit.DeviceAddress   := FRequestReader.DeviceAddress;
+   FAnswBit.FunctionNum     := FRequestReader.FunctionCode;
+   FAnswBit.StartingAddress := swap(TempStartAddr);
+   FAnswBit.Quantity        := swap(TempQuantity);
+   FAnswBit.BitData         := TempBits;
+
+  finally
+   if Assigned(TempBits) then FreeAndNil(TempBits);
+  end;
+
+  FAnswBit.Build;
+  TempPackData     := FAnswBit.Packet;
+  TempPackDataSize := FAnswBit.LenPacket;
+  try
+   TempRes := FCOMPort.WriteData(TempPackData^,TempPackDataSize);
+  finally
+   Freemem(TempPackData);
   end;
 
 end;
@@ -297,8 +334,29 @@ begin
 end;
 
 procedure TChennelRSThread.SendErrorMsg(ADevNum, AFuncNum, AError : Byte);
+var TempPack : Pointer;
+    TempLen  : Cardinal;
+    TempRes  : Integer;
 begin
+  FAnswError.DeviceAddress := ADevNum;
+  FAnswError.FunctionNum   := TMBFunctionsEnum(AFuncNum);
+  FAnswError.ErrorCode     := AError;
+  FAnswError.Build;
 
+  TempPack := FAnswError.Packet;
+
+  if not Assigned(TempPack) then
+   begin
+    Exit;
+   end;
+
+  TempLen  := FAnswError.LenPacket;
+  try
+   TempRes := FCOMPort.WriteData(TempPack);
+
+  finally
+   Freemem(TempPack);
+  end;
 end;
 
 procedure TChennelRSThread.Execute;

@@ -493,7 +493,7 @@ object frmMain: TfrmMain
     end
     object actChannelOpenAll: TAction
       Category = 'Channel'
-      Caption = 'Отарыть все каналы'
+      Caption = 'Открыть все каналы'
       OnExecute = actChannelOpenAllExecute
     end
   end

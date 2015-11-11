@@ -7,7 +7,8 @@
       <Unit0>
         <Filename Value="modbusemu.lpr"/>
         <IsPartOfProject Value="True"/>
-        <UsageCount Value="37"/>
+        <CursorPos X="14" Y="10"/>
+        <UsageCount Value="55"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -17,9 +18,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="58"/>
-        <CursorPos X="39" Y="151"/>
-        <UsageCount Value="37"/>
+        <TopLine Value="148"/>
+        <CursorPos X="20" Y="151"/>
+        <UsageCount Value="55"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>

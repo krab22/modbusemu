@@ -56,6 +56,26 @@ type
     procedure SetWordData(const WordList : TWordRegsValues);
   end;
 
+  IBuilderRTUAnswerPacket = interface(IBuilderRTUPacket)
+  ['{76539E6F-5488-E511-9EA3-E0CB4E44D5C7}']
+   procedure SetFunctionNumber(const Value : TMBFunctionsEnum);
+  end;
+
+  IBuilderRTUErrorAnswer = interface(IBuilderRTUAnswerPacket)
+  ['{EE03FF72-5488-E511-9EA3-E0CB4E44D5C7}']
+   procedure SetErrorCode(const Value : Byte);
+  end;
+
+  IBuilderRTUBitAnswerPacket =interface(IBuilderRTUAnswerPacket)
+  ['{B8B27D76-5488-E511-9EA3-E0CB4E44D5C7}']
+    procedure SetBitData(const BitList : TBits);
+  end;
+
+  IBuilderRTUWordAnswerPacket =interface(IBuilderRTUAnswerPacket)
+  ['{A68DE879-5488-E511-9EA3-E0CB4E44D5C7}']
+    procedure SetWordData(const WordList : TWordRegsValues);
+  end;
+
   // интерфейс для записи  результатов чтения из порта
   IReaderPacket = interface
   ['{DB48AE37-11BC-4780-9BAB-DBFEA4473533}']
