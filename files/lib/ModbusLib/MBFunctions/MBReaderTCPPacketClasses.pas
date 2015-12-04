@@ -218,8 +218,10 @@ implementation
 
 uses SysUtils,
      MBDefine,
-     MBReaderBase, MBErrorCode,
-     MBResourceString;
+     MBReaderBase,
+     MBResourceString,
+     {Библиотека MiscFunctions}
+     ExceptionsTypes;
 
 { TReaderMBTCPF1Packet }
 

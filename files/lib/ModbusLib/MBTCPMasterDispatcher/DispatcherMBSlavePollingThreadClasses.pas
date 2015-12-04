@@ -39,6 +39,8 @@ type
    procedure SendBoolPacket(Item : TMBSlavePollingItem; Packet : array of Boolean);
 
    procedure OnSocketErrorProc(Source: TObject; ErrorEvent: TErrorEvent; var ErrorCode: Integer);
+   procedure OnConnectProc(ASender : TObject);
+   procedure OnDisconnect(ASender : TObject);
 
    function  IsPackegesSame(Item : TMBSlavePollingItem; const NewPackege : Pointer; const PackegeSize : Cardinal): Boolean;
    procedure SaveLastPacket(Item : TMBSlavePollingItem; const Packege : Pointer; const PackegeSize : Cardinal);
@@ -54,6 +56,8 @@ type
 implementation
 
 uses SysUtils, SocketMisc, SocketErrorCode,
+     {Библиотека MiscFunctions}
+     ExceptionsTypes,
      MBReaderTCPPacketClasses, MBRequestTypes, DispatcherResStrings;
 
 { TMBSlavePollingThread }
@@ -98,127 +102,127 @@ begin
      Sleep(TempInterval);
      if Terminated then Break;
      try
-     Lock;
-     try
-      // пытаемся восстановить соединение
-      if not FSlaveConnection.Active then
-       begin
-        SetLastResponseNilToAllItem;
-        SendLogMessage(llInfo,rsDispThread,Format(rsEDispThread1,[FSlaveConnection.Address,TempReconnect/1000]));
-        Sleep(TempReconnect);
-        Reconnect;
-        if not FSlaveConnection.Active then
-         begin
-          SendLogMessage(llError,rsDispThread,Format(rsEDispThread2,[FSlaveConnection.Address]));
-          Continue;
-         end;
-       end;
-
-      for TempItem in FItemDictinary.Values do
-       begin
-        // чистим буфер
-        FillByte(TempBuff^,TempBuffSize,0);
-
-        // пропускаем не активные итемы
-        if not TMBSlavePollingItem(TempItem).Active then Continue;
-
-        // получаем запрос
-        TempRequest  := TMBSlavePollingItem(TempItem).Request;
-        // инкремент номера тразакции
-        TempTransNum := Swap(TempRequest^.TCPHeader.TransactioID);
-        try
-         Inc(TempTransNum);
-        except
-         TempTransNum := 0;
-        end;
-        TempRequest^.TCPHeader.TransactioID := Swap(TempTransNum);
-        // подмена номера тразакции в последнем ответе дабы исключить его из сравнения
-        TempRequest := TMBSlavePollingItem(TempItem).LastResponse;
-        if TempRequest <> nil then TempRequest^.TCPHeader.TransactioID:= Swap(TempTransNum);
-        // снова получаем запрос
-        TempRequest     := TMBSlavePollingItem(TempItem).Request;
-        TempRequestSize := TMBSlavePollingItem(TempItem).RequestSize;
-
-        // передача запроса
-        SendRes := FSlaveConnection.SendBuf(TempRequest^,TempRequestSize);
-        if SendRes <> TempRequestSize then  // количество отправленных байт
-         begin
-          case SendRes of
-           -1  : begin
-                  SendLogMessage(llError,rsDispThread,Format(rsEDispThread3,[FSlaveConnection.LastWaitError]));
-                  SendErrorToAll(mdeeSocketError,FSlaveConnection.LastWaitError);
-                  FSlaveConnection.Active := False;
-                  Break; // выходим из цикла при ошибке отсылки
-                 end
-          else
-           { при не полной отправке данных необходимо дождаться возможного ответа, но об ошибке
-           сообщить необходимо}
-           SendError(TMBSlavePollingItem(TempItem),mdeeSend,ER_SLAVE_SENT_NOT_FULL);
+      Lock;
+      try
+       // пытаемся восстановить соединение
+       if not FSlaveConnection.Active then
+        begin
+         SetLastResponseNilToAllItem;
+         SendLogMessage(llInfo,rsDispThread,Format(rsEDispThread1,[FSlaveConnection.Address,TempReconnect/1000]));
+         Sleep(TempReconnect);
+         Reconnect;
+         if not FSlaveConnection.Active then
+          begin
+           //SendLogMessage(llError,rsDispThread,Format(rsEDispThread2,[FSlaveConnection.Address]));
+           Continue;
           end;
+        end;
+
+       for TempItem in FItemDictinary.Values do
+        begin
+         // чистим буфер
+         FillByte(TempBuff^,TempBuffSize,0);
+
+         // пропускаем не активные итемы
+         if not TMBSlavePollingItem(TempItem).Active then Continue;
+
+         // получаем запрос
+         TempRequest  := TMBSlavePollingItem(TempItem).Request;
+         // инкремент номера тразакции
+         TempTransNum := Swap(TempRequest^.TCPHeader.TransactioID);
+         try
+          Inc(TempTransNum);
+         except
+          TempTransNum := 0;
          end;
-        // устанавливаем время ожидания
-        FSlaveConnection.SelectTimeOut  := TMBSlavePollingItem(TempItem).ItemProp.SlaveParams.PoolingTimeParam.TimeOut;
-        // ждем прихода ответа
-        WaitRes := wrAbandoned;
-        Counter := 0;
-        while (Counter <= 5) do
-         begin
-          WaitRes := FSlaveConnection.WaiteReceiveData;
-          if (WaitRes = wrSignaled) then Break;
-          Inc(Counter);
-          if Terminated then Break;
-         end;
-        // проверяем на то что не дождались ответа
-        if (WaitRes <> wrSignaled) or (Counter >=5) then
-         begin
+         TempRequest^.TCPHeader.TransactioID := Swap(TempTransNum);
+         // подмена номера тразакции в последнем ответе дабы исключить его из сравнения
+         TempRequest := TMBSlavePollingItem(TempItem).LastResponse;
+         if TempRequest <> nil then TempRequest^.TCPHeader.TransactioID:= Swap(TempTransNum);
+         // снова получаем запрос
+         TempRequest     := TMBSlavePollingItem(TempItem).Request;
+         TempRequestSize := TMBSlavePollingItem(TempItem).RequestSize;
+
+         // передача запроса
+         SendRes := FSlaveConnection.SendBuf(TempRequest^,TempRequestSize);
+         if Cardinal(SendRes) <> TempRequestSize then  // количество отправленных байт
+          begin
+           case SendRes of
+            -1  : begin
+                   SendLogMessage(llError,rsDispThread,Format(rsEDispThread3,[FSlaveConnection.LastWaitError]));
+                   SendErrorToAll(mdeeSocketError,FSlaveConnection.LastWaitError);
+                   FSlaveConnection.Active := False;
+                   Break; // выходим из цикла при ошибке отсылки
+                  end
+           else
+            { при не полной отправке данных необходимо дождаться возможного ответа, но об ошибке
+            сообщить необходимо}
+            SendError(TMBSlavePollingItem(TempItem),mdeeSend,ER_SLAVE_SENT_NOT_FULL);
+           end;
+          end;
+         // устанавливаем время ожидания
+         FSlaveConnection.SelectTimeOut  := TMBSlavePollingItem(TempItem).ItemProp.SlaveParams.PoolingTimeParam.TimeOut;
+         // ждем прихода ответа
+         WaitRes := wrAbandoned;
+         Counter := 0;
+         while (Counter <= 5) do
+          begin
+           WaitRes := FSlaveConnection.WaiteReceiveData;
+           if (WaitRes = wrSignaled) then Break;
+           Inc(Counter);
+           if Terminated then Break;
+          end;
+         // проверяем на то что не дождались ответа
+         if (WaitRes <> wrSignaled) or (Counter >=5) then
+          begin
            SendLogMessage(llDebug,rsDispThread,Format(rsEDispThread4,
                                                       [TempRequest^.Header.DeviceInfo.DeviceAddress,
                                                        swap(TempRequest^.Header.RequestData.StartingAddress),
                                                        swap(TempRequest^.Header.RequestData.Quantity)
                                                       ]));
            SendError(TMBSlavePollingItem(TempItem),mdeeReceive,ER_SLAVE_ANSVER_TIMEOUT);
-          FSlaveConnection.Active := False;
-          Break; // не дождались ответа - пробуем следующий итем
-         end;
-        // читаем ответ
-        ReadRes := FSlaveConnection.GetQuantityDataCame; // получаем количество пришедших данных
-        if CheckResultNil(ReadRes,ER_SLAVE_CONNECT_BROKEN) then // проверяем количество на 0
-         begin
-          // скорей всего соединение с сервером разорвано
-          FSlaveConnection.Active := False; // закрываем соединение и выходим из цикла
-          Break;
-         end;
-        if ReadRes > TempBuffSize then ReadRes := TempBuffSize; // надо подумать об вычитке всего блока пришедших данных - иначе часть данных теряется
-        ReadRes := FSlaveConnection.ReceiveBuf(TempBuff^, ReadRes);
-        if Terminated then Break;
-        if CheckResultNil(ReadRes,ER_SLAVE_CONNECT_BROKEN) then
-         begin
-          SendLogMessage(llError,rsDispThread,rsEDispThread5);
-          // скорей всего соединение с сервером разорвано
-          FSlaveConnection.Active := False; // закрываем соединение и выходим из цикла
-          Break;
-         end;
-        // разбираем ответ и отсылаем подписчикам оповещение об изменении состояния объекта
-        try
-         ReadResponse(TempBuff,ReadRes,TMBSlavePollingItem(TempItem));
-        except
-         on E : Exception do
-          begin
-           SendLogMessage(llError,rsDispThread, Format(rsEDispThread6,[E.Message]));
+           FSlaveConnection.Active := False;
+           Break; // не дождались ответа - пробуем следующий итем
           end;
-        end;
+         // читаем ответ
+         ReadRes := FSlaveConnection.GetQuantityDataCame; // получаем количество пришедших данных
+         if CheckResultNil(ReadRes,ER_SLAVE_CONNECT_BROKEN) then // проверяем количество на 0
+          begin
+           // скорей всего соединение с сервером разорвано
+           FSlaveConnection.Active := False; // закрываем соединение и выходим из цикла
+           Break;
+          end;
+         if ReadRes > TempBuffSize then ReadRes := TempBuffSize; // надо подумать об вычитке всего блока пришедших данных - иначе часть данных теряется
+         ReadRes := FSlaveConnection.ReceiveBuf(TempBuff^, ReadRes);
+         if Terminated then Break;
+         if CheckResultNil(ReadRes,ER_SLAVE_CONNECT_BROKEN) then
+          begin
+           SendLogMessage(llError,rsDispThread,rsEDispThread5);
+           // скорей всего соединение с сервером разорвано
+           FSlaveConnection.Active := False; // закрываем соединение и выходим из цикла
+           Break;
+          end;
+         // разбираем ответ и отсылаем подписчикам оповещение об изменении состояния объекта
+         try
+          ReadResponse(TempBuff,ReadRes,TMBSlavePollingItem(TempItem));
+         except
+          on E : Exception do
+           begin
+            SendLogMessage(llError,rsDispThread, Format(rsEDispThread6,[E.Message]));
+           end;
+         end;
 
-        if Terminated then Break;
+         if Terminated then Break;
+      end;
+     finally
+      UnLock;
      end;
-    finally
-     UnLock;
-    end;
     except
      on E : Exception do
       begin
        SendLogMessage(llError,rsDispThread, Format(rsEDispThread7,[E.Message]));
       end;
-   end;
+    end;
    end;
   finally
    FreeMem(TempBuff);
@@ -276,11 +280,17 @@ begin
          if TempF3Reader.ErrorCode<>0 then
           begin
            SendError(Item,mdeeMBError,TempF3Reader.ErrorCode);
+
+//           SendLogMessage(llWarning,'TMBSlavePollingThread.ReadResponse',Format('Устройство %d. Пришла ошибка %d',[TempF3Reader.DeviceAddress,TempF3Reader.ErrorCode]));
+
            Exit;
           end;
          Count := TempF3Reader.RegCount-1;
          SetLength(TempWordArray, Count+1);
          for i := 0 to Count do TempWordArray[i] :=TempF3Reader.RegValues[i];
+
+//         SendLogMessage(llWarning,'TMBSlavePollingThread.ReadResponse',Format('Устройство %d. Пришли данные.',[TempF3Reader.DeviceAddress]));
+
          SendWordPacket(Item,TempWordArray);
         end;
      4: begin
@@ -340,17 +350,20 @@ begin
   FSlaveConnection.SelectEnable   := False;
   FSlaveConnection.BlockingSocket := False;
   FSlaveConnection.OnError        := @OnSocketErrorProc;
+  FSlaveConnection.OnConnect      := @OnConnectProc;
+  FSlaveConnection.OnDisconnect   := @OnDisconnect;
   FSlaveConnection.Open;
-  if FSlaveConnection.Active then
-   begin
-    SendErrorToAll(mdeeConnect,0);
-    SendLogMessage(llInfo,rsDispESSOM,Format(rsDispESSOM1,[FSlaveConnection.Address,FSlaveConnection.Port]));
-   end;
+//  if FSlaveConnection.Active then
+//   begin
+//    SendErrorToAll(mdeeConnect,0);
+//    SendLogMessage(llInfo,rsDispESSOM,Format(rsDispESSOM1,[FSlaveConnection.Address,FSlaveConnection.Port]));
+//   end;
  except
   on E : Exception do
    begin
-    SendErrorToAll(mdeeConnect,WSAETIMEDOUT);
-    FLastError := WSAETIMEDOUT;
+    FLastError := FSlaveConnection.LastWaitError;
+    if FLastError = 0 then FLastError := WSAETIMEDOUT;
+    SendErrorToAll(mdeeConnect,FLastError);
    end;
  end;
 end;
@@ -359,11 +372,11 @@ procedure TMBSlavePollingThread.CloseThread;
 begin
   if Assigned(FSlaveConnection) then
    begin
-    SendLogMessage(llInfo,rsDispESSOM,Format(rsDispESSOM2,[FSlaveConnection.Address,FSlaveConnection.Port]));
+//    SendLogMessage(llInfo,rsDispESSOM,Format(rsDispESSOM2,[FSlaveConnection.Address,FSlaveConnection.Port]));
     FreeAndNil(FSlaveConnection);
    end;
-  SendErrorToAll(mdeeDisconnect,0);
-  FLastError := Cardinal(-1);
+//  SendErrorToAll(mdeeDisconnect,0);
+  FLastError := 0;//Cardinal(-1);
 end;
 
 function TMBSlavePollingThread.IsPackegesSame(Item : TMBSlavePollingItem; const NewPackege : Pointer; const PackegeSize : Cardinal): Boolean;
@@ -385,13 +398,17 @@ begin
   try
     FSlaveConnection.Active := False;
   except
-   SendErrorToAll(mdeeDisconnect,WSAETIMEDOUT);
+   FLastError := FSlaveConnection.LastWaitError;
+   if FLastError = 0 then FLastError := WSAETIMEDOUT;
+   SendErrorToAll(mdeeDisconnect,FLastError);
   end;
 
   try
    FSlaveConnection.Active := True;
   except
-   SendErrorToAll(mdeeConnect,WSAETIMEDOUT);
+   FLastError := FSlaveConnection.LastWaitError;
+   if FLastError = 0 then FLastError := WSAETIMEDOUT;
+   SendErrorToAll(mdeeDisconnect,FLastError);
   end;
 end;
 
@@ -463,7 +480,20 @@ end;
 
 procedure TMBSlavePollingThread.OnSocketErrorProc(Source : TObject; ErrorEvent : TErrorEvent; var ErrorCode : Integer);
 begin
+  SendErrorToAll(mdeeSocketError,ErrorCode);
   SendLogMessage(llError,rsDispESSOM,Format(rsDispESSOM3,[FSlaveConnection.Address,FSlaveConnection.Port,ErrorCode,SysErrorMessage(ErrorCode)]));
+end;
+
+procedure TMBSlavePollingThread.OnConnectProc(ASender : TObject);
+begin
+  SendErrorToAll(mdeeConnect,0);
+  SendLogMessage(llInfo,rsDispESSOM,Format(rsDispESSOM1,[FSlaveConnection.Address,FSlaveConnection.Port]));
+end;
+
+procedure TMBSlavePollingThread.OnDisconnect(ASender : TObject);
+begin
+  SendErrorToAll(mdeeDisconnect,0);
+  SendLogMessage(llInfo,rsDispESSOM,Format(rsDispESSOM2,[FSlaveConnection.Address,FSlaveConnection.Port]));
 end;
 
 procedure TMBSlavePollingThread.SetCSection(const Value: TCriticalSection);

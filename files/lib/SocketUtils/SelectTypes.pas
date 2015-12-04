@@ -40,7 +40,7 @@ type
 
 implementation
 
-uses SocketMisc, SocketResStrings;
+uses {$IFDEF UNIX}SocketMisc,{$ENDIF} SocketResStrings;
 
 { TSelectThread }
 

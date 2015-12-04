@@ -66,7 +66,8 @@ implementation
 
 uses SysUtils,
      MBResourceString,
-     MBErrorCode,
+     {Библиотека MiscFunctions}
+     ExceptionsTypes,
      CRC16Func;
 
 { TReaderMBRTUPacket }

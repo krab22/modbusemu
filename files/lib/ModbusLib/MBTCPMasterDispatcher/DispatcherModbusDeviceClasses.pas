@@ -19,6 +19,7 @@ type
   TDispatcherModbusDevice = class(TComponentLogged, IMBDispDeviceTCPItf, IMBDispCallBackItf)
    private
     FDeviceCS                 : TCriticalSection;
+    FObjectID                 : String;
 
     FTCPDevice                : TMBTCPDevice;
     FDevicePollItms           : TMBTCPSlavePollingItemArray;
@@ -37,6 +38,10 @@ type
     FPoolingTimeOut           : Integer;
 
     FDispatcherItf            : IMBDispatcherItf;
+
+    FOnPollingError           : TPollingError;
+    FOnPollingEvent           : TPollingEvent;
+
     function GetRangesCoilCount: Integer;
     function GetRangesCoilItem(Index : Integer): TDeviceRangeItem;
     function GetRangesDiscretCount: Integer;
@@ -100,9 +105,14 @@ type
     procedure LoadFromXML(AIPAddr : String; APort : Word; ADeviceTag : TXmlNode); virtual;
     // поиск заданного интервала переменных
     function  SearchRangeItem(ARangeID : String) : TDeviceRangeItem;
+    // получить идетенфикатор секции переменных
+    function  GetRangeItemID(ARangeType: TRegMBTypes; ARegStart, ARegQuantity: Word) : String;
     // устанавливаем подписсчиков на изменения регистров
     procedure SetDataSubscribers(ASubscribers : TDeviceSubscribers);
 
+    // идентификатор объекта к которому принадлежит устройство
+    property ObjectID                 : String read FObjectID write FObjectID;
+    // объект модели устройства
     property Device                   : TMBTCPDevice read FTCPDevice;
     // идентификатор устройства
     property DeviceID                 : String read FDeviceID write FDeviceID;
@@ -128,13 +138,18 @@ type
     property RangesHolding[Index : Integer] : TDeviceRangeItem read GetRangesHoldingItem;
 
     property Subscribers  : TDeviceSubscribers read FSubscribers write SetDataSubscribers;
+
+    property OnPollingError           : TPollingError read FOnPollingError write FOnPollingError;
+    property OnPollingEvent           : TPollingEvent read FOnPollingEvent write FOnPollingEvent;
   end;
 
 implementation
 
 uses SocketMisc,
-     DeviceResStrings, DispatcherResStrings,
-     XMLTypes, ErrorTypes;
+     DispatcherResStrings,
+     {Библиотека MiscFunctions}
+     XMLConsts,
+     ExceptionsTypes;
 
 { TDispatcherModbusDevice }
 
@@ -189,7 +204,7 @@ begin
    FTCPDevice.AddRegisters(ARangeType,ARegStart,ARegQuantity);
    if not Assigned(FDispatcherItf) then Exit;
 
-   SendLogMessage(llDebug,'TDispatcherModbusDevice.AddRange',Format('ARegStart: %d ARegQuantity: %d',[ARegStart,ARegQuantity]));
+   SendLogMessage(llDebug,rsDevDebug1,Format(rsDevDebug2,[ARegStart,ARegQuantity]));
 
    GeneretePollingItems;
    TempItf := FDispatcherItf;
@@ -317,6 +332,13 @@ begin
      SetLength(TempSustr,0);
     end;
 
+   if ItemProp.LastError <> 0 then
+    begin
+     if not Assigned(FOnPollingError) then Exit;
+     ItemProp.LastError := 0;
+     FOnPollingError(ItemProp);
+    end;
+
   finally
    UnLock;
   end;
@@ -349,7 +371,7 @@ begin
             TempAddr := ItemProp.Item.StartAddr+i;
             if FTCPDevice.Holdings[TempAddr].Value <> Package[i] then
              begin
-              FTCPDevice.Holdings[TempAddr].ServerSideSetValue(Swap(Package[i]));
+              FTCPDevice.Holdings[TempAddr].ServerSideSetValue(Package[i]);
               if not Assigned(FSubscribers) then Continue;
               if FTCPDevice.Holdings[TempAddr].IsChanged then
                begin
@@ -374,7 +396,7 @@ begin
             TempAddr := ItemProp.Item.StartAddr+i;
             if FTCPDevice.Inputs[TempAddr].Value <> Package[i] then
              begin
-              FTCPDevice.Inputs[TempAddr].ServerSideSetValue(Swap(Package[i]));
+              FTCPDevice.Inputs[TempAddr].ServerSideSetValue(Package[i]);
               if not Assigned(FSubscribers) then Continue;
               if FTCPDevice.Inputs[TempAddr].IsChanged then
                begin
@@ -403,6 +425,13 @@ begin
      SetLength(TempSustr,0);
     end;
 
+   if ItemProp.LastError <> 0 then
+    begin
+     if not Assigned(FOnPollingError) then Exit;
+     ItemProp.LastError := 0;
+     FOnPollingError(ItemProp);
+    end;
+
   finally
    UnLock;
   end;
@@ -415,25 +444,33 @@ begin
    if ItemProp.Item.DevNumber <> FTCPDevice.DeviceNum then Exit;
    case EvType of
     mdeeConnect     : begin
-                       SendLogMessage(llDebug,'SendEvent',Format('Устройство: %d. Code1: %d. Code2: %d Connect.',[ItemProp.Item.DevNumber,Code1,Code2]));
+                       if Assigned(FOnPollingEvent) then FOnPollingEvent(ItemProp,EvType);
+                       SendLogMessage(llDebug,rsDevDebug3,Format(rsDevDebug4,[ItemProp.RangeID, ItemProp.Item.DevNumber,Code1,Code2]));
                       end;
     mdeeDisconnect  : begin
+                       if Assigned(FOnPollingEvent) then FOnPollingEvent(ItemProp,EvType);
                        FTCPDevice.InitializeDevice;
-                       SendLogMessage(llDebug,'SendEvent',Format('Устройство: %d. Code1: %d. Code2: %d Disconnect.',[ItemProp.Item.DevNumber,Code1,Code2]));
+                       SendLogMessage(llDebug,rsDevDebug3,Format(rsDevDebug5,[ItemProp.RangeID, ItemProp.Item.DevNumber,Code1,Code2]));
                       end;
     mdeeReceive     : begin
-                       SendLogMessage(llDebug,'SendEvent',Format('Устройство: %d. Code1: %d. Code2: %d Receive.',[ItemProp.Item.DevNumber,Code1,Code2]));
+                       if Assigned(FOnPollingEvent) then FOnPollingEvent(ItemProp,EvType);
+                       SendLogMessage(llDebug,rsDevDebug3,Format(rsDevDebug6,[ItemProp.RangeID, ItemProp.Item.DevNumber,Code1,Code2]));
                       end;
     mdeeSend        : begin
-                       SendLogMessage(llDebug,'SendEvent',Format('Устройство: %d. Code1: %d. Code2: %d Send.',[ItemProp.Item.DevNumber,Code1,Code2]));
+                       if Assigned(FOnPollingEvent) then FOnPollingEvent(ItemProp,EvType);
+                       SendLogMessage(llDebug,rsDevDebug3,Format(rsDevDebug7,[ItemProp.RangeID, ItemProp.Item.DevNumber,Code1,Code2]));
                       end;
     mdeeMBError     : begin
+                       ItemProp.LastError := Code1;
                        FTCPDevice.InitializeDevice;
-                       SendLogMessage(llDebug,'SendEvent',Format('Устройство: %d. Code1: %d. Code2: %d MBError.',[ItemProp.Item.DevNumber,Code1,Code2]));
+                       if Assigned(FOnPollingError) then FOnPollingError(ItemProp);
+                       SendLogMessage(llDebug,rsDevDebug3,Format(rsDevDebug8,[ItemProp.RangeID, ItemProp.Item.DevNumber,Code1,Code2]));
                       end;
     mdeeSocketError : begin
+                       ItemProp.LastError := Code1;
                        FTCPDevice.InitializeDevice;
-                       SendLogMessage(llDebug,'SendEvent',Format('Устройство: %d. Code1: %d. Code2: %d SocketError.',[ItemProp.Item.DevNumber,Code1,Code2]));
+                       if Assigned(FOnPollingError) then FOnPollingError(ItemProp);
+                       SendLogMessage(llDebug,rsDevDebug3,Format(rsDevDebug9,[ItemProp.RangeID, ItemProp.Item.DevNumber,Code1,Code2]));
                       end;
    end;
   finally
@@ -807,6 +844,7 @@ begin
       SetLength(FDevicePollItms, Length(FDevicePollItms)+Count+1);
       for i := 0 to Count do
        begin
+        FDevicePollItms[i+TempPos].ObjectID                                       := FObjectID;
         FDevicePollItms[i+TempPos].ID                                             := FDeviceID;
         FDevicePollItms[i+TempPos].Caption                                        := FDeviceCaption;
         FDevicePollItms[i+TempPos].Item.DevNumber                                 := FTCPDevice.DeviceNum;
@@ -814,15 +852,16 @@ begin
 // надо сделать проверку размера добавляемого диапазона - он может быть очень большим или сделать это в потоке опроса
         FDevicePollItms[i+TempPos].Item.StartAddr                                 := FTCPDevice.DiscretsRanges[i].StartAddres;
         FDevicePollItms[i+TempPos].Item.Quantity                                  := FTCPDevice.DiscretsRanges[i].Count;
+        FDevicePollItms[i+TempPos].RangeID                                        := GetRangeItemID(rgDiscrete,FDevicePollItms[i+TempPos].Item.StartAddr,FDevicePollItms[i+TempPos].Item.Quantity);
         FDevicePollItms[i+TempPos].SlaveParams.SlaveAddr.IP.Addr                  := FTCPDevice.IPAddress;
         FDevicePollItms[i+TempPos].SlaveParams.SlaveAddr.Port                     := FTCPDevice.IPPort;
         FDevicePollItms[i+TempPos].SlaveParams.PoolingTimeParam.Interval          := FPoolingInterval;
         FDevicePollItms[i+TempPos].SlaveParams.PoolingTimeParam.ReconnectInterval := FPoolingReconnectInterval;
         FDevicePollItms[i+TempPos].SlaveParams.PoolingTimeParam.TimeOut           := FPoolingTimeOut;
-        SendLogMessage(llDebug,'TDispatcherModbusDevice.GeneretePollingItems',Format('Discret. Добавлена еденица опроса: %d::%d::%d',
-                                                                                     [FDevicePollItms[i+TempPos].Item.DevNumber,
-                                                                                      FDevicePollItms[i+TempPos].Item.StartAddr,
-                                                                                      FDevicePollItms[i+TempPos].Item.Quantity]));
+        SendLogMessage(llDebug,rsDevDebug11,Format(rsDevDebug10,
+                                                   [FDevicePollItms[i+TempPos].Item.DevNumber,
+                                                    FDevicePollItms[i+TempPos].Item.StartAddr,
+                                                    FDevicePollItms[i+TempPos].Item.Quantity]));
 
        end;
       TempPos := Count + 1;
@@ -837,6 +876,7 @@ begin
       SetLength(FDevicePollItms, Length(FDevicePollItms)+Count+1);
       for i := 0 to Count do
        begin
+        FDevicePollItms[i+TempPos].ObjectID                                       := FObjectID;
         FDevicePollItms[i+TempPos].ID                                             := FDeviceID;
         FDevicePollItms[i+TempPos].Caption                                        := FDeviceCaption;
         FDevicePollItms[i+TempPos].Item.DevNumber                                 := FTCPDevice.DeviceNum;
@@ -844,15 +884,16 @@ begin
 // надо сделать проверку размера добавляемого диапазона - он может быть очень большим или сделать это в потоке опроса
         FDevicePollItms[i+TempPos].Item.StartAddr                                 := FTCPDevice.CoilsRanges[i].StartAddres;
         FDevicePollItms[i+TempPos].Item.Quantity                                  := FTCPDevice.CoilsRanges[i].Count;
+        FDevicePollItms[i+TempPos].RangeID                                        := GetRangeItemID(rgCoils,FDevicePollItms[i+TempPos].Item.StartAddr,FDevicePollItms[i+TempPos].Item.Quantity);
         FDevicePollItms[i+TempPos].SlaveParams.SlaveAddr.IP.Addr                  := FTCPDevice.IPAddress;
         FDevicePollItms[i+TempPos].SlaveParams.SlaveAddr.Port                     := FTCPDevice.IPPort;
         FDevicePollItms[i+TempPos].SlaveParams.PoolingTimeParam.Interval          := FPoolingInterval;
         FDevicePollItms[i+TempPos].SlaveParams.PoolingTimeParam.ReconnectInterval := FPoolingReconnectInterval;
         FDevicePollItms[i+TempPos].SlaveParams.PoolingTimeParam.TimeOut           := FPoolingTimeOut;
-        SendLogMessage(llDebug,'TDispatcherModbusDevice.GeneretePollingItems',Format('Coil. Добавлена еденица опроса: %d::%d::%d',
-                                                                              [FDevicePollItms[i+TempPos].Item.DevNumber,
-                                                                               FDevicePollItms[i+TempPos].Item.StartAddr,
-                                                                               FDevicePollItms[i+TempPos].Item.Quantity]));
+        SendLogMessage(llDebug,rsDevDebug11,Format(rsDevDebug12,
+                                                   [FDevicePollItms[i+TempPos].Item.DevNumber,
+                                                    FDevicePollItms[i+TempPos].Item.StartAddr,
+                                                    FDevicePollItms[i+TempPos].Item.Quantity]));
 
        end;
       TempPos := Count + 1;
@@ -867,6 +908,7 @@ begin
       SetLength(FDevicePollItms, Length(FDevicePollItms)+Count+1);
       for i := 0 to Count do
        begin
+        FDevicePollItms[i+TempPos].ObjectID                                       := FObjectID;
         FDevicePollItms[i+TempPos].ID                                             := FDeviceID;
         FDevicePollItms[i+TempPos].Caption                                        := FDeviceCaption;
         FDevicePollItms[i+TempPos].Item.DevNumber                                 := FTCPDevice.DeviceNum;
@@ -874,15 +916,16 @@ begin
 // надо сделать проверку размера добавляемого диапазона - он может быть очень большим или сделать это в потоке опроса
         FDevicePollItms[i+TempPos].Item.StartAddr                                 := FTCPDevice.HoldingsRanges[i].StartAddres;
         FDevicePollItms[i+TempPos].Item.Quantity                                  := FTCPDevice.HoldingsRanges[i].Count;
+        FDevicePollItms[i+TempPos].RangeID                                        := GetRangeItemID(rgHolding,FDevicePollItms[i+TempPos].Item.StartAddr,FDevicePollItms[i+TempPos].Item.Quantity);
         FDevicePollItms[i+TempPos].SlaveParams.SlaveAddr.IP.Addr                  := FTCPDevice.IPAddress;
         FDevicePollItms[i+TempPos].SlaveParams.SlaveAddr.Port                     := FTCPDevice.IPPort;
         FDevicePollItms[i+TempPos].SlaveParams.PoolingTimeParam.Interval          := FPoolingInterval;
         FDevicePollItms[i+TempPos].SlaveParams.PoolingTimeParam.ReconnectInterval := FPoolingReconnectInterval;
         FDevicePollItms[i+TempPos].SlaveParams.PoolingTimeParam.TimeOut           := FPoolingTimeOut;
-        SendLogMessage(llDebug,'TDispatcherModbusDevice.GeneretePollingItems',Format('Holding. Добавлена еденица опроса: %d::%d::%d',
-                                                                                     [FDevicePollItms[i+TempPos].Item.DevNumber,
-                                                                                      FDevicePollItms[i+TempPos].Item.StartAddr,
-                                                                                      FDevicePollItms[i+TempPos].Item.Quantity]));
+        SendLogMessage(llDebug,rsDevDebug11,Format(rsDevDebug13,
+                                                   [FDevicePollItms[i+TempPos].Item.DevNumber,
+                                                    FDevicePollItms[i+TempPos].Item.StartAddr,
+                                                    FDevicePollItms[i+TempPos].Item.Quantity]));
        end;
       TempPos := Count + 1;
      end;
@@ -896,6 +939,7 @@ begin
       SetLength(FDevicePollItms, Length(FDevicePollItms)+Count+1);
       for i := 0 to Count do
        begin
+        FDevicePollItms[i+TempPos].ObjectID                                       := FObjectID;
         FDevicePollItms[i+TempPos].ID                                             := FDeviceID;
         FDevicePollItms[i+TempPos].Caption                                        := FDeviceCaption;
         FDevicePollItms[i+TempPos].Item.DevNumber                                 := FTCPDevice.DeviceNum;
@@ -903,15 +947,16 @@ begin
 // надо сделать проверку размера добавляемого диапазона - он может быть очень большим или сделать это в потоке опроса
         FDevicePollItms[i+TempPos].Item.StartAddr                                 := FTCPDevice.InputsRanges[i].StartAddres;
         FDevicePollItms[i+TempPos].Item.Quantity                                  := FTCPDevice.InputsRanges[i].Count;
+        FDevicePollItms[i+TempPos].RangeID                                        := GetRangeItemID(rgInput,FDevicePollItms[i+TempPos].Item.StartAddr,FDevicePollItms[i+TempPos].Item.Quantity);
         FDevicePollItms[i+TempPos].SlaveParams.SlaveAddr.IP.Addr                  := FTCPDevice.IPAddress;
         FDevicePollItms[i+TempPos].SlaveParams.SlaveAddr.Port                     := FTCPDevice.IPPort;
         FDevicePollItms[i+TempPos].SlaveParams.PoolingTimeParam.Interval          := FPoolingInterval;
         FDevicePollItms[i+TempPos].SlaveParams.PoolingTimeParam.ReconnectInterval := FPoolingReconnectInterval;
         FDevicePollItms[i+TempPos].SlaveParams.PoolingTimeParam.TimeOut           := FPoolingTimeOut;
-        SendLogMessage(llDebug,'TDispatcherModbusDevice.GeneretePollingItems',Format('Input. Добавлена еденица опроса: %d::%d::%d',
-                                                                                     [FDevicePollItms[i+TempPos].Item.DevNumber,
-                                                                                      FDevicePollItms[i+TempPos].Item.StartAddr,
-                                                                                      FDevicePollItms[i+TempPos].Item.Quantity]));
+        SendLogMessage(llDebug,rsDevDebug11,Format(rsDevDebug14,
+                                                   [FDevicePollItms[i+TempPos].Item.DevNumber,
+                                                    FDevicePollItms[i+TempPos].Item.StartAddr,
+                                                    FDevicePollItms[i+TempPos].Item.Quantity]));
 
        end;
      end;
@@ -922,7 +967,7 @@ procedure TDispatcherModbusDevice.SubscribeToUpdates(ADispetcherItf: IMBDispatch
 var i,Count : Integer;
     TempCallBack : IMBDispCallBackItf;
 begin
-  if not Assigned(ADispetcherItf) then raise Exception.CreateFmt('TDispatcherModbusDevice.SubscribeToUpdates. %s',[rsEItfDisp1]);
+  if not Assigned(ADispetcherItf) then raise Exception.CreateFmt(rsDevExcept1,[rsEItfDisp1]);
 
   FDispatcherItf := ADispetcherItf;
   TempCallBack   := Self as IMBDispCallBackItf;
@@ -934,7 +979,7 @@ end;
 procedure TDispatcherModbusDevice.UnsubscribeToUpdates;
 var i,Count : Integer;
 begin
-  if not Assigned(FDispatcherItf) then raise Exception.CreateFmt('TDispatcherModbusDevice.UnsubscribeToUpdates. %s',[rsEItfDisp1]);
+  if not Assigned(FDispatcherItf) then raise Exception.CreateFmt(rsDevExcept2,[rsEItfDisp1]);
 
   Count := Length(FDevicePollItms)-1;
   for i := 0 to Count do
@@ -1044,6 +1089,30 @@ begin
    begin
     Result := FRangesInput[i];
     Exit;
+   end;
+end;
+
+function TDispatcherModbusDevice.GetRangeItemID(ARangeType : TRegMBTypes; ARegStart, ARegQuantity : Word) : String;
+var TempRangeList : TDeviceRangeArray;
+    TempRange     : TDeviceRangeItem;
+    i, Count      : Integer;
+begin
+  Result := '';
+  case ARangeType of
+   rgCoils    : TempRangeList := FRangesCoil;
+   rgDiscrete : TempRangeList := FRangesDiscret;
+   rgHolding  : TempRangeList := FRangesHolding;
+   rgInput    : TempRangeList := FRangesInput;
+  end;
+  Count := Length(TempRangeList)-1;
+  for i := 0 to Count do
+   begin
+    TempRange := TempRangeList[i];
+    if (TempRange.StartReg = ARegStart) and (TempRange.Quantity = ARegQuantity) then
+     begin
+      Result := TempRange.RangeID;
+      Break;
+     end;
    end;
 end;
 

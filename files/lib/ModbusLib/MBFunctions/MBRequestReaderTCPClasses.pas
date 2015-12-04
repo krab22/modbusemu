@@ -54,7 +54,10 @@ type
 implementation
 
 uses SysUtils, 
-     MBDefine, MBErrorCode, MBRequestTypes;
+     MBDefine,
+     MBRequestTypes,
+     {Библиотека MiscFunctions}
+     ExceptionsTypes;
 
 { TMBTCPRequestReader }
 

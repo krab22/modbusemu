@@ -31,7 +31,9 @@ implementation
 
 uses SysUtils,
      CRC16Func,
-     MBErrorCode, MBDefine, MBRequestTypes;
+     {Библиотека MiscFunctions}
+     ExceptionsTypes,
+     MBDefine, MBRequestTypes;
 
 { TMBRTURequestReader }
 

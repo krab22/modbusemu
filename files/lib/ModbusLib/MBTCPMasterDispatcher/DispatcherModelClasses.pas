@@ -61,7 +61,9 @@ type
 
 implementation
 
-uses ErrorTypes, XMLTypes;
+uses {Библиотека MiscFunctions}
+     XMLConsts,
+     ExceptionsTypes;
 
 { TDispatcherModel }
 

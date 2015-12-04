@@ -19,6 +19,28 @@ type
    ErrorData     : TMBErrorData;
   end;
 
+  PMBErrorResponse = ^TMBErrorResponse;
+  TMBErrorResponse = packed record
+   Heder : TMBErrorHeder;
+   CRC   : Word;
+  end;
+
+  PMBResponseHeader = ^TMBResponseHeader;
+  TMBResponseHeader = packed record
+   DeviceAddress : Byte;
+   FunctionCode  : Byte;
+   ByteCount     : Byte;
+  end;
+
+  PWordRegVlueArray = ^TWordRegVlueArray;
+  TWordRegVlueArray = array [0..124] of Word;
+
+  PWordRegF3Response = ^TWordRegF3Response;
+  TWordRegF3Response = packed record
+   ByteCount : Byte;
+   RegValues : TWordRegVlueArray;
+  end;
+
   PMBTCPErrorHeder = ^TMBTCPErrorHeder;
   TMBTCPErrorHeder = packed record
    TransactioID : Word;
@@ -27,21 +49,6 @@ type
    DeviceID     : Byte;
    ErrorData    : TMBErrorData;
   end;
-
-  PMBErrorResponse = ^TMBErrorResponse;
-  TMBErrorResponse = packed record
-   Heder : TMBErrorHeder;
-   CRC   : Word;
-  end;
-
- PWordRegVlueArray = ^TWordRegVlueArray;
- TWordRegVlueArray = array [0..124] of Word;
-
- PWordRegF3Response = ^TWordRegF3Response;
- TWordRegF3Response = packed record
-  ByteCount : Byte;
-  RegValues : TWordRegVlueArray;
- end;
 
  PEventArray = ^TEventArray;
  TEventArray = packed array [0..63] of Byte;

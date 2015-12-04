@@ -408,7 +408,7 @@ begin
   TempTimeOut := FClientObject.SelectTimeOut;
   TempFlag    := False;
   while not Terminated do
-   begin
+  begin
    try
     TempTick := GetTickCount64;
 
@@ -479,7 +479,7 @@ begin
      begin
       SendLogMessage(llError,rsClientConnectionName,Format('TServerClientThread.Execute. Ошибка: %s',[E.Message]));
       Sleep(200);
-   end;
+     end;
    end;
   end;
   SetLength(TempBuff,0);
@@ -498,7 +498,7 @@ begin
   TempMaxConn := FOwner.MaxNumberSimultaneousConnections;
   TempSleepTime := FOwner.AcceptTheradSleepTime;
   while not Terminated do
-   begin
+  begin
    try
     TempCliHandle := INVALID_SOCKET;
     TempCliAddr.sin_addr.s_addr := 0;
@@ -547,8 +547,8 @@ begin
      begin
       SendLogMessage(llError,'AcceptThread',E.Message);
       Sleep(TempSleepTime);
+     end;
    end;
-end;
   end;
 end;
 

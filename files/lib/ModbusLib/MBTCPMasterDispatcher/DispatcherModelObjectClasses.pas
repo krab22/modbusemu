@@ -68,7 +68,10 @@ type
 
 implementation
 
-uses ErrorTypes, XMLTypes;
+uses DispatcherResStrings,
+     {Библиотека MiscFunctions}
+     XMLConsts,
+     ExceptionsTypes;
 
 { TDispatcherModelObject }
 
@@ -243,12 +246,13 @@ begin
         if TempNode3.Name <> csXMLDevice then Continue;
         TempDevice := TDispatcherModbusDevice.Create(nil);
         TempDevice.Logger := Logger;
+        TempDevice.ObjectID                 := FObjectID;
         TempDevice.PoolingInterval          := FPoolingInterval;
         TempDevice.PoolingReconnectInterval := FPoolingReconnectInterval;
         TempDevice.PoolingTimeOut           := FPoolingTimeOut;
         TempDevice.LoadFromXML(TempIP,TempPort,TempNode3);
 
-        SendLogMessage(llDebug,'TDispatcherModelObject.LoadFromXML', Format('Добавлено устройство: %d',[TempDevice.Device.DeviceNum]));
+        SendLogMessage(llDebug,rsDevDebug15, Format(rsDevDebug16,[TempDevice.Device.DeviceNum]));
 
         FObjectDevices.Add(TempDevice);
        end;

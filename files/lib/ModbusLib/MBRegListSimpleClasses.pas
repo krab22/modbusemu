@@ -97,7 +97,8 @@ type
 implementation
 
 uses SysUtils,
-     MBErrorCode;
+     {Библиотека MiscFunctions}
+     ExceptionsTypes;
 
 { TMBRegSimpleList }
 

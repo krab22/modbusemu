@@ -26,7 +26,7 @@ msgid "Открыть канал"
 msgstr ""
 
 #: tfrmmain.actchannelopenall.caption
-msgid "Отарыть все каналы"
+msgid "Открыть все каналы"
 msgstr ""
 
 #: tfrmmain.actdevadd.caption

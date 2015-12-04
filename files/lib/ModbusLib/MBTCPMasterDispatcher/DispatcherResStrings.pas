@@ -12,7 +12,7 @@ resourcestring
   rsEDispThread2  = 'Не удалось восстановить соединение с сервером %s';
   rsEDispThread3  = 'Ошибка отправки запроса: %u';
   rsEDispThread4  = 'Не пришел ответ на запрос: %d::%d::%d';
-  rsEDispThread5  = 'Ответ нулевой длинны';
+  rsEDispThread5  = 'Ответ нулевой длины';
   rsEDispThread6  = 'Разбор сообщения. Исключение: %s';
   rsEDispThread7  = 'Исключение: %s';
   rsDispESSOM     = 'Диспетчер соединений ЭССО-М';
@@ -60,6 +60,37 @@ resourcestring
 
   rsSetInputValue11 = 'TDispatcherModbusMaster.SetInputValue Интерфейс устройства не задан.';
   rsSetInputValue12 = 'TDispatcherModbusMaster.SetInputValue Пток отправки данных не активен.';
+
+  rsDevDebug1 = 'TDispatcherModbusDevice.AddRange';
+  rsDevDebug2 = 'ARegStart: %d ARegQuantity: %d';
+  rsDevDebug3 = 'SendEvent';
+  rsDevDebug4 = 'ID: %s. Устройство: %d. Code1: %d. Code2: %d Connect.';
+  rsDevDebug5 = 'ID: %s. Устройство: %d. Code1: %d. Code2: %d Disconnect.';
+  rsDevDebug6 = 'ID: %s. Устройство: %d. Code1: %d. Code2: %d Receive.';
+  rsDevDebug7 = 'ID: %s. Устройство: %d. Code1: %d. Code2: %d Send.';
+  rsDevDebug8 = 'ID: %s. Устройство: %d. Code1: %d. Code2: %d MBError.';
+  rsDevDebug9 = 'ID: %s. Устройство: %d. Code1: %d. Code2: %d SocketError.';
+
+  rsDevDebug11 = 'TDispatcherModbusDevice.GeneretePollingItems';
+
+  rsDevDebug10 = 'Discret. Добавлена еденица опроса: %d::%d::%d';
+  rsDevDebug12 = 'Coil. Добавлена еденица опроса: %d::%d::%d';
+  rsDevDebug13 = 'Holding. Добавлена еденица опроса: %d::%d::%d';
+  rsDevDebug14 = 'Input. Добавлена еденица опроса: %d::%d::%d';
+
+  rsDevDebug15 = 'TDispatcherModelObject.LoadFromXML';
+  rsDevDebug16 = 'Добавлено устройство: %d';
+
+  rsDevExcept1 = 'TDispatcherModbusDevice.SubscribeToUpdates. %s';
+  rsDevExcept2 = 'TDispatcherModbusDevice.UnsubscribeToUpdates. %s';
+
+  rsDevice1 = 'Discret registers - StartAddress.';
+  rsDevice2 = 'Discret registers.';
+  rsDevice3 = 'Discret registers - Quantity.';
+  rsDevice4 = 'Discret registers.';
+  rsDevice5 = 'Coil registers.';
+  rsDevice6 = 'Input registers.';
+  rsDevice7 = 'Holding registers.';
 
 implementation
 

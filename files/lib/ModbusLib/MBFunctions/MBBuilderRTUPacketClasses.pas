@@ -260,7 +260,7 @@ uses SysUtils,
 
 procedure TBuilderMBF1Request.Build;
 begin
-  FLenPacket:=sizeof(TMBF1Request);
+  FLenPacket := sizeof(TMBF1Request);
   GetPacketMem;
   PMBF1Request(FPacket)^.Header.DeviceAddress:=FDeviceAddress;
   PMBF1Request(FPacket)^.Header.FunctionCode:=FFunctionNum;

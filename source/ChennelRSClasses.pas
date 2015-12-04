@@ -273,7 +273,7 @@ begin
    end;
 
    FAnswBit.DeviceAddress   := FRequestReader.DeviceAddress;
-   FAnswBit.FunctionNum     := FRequestReader.FunctionCode;
+   FAnswBit.FunctionNum     := TMBFunctionsEnum(FRequestReader.FunctionCode);
    FAnswBit.StartingAddress := swap(TempStartAddr);
    FAnswBit.Quantity        := swap(TempQuantity);
    FAnswBit.BitData         := TempBits;
@@ -287,15 +287,69 @@ begin
   TempPackDataSize := FAnswBit.LenPacket;
   try
    TempRes := FCOMPort.WriteData(TempPackData^,TempPackDataSize);
+   if TempRes = -1 then
+    begin
+     SendLogMessage(llError,'ResponseF1','Ошибка отправки ответа');
+    end;
   finally
-   Freemem(TempPackData);
+   if Assigned(TempPackData) then Freemem(TempPackData);
   end;
-
 end;
 
 procedure TChennelRSThread.ResponseF2(ADev : TMBDevice);
+var TempPackData     : Pointer;
+    TempPackDataSize : Cardinal;
+    TempStartAddr    : Word;
+    TempQuantity     : Word;
+    TempBits         : TBits;
+    TempRes          : Integer;
 begin
+  TempBits := nil;
+  TempPackData := nil;
 
+  TempPackData := FRequestReader.GetPacketData(TempPackDataSize);
+
+  if not Assigned(TempPackData) then Exit;
+
+  TempStartAddr := swap(PMBF1_6FRequestData(TempPackData)^.StartingAddress);
+  TempQuantity  := swap(PMBF1_6FRequestData(TempPackData)^.Quantity);
+
+  if Assigned(TempPackData) then Freemem(TempPackData);
+
+  try
+   try
+    TempBits := ADev.GetDiscretRegValues(TempStartAddr,TempQuantity);
+   except
+    on E : Exception do
+     begin
+      SendLogMessage(llError,rsChanRS1, Format('Порт %d. Ошибка получения значений Discret регистров(%d:%d:%d): %s',[FCOMPort.PortNumber,FRequestReader.DeviceAddress, TempStartAddr,TempQuantity,E.Message]));
+      SendErrorMsg(FRequestReader.DeviceAddress,FRequestReader.FunctionCode,ERR_MB_SLAVE_DEVICE_FAILURE - ERR_MB_ERR_CUSTOM);
+      Exit;
+     end;
+   end;
+
+   FAnswBit.DeviceAddress   := FRequestReader.DeviceAddress;
+   FAnswBit.FunctionNum     := TMBFunctionsEnum(FRequestReader.FunctionCode);
+   FAnswBit.StartingAddress := swap(TempStartAddr);
+   FAnswBit.Quantity        := swap(TempQuantity);
+   FAnswBit.BitData         := TempBits;
+
+  finally
+   if Assigned(TempBits) then FreeAndNil(TempBits);
+  end;
+
+  FAnswBit.Build;
+  TempPackData     := FAnswBit.Packet;
+  TempPackDataSize := FAnswBit.LenPacket;
+  try
+   TempRes := FCOMPort.WriteData(TempPackData^,TempPackDataSize);
+   if TempRes = -1 then
+    begin
+     SendLogMessage(llError,'ResponseF2','Ошибка отправки ответа');
+    end;
+  finally
+   if Assigned(TempPackData) then Freemem(TempPackData);
+  end;
 end;
 
 procedure TChennelRSThread.ResponseF3(ADev : TMBDevice);
@@ -352,8 +406,11 @@ begin
 
   TempLen  := FAnswError.LenPacket;
   try
-   TempRes := FCOMPort.WriteData(TempPack);
-
+   TempRes := FCOMPort.WriteData(TempPack,TempLen);
+   if TempRes = -1 then
+    begin
+     SendLogMessage(llError,'SendErrorMsg','Ошибка записи пакета в порт.');
+    end;
   finally
    Freemem(TempPack);
   end;

@@ -105,3 +105,5 @@
 /CRC16Func.ppu
 /MBRequestReaderRTUClasses.o
 /MBRequestReaderRTUClasses.ppu
+/MBBuilderRTUAnswerPacketClasses.o
+/MBBuilderRTUAnswerPacketClasses.ppu

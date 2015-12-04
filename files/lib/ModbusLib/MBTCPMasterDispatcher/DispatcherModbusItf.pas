@@ -6,6 +6,7 @@ interface
 
 uses MBDefine;
 
+{
 const
   ER_SLAVE_ANSVER_TIMEOUT   = 90000;
   ER_SLAVE_ANSVER_NODATA    = 90001;
@@ -13,10 +14,10 @@ const
   ER_SLAVE_ANSVER_WRITEDATA = 90003;
   ER_SLAVE_CONNECT_BROKEN   = 90004;
   ER_SLAVE_SENT_NOT_FULL    = 90005;
+}
 
 type
 
-  TMBDispEventEnum = (mdeeConnect,mdeeDisconnect,mdeeSend,mdeeReceive,mdeeSocketError,mdeeMBError);
   TMBDispEventEnumStringArray = array [TMBDispEventEnum] of string;
 
 const
