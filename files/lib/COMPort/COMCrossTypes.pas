@@ -839,7 +839,8 @@ var TempCount : Integer;
     TempWaiteRes : DWORD;
     {$ENDIF}
 begin
-  Result := -1;
+  Result   := -1;
+  TempBuff := 0;
   if not Active then
    begin
     SetLastError(ErrPortNotOpen,'TNPCCustomCOMPort.ReadData(1)');  //-1
@@ -1284,6 +1285,7 @@ end;
 function TNPCCustomCOMPort.DCBToTermIOs: Termios;
 var x : Cardinal;
 begin
+ Result.c_cflag := 0;
  FillByte(Result, SizeOf(Termios), 0);
 
  FillByte(FPortParams, SizeOf(Termios), 0);

@@ -31,7 +31,7 @@ type
     procedure FreePacket; virtual;
     procedure CopyPacket(Buff : Pointer; BuffSize : Cardinal);
   public
-    constructor Create(AOwner : TComponent); virtual;
+    constructor Create(AOwner : TComponent); override;
     destructor  Destroy; override;
     function  GetPacketData(out DataSize : Cardinal): Pointer; virtual; abstract;
     procedure RequestRead(Packet : Pointer; PacketSize : Cardinal); virtual;  abstract;

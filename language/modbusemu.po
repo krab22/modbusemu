@@ -1,6 +1,400 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
+#: exceptionsresstrings.rsexceptxlmnoattr
+msgid "%s Ð¢ÐµÐ³ %s. ÐÑÑÑÑÑÑÐ²ÑÐµÑ Ð¾Ð±ÑÐ·Ð°ÑÐµÐ»ÑÐ½ÑÐ¹ Ð°ÑÑÐ¸Ð±ÑÑ %s"
+msgstr ""
+
+#: exceptionsresstrings.rsexceptxlmnonode
+msgid "%s Ð¢ÐµÐ³ %s Ð¾ÑÑÑÑÑÑÐ²ÑÐµÑ Ð² Ð´Ð¾ÐºÑÐ¼ÐµÐ½ÑÐµ"
+msgstr ""
+
+#: exceptionsresstrings.rsexceptxmlattrval
+msgid "%s Ð¢ÐµÐ³ %s. ÐÑÑÐ¸Ð±ÑÑ %s Ð¸Ð¼ÐµÐµÑ Ð½ÐµÐ´Ð¾Ð¿ÑÑÑÐ¸Ð¼Ð¾Ðµ Ð·Ð½Ð°ÑÐµÐ½Ð¸Ðµ %s"
+msgstr ""
+
+#: exceptionsresstrings.rsexceptxmlnotassigned
+msgid "ÐÐ±ÑÐµÐºÑ XML Ð´Ð¾ÐºÑÐ¼ÐµÐ½ÑÐ° Ð½Ðµ Ð·Ð°Ð´Ð°Ð½."
+msgstr ""
+
+#: exceptionsresstrings.rsnoerror
+msgid "ÐÐµÑ Ð¾ÑÐ¸Ð±ÐºÐ¸."
+msgstr ""
+
+#: exceptionsresstrings.rs_master_buff_not_assignet
+msgid "ÐÐµÑÐµÐ´Ð°Ð½ Ð¿ÑÑÑÐ¾Ð¹ Ð±ÑÑÐµÑ."
+msgstr ""
+
+#: exceptionsresstrings.rs_master_crc
+msgid "ÐÑÐ¸Ð±ÐºÐ° ÑÐ°ÑÑÐµÑÐ° CRC16 Ð¿Ð¾Ð»ÑÑÐµÐ½Ð½Ð¾Ð³Ð¾ Ð¿Ð°ÐºÐµÑÐ°."
+msgstr ""
+
+#: exceptionsresstrings.rs_master_device_address
+msgid "ÐÐ°ÐºÐµÑ Ð¿ÑÐµÐ´Ð½Ð°Ð·Ð½Ð°ÑÐµÐ½ Ð´ÑÑÐ³Ð¾Ð¼Ñ ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ñ."
+msgstr ""
+
+#: exceptionsresstrings.rs_master_f3_len
+msgid "ÐÐµÐ²ÐµÑÐ½Ð°Ñ Ð´Ð»Ð¸Ð½Ð° Ð¿Ð°ÐºÐµÑÐ°."
+msgstr ""
+
+#: exceptionsresstrings.rs_master_f72_chkrkey
+msgid "ÐÐ»ÑÑÑ Ð¿ÐµÑÐµÐ´Ð°Ð½Ð½ÑÐ¹ Ð² Ð¾ÑÐ²ÐµÑÐµ Ð½Ðµ ÑÐ¾Ð¾ÑÐ²ÐµÑÑÑÐ²ÑÐµÑ Ð¾Ð¶Ð¸Ð´Ð°ÐµÐ¼Ð¾Ð¼Ñ."
+msgstr ""
+
+#: exceptionsresstrings.rs_master_f72_crc
+msgid "ÐÑÐ¸Ð±ÐºÐ° CRC Ð±Ð»Ð¾ÐºÐ° Ð´Ð°Ð½Ð½ÑÑ."
+msgstr ""
+
+#: exceptionsresstrings.rs_master_f72_quantity
+msgid "ÐÐ¾Ð»Ð¸ÑÐµÑÑÐ²Ð¾ ÑÐµÐ³Ð¸ÑÑÑÐ¾Ð² Ð² Ð¾ÑÐ²ÐµÑÐµ Ð²ÑÑÐ¾Ð´Ð¸Ñ Ð·Ð° Ð´Ð¾Ð¿ÑÑÑÐ¸Ð¼ÑÐ¹ Ð´Ð°Ð¿Ð°Ð·Ð¾Ð½."
+msgstr ""
+
+#: exceptionsresstrings.rs_master_fifo_count
+msgid "ÐÐ¾Ð»Ð¸ÑÐµÑÑÐ²Ð¾ FIFO ÑÐµÐ³Ð¸ÑÑÑÐ¾Ð² Ð¿ÑÐµÐ²ÑÑÐ°ÐµÑ Ð´Ð¾Ð¿ÑÑÑÐ¸Ð¼Ð¾Ðµ."
+msgstr ""
+
+#: exceptionsresstrings.rs_master_function_code
+msgid "ÐÐµÐ²ÐµÑÐ½ÑÐ¹ ÐºÐ¾Ð´ ÑÑÐ½ÐºÑÐ¸Ð¸ Ð² Ð¾ÑÐ²ÐµÑÐ½Ð¾Ð¼ ÑÐ¾Ð¾Ð±ÑÐµÐ½Ð¸Ð¸."
+msgstr ""
+
+#: exceptionsresstrings.rs_master_get_memory
+msgid "Ð¡Ð¸ÑÑÐµÐ¼Ð½Ð°Ñ Ð¾ÑÐ¸Ð±ÐºÐ°.  ÐÐ¾Ð´ Ð¾ÑÐ¸Ð±ÐºÐ¸: %d. - %s"
+msgstr ""
+
+#: exceptionsresstrings.rs_master_mei
+msgid "Ð¤ÑÐ½ÐºÑÐ¸Ñ 43. ÐÐ°Ð½Ð½ÑÐ¹ MEI Ð½Ðµ Ð¿Ð¾Ð´Ð´ÐµÑÐ¶Ð¸Ð²Ð°ÐµÑÑÑ."
+msgstr ""
+
+#: exceptionsresstrings.rs_master_morefollows
+msgid "ÐÐµÐ´Ð¾Ð¿ÑÑÑÐ¸Ð¼Ð¾Ðµ Ð·Ð½Ð°ÑÐµÐ½Ð¸Ðµ MoreFollows."
+msgstr ""
+
+#: exceptionsresstrings.rs_master_quantity
+msgid "ÐÐ¾Ð»Ð¸ÑÐµÑÑÐ²Ð¾ Ð·Ð°Ð¿Ð¸ÑÐ°Ð½Ð½ÑÑ ÑÐµÐ³Ð¸ÑÑÑÐ¾Ð² Ð¿ÑÐµÐ²ÑÑÐ°ÐµÑ Ð´Ð¾Ð¿ÑÑÑÐ¸Ð¼Ð¾Ðµ."
+msgstr ""
+
+#: exceptionsresstrings.rs_master_rdic
+msgid "ÐÐ°Ð½Ð½ÑÐ¹ ÐºÐ¾Ð´ ÑÑÐµÐ½Ð¸Ñ ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð° Ð½Ðµ ÑÐµÐ°Ð»Ð¸Ð·Ð¾Ð²Ð°Ð½."
+msgstr ""
+
+#: exceptionsresstrings.rs_master_word_read
+msgid "ÐÐµÑÐµÐ´Ð°Ð½Ð¾ Ð½Ðµ ÑÐµÑÐ½Ð¾Ðµ ÐºÐ¾Ð»Ð¸ÑÐµÑÑÐ²Ð¾ Ð±Ð°Ð¹Ñ."
+msgstr ""
+
+#: exceptionsresstrings.rs_mb_acknowledge
+msgid "ÐÐ°Ð¿ÑÐ¾Ñ Ð¿ÑÐ¸Ð½ÑÑ. ÐÑÐ¿Ð¾Ð»Ð½ÑÐµÑÑÑ Ð´Ð»Ð¸ÑÐµÐ»ÑÐ½Ð°Ñ Ð¾Ð¿ÐµÑÐ°ÑÐ¸Ñ."
+msgstr ""
+
+#: exceptionsresstrings.rs_mb_err_custom
+msgid "ÐÑÐ¸Ð±ÐºÐ° Modbus: %s"
+msgstr ""
+
+#: exceptionsresstrings.rs_mb_gatway_path_unavailable
+msgid "ÐÑÐ¸Ð±ÐºÐ° Ð¼Ð°ÑÑÑÑÑÐ¸Ð·Ð°ÑÐ¸Ð¸."
+msgstr ""
+
+#: exceptionsresstrings.rs_mb_gatway_target_device_failed_respond
+msgid "ÐÐ°Ð¿ÑÐ°ÑÐ¸Ð²Ð°ÐµÐ¼Ð¾Ðµ ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð¾ Ð½Ðµ Ð¾ÑÐ²ÐµÑÐ¸Ð»Ð¾."
+msgstr ""
+
+#: exceptionsresstrings.rs_mb_illegal_data_address
+msgid "ÐÐµÐ´Ð¾Ð¿ÑÑÑÐ¸Ð¼ÑÐ¹ Ð°Ð´ÑÐµÑ Ð´Ð°Ð½Ð½ÑÑ, Ð¿Ð¾Ð»ÑÑÐµÐ½Ð½ÑÐ¹ Ð² Ð·Ð°Ð¿ÑÐ¾ÑÐµ."
+msgstr ""
+
+#: exceptionsresstrings.rs_mb_illegal_data_value
+msgid "ÐÐµÐ´Ð¾Ð¿ÑÑÑÐ¸Ð¼ÑÐµ Ð·Ð½Ð°ÑÐµÐ½Ð¸Ñ, Ð¿Ð¾Ð»ÑÑÐµÐ½Ð½ÑÐµ Ð² Ð¿Ð¾Ð»Ðµ Ð´Ð°Ð½Ð½ÑÑ Ð·Ð°Ð¿ÑÐ¾ÑÐ°."
+msgstr ""
+
+#: exceptionsresstrings.rs_mb_illegal_function
+msgid "ÐÐµÐ´Ð¾Ð¿ÑÑÑÐ¸Ð¼ÑÐ¹ ÑÐ¸Ð¿ ÑÑÐ½ÐºÑÐ¸Ð¸, Ð¿Ð¾Ð»ÑÑÐµÐ½Ð½ÑÐ¹ Ð² Ð·Ð°Ð¿ÑÐ¾ÑÐµ."
+msgstr ""
+
+#: exceptionsresstrings.rs_mb_memory_parity_error
+msgid "ÐÑÐ¸ ÑÑÐµÐ½Ð¸Ð¸ ÑÐ°Ð¹Ð»Ð° Ð¾Ð±Ð½Ð°ÑÑÐ¶ÐµÐ½Ð° Ð¾ÑÐ¸Ð±ÐºÐ° ÑÐµÑÐ½Ð¾ÑÑÐ¸ Ð¿Ð°Ð¼ÑÑÐ¸."
+msgstr ""
+
+#: exceptionsresstrings.rs_mb_slave_device_busy
+msgid "Ð£ÑÑÑÐ¾Ð¹ÑÑÐ²Ð¾ Ð·Ð°Ð½ÑÑÐ¾. ÐÐ¾Ð²ÑÐ¾ÑÐ¸ÑÐµ Ð·Ð°Ð¿ÑÐ¾Ñ Ð¿Ð¾Ð·Ð¶Ðµ."
+msgstr ""
+
+#: exceptionsresstrings.rs_mb_slave_device_failure
+msgid "ÐÐµÑÑÑÑÐ°Ð½Ð¸Ð¼Ð°Ñ Ð¾ÑÐ¸Ð±ÐºÐ° Ð¿ÑÐ¸ Ð¾Ð±ÑÐ°Ð±Ð¾ÑÐºÐµ ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð¾Ð¼ Ð¿Ð¾Ð»ÑÑÐµÐ½Ð½Ð¾Ð³Ð¾ Ð·Ð°Ð¿ÑÐ¾ÑÐ°."
+msgstr ""
+
+#: exceptionsresstrings.rs_mb_uninspacted
+msgid "ÐÐµÑÐ°ÑÐ¿Ð¾Ð·Ð½Ð°Ð½Ð½Ð°Ñ Ð¾ÑÐ¸Ð±ÐºÐ°."
+msgstr ""
+
+#: modbusemuresstr.rsaddchennel
+msgid "ÐÐ¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ ÐºÐ°Ð½Ð°Ð»Ð°"
+msgstr ""
+
+#: modbusemuresstr.rsaddchennel1
+msgid "ÐÐ¾Ð±Ð°Ð²Ð»ÐµÐ½ ÐºÐ°Ð½Ð°Ð»: %s"
+msgstr ""
+
+#: modbusemuresstr.rschanrs1
+msgid "ÐÐ¾ÑÐ¾Ðº RS ÐºÐ°Ð½Ð°Ð»Ð°"
+msgstr ""
+
+#: modbusemuresstr.rschantcp1
+msgid "ÐÐ¾ÑÐ¾Ðº TCP ÐºÐ°Ð½Ð°Ð»Ð°"
+msgstr ""
+
+#: modbusemuresstr.rschanthreadclose
+msgid "Ð¤Ð¸Ð½Ð°Ð»Ð¸Ð·Ð°ÑÐ¸Ñ. ÐÑÐ¸Ð±ÐºÐ°: %s"
+msgstr ""
+
+#: modbusemuresstr.rschanthreadini
+msgid "ÐÐ½Ð¸ÑÐ¸Ð°Ð»Ð¸Ð·Ð°ÑÐ¸Ñ. ÐÑÐ¸Ð±ÐºÐ°: %s"
+msgstr ""
+
+#: modbusemuresstr.rsclientconnect1
+msgid "ÐÐ°Ð½Ð°Ð»: %s:%d. ÐÑÐ¸ÑÐ¾ÐµÐ´ÐµÐ½Ð¸Ð»ÑÑ ÐºÐ»Ð¸ÐµÐ½Ñ: %s:%d"
+msgstr ""
+
+#: modbusemuresstr.rsclientdisconnect1
+msgid "ÐÐ°Ð½Ð°Ð»: %s:%d. ÐÑÑÐ¾ÐµÐ´ÐµÐ½Ð¸Ð»ÑÑ ÐºÐ»Ð¸ÐµÐ½Ñ: %s:%d"
+msgstr ""
+
+#: modbusemuresstr.rsclosechennel1
+msgid "ÐÐ°ÐºÑÑÑÐ¸Ðµ ÐºÐ°Ð½Ð°Ð»Ð°. ÐÐµ Ð²ÑÐ±ÑÐ°Ð½ ÐºÐ°Ð½Ð°Ð» Ð´Ð»Ñ Ð·Ð°ÐºÑÑÑÐ¸Ñ."
+msgstr ""
+
+#: modbusemuresstr.rsclosechennel2
+msgid "ÐÐ°ÐºÑÑÑÐ¸Ðµ ÐºÐ°Ð½Ð°Ð»Ð°"
+msgstr ""
+
+#: modbusemuresstr.rsclosechennel3
+msgid "ÐÐµ ÑÐ´Ð°Ð»Ð¾ÑÑ Ð·Ð°ÐºÑÑÑÑ ÐºÐ°Ð½Ð°Ð»: %s"
+msgstr ""
+
+#: modbusemuresstr.rsclosechennel4
+msgid "ÐÐ°ÐºÑÑÐ»Ð¸ ÐºÐ°Ð½Ð°Ð» ÐºÐ°Ð½Ð°Ð»: %s"
+msgstr ""
+
+#: modbusemuresstr.rsclosechennelall1
+msgid "ÐÐ°ÐºÑÑÑÐ¸Ðµ Ð²ÑÐµÑ ÐºÐ°Ð½Ð°Ð»Ð¾Ð²"
+msgstr ""
+
+#: modbusemuresstr.rsclosechennelall2
+msgid "ÐÑÐµ ÐºÐ°Ð½Ð°Ð»Ñ Ð·Ð°ÐºÑÑÑÑ"
+msgstr ""
+
+#: modbusemuresstr.rsdelchannel1
+msgid "Ð£Ð´Ð°Ð»ÐµÐ½Ð¸Ðµ ÐºÐ°Ð½Ð°Ð»Ð°. ÐÐµ Ð²ÑÐ±ÑÐ°Ð½ ÐºÐ°Ð½Ð°Ð» Ð´Ð»Ñ ÑÐ´Ð°Ð»ÐµÐ½Ð¸Ñ."
+msgstr ""
+
+#: modbusemuresstr.rsdelchannel2
+msgid "Ð£Ð´Ð°Ð»ÐµÐ½Ð¸Ðµ ÐºÐ°Ð½Ð°Ð»Ð°"
+msgstr ""
+
+#: modbusemuresstr.rsdelchannel3
+msgid "Ð£Ð´Ð°Ð»ÐµÐ½ ÐºÐ°Ð½Ð°Ð»: %s"
+msgstr ""
+
+#: modbusemuresstr.rsdelchennelall1
+msgid "Ð£Ð´Ð°Ð»ÐµÐ½Ð¸Ðµ Ð²ÑÐµÑ ÐºÐ°Ð½Ð°Ð»Ð¾Ð²"
+msgstr ""
+
+#: modbusemuresstr.rsdelchennelall2
+msgid "ÐÑÐµ ÐºÐ°Ð½Ð°Ð»Ñ ÑÐ´Ð°Ð»ÐµÐ½Ñ"
+msgstr ""
+
+#: modbusemuresstr.rsdevadd1
+msgid ""
+"ÐÑÐ¸Ð±ÐºÐ° Ð²Ð²Ð¾Ð´Ð° Ð½Ð¾Ð¼ÐµÑÐ° ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð°. ÐÐ°Ð¼Ð¸ Ð²Ð²ÐµÐ´ÐµÐ½ Ð½ÐµÐºÐ¾ÑÑÐµÐºÑÐ½ÑÐ¹ Ð½Ð¾Ð¼ÐµÑ ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð° - %s\n"
+"ÐÐ¾Ð¼ÐµÑ Ð´Ð¾Ð»Ð¶ÐµÐ½ Ð±ÑÑÑ ÑÐ¸ÑÐ»Ð¾Ð¼ Ð¾Ñ 1 Ð´Ð¾ 255\n"
+msgstr ""
+
+#: modbusemuresstr.rsdevadd2
+msgid "Ð£ÑÑÑÐ¾Ð¹ÑÑÐ²Ð¾: %d"
+msgstr ""
+
+#: modbusemuresstr.rsfrmaddtcpchannel1
+msgid "ÐÐ¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ ÑÐµÑÐµÐ²Ð¾Ð³Ð¾ ÐºÐ°Ð½Ð°Ð»Ð°"
+msgstr ""
+
+#: modbusemuresstr.rsfrmaddtcpchannel2
+msgid "ÐÑÐµ Ð¿Ð¾Ð»Ñ Ð´Ð¾Ð»Ð¶Ð½Ñ Ð±ÑÑÑ Ð·Ð°Ð¿Ð¾Ð»Ð½ÐµÐ½Ñ."
+msgstr ""
+
+#: modbusemuresstr.rsfrmaddtcpchannel3
+msgid "ÐÑÐ¸Ð±ÐºÐ° Ð²Ð¾ Ð²Ð²ÐµÐ´ÐµÐ½Ð½Ð¾Ð¼ Ð°Ð´ÑÐµÑÐµ: %s"
+msgstr ""
+
+#: modbusemuresstr.rsfrmaddtcpchannel4
+msgid "ÐÑ ÑÐ¾Ð²ÐµÑÑÐ¸Ð»Ð¸ Ð¾ÑÐ¸Ð±ÐºÑ Ð¿ÑÐ¸ Ð²Ð²Ð¾Ð´Ðµ Ð°Ð´ÑÐµÑÐ° ÐºÐ°Ð½Ð°Ð»Ð°: %s. ÐÐ¾Ð»Ð¶ÐµÐ½ Ð±ÑÑÑ Ð²Ð²ÐµÐ´ÐµÐ½ ÐºÐ¾ÑÑÐµÐºÑÐ½ÑÐ¹ IP-Ð°Ð´ÑÐµÑ."
+msgstr ""
+
+#: modbusemuresstr.rsfrmaddtcpchannel5
+msgid "ÐÑÐ¸Ð±ÐºÐ° Ð²Ð¾ Ð²Ð²ÐµÐ´ÐµÐ½Ð½Ð¾Ð¼ Ð½Ð¾Ð¼ÐµÑÐµ Ð¿Ð¾ÑÑÐ°: %s"
+msgstr ""
+
+#: modbusemuresstr.rsfrmaddtcpchannel6
+msgid "ÐÑ ÑÐ¾Ð²ÐµÑÑÐ¸Ð»Ð¸ Ð¾ÑÐ¸Ð±ÐºÑ Ð¿ÑÐ¸ Ð²Ð²Ð¾Ð´Ðµ Ð½Ð¾Ð¼ÐµÑÐµ Ð¿Ð¾ÑÑÐ° ÐºÐ°Ð½Ð°Ð»Ð°: %s. ÐÐ¾Ð»Ð¶ÐµÐ½ Ð±ÑÑÑ Ð²Ð²ÐµÐ´ÐµÐ½ ÐºÐ¾ÑÑÐµÐºÑÐ½ÑÐ¹ Ð½Ð¾Ð¼ÐµÑ Ð¿Ð¾ÑÑÐ° Ð² Ð´Ð¸Ð°Ð¿Ð°Ð·Ð¾Ð½Ðµ Ð¾Ñ 1 Ð´Ð¾ 65535."
+msgstr ""
+
+#: modbusemuresstr.rsfrmaddtcpchannel7
+msgid "ÐÐ°Ð½Ð°Ð» Ñ ÑÐºÐ°Ð·Ð°Ð½Ð½ÑÐ¼Ð¸ Ð¿Ð°ÑÐ°Ð¼ÐµÑÑÐ°Ð¼Ð¸ (%s:%s:%s) ÑÐ¶Ðµ ÑÑÑÐµÑÑÐ²ÑÐµÑ."
+msgstr ""
+
+#: modbusemuresstr.rsfrmaddtcpchannel8
+msgid "ÐÐ¾Ð±Ð°Ð²Ð¸Ð»Ð¸ ÑÐµÑÐµÐ²Ð¾Ð¹ ÐºÐ°Ð½Ð°Ð»: %s:%s:%d"
+msgstr ""
+
+#: modbusemuresstr.rsfrmaddtcpchannel9
+msgid "ÐÑÐ¸ Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ð¸ ÐºÐ°Ð½Ð°Ð»Ð° Ð¿ÑÐ¾Ð¸Ð·Ð¾ÑÐ»Ð° Ð¾ÑÐ¸Ð±ÐºÐ°: %s"
+msgstr ""
+
+#: modbusemuresstr.rsonclientreceivedataproc1
+msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. ÐÑÐ¸Ð±ÐºÐ° ÑÐ°Ð·Ð±Ð¾ÑÐ° Ð¿Ð°ÐºÐµÑÐ°: %s"
+msgstr ""
+
+#: modbusemuresstr.rsonclientreceivedataproc2
+msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. ÐÑÐ¸Ð±ÐºÐ° Ð¿Ð¾Ð»ÑÑÐµÐ½Ð¸Ñ ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð°: %s"
+msgstr ""
+
+#: modbusemuresstr.rsonclientreceivedataproc3
+msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. ÐÐ°Ð¿ÑÐ°ÑÐ¸Ð²Ð°ÐµÑÑÑ Ð½ÐµÑÑÑÐµÑÑÐ²ÑÑÑÐµÐµ ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð¾ - %d"
+msgstr ""
+
+#: modbusemuresstr.rsonclientreceivedataproc4
+msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. ÐÐ°Ð¿ÑÐ°ÑÐ¸Ð²Ð°ÐµÐ¼Ð°Ñ ÑÑÐ½ÐºÑÐ¸Ñ(%d) Ð½Ðµ Ð¿Ð¾Ð´Ð´ÐµÑÐ¶Ð¸Ð²Ð°ÐµÑÑÑ ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð¾Ð¼ %d"
+msgstr ""
+
+#: modbusemuresstr.rsonserverreadproc1
+msgid "ÐÑÐ¸Ð±ÐºÐ° ÑÑÐµÐ½Ð¸Ñ Ð¸Ð· Ð¿Ð¾ÑÑÐ°: %d - %s"
+msgstr ""
+
+#: modbusemuresstr.rsonserverreadproc2
+msgid "ÐÑÐ¸Ð±ÐºÐ° ÑÐ°Ð·Ð±Ð¾ÑÐ° Ð¿Ð°ÐºÐµÑÐ°: %s"
+msgstr ""
+
+#: modbusemuresstr.rsonserverreadproc3
+msgid "ÐÐ¾ÑÑ â%d. ÐÑÐ¸Ð±ÐºÐ° Ð¿Ð¾Ð»ÑÑÐµÐ½Ð¸Ñ ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð°: %s"
+msgstr ""
+
+#: modbusemuresstr.rsonserverreadproc4
+msgid "ÐÐ¾ÑÑ â%d. ÐÐ°Ð¿ÑÐ°ÑÐ¸Ð²Ð°ÐµÑÑÑ Ð½ÐµÑÑÑÐµÑÑÐ²ÑÑÑÐµÐµ ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð¾ - %d"
+msgstr ""
+
+#: modbusemuresstr.rsonserverreadproc5
+msgid "ÐÐ¾ÑÑ %d. ÐÐ°Ð¿ÑÐ°ÑÐ¸Ð²Ð°ÐµÐ¼Ð°Ñ ÑÑÐ½ÐºÑÐ¸Ñ(%d) Ð½Ðµ Ð¿Ð¾Ð´Ð´ÐµÑÐ¶Ð¸Ð²Ð°ÐµÑÑÑ ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð¾Ð¼ %d"
+msgstr ""
+
+#: modbusemuresstr.rsopenchennel1
+msgid "ÐÑÐºÑÑÑÐ¸Ðµ ÐºÐ°Ð½Ð°Ð»Ð°. ÐÐµ Ð²ÑÐ±ÑÐ°Ð½ ÐºÐ°Ð½Ð°Ð» Ð´Ð»Ñ Ð¾ÑÐºÑÑÑÐ¸Ñ."
+msgstr ""
+
+#: modbusemuresstr.rsopenchennel2
+msgid "ÐÑÐºÑÑÑÐ¸Ðµ ÐºÐ°Ð½Ð°Ð»Ð°"
+msgstr ""
+
+#: modbusemuresstr.rsopenchennel3
+msgid "ÐÑÐºÑÑÑ ÐºÐ°Ð½Ð°Ð»: %s"
+msgstr ""
+
+#: modbusemuresstr.rsopenchennel4
+msgid "ÐÐµ ÑÐ´Ð°Ð»Ð¾ÑÑ Ð¾ÑÐºÑÑÑÑ ÐºÐ°Ð½Ð°Ð»: %s"
+msgstr ""
+
+#: modbusemuresstr.rsopenchennelall1
+msgid "ÐÑÐºÑÑÑÐ¸Ðµ Ð²ÑÐµÑ ÐºÐ°Ð½Ð°Ð»Ð¾Ð²"
+msgstr ""
+
+#: modbusemuresstr.rsopenchennelall2
+msgid "ÐÑÐµ ÐºÐ°Ð½Ð°Ð»Ñ Ð¾ÑÐºÑÑÑÑ"
+msgstr ""
+
+#: modbusemuresstr.rsresponsef15_1
+msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. ÐÐ¾Ð¿ÑÑÐºÐ° Ð²ÑÐ·Ð¾Ð²Ð° Ð½ÐµÑÐµÐ°Ð»Ð¸Ð·Ð¾Ð²Ð°Ð½Ð½Ð¾Ð¹ ÑÑÐ½ÐºÑÐ¸Ð¸ 15"
+msgstr ""
+
+#: modbusemuresstr.rsresponsef16_1
+msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. ÐÐ¾Ð¿ÑÑÐºÐ° Ð²ÑÐ·Ð¾Ð²Ð° Ð½ÐµÑÐµÐ°Ð»Ð¸Ð·Ð¾Ð²Ð°Ð½Ð½Ð¾Ð¹ ÑÑÐ½ÐºÑÐ¸Ð¸ 16"
+msgstr ""
+
+#: modbusemuresstr.rsresponsef17_1
+msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. ÐÐ¾Ð¿ÑÑÐºÐ° Ð²ÑÐ·Ð¾Ð²Ð° Ð½ÐµÑÐµÐ°Ð»Ð¸Ð·Ð¾Ð²Ð°Ð½Ð½Ð¾Ð¹ ÑÑÐ½ÐºÑÐ¸Ð¸ 17"
+msgstr ""
+
+#: modbusemuresstr.rsresponsef1_1
+msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. ÐÑÐ¸Ð±ÐºÐ° Ð¿Ð¾Ð»ÑÑÐµÐ½Ð¸Ñ Ð·Ð½Ð°ÑÐµÐ½Ð¸Ð¹ Coil ÑÐµÐ³Ð¸ÑÑÑÐ¾Ð²(%d:%d:%d): %s"
+msgstr ""
+
+#: modbusemuresstr.rsresponsef1_2
+msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. Read Coils. ÐÐµ ÑÐ´Ð°Ð»Ð¾ÑÑ Ð¾ÑÐ¿ÑÐ°Ð²Ð¸ÑÑ Ð¾ÑÐ²ÐµÑ Ð½Ð° Ð·Ð°Ð¿ÑÐ¾Ñ."
+msgstr ""
+
+#: modbusemuresstr.rsresponsef1_3
+msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. Read Coils. ÐÑÐ¿ÑÐ°Ð²Ð¸Ð»Ð¸ Ð¾ÑÐ²ÐµÑ Ð½Ð° Ð·Ð°Ð¿ÑÐ¾Ñ ÐºÐ»Ð¸ÐµÐ½ÑÐ°."
+msgstr ""
+
+#: modbusemuresstr.rsresponsef2_1
+msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. ÐÑÐ¸Ð±ÐºÐ° Ð¿Ð¾Ð»ÑÑÐµÐ½Ð¸Ñ Ð·Ð½Ð°ÑÐµÐ½Ð¸Ð¹ Discrete ÑÐµÐ³Ð¸ÑÑÑÐ¾Ð²(%d:%d:%d): %s"
+msgstr ""
+
+#: modbusemuresstr.rsresponsef2_2
+msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. Read Discrete. ÐÐµ ÑÐ´Ð°Ð»Ð¾ÑÑ Ð¾ÑÐ¿ÑÐ°Ð²Ð¸ÑÑ Ð¾ÑÐ²ÐµÑ Ð½Ð° Ð·Ð°Ð¿ÑÐ¾Ñ."
+msgstr ""
+
+#: modbusemuresstr.rsresponsef2_3
+msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. Read Discrete. ÐÑÐ¿ÑÐ°Ð²Ð¸Ð»Ð¸ Ð¾ÑÐ²ÐµÑ Ð½Ð° Ð·Ð°Ð¿ÑÐ¾Ñ ÐºÐ»Ð¸ÐµÐ½ÑÐ°."
+msgstr ""
+
+#: modbusemuresstr.rsresponsef3_1
+msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. ÐÑÐ¸Ð±ÐºÐ° Ð¿Ð¾Ð»ÑÑÐµÐ½Ð¸Ñ Ð·Ð½Ð°ÑÐµÐ½Ð¸Ð¹ Holding ÑÐµÐ³Ð¸ÑÑÑÐ¾Ð²(%d:%d:%d): %s"
+msgstr ""
+
+#: modbusemuresstr.rsresponsef3_2
+msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. Read Holding. ÐÐµ ÑÐ´Ð°Ð»Ð¾ÑÑ Ð¾ÑÐ¿ÑÐ°Ð²Ð¸ÑÑ Ð¾ÑÐ²ÐµÑ Ð½Ð° Ð·Ð°Ð¿ÑÐ¾Ñ."
+msgstr ""
+
+#: modbusemuresstr.rsresponsef3_3
+msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. Read Holding. ÐÑÐ¿ÑÐ°Ð²Ð¸Ð»Ð¸ Ð¾ÑÐ²ÐµÑ Ð½Ð° Ð·Ð°Ð¿ÑÐ¾Ñ ÐºÐ»Ð¸ÐµÐ½ÑÐ°."
+msgstr ""
+
+#: modbusemuresstr.rsresponsef4_1
+msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. ÐÑÐ¸Ð±ÐºÐ° Ð¿Ð¾Ð»ÑÑÐµÐ½Ð¸Ñ Ð·Ð½Ð°ÑÐµÐ½Ð¸Ð¹ Input ÑÐµÐ³Ð¸ÑÑÑÐ¾Ð²(%d:%d:%d): %s"
+msgstr ""
+
+#: modbusemuresstr.rsresponsef4_2
+msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. Read Input. ÐÐµ ÑÐ´Ð°Ð»Ð¾ÑÑ Ð¾ÑÐ¿ÑÐ°Ð²Ð¸ÑÑ Ð¾ÑÐ²ÐµÑ Ð½Ð° Ð·Ð°Ð¿ÑÐ¾Ñ."
+msgstr ""
+
+#: modbusemuresstr.rsresponsef4_3
+msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. Read Input. ÐÑÐ¿ÑÐ°Ð²Ð¸Ð»Ð¸ Ð¾ÑÐ²ÐµÑ Ð½Ð° Ð·Ð°Ð¿ÑÐ¾Ñ ÐºÐ»Ð¸ÐµÐ½ÑÐ°."
+msgstr ""
+
+#: modbusemuresstr.rsresponsef5_1
+msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. ÐÑÐ¸Ð±ÐºÐ° Ð·Ð°Ð¿Ð¸ÑÐ¸ Ð·Ð½Ð°ÑÐµÐ½Ð¸Ð¹ Coil ÑÐµÐ³Ð¸ÑÑÑÐ¾Ð²(%d:%d:%d): %s"
+msgstr ""
+
+#: modbusemuresstr.rsresponsef5_2
+msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. Write Coils. ÐÐµ ÑÐ´Ð°Ð»Ð¾ÑÑ Ð¾ÑÐ¿ÑÐ°Ð²Ð¸ÑÑ Ð¾ÑÐ²ÐµÑ Ð½Ð° Ð·Ð°Ð¿ÑÐ¾Ñ."
+msgstr ""
+
+#: modbusemuresstr.rsresponsef5_3
+msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. Write Coils. ÐÑÐ¿ÑÐ°Ð²Ð¸Ð»Ð¸ Ð¾ÑÐ²ÐµÑ Ð½Ð° Ð·Ð°Ð¿ÑÐ¾Ñ ÐºÐ»Ð¸ÐµÐ½ÑÐ°."
+msgstr ""
+
+#: modbusemuresstr.rsresponsef6_1
+msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. ÐÑÐ¸Ð±ÐºÐ° Ð·Ð°Ð¿Ð¸ÑÐ¸ Ð·Ð½Ð°ÑÐµÐ½Ð¸Ð¹ Input ÑÐµÐ³Ð¸ÑÑÑÐ¾Ð²(%d:%d:%d): %s"
+msgstr ""
+
+#: modbusemuresstr.rsresponsef6_2
+msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. Write Input. ÐÐµ ÑÐ´Ð°Ð»Ð¾ÑÑ Ð¾ÑÐ¿ÑÐ°Ð²Ð¸ÑÑ Ð¾ÑÐ²ÐµÑ Ð½Ð° Ð·Ð°Ð¿ÑÐ¾Ñ."
+msgstr ""
+
+#: modbusemuresstr.rsresponsef6_3
+msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. Write Input. ÐÑÐ¿ÑÐ°Ð²Ð¸Ð»Ð¸ Ð¾ÑÐ²ÐµÑ Ð½Ð° Ð·Ð°Ð¿ÑÐ¾Ñ ÐºÐ»Ð¸ÐµÐ½ÑÐ°."
+msgstr ""
+
+#: modbusemuresstr.rssenderrormsg1
+msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. ÐÑÐ¸Ð±ÐºÐ° Ð¾ÑÐ¿ÑÐ°Ð²ÐºÐ¸ Ð¿Ð¾ÑÐ²ÐµÑÐ°: %d"
+msgstr ""
+
 #: tfrmmain.actchanneladd.caption
 msgid "Добавить канал"
 msgstr ""
@@ -30,17 +424,14 @@ msgid "Открыть все каналы"
 msgstr ""
 
 #: tfrmmain.actdevadd.caption
-msgctxt "TFRMMAIN.ACTDEVADD.CAPTION"
 msgid "Добавить устройство"
 msgstr ""
 
 #: tfrmmain.actdevclearlist.caption
-msgctxt "TFRMMAIN.ACTDEVCLEARLIST.CAPTION"
 msgid "Очистить список устройств"
 msgstr ""
 
 #: tfrmmain.actdevdel.caption
-msgctxt "TFRMMAIN.ACTDEVDEL.CAPTION"
 msgid "Удалить устройство"
 msgstr ""
 
@@ -49,17 +440,14 @@ msgid "Просмотреть устройство"
 msgstr ""
 
 #: tfrmmain.actexit.caption
-msgctxt "TFRMMAIN.ACTEXIT.CAPTION"
 msgid "Выход"
 msgstr ""
 
 #: tfrmmain.actfileloadconf.caption
-msgctxt "TFRMMAIN.ACTFILELOADCONF.CAPTION"
 msgid "Загрузить конфигурацию"
 msgstr ""
 
 #: tfrmmain.actfilesaveconf.caption
-msgctxt "TFRMMAIN.ACTFILESAVECONF.CAPTION"
 msgid "Сохранить конфигурацию"
 msgstr ""
 

@@ -20,7 +20,8 @@
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
-      <BuildNr Value="40"/>
+      <BuildNr Value="55"/>
+      <Language Value="0419"/>
       <Attributes pvaDebug="True"/>
       <StringTable ProductVersion=""/>
     </VersionInfo>
@@ -43,7 +44,7 @@
         <PackageName Value="LCL"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="2">
+    <Units Count="4">
       <Unit0>
         <Filename Value="modbusemu.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -55,6 +56,14 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit1>
+      <Unit2>
+        <Filename Value="files/lib/MiscFunctions/ExceptionsResStrings.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="source/ModbusEmuResStr.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit3>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -65,7 +74,7 @@
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
       <Libraries Value="/usr/lib/codetyphon/binLibraries/x86_64-linux/"/>
-      <OtherUnitFiles Value="source;files/lib/CRC16;files/lib/LogUtils;files/lib/ModbusLib;files/lib/ModbusLib/MBFunctions;files/lib/ModbusLib/MBTCPMasterDispatcher;files/lib/SocketUtils;files/lib/COMPort"/>
+      <OtherUnitFiles Value="source;files/lib/CRC16;files/lib/LogUtils;files/lib/ModbusLib;files/lib/ModbusLib/MBFunctions;files/lib/ModbusLib/MBTCPMasterDispatcher;files/lib/SocketUtils;files/lib/COMPort;files/lib/MiscFunctions"/>
       <UnitOutputDirectory Value="dcu/$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <CodeGeneration>

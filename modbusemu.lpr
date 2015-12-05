@@ -7,7 +7,7 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Interfaces,
-  Forms, main;
+  Forms, main, ModbusEmuResStr, ExceptionsResStrings;
 
 {$R *.res}
 

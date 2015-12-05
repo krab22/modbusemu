@@ -62,7 +62,7 @@ type
 implementation
 
 uses LoggerItf, ModbusEmuResStr,
-     MBDefine, MBErrorCode,
+     MBDefine, ExceptionsTypes,
      MBRequestTypes, MBResponseTypes;
 
 { TChennelTCP }

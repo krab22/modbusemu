@@ -27,8 +27,7 @@ var formChenAdd : TformChenAdd;
 implementation
 
 uses {$IFDEF UNIX}formChennelRSLinuxAdd{$ELSE}formChennelRSWindowsAdd{$ENDIF}, formChennelTCPAdd,
-     LoggerLazarusGtkApplication,
-     ModbusEmuResStr;
+     LoggerLazarusGtkApplication;
 
 {$R *.lfm}
 

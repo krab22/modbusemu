@@ -9,8 +9,8 @@ unit MBBuilderPacketClasses;
 
 interface
 
-uses Types, Classes,
-     MBRequestTypes, MBBuilderBase, MBInterfaces;
+uses Classes,
+     MBBuilderBase, MBInterfaces;
 
 const
   cMaxBitRegCount  = 2000;

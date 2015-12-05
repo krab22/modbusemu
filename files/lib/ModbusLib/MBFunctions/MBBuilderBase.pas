@@ -4,7 +4,7 @@ unit MBBuilderBase;
 
 interface
 
-uses Types, Classes,
+uses Classes,
      MBInterfaces, MBDefine;
 
 type

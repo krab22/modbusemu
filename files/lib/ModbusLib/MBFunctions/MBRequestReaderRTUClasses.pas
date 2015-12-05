@@ -60,7 +60,7 @@ begin
   if FPacket = nil then Exit;
   DataSize := FPacketSize-4;
   Result := AllocMem(DataSize);
-  Move(Pointer(Cardinal(FPacket)+2)^,Result^,DataSize);
+  Move(Pointer(PtrUInt(FPacket)+2)^,Result^,DataSize);
 end;
 
 procedure TMBRTURequestReader.InitHeader;
@@ -84,7 +84,7 @@ begin
 
    FDeviceAddress := TempHeader^.DeviceAddress;
    FFunctionCode  := TempHeader^.FunctionCode;
-   FPacketCRC     := Word(Pointer(Cardinal(Packet)+PacketSize-2)^);
+   FPacketCRC     := Word(Pointer(PtrUInt(Packet)+PacketSize-2)^);
 
   except
    on E : Exception do

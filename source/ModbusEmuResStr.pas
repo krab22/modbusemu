@@ -5,6 +5,7 @@ unit ModbusEmuResStr;
 interface
 
 resourcestring
+
  rsAddChennel  = 'Добавление канала';
  rsAddChennel1 = 'Добавлен канал: %s';
 
