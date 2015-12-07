@@ -5,9 +5,12 @@ unit formChennelTCPAdd;
 interface
 
 uses Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
-     MBDeviceClasses;
+     MBDeviceClasses, LoggerItf;
 
 type
+
+  { TfrmChennelTCPAdd }
+
   TfrmChennelTCPAdd = class(TForm)
     btOk      : TButton;
     btCancel  : TButton;
@@ -21,18 +24,19 @@ type
    private
     FChennelList : TStrings;
     FDevArray    : TDeviceArray;
+    FLogger      : IDLogger;
     function IsChannelExist : Boolean;
    public
     property ChennelList : TStrings read FChennelList write FChennelList;
     property DevArray    : TDeviceArray read FDevArray write FDevArray;
+    property Logger      : IDLogger read FLogger write FLogger;
   end;
 
 var frmChennelTCPAdd : TfrmChennelTCPAdd;
 
 implementation
 
-uses LoggerLazarusGtkApplication,
-     ChennelTCPClasses, SocketMisc,
+uses ChennelTCPClasses, SocketMisc,
      ModbusEmuResStr;
 
 {$R *.lfm}
@@ -51,7 +55,7 @@ begin
   except
    on E : Exception do
     begin
-     LoggerObj.debug(rsFrmAddTCPChannel1,Format(rsFrmAddTCPChannel3,[edAddress.Text]));
+     FLogger.debug(rsFrmAddTCPChannel1,Format(rsFrmAddTCPChannel3,[edAddress.Text]));
      raise Exception.CreateFmt(rsFrmAddTCPChannel4,[edAddress.Text]);
     end;
   end;
@@ -60,7 +64,7 @@ begin
   except
    on E : Exception do
     begin
-     LoggerObj.debug(rsFrmAddTCPChannel1,Format(rsFrmAddTCPChannel5,[edPort.Text]));
+     FLogger.debug(rsFrmAddTCPChannel1,Format(rsFrmAddTCPChannel5,[edPort.Text]));
      raise Exception.CreateFmt(rsFrmAddTCPChannel6,[edPort.Text]);
     end;
   end;
@@ -69,6 +73,7 @@ begin
    if IsChannelExist then raise Exception.CreateFmt(rsFrmAddTCPChannel7,[edName.Text,edAddress.Text,edPort.Text]);
 
    TempChen := TChennelTCP.Create;
+   TempChen.Logger      := FLogger;
    TempChen.DeviceArray := FDevArray;
    TempChen.BindAddress := edAddress.Text;
    TempChen.Port        := TempPort;
@@ -76,12 +81,12 @@ begin
 
    Tag := FChennelList.AddObject(edName.Text,TempChen);
 
-   LoggerObj.info(rsFrmAddTCPChannel1,Format(rsFrmAddTCPChannel8,[edName.Text,edAddress.Text,TempPort]));
+   FLogger.info(rsFrmAddTCPChannel1,Format(rsFrmAddTCPChannel8,[edName.Text,edAddress.Text,TempPort]));
 
   except
     on E : Exception do
      begin
-      LoggerObj.error(rsFrmAddTCPChannel1,Format(rsFrmAddTCPChannel9,[E.Message]));
+      FLogger.error(rsFrmAddTCPChannel1,Format(rsFrmAddTCPChannel9,[E.Message]));
       Exit;
      end;
   end;

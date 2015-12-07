@@ -8,7 +8,7 @@
         <Filename Value="modbusemu.lpr"/>
         <IsPartOfProject Value="True"/>
         <CursorPos X="53" Y="10"/>
-        <UsageCount Value="70"/>
+        <UsageCount Value="83"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -17,28 +17,26 @@
         <ComponentName Value="frmMain"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="151"/>
-        <CursorPos X="20" Y="151"/>
-        <UsageCount Value="70"/>
+        <TopLine Value="496"/>
+        <CursorPos X="32" Y="334"/>
+        <UsageCount Value="83"/>
         <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="files/lib/MiscFunctions/ExceptionsResStrings.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="-1"/>
         <CursorPos X="3" Y="9"/>
-        <UsageCount Value="21"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="34"/>
       </Unit2>
       <Unit3>
         <Filename Value="source/ModbusEmuResStr.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="2"/>
-        <CursorPos X="2" Y="8"/>
-        <UsageCount Value="21"/>
+        <TopLine Value="76"/>
+        <CursorPos X="12" Y="111"/>
+        <UsageCount Value="34"/>
         <Loaded Value="True"/>
       </Unit3>
     </Units>

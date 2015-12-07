@@ -990,7 +990,7 @@ begin
      SendLogMessage(llError,rsClientConnectionName,Format(rsClLasrErrSet1,[aClient.ClientAddr,aClient.ClientPort,IntToStr(aError),FLastErrorDescr]));
 
      try
-      if Assigned(FOnClientError) then FOnClientError(Self);
+      if Assigned(FOnClientError) then FOnClientError(aClient);
      except
      end;
 

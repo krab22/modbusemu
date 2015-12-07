@@ -11,7 +11,7 @@ uses Classes, SysUtils,
      MBDeviceClasses;
 
 type
-  TChennelRSThread = class(TChannelBaseThread)
+  TChennelRSThread = class(TChennelBaseThread)
    private
     FCOMPort         : TNPCCustomCOMPort;
     FRequestReader   : TMBRTURequestReader;
@@ -58,7 +58,7 @@ type
     property StopBits        : TComPortStopBits read FStopBits write FStopBits default sb1BITS;
   end;
 
-  TChennelRS = class(TChannelBase)
+  TChennelRS = class(TChennelBase)
   private
     FBaudRate        : TComPortBaudRate;
     FByteSize        : TComPortDataBits;
@@ -111,19 +111,19 @@ end;
 procedure TChennelRS.SetActiveTrue;
 begin
   if Active then Exit;
-  FChannelThread := TChennelRSThread.Create(True);
-  FChannelThread.Logger := Logger;
-  FChannelThread.DeviceArray := DeviceArray;
+  FChennelThread := TChennelRSThread.Create(True);
+  FChennelThread.Logger := Logger;
+  FChennelThread.DeviceArray := DeviceArray;
 
-  TChennelRSThread(FChannelThread).BaudRate        := FBaudRate;
-  TChennelRSThread(FChannelThread).ByteSize        := FByteSize;
-  TChennelRSThread(FChannelThread).Parity          := FParity;
-  TChennelRSThread(FChannelThread).PortNum         := FPortNum;
-  TChennelRSThread(FChannelThread).PortPrefix      := FPortPrefix;
-  TChennelRSThread(FChannelThread).PortPrefixOther := FPortPrefixOther;
-  TChennelRSThread(FChannelThread).StopBits        := FStopBits;
+  TChennelRSThread(FChennelThread).BaudRate        := FBaudRate;
+  TChennelRSThread(FChennelThread).ByteSize        := FByteSize;
+  TChennelRSThread(FChennelThread).Parity          := FParity;
+  TChennelRSThread(FChennelThread).PortNum         := FPortNum;
+  TChennelRSThread(FChennelThread).PortPrefix      := FPortPrefix;
+  TChennelRSThread(FChennelThread).PortPrefixOther := FPortPrefixOther;
+  TChennelRSThread(FChennelThread).StopBits        := FStopBits;
 
-  FChannelThread.Start;
+  FChennelThread.Start;
 end;
 
 { TChennelRSThread }
@@ -266,7 +266,7 @@ begin
    except
     on E : Exception do
      begin
-      SendLogMessage(llError,rsChanRS1, Format('Порт %d. Ошибка получения значений Coil регистров(%d:%d:%d): %s',[FCOMPort.PortNumber,FRequestReader.DeviceAddress, TempStartAddr,TempQuantity,E.Message]));
+      SendLogMessage(llError,rsChanRS1, Format(rsMBError1,[FCOMPort.PortNumber,FRequestReader.DeviceAddress, TempStartAddr,TempQuantity,E.Message]));
       SendErrorMsg(FRequestReader.DeviceAddress,FRequestReader.FunctionCode,ERR_MB_SLAVE_DEVICE_FAILURE - ERR_MB_ERR_CUSTOM);
       Exit;
      end;
@@ -289,7 +289,7 @@ begin
    TempRes := FCOMPort.WriteData(TempPackData^,TempPackDataSize);
    if TempRes = -1 then
     begin
-     SendLogMessage(llError,'ResponseF1','Ошибка отправки ответа');
+     SendLogMessage(llError,rsMBObj,rsMBError2);
     end;
   finally
    if Assigned(TempPackData) then Freemem(TempPackData);
@@ -322,7 +322,7 @@ begin
    except
     on E : Exception do
      begin
-      SendLogMessage(llError,rsChanRS1, Format('Порт %d. Ошибка получения значений Discret регистров(%d:%d:%d): %s',[FCOMPort.PortNumber,FRequestReader.DeviceAddress, TempStartAddr,TempQuantity,E.Message]));
+      SendLogMessage(llError,rsChanRS1, Format(rsMBError3,[FCOMPort.PortNumber,FRequestReader.DeviceAddress, TempStartAddr,TempQuantity,E.Message]));
       SendErrorMsg(FRequestReader.DeviceAddress,FRequestReader.FunctionCode,ERR_MB_SLAVE_DEVICE_FAILURE - ERR_MB_ERR_CUSTOM);
       Exit;
      end;
@@ -345,7 +345,7 @@ begin
    TempRes := FCOMPort.WriteData(TempPackData^,TempPackDataSize);
    if TempRes = -1 then
     begin
-     SendLogMessage(llError,'ResponseF2','Ошибка отправки ответа');
+     SendLogMessage(llError,rsMBObj1,rsMBError2);
     end;
   finally
    if Assigned(TempPackData) then Freemem(TempPackData);
@@ -409,7 +409,7 @@ begin
    TempRes := FCOMPort.WriteData(TempPack,TempLen);
    if TempRes = -1 then
     begin
-     SendLogMessage(llError,'SendErrorMsg','Ошибка записи пакета в порт.');
+     SendLogMessage(llError,rsMBObj2,rsMBError4);
     end;
   finally
    Freemem(TempPack);
@@ -420,7 +420,7 @@ procedure TChennelRSThread.Execute;
 begin
   InitThread;
   try
-   while Terminated do
+   while not Terminated do
     begin
      Sleep(500);
     end;
@@ -442,7 +442,7 @@ begin
 
    case FPortPrefix of
     pptOther : begin
-                if FPortPrefixOther = '' then raise Exception.Create('Признак нестандартного префикса установлен, а сам префикс не задан.');
+                if FPortPrefixOther = '' then raise Exception.Create(rsMBError5);
                 FCOMPort.PortPrefixOther := FPortPrefixOther;
                end;
    end;

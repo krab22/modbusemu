@@ -50,6 +50,9 @@ type
      lbDeviceList      : TListBox;
      libChennelList    : TListBox;
      memLog            : TMemo;
+     mppiOpenChennal   : TMenuItem;
+     mppiCloseChennal  : TMenuItem;
+     mppiDelChennal    : TMenuItem;
      mmChannelDel      : TMenuItem;
      mmChannelOpen     : TMenuItem;
      mmChannelClose    : TMenuItem;
@@ -72,6 +75,7 @@ type
      mmFiles           : TMenuItem;
      mMenu             : TMainMenu;
      odConf            : TOpenDialog;
+     ppmChennalOperations : TPopupMenu;
      scrbChennelParams : TScrollBox;
      sdConf            : TSaveDialog;
      sdLog             : TSaveDialog;
@@ -137,7 +141,7 @@ type
      procedure ClearChennals;
      procedure Lock;
      procedure UnLock;
-     procedure SetChennelFrame(AChennel : TChannelBase);
+     procedure SetChennelFrame(AChennel : TChennelBase);
    public
   end;
 
@@ -175,6 +179,7 @@ var TempFrm : TformChenAdd;
 begin
   TempFrm := TformChenAdd.Create(Self);
   try
+    TempFrm.Logger := LoggerObj as IDLogger;
     TempFrm.ChennelList := libChennelList.Items;
     TempFrm.DevArray := FDevArray;
     TempRes := TempFrm.ShowModal;
@@ -185,7 +190,7 @@ begin
   if TempRes <> mrOK then Exit;
   if TempIndex = -1 then Exit;
   libChennelList.ItemIndex := TempIndex;
-  TempChenName :=libChennelList.Items.Strings[TempIndex];
+  TempChenName := libChennelList.Items.Strings[TempIndex];
   LoggerObj.info(rsAddChennel,Format(rsAddChennel1,[TempChenName]));
   FIsConfModify := True;
 end;
@@ -212,7 +217,7 @@ begin
 end;
 
 procedure TfrmMain.actChannelOpenExecute(Sender: TObject);
-var TempChen  : TChannelBase;
+var TempChen  : TChennelBase;
     TempChenName : String;
 begin
   if libChennelList.ItemIndex = -1 then
@@ -220,7 +225,7 @@ begin
     libChennelList.SetFocus;
     raise Exception.Create(rsOpenChennel1);
    end;
-  TempChen := TChannelBase(libChennelList.Items.Objects[libChennelList.ItemIndex]);
+  TempChen := TChennelBase(libChennelList.Items.Objects[libChennelList.ItemIndex]);
   if not Assigned(TempChen) then Exit;
   TempChen.Active := True;
   TempChenName :=libChennelList.Items.Strings[libChennelList.ItemIndex];
@@ -229,7 +234,7 @@ begin
 end;
 
 procedure TfrmMain.actChannelCloseExecute(Sender: TObject);
-var TempChen  : TChannelBase;
+var TempChen  : TChennelBase;
     TempChenName : String;
 begin
   if libChennelList.ItemIndex = -1 then
@@ -237,7 +242,7 @@ begin
     libChennelList.SetFocus;
     raise Exception.Create(rsCloseChennel1);
    end;
-  TempChen := TChannelBase(libChennelList.Items.Objects[libChennelList.ItemIndex]);
+  TempChen := TChennelBase(libChennelList.Items.Objects[libChennelList.ItemIndex]);
   if not Assigned(TempChen) then Exit;
   TempChen.Active := False;
   TempChenName :=libChennelList.Items.Strings[libChennelList.ItemIndex];
@@ -246,13 +251,13 @@ begin
 end;
 
 procedure TfrmMain.actChannelOpenAllExecute(Sender: TObject);
-var TempChen  : TChannelBase;
+var TempChen  : TChennelBase;
     i, Count  : Integer;
 begin
   Count := libChennelList.Items.Count-1;
   for i := 0 to Count do
    begin
-    TempChen := TChannelBase(libChennelList.Items.Objects[i]);
+    TempChen := TChennelBase(libChennelList.Items.Objects[i]);
     if not Assigned(TempChen) then Continue;
     TempChen.Active := True;
    end;
@@ -260,13 +265,13 @@ begin
 end;
 
 procedure TfrmMain.actChannelCloseAllExecute(Sender: TObject);
-var TempChen  : TChannelBase;
+var TempChen  : TChennelBase;
     i, Count  : Integer;
 begin
   Count := libChennelList.Items.Count-1;
   for i := 0 to Count do
    begin
-    TempChen := TChannelBase(libChennelList.Items.Objects[i]);
+    TempChen := TChennelBase(libChennelList.Items.Objects[i]);
     if not Assigned(TempChen) then Continue;
     TempChen.Active := False;
    end;
@@ -299,7 +304,7 @@ begin
 end;
 
 procedure TfrmMain.libChennelListSelectionChange(Sender : TObject; User : boolean);
-var TempChen  : TChannelBase;
+var TempChen  : TChennelBase;
     TempIndex : Integer;
 begin
   TempIndex := libChennelList.ItemIndex;
@@ -309,12 +314,12 @@ begin
     if Assigned(FChenTCPFrame) then FChenTCPFrame.Parent := nil;
     Exit;
    end;
-  TempChen := TChannelBase(libChennelList.Items.Objects[TempIndex]);
+  TempChen := TChennelBase(libChennelList.Items.Objects[TempIndex]);
   if not Assigned(TempChen) then Exit;
   SetChennelFrame(TempChen);
 end;
 
-procedure TfrmMain.SetChennelFrame(AChennel : TChannelBase);
+procedure TfrmMain.SetChennelFrame(AChennel : TChennelBase);
 begin
   if AChennel.ClassType = TChennelRS then
    begin

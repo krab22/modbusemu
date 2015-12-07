@@ -173,6 +173,10 @@ msgstr ""
 msgid "ÐÐ°ÐºÑÑÐ»Ð¸ ÐºÐ°Ð½Ð°Ð» ÐºÐ°Ð½Ð°Ð»: %s"
 msgstr ""
 
+#: modbusemuresstr.rsclosechennel5
+msgid "Ð¡ÐµÑÐ²ÐµÑÐ½ÑÐ¹ ÑÐ¾ÐºÐµÑ %s:%d Ð·Ð°ÐºÑÑÑ"
+msgstr ""
+
 #: modbusemuresstr.rsclosechennelall1
 msgid "ÐÐ°ÐºÑÑÑÐ¸Ðµ Ð²ÑÐµÑ ÐºÐ°Ð½Ð°Ð»Ð¾Ð²"
 msgstr ""
@@ -247,6 +251,38 @@ msgstr ""
 msgid "ÐÑÐ¸ Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ð¸ ÐºÐ°Ð½Ð°Ð»Ð° Ð¿ÑÐ¾Ð¸Ð·Ð¾ÑÐ»Ð° Ð¾ÑÐ¸Ð±ÐºÐ°: %s"
 msgstr ""
 
+#: modbusemuresstr.rsmberror1
+msgid "ÐÐ¾ÑÑ %d. ÐÑÐ¸Ð±ÐºÐ° Ð¿Ð¾Ð»ÑÑÐµÐ½Ð¸Ñ Ð·Ð½Ð°ÑÐµÐ½Ð¸Ð¹ Coil ÑÐµÐ³Ð¸ÑÑÑÐ¾Ð²(%d:%d:%d): %s"
+msgstr ""
+
+#: modbusemuresstr.rsmberror2
+msgid "ÐÑÐ¸Ð±ÐºÐ° Ð¾ÑÐ¿ÑÐ°Ð²ÐºÐ¸ Ð¾ÑÐ²ÐµÑÐ°"
+msgstr ""
+
+#: modbusemuresstr.rsmberror3
+msgid "ÐÐ¾ÑÑ %d. ÐÑÐ¸Ð±ÐºÐ° Ð¿Ð¾Ð»ÑÑÐµÐ½Ð¸Ñ Ð·Ð½Ð°ÑÐµÐ½Ð¸Ð¹ Discret ÑÐµÐ³Ð¸ÑÑÑÐ¾Ð²(%d:%d:%d): %s"
+msgstr ""
+
+#: modbusemuresstr.rsmberror4
+msgid "ÐÑÐ¸Ð±ÐºÐ° Ð·Ð°Ð¿Ð¸ÑÐ¸ Ð¿Ð°ÐºÐµÑÐ° Ð² Ð¿Ð¾ÑÑ."
+msgstr ""
+
+#: modbusemuresstr.rsmberror5
+msgid "ÐÑÐ¸Ð·Ð½Ð°Ðº Ð½ÐµÑÑÐ°Ð½Ð´Ð°ÑÑÐ½Ð¾Ð³Ð¾ Ð¿ÑÐµÑÐ¸ÐºÑÐ° ÑÑÑÐ°Ð½Ð¾Ð²Ð»ÐµÐ½, Ð° ÑÐ°Ð¼ Ð¿ÑÐµÑÐ¸ÐºÑ Ð½Ðµ Ð·Ð°Ð´Ð°Ð½."
+msgstr ""
+
+#: modbusemuresstr.rsmbobj
+msgid "ResponseF1"
+msgstr ""
+
+#: modbusemuresstr.rsmbobj1
+msgid "ResponseF2"
+msgstr ""
+
+#: modbusemuresstr.rsmbobj2
+msgid "SendErrorMsg"
+msgstr ""
+
 #: modbusemuresstr.rsonclientreceivedataproc1
 msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. ÐÑÐ¸Ð±ÐºÐ° ÑÐ°Ð·Ð±Ð¾ÑÐ° Ð¿Ð°ÐºÐµÑÐ°: %s"
 msgstr ""
@@ -297,6 +333,18 @@ msgstr ""
 
 #: modbusemuresstr.rsopenchennel4
 msgid "ÐÐµ ÑÐ´Ð°Ð»Ð¾ÑÑ Ð¾ÑÐºÑÑÑÑ ÐºÐ°Ð½Ð°Ð»: %s"
+msgstr ""
+
+#: modbusemuresstr.rsopenchennel5
+msgid "ÐÑÐ¸Ð±ÐºÐ° ÑÐ¾ÐºÐµÑÐ°: %d - %s"
+msgstr ""
+
+#: modbusemuresstr.rsopenchennel6
+msgid "ÐÑÐ¸Ð±ÐºÐ° ÐºÐ»Ð¸ÐµÐ½ÑÐ°(%s:%d): %d"
+msgstr ""
+
+#: modbusemuresstr.rsopenchennel7
+msgid "Ð¡ÐµÑÐ²ÐµÑÐ½ÑÐ¹ ÑÐ¾ÐºÐµÑ %s:%d Ð¾ÑÐºÑÑÑ"
 msgstr ""
 
 #: modbusemuresstr.rsopenchennelall1

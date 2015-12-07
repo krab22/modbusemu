@@ -11,7 +11,7 @@ uses Classes, SysUtils, syncobjs,
 type
 
   { абстрактный класс потока канала }
-  TChannelBaseThread = class(TThreadLogged)
+  TChennelBaseThread = class(TThreadLogged)
    private
     FCSection    : TCriticalSection;
     FDeviceArray : TDeviceArray;
@@ -25,7 +25,7 @@ type
   end;
 
   { абстрактный класс канала }
-  TChannelBase = class(TObjectLogged)
+  TChennelBase = class(TObjectLogged)
    private
     FName        : String;           // наименование канала
     FCSection    : TCriticalSection; // критическая секци для доступа к списку устройств
@@ -36,7 +36,7 @@ type
     procedure SetActive(AValue : Boolean);
     procedure SetActiveFalse;
    protected
-    FChannelThread : TChannelBaseThread;
+    FChennelThread : TChennelBaseThread;
     procedure SetLogger(const AValue: IDLogger); override;
     procedure Lock;
     procedure UnLock;
@@ -54,87 +54,87 @@ type
 
 implementation
 
-{ TChannelBaseThread }
+{ TChennelBaseThread }
 
-procedure TChannelBaseThread.Lock;
+procedure TChennelBaseThread.Lock;
 begin
   if Assigned(FCSection) then FCSection.Enter;
 end;
 
-procedure TChannelBaseThread.UnLock;
+procedure TChennelBaseThread.UnLock;
 begin
   if Assigned(FCSection) then FCSection.Leave;
 end;
 
-constructor TChannelBaseThread.Create(CreateSuspended : Boolean; const StackSize : SizeUInt);
+constructor TChennelBaseThread.Create(CreateSuspended : Boolean; const StackSize : SizeUInt);
 begin
   inherited Create(CreateSuspended,StackSize);
 end;
 
-{ TChannelBase }
+{ TChennelBase }
 
-constructor TChannelBase.Create;
+constructor TChennelBase.Create;
 begin
   FCSection      := nil;
   FName          := '';
-  FChannelThread := nil;
+  FChennelThread := nil;
 end;
 
-destructor TChannelBase.Destroy;
+destructor TChennelBase.Destroy;
 begin
   if Active then Active := False;
   inherited Destroy;
 end;
 
-function TChannelBase.GetActive : Boolean;
+function TChennelBase.GetActive : Boolean;
 begin
-  Result := Assigned(FChannelThread);
+  Result := Assigned(FChennelThread);
 end;
 
-procedure TChannelBase.SetCSection(AValue : TCriticalSection);
+procedure TChennelBase.SetCSection(AValue : TCriticalSection);
 begin
   if FCSection = AValue then Exit;
   FCSection := AValue;
-  if Assigned(FChannelThread) then FChannelThread.CSection := FCSection;
+  if Assigned(FChennelThread) then FChennelThread.CSection := FCSection;
 end;
 
-procedure TChannelBase.SetDeviceArray(AValue : TDeviceArray);
+procedure TChennelBase.SetDeviceArray(AValue : TDeviceArray);
 begin
   FDeviceArray := AValue;
   Lock;
   try
-   if Assigned(FChannelThread) then FChannelThread.DeviceArray := FDeviceArray;
+   if Assigned(FChennelThread) then FChennelThread.DeviceArray := FDeviceArray;
   finally
    UnLock;
   end;
 end;
 
-procedure TChannelBase.SetActive(AValue : Boolean);
+procedure TChennelBase.SetActive(AValue : Boolean);
 begin
   if AValue then SetActiveTrue
    else SetActiveFalse;
 end;
 
-procedure TChannelBase.SetActiveFalse;
+procedure TChennelBase.SetActiveFalse;
 begin
   if not Active then Exit;
-  FChannelThread.Terminate;
-  FChannelThread.WaitFor;
-  FreeAndNil(FChannelThread);
+  FChennelThread.Terminate;
+  FChennelThread.WaitFor;
+  FreeAndNil(FChennelThread);
 end;
 
-procedure TChannelBase.SetLogger(const AValue : IDLogger);
+procedure TChennelBase.SetLogger(const AValue : IDLogger);
 begin
   inherited SetLogger(AValue);
-  if Assigned(FChannelThread) then FChannelThread.Logger := Logger;
+  if Assigned(FChennelThread) then FChennelThread.Logger := Logger;
 end;
 
-procedure TChannelBase.Lock;
+procedure TChennelBase.Lock;
 begin
   if Assigned(FCSection) then FCSection.Enter;
 end;
 
-procedure TChannelBase.UnLock;
+procedure TChennelBase.UnLock;
 begin
   if Assigned(FCSection) then FCSection.Leave;
 end;

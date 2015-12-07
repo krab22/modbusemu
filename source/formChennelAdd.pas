@@ -5,7 +5,7 @@ unit formChennelAdd;
 interface
 
 uses Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
-     MBDeviceClasses;
+     MBDeviceClasses, LoggerItf;
 
 type
   TformChenAdd = class(TForm)
@@ -17,17 +17,18 @@ type
    private
     FChennelList : TStrings;
     FDevArray    : TDeviceArray;
+    FLogger      : IDLogger;
    public
     property ChennelList : TStrings read FChennelList write FChennelList;
     property DevArray    : TDeviceArray read FDevArray write FDevArray;
+    property Logger      : IDLogger read FLogger write FLogger;
   end;
 
 var formChenAdd : TformChenAdd;
 
 implementation
 
-uses {$IFDEF UNIX}formChennelRSLinuxAdd{$ELSE}formChennelRSWindowsAdd{$ENDIF}, formChennelTCPAdd,
-     LoggerLazarusGtkApplication;
+uses {$IFDEF UNIX}formChennelRSLinuxAdd{$ELSE}formChennelRSWindowsAdd{$ENDIF}, formChennelTCPAdd;
 
 {$R *.lfm}
 
@@ -40,6 +41,7 @@ begin
   TempRes := mrCancel;
   TempForm := TfrmChennelRSAdd.Create(Self);
   try
+    TempForm.Logger := FLogger;
     TempForm.ChennelList := FChennelList;
     TempForm.DevArray := FDevArray;
     TempForm.ShowModal;
@@ -58,6 +60,7 @@ begin
   TempRes := mrCancel;
   TempForm := TfrmChennelTCPAdd.Create(Self);
   try
+    TempForm.Logger := FLogger;
     TempForm.ChennelList := FChennelList;
     TempForm.DevArray := FDevArray;
     TempForm.ShowModal;

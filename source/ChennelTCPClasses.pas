@@ -11,7 +11,10 @@ uses Classes, SysUtils,
      MBRequestReaderTCPClasses, MBBuilderTCPAnswerPacketClasses;
 
 type
-  TChennelTCPThread = class(TChannelBaseThread)
+
+  { TChennelTCPThread }
+
+  TChennelTCPThread = class(TChennelBaseThread)
    private
     FBindAddress : String;
     FPort        : Word;
@@ -28,6 +31,8 @@ type
     procedure OnClientConnectProc(Sender : TBaseServerSocket; aClient : TServerClientObj);
     procedure OnClientDisconnectProc(Sender : TBaseServerSocket; aClient : TServerClientObj);
     procedure OnClientReceiveDataProc(Sender : TServerClientObj; Buff : array of Byte; DataSize : Cardinal; QuantityDataCame : Cardinal);
+    procedure OnSocketErrorProc(Sender : TObject);
+    procedure OnClientErrorProc(Sender : TObject);
 
     procedure SendErrorMsg(ATaransID,AProtID : Word; ADevNum,AFuncNum,AError: Byte; AClient : TServerClientObj);
 
@@ -47,7 +52,7 @@ type
     property Port        : Word read FPort write FPort;
   end;
 
-  TChennelTCP = class(TChannelBase)
+  TChennelTCP = class(TChennelBase)
    private
     FBindAddress : String;
     FPort        : Word;
@@ -70,14 +75,15 @@ uses LoggerItf, ModbusEmuResStr,
 procedure TChennelTCP.SetActiveTrue;
 begin
   if Active then Exit;
-  FChannelThread := TChennelTCPThread.Create(True);
-  FChannelThread.Logger := Logger;
-  FChannelThread.CSection := CSection;
-  FChannelThread.DeviceArray := DeviceArray;
-  TChennelTCPThread(FChannelThread).BindAddress := FBindAddress;
-  TChennelTCPThread(FChannelThread).Port        := FPort;
 
-  FChannelThread.Start;
+  FChennelThread := TChennelTCPThread.Create(True);
+  FChennelThread.Logger      := Logger;
+  FChennelThread.CSection    := CSection;
+  FChennelThread.DeviceArray := DeviceArray;
+  TChennelTCPThread(FChennelThread).BindAddress := FBindAddress;
+  TChennelTCPThread(FChennelThread).Port        := FPort;
+
+  FChennelThread.Start;
 end;
 
 constructor TChennelTCP.Create;
@@ -179,6 +185,16 @@ begin
   finally
    UnLock;
   end;
+end;
+
+procedure TChennelTCPThread.OnSocketErrorProc(Sender : TObject);
+begin
+  SendLogMessage(llDebug,rsChanTCP1,Format(rsOpenChennel5,[TBaseServerSocket(Sender).LastError,TBaseServerSocket(Sender).LastErrorDescr]));
+end;
+
+procedure TChennelTCPThread.OnClientErrorProc(Sender : TObject);
+begin
+  SendLogMessage(llDebug,rsChanTCP1,Format(rsOpenChennel6,[TServerClientObj(Sender).ClientAddr,TServerClientObj(Sender).ClientPort,TServerClientObj(Sender).LastError]));
 end;
 
 procedure TChennelTCPThread.SendErrorMsg(ATaransID, AProtID : Word; ADevNum, AFuncNum, AError : Byte; AClient : TServerClientObj);
@@ -553,7 +569,7 @@ procedure TChennelTCPThread.Execute;
 begin
   InitThread;
   try
-   while Terminated do
+   while not Terminated do
     begin
      Sleep(500);
     end;
@@ -572,7 +588,12 @@ begin
    FSrvSocket.OnClientConnect     := @OnClientConnectProc;
    FSrvSocket.OnClientDisconnect  := @OnClientDisconnectProc;
    FSrvSocket.OnClientReceiveData := @OnClientReceiveDataProc;
+   FSrvSocket.OnError             := @OnSocketErrorProc;
+   FSrvSocket.OnClientError       := @OnClientErrorProc;
    FSrvSocket.Open;
+
+   if FSrvSocket.Active then SendLogMessage(llDebug,rsChanTCP1, Format(rsOpenChennel7,[FBindAddress,FPort]));
+
   except
    on E : Exception do
     begin
@@ -584,6 +605,8 @@ end;
 procedure TChennelTCPThread.CloseThread;
 begin
   try
+   SendLogMessage(llDebug,rsChanTCP1, Format(rsCloseChennel5,[FSrvSocket.BindAddress,FSrvSocket.Port]));
+
    FreeAndNil(FSrvSocket);
   except
    on E : Exception do
