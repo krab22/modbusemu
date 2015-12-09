@@ -8,7 +8,7 @@
         <Filename Value="modbusemu.lpr"/>
         <IsPartOfProject Value="True"/>
         <CursorPos X="53" Y="10"/>
-        <UsageCount Value="110"/>
+        <UsageCount Value="115"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -17,11 +17,12 @@
         <ComponentName Value="frmMain"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="539"/>
-        <CursorPos X="16" Y="597"/>
+        <TopLine Value="560"/>
+        <CursorPos X="36" Y="574"/>
         <ComponentState Value="1"/>
-        <UsageCount Value="110"/>
+        <UsageCount Value="115"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
@@ -30,7 +31,7 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="3" Y="9"/>
-        <UsageCount Value="61"/>
+        <UsageCount Value="66"/>
       </Unit2>
       <Unit3>
         <Filename Value="source/ModbusEmuResStr.pas"/>
@@ -44,7 +45,7 @@
           <TopLine Value="30"/>
           <CursorPos X="2" Y="49"/>
         </ExtraEditor1>
-        <UsageCount Value="61"/>
+        <UsageCount Value="66"/>
       </Unit3>
     </Units>
   </ProjectSession>
@@ -69,7 +70,7 @@
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="source/main.pas"/>
-        <Line Value="458"/>
+        <Line Value="568"/>
       </Item3>
     </BreakPoints>
   </Debugging>

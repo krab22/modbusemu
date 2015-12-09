@@ -32,7 +32,7 @@ type
      actChennelCloseAll: TAction;
      actChennelOpenAll : TAction;
      actChennelEdit    : TAction;
-     actDevEdit : TAction;
+     actDevEdit        : TAction;
      actLogSave        : TAction;
      actLogClear       : TAction;
      actlMain          : TActionList;
@@ -561,8 +561,28 @@ begin
 end;
 
 procedure TfrmMain.actDevEditExecute(Sender : TObject);
+var TempDev     : TMBDevice;
+    TempAddForm : TfrmAddDevice;
+    OldCaption  : String;
 begin
+  if lbDeviceList.ItemIndex = -1 then Exit;
+  TempDev := TMBDevice(lbDeviceList.Items.Objects[lbDeviceList.ItemIndex]);
+  if not Assigned(TempDev) then Exit;
+  TempAddForm := TfrmAddDevice.Create(Self);
+  try
+   OldCaption := Caption;
+   Caption    := actDevEdit.Caption;
 
+   if TempAddForm.ShowModal <> mrOK then Exit;
+   Lock;
+   try
+
+   finally
+    UnLock;
+   end;
+  finally
+   FreeAndNil(TempAddForm);
+  end;
 end;
 
 procedure TfrmMain.actDevViewExecute(Sender : TObject);
