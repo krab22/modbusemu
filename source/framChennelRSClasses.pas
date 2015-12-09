@@ -14,28 +14,30 @@ type
   TframeChennelRS = class(TFrame)
     btChennelClose : TButton;
     btChennelStart : TButton;
-    lbStopBits : TLabel;
+    btEdit         : TButton;
+    lbStopBits     : TLabel;
     lbStopBitsName : TLabel;
-    lbBits : TLabel;
-    lbByteSize : TLabel;
+    lbBits         : TLabel;
+    lbByteSize     : TLabel;
     lbByteSizeName : TLabel;
-    lbBaud : TLabel;
-    lbBaudName : TLabel;
-    lbParity : TLabel;
-    lbParityName : TLabel;
-    lbPort : TLabel;
-    lbPortName : TLabel;
-    lbChennelCapt : TLabel;
-    lbChennelName : TLabel;
+    lbBaud         : TLabel;
+    lbBaudName     : TLabel;
+    lbParity       : TLabel;
+    lbParityName   : TLabel;
+    lbPort         : TLabel;
+    lbPortName     : TLabel;
+    lbChennelCapt  : TLabel;
+    lbChennelName  : TLabel;
     procedure btChennelCloseClick(Sender : TObject);
     procedure btChennelStartClick(Sender : TObject);
    private
     FChennel : TChennelRS;
     function  GetChennel : TChennelBase;
     procedure SetChennel(AValue : TChennelBase);
-    procedure UpdateChenInfo;
     procedure ClearInfo;
    public
+    procedure UpdateChenInfo;
+
     property Chennel : TChennelBase read GetChennel write SetChennel;
   end;
 

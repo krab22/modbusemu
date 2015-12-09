@@ -26,7 +26,7 @@ object frameChennelTCP: TframeChennelTCP
     TabOrder = 0
   end
   object btChennelClose: TButton
-    Left = 149
+    Left = 104
     Height = 25
     Top = 80
     Width = 75
@@ -47,7 +47,6 @@ object frameChennelTCP: TframeChennelTCP
     Height = 20
     Top = 24
     Width = 92
-    BidiMode = bdLeftToRight
     Caption = 'Адрес канала:'
     ParentBidiMode = False
     ParentColor = False
@@ -75,5 +74,13 @@ object frameChennelTCP: TframeChennelTCP
     Width = 40
     Caption = 'lbPort'
     ParentColor = False
+  end
+  object btEdit: TButton
+    Left = 200
+    Height = 25
+    Top = 80
+    Width = 75
+    Caption = 'Изменить'
+    TabOrder = 2
   end
 end

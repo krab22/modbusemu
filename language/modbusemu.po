@@ -133,6 +133,18 @@ msgstr ""
 msgid "ÐÐ¾Ð±Ð°Ð²Ð»ÐµÐ½ ÐºÐ°Ð½Ð°Ð»: %s"
 msgstr ""
 
+#: modbusemuresstr.rsaddchennel2
+msgid "ÐÐ¾Ð±Ð°Ð²Ð¸ÑÑ ÑÐµÑÐµÐ²Ð¾Ð¹ ÐºÐ°Ð½Ð°Ð»"
+msgstr ""
+
+#: modbusemuresstr.rsaddchennel3
+msgid "ÐÐ¾Ð±Ð°Ð²Ð¸ÑÑ"
+msgstr ""
+
+#: modbusemuresstr.rsaddchennel4
+msgid "ÐÐ¾Ð±Ð°Ð²Ð¸ÑÑ Ð¿Ð¾ÑÐ»ÐµÐ´Ð¾Ð²Ð°ÑÐµÐ»ÑÐ½ÑÐ¹ ÐºÐ°Ð½Ð°Ð»"
+msgstr ""
+
 #: modbusemuresstr.rschanrs1
 msgid "ÐÐ¾ÑÐ¾Ðº RS ÐºÐ°Ð½Ð°Ð»Ð°"
 msgstr ""
@@ -213,6 +225,28 @@ msgstr ""
 
 #: modbusemuresstr.rsdevadd2
 msgid "Ð£ÑÑÑÐ¾Ð¹ÑÑÐ²Ð¾: %d"
+msgstr ""
+
+#: modbusemuresstr.rseditchennel
+msgid "ÐÐ·Ð¼ÐµÐ½ÐµÐ½Ð¸Ðµ ÐºÐ°Ð½Ð°Ð»Ð°. ÐÐµ Ð²ÑÐ±ÑÐ°Ð½ ÐºÐ°Ð½Ð°Ð» Ð´Ð»Ñ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ñ."
+msgstr ""
+
+#: modbusemuresstr.rseditchennel1
+msgctxt "modbusemuresstr.rseditchennel1"
+msgid "ÐÐ·Ð¼ÐµÐ½ÐµÐ½Ð¸Ðµ ÑÐµÑÐµÐ²Ð¾Ð³Ð¾ ÐºÐ°Ð½Ð°Ð»Ð°"
+msgstr ""
+
+#: modbusemuresstr.rseditchennel2
+msgid "Ð¡Ð¾ÑÑÐ°Ð½Ð¸ÑÑ"
+msgstr ""
+
+#: modbusemuresstr.rseditchennel3
+msgid "ÐÐ°Ð½Ð°Ð» %s Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½"
+msgstr ""
+
+#: modbusemuresstr.rseditchennel4
+msgctxt "modbusemuresstr.rseditchennel4"
+msgid "ÐÐ·Ð¼ÐµÐ½ÐµÐ½Ð¸Ðµ Ð¿Ð¾ÑÐ»ÐµÐ´Ð¾Ð²Ð°ÑÐµÐ»ÑÐ½Ð¾Ð³Ð¾ ÐºÐ°Ð½Ð°Ð»Ð°"
 msgstr ""
 
 #: modbusemuresstr.rsfrmaddtcpchannel1
@@ -443,59 +477,151 @@ msgstr ""
 msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. ÐÑÐ¸Ð±ÐºÐ° Ð¾ÑÐ¿ÑÐ°Ð²ÐºÐ¸ Ð¿Ð¾ÑÐ²ÐµÑÐ°: %d"
 msgstr ""
 
-#: tfrmmain.actchanneladd.caption
+#: tfrmmain.actchenneladd.caption
+msgctxt "TFRMMAIN.ACTCHENNELADD.CAPTION"
 msgid "Добавить канал"
 msgstr ""
 
-#: tfrmmain.actchannelclose.caption
+#: tfrmmain.actchenneladd.hint
+msgctxt "TFRMMAIN.ACTCHENNELADD.HINT"
+msgid "Добавить канал"
+msgstr ""
+
+#: tfrmmain.actchennelclose.caption
+msgctxt "TFRMMAIN.ACTCHENNELCLOSE.CAPTION"
 msgid "Закрыть канал"
 msgstr ""
 
-#: tfrmmain.actchannelcloseall.caption
+#: tfrmmain.actchennelclose.hint
+msgctxt "TFRMMAIN.ACTCHENNELCLOSE.HINT"
+msgid "Закрыть канал"
+msgstr ""
+
+#: tfrmmain.actchennelcloseall.caption
+msgctxt "TFRMMAIN.ACTCHENNELCLOSEALL.CAPTION"
 msgid "Закрыть все каналы"
 msgstr ""
 
-#: tfrmmain.actchanneldel.caption
+#: tfrmmain.actchennelcloseall.hint
+msgctxt "TFRMMAIN.ACTCHENNELCLOSEALL.HINT"
+msgid "Закрыть все каналы"
+msgstr ""
+
+#: tfrmmain.actchenneldel.caption
+msgctxt "TFRMMAIN.ACTCHENNELDEL.CAPTION"
 msgid "Удалить канал"
 msgstr ""
 
-#: tfrmmain.actchanneldelall.caption
+#: tfrmmain.actchenneldel.hint
+msgctxt "TFRMMAIN.ACTCHENNELDEL.HINT"
+msgid "Удалить канал"
+msgstr ""
+
+#: tfrmmain.actchenneldelall.caption
+msgctxt "TFRMMAIN.ACTCHENNELDELALL.CAPTION"
 msgid "Удалить все каналы"
 msgstr ""
 
-#: tfrmmain.actchannelopen.caption
+#: tfrmmain.actchenneldelall.hint
+msgctxt "TFRMMAIN.ACTCHENNELDELALL.HINT"
+msgid "Удалить все каналы"
+msgstr ""
+
+#: tfrmmain.actchenneledit.caption
+msgid "Изменить"
+msgstr ""
+
+#: tfrmmain.actchenneledit.hint
+msgid "Изменить параметры канала"
+msgstr ""
+
+#: tfrmmain.actchennelopen.caption
+msgctxt "TFRMMAIN.ACTCHENNELOPEN.CAPTION"
 msgid "Открыть канал"
 msgstr ""
 
-#: tfrmmain.actchannelopenall.caption
+#: tfrmmain.actchennelopen.hint
+msgctxt "TFRMMAIN.ACTCHENNELOPEN.HINT"
+msgid "Открыть канал"
+msgstr ""
+
+#: tfrmmain.actchennelopenall.caption
+msgctxt "TFRMMAIN.ACTCHENNELOPENALL.CAPTION"
+msgid "Открыть все каналы"
+msgstr ""
+
+#: tfrmmain.actchennelopenall.hint
+msgctxt "TFRMMAIN.ACTCHENNELOPENALL.HINT"
 msgid "Открыть все каналы"
 msgstr ""
 
 #: tfrmmain.actdevadd.caption
+msgctxt "tfrmmain.actdevadd.caption"
+msgid "Добавить устройство"
+msgstr ""
+
+#: tfrmmain.actdevadd.hint
+msgctxt "TFRMMAIN.ACTDEVADD.HINT"
 msgid "Добавить устройство"
 msgstr ""
 
 #: tfrmmain.actdevclearlist.caption
+msgctxt "tfrmmain.actdevclearlist.caption"
+msgid "Очистить список устройств"
+msgstr ""
+
+#: tfrmmain.actdevclearlist.hint
+msgctxt "TFRMMAIN.ACTDEVCLEARLIST.HINT"
 msgid "Очистить список устройств"
 msgstr ""
 
 #: tfrmmain.actdevdel.caption
+msgctxt "tfrmmain.actdevdel.caption"
 msgid "Удалить устройство"
+msgstr ""
+
+#: tfrmmain.actdevdel.hint
+msgctxt "TFRMMAIN.ACTDEVDEL.HINT"
+msgid "Удалить устройство"
+msgstr ""
+
+#: tfrmmain.actdevedit.caption
+msgid "Редактировать параметры устройства"
 msgstr ""
 
 #: tfrmmain.actdevview.caption
 msgid "Просмотреть устройство"
 msgstr ""
 
+#: tfrmmain.actdevview.hint
+msgid "Просмотр устройства"
+msgstr ""
+
 #: tfrmmain.actexit.caption
 msgid "Выход"
 msgstr ""
 
+#: tfrmmain.actexit.hint
+msgid "Выйти"
+msgstr ""
+
 #: tfrmmain.actfileloadconf.caption
+msgctxt "tfrmmain.actfileloadconf.caption"
+msgid "Загрузить конфигурацию"
+msgstr ""
+
+#: tfrmmain.actfileloadconf.hint
+msgctxt "TFRMMAIN.ACTFILELOADCONF.HINT"
 msgid "Загрузить конфигурацию"
 msgstr ""
 
 #: tfrmmain.actfilesaveconf.caption
+msgctxt "tfrmmain.actfilesaveconf.caption"
+msgid "Сохранить конфигурацию"
+msgstr ""
+
+#: tfrmmain.actfilesaveconf.hint
+msgctxt "TFRMMAIN.ACTFILESAVECONF.HINT"
 msgid "Сохранить конфигурацию"
 msgstr ""
 
@@ -503,8 +629,16 @@ msgstr ""
 msgid "Очистить"
 msgstr ""
 
+#: tfrmmain.actlogclear.hint
+msgid "Очитсить протокол"
+msgstr ""
+
 #: tfrmmain.actlogsave.caption
 msgid "Сохранить"
+msgstr ""
+
+#: tfrmmain.actlogsave.hint
+msgid "Сохранить протокол"
 msgstr ""
 
 #: tfrmmain.caption

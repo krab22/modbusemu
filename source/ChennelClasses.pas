@@ -14,14 +14,14 @@ type
   TChennelBaseThread = class(TThreadLogged)
    private
     FCSection    : TCriticalSection;
-    FDeviceArray : TDeviceArray;
+    FDeviceArray : PDeviceArray;
    protected
     procedure Lock;
     procedure UnLock;
    public
     constructor Create(CreateSuspended: Boolean; const StackSize: SizeUInt = 65535); reintroduce;
     property CSection    : TCriticalSection read FCSection write FCSection;
-    property DeviceArray : TDeviceArray read FDeviceArray write FDeviceArray;
+    property DeviceArray : PDeviceArray read FDeviceArray write FDeviceArray;
   end;
 
   { абстрактный класс канала }
@@ -29,10 +29,10 @@ type
    private
     FName        : String;           // наименование канала
     FCSection    : TCriticalSection; // критическая секци для доступа к списку устройств
-    FDeviceArray : TDeviceArray;     // список устройств
+    FDeviceArray : PDeviceArray;     // список устройств
     function  GetActive : Boolean;
     procedure SetCSection(AValue : TCriticalSection);
-    procedure SetDeviceArray(AValue : TDeviceArray);
+    procedure SetDeviceArray(AValue : PDeviceArray);
     procedure SetActive(AValue : Boolean);
     procedure SetActiveFalse;
    protected
@@ -49,7 +49,7 @@ type
     property Name        : String read FName write FName;
     property Active      : Boolean read GetActive write SetActive;
     property CSection    : TCriticalSection read FCSection write SetCSection;
-    property DeviceArray : TDeviceArray read FDeviceArray write SetDeviceArray;
+    property DeviceArray : PDeviceArray read FDeviceArray write SetDeviceArray;
   end;
 
 implementation
@@ -98,7 +98,7 @@ begin
   if Assigned(FChennelThread) then FChennelThread.CSection := FCSection;
 end;
 
-procedure TChennelBase.SetDeviceArray(AValue : TDeviceArray);
+procedure TChennelBase.SetDeviceArray(AValue : PDeviceArray);
 begin
   FDeviceArray := AValue;
   Lock;

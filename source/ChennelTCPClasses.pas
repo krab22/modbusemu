@@ -134,7 +134,7 @@ begin
   try
     // получаем требуемый девайс
     try
-     TempDevice := DeviceArray[FReader.DeviceAddress];
+     TempDevice := DeviceArray^[FReader.DeviceAddress];
     except
      on E : Exception do
       begin
@@ -254,18 +254,18 @@ begin
    FAnswBits.Build;
    // получаем паект от построителя для отправки
    TempPackData     := FAnswBits.Packet;
-   TempPackDataSize := FAnswBits.Len;
+   TempPackDataSize := FAnswBits.LenPacket;
    try
     // посылаем ответ
     TempSendRes := AClient.SendDada(TempPackData^,TempPackDataSize);
     if TempSendRes = -1 then
      begin
       SendLogMessage(llDebug, rsChanTCP1,Format(rsResponseF1_2,[AClient.ClientAddr,AClient.ClientPort]));
-     end
-    else
-     begin
-      SendLogMessage(llDebug, rsChanTCP1,Format(rsResponseF1_3,[AClient.ClientAddr,AClient.ClientPort]));
      end;
+//    else
+//     begin
+//      SendLogMessage(llDebug, rsChanTCP1,Format(rsResponseF1_3,[AClient.ClientAddr,AClient.ClientPort]));
+//     end;
    finally
     // освобождаем память выделенную для пакета
     Freemem(TempPackData);
@@ -313,17 +313,17 @@ begin
   FAnswBits.Build;
 
   TempPackData     := FAnswBits.Packet;
-  TempPackDataSize := FAnswBits.Len;
+  TempPackDataSize := FAnswBits.LenPacket;
   try
    TempSendRes := AClient.SendDada(TempPackData^,TempPackDataSize);
    if TempSendRes = -1 then
     begin
      SendLogMessage(llDebug, rsChanTCP1,Format(rsResponseF2_2,[AClient.ClientAddr,AClient.ClientPort]));
-    end
-   else
-    begin
-     SendLogMessage(llDebug, rsChanTCP1,Format(rsResponseF2_3,[AClient.ClientAddr,AClient.ClientPort]));
     end;
+//   else
+//    begin
+//     SendLogMessage(llDebug, rsChanTCP1,Format(rsResponseF2_3,[AClient.ClientAddr,AClient.ClientPort]));
+//    end;
   finally
    Freemem(TempPackData);
   end;
@@ -370,17 +370,17 @@ begin
   FAnswWord.Build;
 
   TempPackData     := FAnswWord.Packet;
-  TempPackDataSize := FAnswWord.Len;
+  TempPackDataSize := FAnswWord.LenPacket;
   try
    TempSendRes := AClient.SendDada(TempPackData^,TempPackDataSize);
    if TempSendRes = -1 then
     begin
      SendLogMessage(llDebug, rsChanTCP1,Format(rsResponseF3_2,[AClient.ClientAddr,AClient.ClientPort]));
-    end
-   else
-    begin
-     SendLogMessage(llDebug, rsChanTCP1,Format(rsResponseF3_3,[AClient.ClientAddr,AClient.ClientPort]));
     end;
+//   else
+//    begin
+//     SendLogMessage(llDebug, rsChanTCP1,Format(rsResponseF3_3,[AClient.ClientAddr,AClient.ClientPort]));
+//    end;
   finally
    Freemem(TempPackData);
   end;
@@ -427,17 +427,17 @@ begin
   FAnswWord.Build;
 
   TempPackData     := FAnswWord.Packet;
-  TempPackDataSize := FAnswWord.Len;
+  TempPackDataSize := FAnswWord.LenPacket;
   try
    TempSendRes := AClient.SendDada(TempPackData^,TempPackDataSize);
    if TempSendRes = -1 then
     begin
      SendLogMessage(llDebug, rsChanTCP1,Format(rsResponseF4_2,[AClient.ClientAddr,AClient.ClientPort]));
-    end
-   else
-    begin
-     SendLogMessage(llDebug, rsChanTCP1,Format(rsResponseF4_3,[AClient.ClientAddr,AClient.ClientPort]));
     end;
+//   else
+//    begin
+//     SendLogMessage(llDebug, rsChanTCP1,Format(rsResponseF4_3,[AClient.ClientAddr,AClient.ClientPort]));
+//    end;
   finally
    Freemem(TempPackData);
   end;

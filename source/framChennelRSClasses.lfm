@@ -17,7 +17,7 @@ object frameChennelRS: TframeChennelRS
     ParentColor = False
   end
   object btChennelClose: TButton
-    Left = 213
+    Left = 104
     Height = 25
     Top = 144
     Width = 75
@@ -129,5 +129,13 @@ object frameChennelRS: TframeChennelRS
     Width = 68
     Caption = 'lbStopBits'
     ParentColor = False
+  end
+  object btEdit: TButton
+    Left = 204
+    Height = 25
+    Top = 144
+    Width = 83
+    Caption = 'Изменить'
+    TabOrder = 2
   end
 end

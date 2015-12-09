@@ -184,7 +184,7 @@ begin
   Lock;
   try
    try
-    TempDevice := DeviceArray[FRequestReader.DeviceAddress];
+    TempDevice := DeviceArray^[FRequestReader.DeviceAddress];
    except
     on E : Exception do
      begin

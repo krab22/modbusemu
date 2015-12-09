@@ -8,10 +8,20 @@ resourcestring
 
  rsAddChennel               = 'Добавление канала';
  rsAddChennel1              = 'Добавлен канал: %s';
+ rsAddChennel2              = 'Добавить сетевой канал';
+ rsAddChennel3              = 'Добавить';
+ rsAddChennel4              = 'Добавить последовательный канал';
+
+ rsEditChennel1             = 'Изменение сетевого канала';
+ rsEditChennel2             = 'Сохранить';
+ rsEditChennel3             = 'Канал %s изменен';
+ rsEditChennel4             = 'Изменение последовательного канала';
 
  rsDelChannel1              = 'Удаление канала. Не выбран канал для удаления.';
  rsDelChannel2              = 'Удаление канала';
  rsDelChannel3              = 'Удален канал: %s';
+
+ rsEditChennel              = 'Изменение канала. Не выбран канал для изменения.';
 
  rsOpenChennel1             = 'Открытие канала. Не выбран канал для открытия.';
  rsOpenChennel2             = 'Открытие канала';

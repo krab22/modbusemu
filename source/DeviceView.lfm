@@ -10,7 +10,7 @@ object frmDeviceView: TfrmDeviceView
   LCLVersion = '1.5'
   object lbDevNum: TLabel
     Left = 8
-    Height = 21
+    Height = 20
     Top = 8
     Width = 123
     Caption = 'Номер устройства'
@@ -18,7 +18,7 @@ object frmDeviceView: TfrmDeviceView
   end
   object edDevNum: TEdit
     Left = 136
-    Height = 33
+    Height = 32
     Top = 8
     Width = 80
     ReadOnly = True

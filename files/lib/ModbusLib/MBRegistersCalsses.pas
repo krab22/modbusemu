@@ -47,6 +47,7 @@ type
     FMBRegType  : TRegMBTypes;       // тип диапазона регистров
     FNumber     : Word;              // номер регистра в диапазоне. первое значение - 1
     FStrAddress : String;            // строковое представление адреса
+    FDescr      : String;
     function  GetAddress: DWORD;
     procedure SetAddress(const aValue: DWord);
     procedure SetRegNumber(const aValue: Word);
@@ -61,6 +62,7 @@ type
     property Address       : DWORD read GetAddress write SetAddress;
     property RegNumber     : Word read FNumber write SetRegNumber;
     property RegReadOnly   : Boolean read FReadOnly write FReadOnly;
+    property Description   : String read FDescr write FDescr;
   end;
 
   TMBRegisterArray = array[0..65535] of TMBRegister;
@@ -731,4 +733,4 @@ begin
   if Assigned(FOnChange) then FOnChange(Self, TempBits);
 end;
 
-end.
+end.

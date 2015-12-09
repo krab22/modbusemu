@@ -16,11 +16,11 @@ type
     procedure btAddTCPChennelClick(Sender : TObject);
    private
     FChennelList : TStrings;
-    FDevArray    : TDeviceArray;
+    FDevArray    : PDeviceArray;
     FLogger      : IDLogger;
    public
     property ChennelList : TStrings read FChennelList write FChennelList;
-    property DevArray    : TDeviceArray read FDevArray write FDevArray;
+    property DevArray    : PDeviceArray read FDevArray write FDevArray;
     property Logger      : IDLogger read FLogger write FLogger;
   end;
 

@@ -24,13 +24,15 @@ type
      actDevDel         : TAction;
      actDevClearList   : TAction;
      actDevView        : TAction;
-     actChannelAdd     : TAction;
-     actChannelDel     : TAction;
-     actChannelClose   : TAction;
-     actChannelOpen    : TAction;
-     actChannelDelAll  : TAction;
-     actChannelCloseAll: TAction;
-     actChannelOpenAll : TAction;
+     actChennelAdd     : TAction;
+     actChennelDel     : TAction;
+     actChennelClose   : TAction;
+     actChennelOpen    : TAction;
+     actChennelDelAll  : TAction;
+     actChennelCloseAll: TAction;
+     actChennelOpenAll : TAction;
+     actChennelEdit    : TAction;
+     actDevEdit : TAction;
      actLogSave        : TAction;
      actLogClear       : TAction;
      actlMain          : TActionList;
@@ -46,10 +48,13 @@ type
      cbLogWarn         : TCheckBox;
      cbLogError        : TCheckBox;
      cmbLogLineCount   : TComboBox;
+     ImgListAct        : TImageList;
      lbChennelList     : TLabel;
      lbDeviceList      : TListBox;
      libChennelList    : TListBox;
      memLog            : TMemo;
+     mmDevEditDev : TMenuItem;
+     mppiEditChennal   : TMenuItem;
      mppiOpenChennal   : TMenuItem;
      mppiCloseChennal  : TMenuItem;
      mppiDelChennal    : TMenuItem;
@@ -101,16 +106,19 @@ type
      tbChannelDelAll   : TToolButton;
      tbChannelCloseAll : TToolButton;
      tbChannelOpenAll  : TToolButton;
-     procedure actChannelAddExecute(Sender: TObject);
-     procedure actChannelCloseAllExecute(Sender: TObject);
-     procedure actChannelCloseExecute(Sender: TObject);
-     procedure actChannelDelAllExecute(Sender: TObject);
-     procedure actChannelDelExecute(Sender: TObject);
-     procedure actChannelOpenAllExecute(Sender: TObject);
-     procedure actChannelOpenExecute(Sender: TObject);
+     tbDevEditDev : TToolButton;
+     procedure actChennelAddExecute(Sender: TObject);
+     procedure actChennelCloseAllExecute(Sender: TObject);
+     procedure actChennelCloseExecute(Sender: TObject);
+     procedure actChennelDelAllExecute(Sender: TObject);
+     procedure actChennelDelExecute(Sender: TObject);
+     procedure actChennelEditExecute(Sender : TObject);
+     procedure actChennelOpenAllExecute(Sender: TObject);
+     procedure actChennelOpenExecute(Sender: TObject);
      procedure actDevAddExecute(Sender : TObject);
      procedure actDevClearListExecute(Sender : TObject);
      procedure actDevDelExecute(Sender : TObject);
+     procedure actDevEditExecute(Sender : TObject);
      procedure actDevViewExecute(Sender : TObject);
      procedure actExitExecute(Sender : TObject);
      procedure actFileLoadConfExecute(Sender : TObject);
@@ -153,7 +161,9 @@ implementation
 
 uses DeviceAdd,
      ChennelRSClasses, ChennelTCPClasses,
-     formChennelAdd, ModbusEmuResStr,
+     formChennelAdd,
+     formChennelTCPAdd, {$IFDEF UNIX }formChennelRSLinuxAdd,{$ELSE}formChennelRSWindowsAdd,{$ENDIF}
+     ModbusEmuResStr, MBDefine,
      LoggerLazarusGtkApplication,
      LoggerItf;
 
@@ -171,7 +181,7 @@ begin
 
 end;
 
-procedure TfrmMain.actChannelAddExecute(Sender: TObject);
+procedure TfrmMain.actChennelAddExecute(Sender: TObject);
 var TempFrm : TformChenAdd;
     TempIndex : Integer;
     TempChenName : String;
@@ -181,7 +191,7 @@ begin
   try
     TempFrm.Logger := LoggerObj as IDLogger;
     TempFrm.ChennelList := libChennelList.Items;
-    TempFrm.DevArray := FDevArray;
+    TempFrm.DevArray := @FDevArray;
     TempRes := TempFrm.ShowModal;
     TempIndex := TempFrm.Tag;
   finally
@@ -191,11 +201,10 @@ begin
   if TempIndex = -1 then Exit;
   libChennelList.ItemIndex := TempIndex;
   TempChenName := libChennelList.Items.Strings[TempIndex];
-  LoggerObj.info(rsAddChennel,Format(rsAddChennel1,[TempChenName]));
   FIsConfModify := True;
 end;
 
-procedure TfrmMain.actChannelDelExecute(Sender: TObject);
+procedure TfrmMain.actChennelDelExecute(Sender: TObject);
 var TempChen : TObject;
     TempChenName : String;
 begin
@@ -205,7 +214,7 @@ begin
     raise Exception.Create(rsDelChannel1);
    end;
   TempChen := libChennelList.Items.Objects[libChennelList.ItemIndex];
-  TempChenName := libChennelList.Items.Strings[libChennelList.ItemIndex];;
+  TempChenName := libChennelList.Items.Strings[libChennelList.ItemIndex];
   if not Assigned(TempChen) then Exit;
   libChennelList.Items.Objects[libChennelList.ItemIndex] := nil;
   libChennelList.Items.Delete(libChennelList.ItemIndex);
@@ -216,7 +225,77 @@ begin
   FIsConfModify := True;
 end;
 
-procedure TfrmMain.actChannelOpenExecute(Sender: TObject);
+procedure TfrmMain.actChennelEditExecute(Sender : TObject);
+var TempChen     : TChennelBase;
+    TempChenName : String;
+    TempForm     : TForm;
+begin
+  if libChennelList.ItemIndex = -1 then
+   begin
+    libChennelList.SetFocus;
+    raise Exception.Create(rsDelChannel1);
+   end;
+  TempChen     := TChennelBase(libChennelList.Items.Objects[libChennelList.ItemIndex]);
+  TempChenName := libChennelList.Items.Strings[libChennelList.ItemIndex];
+
+  if TempChen.ClassType = TChennelTCP then
+   begin
+    TempForm := TfrmChennelTCPAdd.Create(nil);
+    try
+     TfrmChennelTCPAdd(TempForm).Logger        := LoggerObj as IDLogger;
+     TfrmChennelTCPAdd(TempForm).IsChennalEdit := True;
+     TfrmChennelTCPAdd(TempForm).ChennelList   := libChennelList.Items;
+     TfrmChennelTCPAdd(TempForm).DevArray      := @FDevArray;
+     TfrmChennelTCPAdd(TempForm).ChennalName   := TempChenName;
+     TfrmChennelTCPAdd(TempForm).ChennalObj    := TempChen;
+
+     TempForm.ShowModal;
+     if TempForm.ModalResult = mrOK then
+      begin
+       libChennelList.Items.Strings[libChennelList.ItemIndex] := TfrmChennelTCPAdd(TempForm).ChennalName;
+       if TempChen.Active then
+        begin
+         TempChen.Active := False;
+         TempChen.Active := True;
+        end;
+       if Assigned(FChenTCPFrame) then FChenTCPFrame.UpdateChenInfo;
+       FIsConfModify := True;
+      end;
+    finally
+     FreeAndNil(TempForm);
+    end;
+   end;
+
+  if TempChen.ClassType = TChennelRS then
+   begin
+    TempForm := TfrmChennelRSAdd.Create(nil);
+    try
+     TfrmChennelRSAdd(TempForm).Logger         := LoggerObj as IDLogger;
+     TfrmChennelRSAdd(TempForm).IsChennalEdit  := True;
+     TfrmChennelRSAdd(TempForm).ChennelList    := libChennelList.Items;
+     TfrmChennelRSAdd(TempForm).DevArray       := @FDevArray;
+     TfrmChennelRSAdd(TempForm).ChennalName    := TempChenName;
+     TfrmChennelRSAdd(TempForm).ChennalObj     := TempChen;
+
+     TempForm.ShowModal;
+     if TempForm.ModalResult = mrOK then
+      begin
+       libChennelList.Items.Strings[libChennelList.ItemIndex] := TfrmChennelRSAdd(TempForm).ChennalName;
+       if TempChen.Active then
+        begin
+         TempChen.Active := False;
+         TempChen.Active := True;
+        end;
+       if Assigned(FChenRSFrame) then FChenRSFrame.UpdateChenInfo;
+       FIsConfModify := True;
+      end;
+    finally
+     FreeAndNil(TempForm);
+    end;
+   end;
+end;
+
+procedure TfrmMain.actChennelOpenExecute(Sender: TObject);
 var TempChen  : TChennelBase;
     TempChenName : String;
 begin
@@ -233,7 +312,7 @@ begin
    else LoggerObj.info(rsOpenChennel2,Format(rsOpenChennel4,[TempChenName]));
 end;
 
-procedure TfrmMain.actChannelCloseExecute(Sender: TObject);
+procedure TfrmMain.actChennelCloseExecute(Sender: TObject);
 var TempChen  : TChennelBase;
     TempChenName : String;
 begin
@@ -250,7 +329,7 @@ begin
    else LoggerObj.info(rsCloseChennel2,Format(rsCloseChennel4,[TempChenName]));
 end;
 
-procedure TfrmMain.actChannelOpenAllExecute(Sender: TObject);
+procedure TfrmMain.actChennelOpenAllExecute(Sender: TObject);
 var TempChen  : TChennelBase;
     i, Count  : Integer;
 begin
@@ -264,7 +343,7 @@ begin
   LoggerObj.info(rsOpenChennelAll1,rsOpenChennelAll2);
 end;
 
-procedure TfrmMain.actChannelCloseAllExecute(Sender: TObject);
+procedure TfrmMain.actChennelCloseAllExecute(Sender: TObject);
 var TempChen  : TChennelBase;
     i, Count  : Integer;
 begin
@@ -278,7 +357,7 @@ begin
   LoggerObj.info(rsCloseChennelAll1,rsCloseChennelAll2);
 end;
 
-procedure TfrmMain.actChannelDelAllExecute(Sender: TObject);
+procedure TfrmMain.actChennelDelAllExecute(Sender: TObject);
 var i, Count : Integer;
 begin
   if Assigned(FChenRSFrame) then FChenRSFrame.Parent := nil;
@@ -323,7 +402,11 @@ procedure TfrmMain.SetChennelFrame(AChennel : TChennelBase);
 begin
   if AChennel.ClassType = TChennelRS then
    begin
-    if not Assigned(FChenRSFrame) then FChenRSFrame := TframeChennelRS.Create(Self);
+    if not Assigned(FChenRSFrame) then
+     begin
+      FChenRSFrame := TframeChennelRS.Create(Self);
+      FChenRSFrame.btEdit.Action := actChennelEdit;
+     end;
     if Assigned(FChenTCPFrame) then FChenTCPFrame.Parent := nil;
     FChenRSFrame.Chennel := AChennel;
     FChenRSFrame.Parent  := scrbChennelParams;
@@ -331,7 +414,11 @@ begin
 
   if AChennel.ClassType = TChennelTCP then
    begin
-    if not Assigned(FChenTCPFrame) then FChenTCPFrame := TframeChennelTCP.Create(Self);
+    if not Assigned(FChenTCPFrame) then
+     begin
+      FChenTCPFrame := TframeChennelTCP.Create(Self);
+      FChenTCPFrame.btEdit.Action := actChennelEdit;
+     end;
     if Assigned(FChenRSFrame) then FChenRSFrame.Parent := nil;
     FChenTCPFrame.Chennel := AChennel;
     FChenTCPFrame.Parent  := scrbChennelParams;
@@ -366,24 +453,78 @@ end;
 procedure TfrmMain.actDevAddExecute(Sender : TObject);
 var TempAddForm : TfrmAddDevice;
     TempDevNum  : Integer;
+    TempStr     : String;
 begin
-  TempAddForm := TfrmAddDevice.Create(nil);
+  TempAddForm := TfrmAddDevice.Create(Self);
   try
    if TempAddForm.ShowModal <> mrOK then Exit;
-   try
-    TempDevNum := StrToInt(TempAddForm.edDevNumber.Text);
-   except
-    on E : Exception do
-     begin
-      raise Exception.CreateFmt(rsDevAdd1 ,[TempAddForm.edDevNumber.Text]);
-     end;
-   end;
-   if (TempDevNum < 1) or (TempDevNum > 255) then raise Exception.CreateFmt(rsDevAdd1 ,[TempAddForm.edDevNumber.Text]);
+   TempDevNum := TempAddForm.speDevNumber.Value;
+
    if Assigned(FDevArray[TempDevNum]) then Exit;
    Lock;
    try
+    TempStr := Format('Устройство: %d;',[TempDevNum]);
+
     FDevArray[TempDevNum] := TMBDevice.Create(nil);
     FDevArray[TempDevNum].DeviceNum := TempDevNum;
+    FDevArray[TempDevNum].DefCoil    := Boolean(TempAddForm.cbCoilsDefValue.ItemIndex);
+    FDevArray[TempDevNum].DefDiscret := Boolean(TempAddForm.cbDiscretDefValue.ItemIndex);
+    FDevArray[TempDevNum].DefHolding := Word(TempAddForm.speHoldingDefValue.Value);
+    FDevArray[TempDevNum].DefInput   := Word(TempAddForm.speInputDefValue.Value);
+
+    if TempAddForm.cgFunctions.Checked[0] then // функция 1
+     begin
+      FDevArray[TempDevNum].DeviceFunctions := FDevArray[TempDevNum].DeviceFunctions+[fn01];
+      FDevArray[TempDevNum].AddRegisters(rgCoils,0,65535);
+      TempStr := Format('%s Функция 1;',[TempStr]);
+     end;
+    if TempAddForm.cgFunctions.Checked[1] then // функция 2
+     begin
+      FDevArray[TempDevNum].DeviceFunctions := FDevArray[TempDevNum].DeviceFunctions+[fn02];
+      FDevArray[TempDevNum].AddRegisters(rgDiscrete,0,65535);
+      TempStr := Format('%s Функция 2;',[TempStr]);
+     end;
+    if TempAddForm.cgFunctions.Checked[2] then // функция 3
+     begin
+      FDevArray[TempDevNum].DeviceFunctions := FDevArray[TempDevNum].DeviceFunctions+[fn03];
+      FDevArray[TempDevNum].AddRegisters(rgHolding,0,65535);
+      TempStr := Format('%s Функция 3;',[TempStr]);
+     end;
+    if TempAddForm.cgFunctions.Checked[3] then // функция 4
+     begin
+      FDevArray[TempDevNum].DeviceFunctions := FDevArray[TempDevNum].DeviceFunctions+[fn04];
+      FDevArray[TempDevNum].AddRegisters(rgDiscrete,0,65535);
+      TempStr := Format('%s Функция 4;',[TempStr]);
+     end;
+    if TempAddForm.cgFunctions.Checked[4] then // функция 5
+     begin
+      FDevArray[TempDevNum].DeviceFunctions := FDevArray[TempDevNum].DeviceFunctions+[fn05];
+      TempStr := Format('%s Функция 5;',[TempStr]);
+     end;
+    if TempAddForm.cgFunctions.Checked[5] then // функция 6
+     begin
+      FDevArray[TempDevNum].DeviceFunctions := FDevArray[TempDevNum].DeviceFunctions+[fn06];
+      TempStr := Format('%s Функция 6;',[TempStr]);
+     end;
+    if TempAddForm.cgFunctions.Checked[6] then // функция 15
+     begin
+      FDevArray[TempDevNum].DeviceFunctions := FDevArray[TempDevNum].DeviceFunctions+[fn15];
+      TempStr := Format('%s Функция 15;',[TempStr]);
+     end;
+    if TempAddForm.cgFunctions.Checked[7] then // функция 16
+     begin
+      FDevArray[TempDevNum].DeviceFunctions := FDevArray[TempDevNum].DeviceFunctions+[fn16];
+      TempStr := Format('%s Функция 16;',[TempStr]);
+     end;
+    if TempAddForm.cgFunctions.Checked[8] then // функция 17
+     begin
+      FDevArray[TempDevNum].DeviceFunctions := FDevArray[TempDevNum].DeviceFunctions+[fn17];
+      TempStr := Format('%s Функция 17;',[TempStr]);
+     end;
+
+    FDevArray[TempDevNum].InitializeDevice;
+
+    LoggerObj.info('Создание устроств',Format('Добавлено: %s',[TempStr]));
    finally
     UnLock;
    end;
@@ -417,6 +558,11 @@ begin
    UnLock;
   end;
   FIsConfModify := True;
+end;
+
+procedure TfrmMain.actDevEditExecute(Sender : TObject);
+begin
+
 end;
 
 procedure TfrmMain.actDevViewExecute(Sender : TObject);
@@ -474,7 +620,7 @@ end;
 
 procedure TfrmMain.ClearChennals;
 begin
-  actChannelDelAll.Execute;
+  actChennelDelAll.Execute;
 end;
 
 procedure TfrmMain.Lock;

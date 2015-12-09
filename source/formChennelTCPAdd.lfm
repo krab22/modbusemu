@@ -32,7 +32,7 @@ object frmChennelTCPAdd: TfrmChennelTCPAdd
   end
   object lbName: TLabel
     Left = 8
-    Height = 21
+    Height = 20
     Top = 8
     Width = 28
     Caption = 'Имя'
@@ -40,7 +40,7 @@ object frmChennelTCPAdd: TfrmChennelTCPAdd
   end
   object lbAddress: TLabel
     Left = 8
-    Height = 21
+    Height = 20
     Top = 48
     Width = 40
     Caption = 'Адрес'
@@ -48,7 +48,7 @@ object frmChennelTCPAdd: TfrmChennelTCPAdd
   end
   object lbPort: TLabel
     Left = 8
-    Height = 21
+    Height = 20
     Top = 88
     Width = 33
     Caption = 'Порт'
@@ -56,7 +56,7 @@ object frmChennelTCPAdd: TfrmChennelTCPAdd
   end
   object edName: TEdit
     Left = 64
-    Height = 33
+    Height = 32
     Top = 8
     Width = 224
     TabOrder = 2
@@ -64,7 +64,7 @@ object frmChennelTCPAdd: TfrmChennelTCPAdd
   end
   object edAddress: TEdit
     Left = 64
-    Height = 33
+    Height = 32
     Top = 48
     Width = 224
     TabOrder = 3
@@ -72,7 +72,7 @@ object frmChennelTCPAdd: TfrmChennelTCPAdd
   end
   object edPort: TEdit
     Left = 64
-    Height = 33
+    Height = 32
     Top = 88
     Width = 224
     TabOrder = 4

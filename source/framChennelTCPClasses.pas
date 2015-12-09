@@ -15,6 +15,7 @@ type
   TframeChennelTCP = class(TFrame)
    btChennelStart   : TButton;
    btChennelClose   : TButton;
+   btEdit           : TButton;
    lbPort           : TLabel;
    lbChennelPort    : TLabel;
    lbAddress        : TLabel;
@@ -27,9 +28,10 @@ type
     FChennel : TChennelTCP;
     function  GetChennel : TChennelBase;
     procedure SetChennel(AValue : TChennelBase);
-    procedure UpdateChenInfo;
     procedure ClearInfo;
   public
+    procedure UpdateChenInfo;
+
     property Chennel : TChennelBase read GetChennel write SetChennel;
   end;
 

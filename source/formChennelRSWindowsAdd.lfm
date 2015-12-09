@@ -1,16 +1,16 @@
 object TfrmChennelRSAdd: TTfrmChennelRSAdd
-  Left = 2271
-  Height = 240
-  Top = 534
-  Width = 320
+  Left = 2128
+  Height = 247
+  Top = 469
+  Width = 381
   Caption = 'Добавить последовательный канал'
-  ClientHeight = 240
-  ClientWidth = 320
+  ClientHeight = 247
+  ClientWidth = 381
   LCLVersion = '1.5'
   object btOk: TButton
-    Left = 146
+    Left = 207
     Height = 25
-    Top = 203
+    Top = 210
     Width = 80
     Anchors = [akRight, akBottom]
     Caption = 'Добавить'
@@ -19,12 +19,180 @@ object TfrmChennelRSAdd: TTfrmChennelRSAdd
     TabOrder = 0
   end
   object btCancel: TButton
-    Left = 234
+    Left = 295
     Height = 25
-    Top = 203
+    Top = 210
     Width = 75
     Anchors = [akRight, akBottom]
     Caption = 'Отмена'
     TabOrder = 1
+  end
+  object lbPrefix: TLabel
+    Left = 8
+    Height = 20
+    Top = 51
+    Width = 65
+    Caption = 'Префикс:'
+    ParentColor = False
+  end
+  object lbPortNum: TLabel
+    Left = 8
+    Height = 20
+    Top = 86
+    Width = 91
+    Caption = 'Номер порта:'
+    FocusControl = spePortNum
+    ParentColor = False
+  end
+  object spePortNum: TSpinEdit
+    Tag = 1
+    Left = 104
+    Height = 32
+    Top = 86
+    Width = 80
+    MaxValue = 255
+    MinValue = 1
+    TabOrder = 2
+    Value = 1
+  end
+  object lbBaudRate: TLabel
+    Left = 192
+    Height = 20
+    Top = 86
+    Width = 66
+    Caption = 'Скорость:'
+    FocusControl = cmbBaudRate
+    ParentColor = False
+  end
+  object cmbBaudRate: TComboBox
+    Left = 263
+    Height = 28
+    Top = 86
+    Width = 112
+    ItemHeight = 0
+    ItemIndex = 9
+    Items.Strings = (
+      '75'
+      '110'
+      '150'
+      '300'
+      '600'
+      '1200'
+      '1800'
+      '2400'
+      '4800'
+      '9600'
+      '14400'
+      '19200'
+      '28800'
+      '38400'
+      '57600'
+      '115200'
+    )
+    Style = csDropDownList
+    TabOrder = 3
+    Text = '9600'
+  end
+  object lbByteSize: TLabel
+    Left = 8
+    Height = 20
+    Top = 126
+    Width = 94
+    Caption = 'Размер байта:'
+    FocusControl = cmbByteSize
+    ParentColor = False
+  end
+  object cmbByteSize: TComboBox
+    Left = 108
+    Height = 28
+    Top = 126
+    Width = 76
+    ItemHeight = 0
+    ItemIndex = 3
+    Items.Strings = (
+      '5'
+      '6'
+      '7'
+      '8'
+    )
+    Style = csDropDownList
+    TabOrder = 4
+    Text = '8'
+  end
+  object lbParitet: TLabel
+    Left = 192
+    Height = 20
+    Top = 126
+    Width = 59
+    Caption = 'Паритет:'
+    FocusControl = cmbParitet
+    ParentColor = False
+  end
+  object cmbParitet: TComboBox
+    Left = 263
+    Height = 28
+    Top = 126
+    Width = 108
+    ItemHeight = 0
+    ItemIndex = 2
+    Items.Strings = (
+      'NONE'
+      'ODD'
+      'EVEN'
+      'MARK'
+      'SPACE'
+    )
+    Style = csDropDownList
+    TabOrder = 5
+    Text = 'EVEN'
+  end
+  object lbStopBits: TLabel
+    Left = 8
+    Height = 20
+    Top = 162
+    Width = 96
+    Caption = 'Стоповых бит:'
+    FocusControl = cmbStopBits
+    ParentColor = False
+  end
+  object cmbStopBits: TComboBox
+    Left = 112
+    Height = 28
+    Top = 162
+    Width = 100
+    ItemHeight = 0
+    ItemIndex = 1
+    Items.Strings = (
+      '1'
+      '1,5'
+      '2'
+    )
+    Style = csDropDownList
+    TabOrder = 6
+    Text = '1,5'
+  end
+  object lbName: TLabel
+    Left = 8
+    Height = 20
+    Top = 8
+    Width = 80
+    Caption = 'Имя канала:'
+    ParentColor = False
+  end
+  object edChennalName: TEdit
+    Left = 96
+    Height = 32
+    Top = 8
+    Width = 279
+    TabOrder = 7
+    Text = 'Последовательный канал'
+  end
+  object lbPrefixName: TLabel
+    Left = 96
+    Height = 20
+    Top = 51
+    Width = 52
+    Caption = '\\.\COM'
+    ParentColor = False
   end
 end
