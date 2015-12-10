@@ -857,6 +857,22 @@ msgstr ""
 msgid "Адрес устройства:"
 msgstr ""
 
+#: tfrmdeviceview.tscoils.caption
+msgid "Coils"
+msgstr ""
+
+#: tfrmdeviceview.tsdiscrets.caption
+msgid "Discrets"
+msgstr ""
+
+#: tfrmdeviceview.tsholdings.caption
+msgid "Holdings"
+msgstr ""
+
+#: tfrmdeviceview.tsinputs.caption
+msgid "Inputs"
+msgstr ""
+
 #: tfrmmain.actchenneladd.caption
 msgctxt "TFRMMAIN.ACTCHENNELADD.CAPTION"
 msgid "Добавить канал"

@@ -117,6 +117,7 @@ type
      tbChannelCloseAll : TToolButton;
      tbChannelOpenAll  : TToolButton;
      tbDevEditDev      : TToolButton;
+     tbDevViewDev : TToolButton;
      procedure actChennelAddExecute(Sender: TObject);
      procedure actChennelCloseAllExecute(Sender: TObject);
      procedure actChennelCloseExecute(Sender: TObject);
