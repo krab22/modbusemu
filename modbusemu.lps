@@ -8,7 +8,7 @@
         <Filename Value="modbusemu.lpr"/>
         <IsPartOfProject Value="True"/>
         <CursorPos X="53" Y="10"/>
-        <UsageCount Value="115"/>
+        <UsageCount Value="126"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -19,38 +19,42 @@
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="560"/>
-        <CursorPos X="36" Y="574"/>
+        <TopLine Value="629"/>
+        <CursorPos Y="632"/>
         <ComponentState Value="1"/>
-        <UsageCount Value="115"/>
+        <UsageCount Value="126"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="files/lib/MiscFunctions/ExceptionsResStrings.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos X="3" Y="9"/>
-        <UsageCount Value="66"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="2"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="8"/>
+        <CursorPos X="33" Y="47"/>
+        <UsageCount Value="77"/>
+        <Loaded Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="source/ModbusEmuResStr.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
-        <CursorPos X="59" Y="18"/>
+        <TopLine Value="100"/>
+        <CursorPos X="30" Y="127"/>
         <ExtraEditorCount Value="1"/>
         <ExtraEditor1>
           <EditorIndex Value="-1"/>
-          <TopLine Value="30"/>
-          <CursorPos X="2" Y="49"/>
+          <CursorPos X="59" Y="18"/>
         </ExtraEditor1>
-        <UsageCount Value="66"/>
+        <UsageCount Value="77"/>
+        <Loaded Value="True"/>
       </Unit3>
     </Units>
   </ProjectSession>
   <Debugging>
-    <BreakPoints Count="3">
+    <BreakPoints Count="2">
       <Item1>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
@@ -65,13 +69,6 @@
         <Source Value="source/formChennelRSLinuxAdd.pas"/>
         <Line Value="141"/>
       </Item2>
-      <Item3>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="source/main.pas"/>
-        <Line Value="568"/>
-      </Item3>
     </BreakPoints>
   </Debugging>
 </CONFIG>

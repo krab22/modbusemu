@@ -53,7 +53,15 @@ type
      lbDeviceList      : TListBox;
      libChennelList    : TListBox;
      memLog            : TMemo;
-     mmDevEditDev : TMenuItem;
+     mmpiAddChennal    : TMenuItem;
+     mmpiLogSave       : TMenuItem;
+     mmpiLogClear      : TMenuItem;
+     mmpiDevEdit       : TMenuItem;
+     mmpiDevView       : TMenuItem;
+     mmpiDevDel        : TMenuItem;
+     mmpiDevClearList  : TMenuItem;
+     mmpiDevAdd        : TMenuItem;
+     mmDevEditDev      : TMenuItem;
      mppiEditChennal   : TMenuItem;
      mppiOpenChennal   : TMenuItem;
      mppiCloseChennal  : TMenuItem;
@@ -80,6 +88,8 @@ type
      mmFiles           : TMenuItem;
      mMenu             : TMainMenu;
      odConf            : TOpenDialog;
+     ppmLogOperations  : TPopupMenu;
+     ppmDevOperations  : TPopupMenu;
      ppmChennalOperations : TPopupMenu;
      scrbChennelParams : TScrollBox;
      sdConf            : TSaveDialog;
@@ -106,7 +116,7 @@ type
      tbChannelDelAll   : TToolButton;
      tbChannelCloseAll : TToolButton;
      tbChannelOpenAll  : TToolButton;
-     tbDevEditDev : TToolButton;
+     tbDevEditDev      : TToolButton;
      procedure actChennelAddExecute(Sender: TObject);
      procedure actChennelCloseAllExecute(Sender: TObject);
      procedure actChennelCloseExecute(Sender: TObject);
@@ -165,7 +175,8 @@ uses DeviceAdd,
      formChennelTCPAdd, {$IFDEF UNIX }formChennelRSLinuxAdd,{$ELSE}formChennelRSWindowsAdd,{$ENDIF}
      ModbusEmuResStr, MBDefine,
      LoggerLazarusGtkApplication,
-     LoggerItf;
+     LoggerItf,
+     ExceptionsTypes;
 
 { TfrmMain }
 
@@ -184,7 +195,7 @@ end;
 procedure TfrmMain.actChennelAddExecute(Sender: TObject);
 var TempFrm : TformChenAdd;
     TempIndex : Integer;
-    TempChenName : String;
+//    TempChenName : String;
     TempRes  : TModalResult;
 begin
   TempFrm := TformChenAdd.Create(Self);
@@ -200,7 +211,7 @@ begin
   if TempRes <> mrOK then Exit;
   if TempIndex = -1 then Exit;
   libChennelList.ItemIndex := TempIndex;
-  TempChenName := libChennelList.Items.Strings[TempIndex];
+//  TempChenName := libChennelList.Items.Strings[TempIndex];
   FIsConfModify := True;
 end;
 
@@ -463,7 +474,7 @@ begin
    if Assigned(FDevArray[TempDevNum]) then Exit;
    Lock;
    try
-    TempStr := Format('Устройство: %d;',[TempDevNum]);
+    TempStr := Format(rsDevAdd13,[TempDevNum]);
 
     FDevArray[TempDevNum] := TMBDevice.Create(nil);
     FDevArray[TempDevNum].DeviceNum := TempDevNum;
@@ -476,55 +487,55 @@ begin
      begin
       FDevArray[TempDevNum].DeviceFunctions := FDevArray[TempDevNum].DeviceFunctions+[fn01];
       FDevArray[TempDevNum].AddRegisters(rgCoils,0,65535);
-      TempStr := Format('%s Функция 1;',[TempStr]);
+      TempStr := Format(rsDevAdd14,[TempStr]);
      end;
     if TempAddForm.cgFunctions.Checked[1] then // функция 2
      begin
       FDevArray[TempDevNum].DeviceFunctions := FDevArray[TempDevNum].DeviceFunctions+[fn02];
       FDevArray[TempDevNum].AddRegisters(rgDiscrete,0,65535);
-      TempStr := Format('%s Функция 2;',[TempStr]);
+      TempStr := Format(rsDevAdd3,[TempStr]);
      end;
     if TempAddForm.cgFunctions.Checked[2] then // функция 3
      begin
       FDevArray[TempDevNum].DeviceFunctions := FDevArray[TempDevNum].DeviceFunctions+[fn03];
       FDevArray[TempDevNum].AddRegisters(rgHolding,0,65535);
-      TempStr := Format('%s Функция 3;',[TempStr]);
+      TempStr := Format(rsDevAdd4,[TempStr]);
      end;
     if TempAddForm.cgFunctions.Checked[3] then // функция 4
      begin
       FDevArray[TempDevNum].DeviceFunctions := FDevArray[TempDevNum].DeviceFunctions+[fn04];
       FDevArray[TempDevNum].AddRegisters(rgDiscrete,0,65535);
-      TempStr := Format('%s Функция 4;',[TempStr]);
+      TempStr := Format(rsDevAdd5,[TempStr]);
      end;
     if TempAddForm.cgFunctions.Checked[4] then // функция 5
      begin
       FDevArray[TempDevNum].DeviceFunctions := FDevArray[TempDevNum].DeviceFunctions+[fn05];
-      TempStr := Format('%s Функция 5;',[TempStr]);
+      TempStr := Format(rsDevAdd6,[TempStr]);
      end;
     if TempAddForm.cgFunctions.Checked[5] then // функция 6
      begin
       FDevArray[TempDevNum].DeviceFunctions := FDevArray[TempDevNum].DeviceFunctions+[fn06];
-      TempStr := Format('%s Функция 6;',[TempStr]);
+      TempStr := Format(rsDevAdd7,[TempStr]);
      end;
     if TempAddForm.cgFunctions.Checked[6] then // функция 15
      begin
       FDevArray[TempDevNum].DeviceFunctions := FDevArray[TempDevNum].DeviceFunctions+[fn15];
-      TempStr := Format('%s Функция 15;',[TempStr]);
+      TempStr := Format(rsDevAdd8,[TempStr]);
      end;
     if TempAddForm.cgFunctions.Checked[7] then // функция 16
      begin
       FDevArray[TempDevNum].DeviceFunctions := FDevArray[TempDevNum].DeviceFunctions+[fn16];
-      TempStr := Format('%s Функция 16;',[TempStr]);
+      TempStr := Format(rsDevAdd9,[TempStr]);
      end;
     if TempAddForm.cgFunctions.Checked[8] then // функция 17
      begin
       FDevArray[TempDevNum].DeviceFunctions := FDevArray[TempDevNum].DeviceFunctions+[fn17];
-      TempStr := Format('%s Функция 17;',[TempStr]);
+      TempStr := Format(rsDevAdd10,[TempStr]);
      end;
 
     FDevArray[TempDevNum].InitializeDevice;
 
-    LoggerObj.info('Создание устроств',Format('Добавлено: %s',[TempStr]));
+    LoggerObj.info(rsDevAdd11,Format(rsDevAdd12,[TempStr]));
    finally
     UnLock;
    end;
@@ -564,18 +575,236 @@ procedure TfrmMain.actDevEditExecute(Sender : TObject);
 var TempDev     : TMBDevice;
     TempAddForm : TfrmAddDevice;
     OldCaption  : String;
+    TempIndex   : Integer;
 begin
   if lbDeviceList.ItemIndex = -1 then Exit;
-  TempDev := TMBDevice(lbDeviceList.Items.Objects[lbDeviceList.ItemIndex]);
+  TempIndex := lbDeviceList.ItemIndex;
+  TempDev := TMBDevice(lbDeviceList.Items.Objects[TempIndex]);
   if not Assigned(TempDev) then Exit;
   TempAddForm := TfrmAddDevice.Create(Self);
   try
-   OldCaption := Caption;
-   Caption    := actDevEdit.Caption;
+   OldCaption := lbDeviceList.Items.Strings[TempIndex];
+   TempAddForm.Caption := actDevEdit.Caption;
+
+   TempAddForm.speDevNumber.Value := TempDev.DeviceNum;
+   if fn01 in TempDev.DeviceFunctions then TempAddForm.cgFunctions.Checked[0] := True
+    else TempAddForm.cgFunctions.Checked[0] := False;
+
+   if fn02 in TempDev.DeviceFunctions then TempAddForm.cgFunctions.Checked[1] := True
+    else TempAddForm.cgFunctions.Checked[1] := False;
+
+   if fn03 in TempDev.DeviceFunctions then TempAddForm.cgFunctions.Checked[2] := True
+    else TempAddForm.cgFunctions.Checked[2] := False;
+
+   if fn04 in TempDev.DeviceFunctions then TempAddForm.cgFunctions.Checked[3] := True
+    else TempAddForm.cgFunctions.Checked[3] := False;
+
+   if fn05 in TempDev.DeviceFunctions then TempAddForm.cgFunctions.Checked[4] := True
+    else TempAddForm.cgFunctions.Checked[4] := False;
+
+   if fn06 in TempDev.DeviceFunctions then TempAddForm.cgFunctions.Checked[5] := True
+    else TempAddForm.cgFunctions.Checked[5] := False;
+
+   if fn15 in TempDev.DeviceFunctions then TempAddForm.cgFunctions.Checked[6] := True
+    else TempAddForm.cgFunctions.Checked[6] := False;
+
+   if fn16 in TempDev.DeviceFunctions then TempAddForm.cgFunctions.Checked[7] := True
+    else TempAddForm.cgFunctions.Checked[7] := False;
+
+   if fn17 in TempDev.DeviceFunctions then TempAddForm.cgFunctions.Checked[8] := True
+    else TempAddForm.cgFunctions.Checked[8] := False;
+
+   if TempDev.DefCoil then TempAddForm.cbCoilsDefValue.ItemIndex := 1
+    else TempAddForm.cbCoilsDefValue.ItemIndex := 0;
+
+   if TempDev.DefDiscret then TempAddForm.cbDiscretDefValue.ItemIndex := 1
+    else TempAddForm.cbDiscretDefValue.ItemIndex := 0;
+
+   TempAddForm.speHoldingDefValue.Value := TempDev.DefHolding;
+   TempAddForm.speInputDefValue.Value   := TempDev.DefInput;
 
    if TempAddForm.ShowModal <> mrOK then Exit;
    Lock;
    try
+    if TempAddForm.speDevNumber.Value <> TempDev.DeviceNum then // изменен номер устройства
+     begin
+       if Assigned(FDevArray[TempAddForm.speDevNumber.Value]) then raise EAddDevAlreadyExists.Create(TempAddForm.speDevNumber.Value);
+       lbDeviceList.Items.Strings[TempIndex] := Format(rsDevAdd2,[TempAddForm.speDevNumber.Value]);
+       FDevArray[TempDev.DeviceNum] := nil;
+       TempDev.DeviceNum := TempAddForm.speDevNumber.Value;
+       FDevArray[TempAddForm.speDevNumber.Value] := TempDev;
+     end;
+
+    TempDev.DefCoil    := Boolean(TempAddForm.cbCoilsDefValue.ItemIndex);
+    TempDev.DefDiscret := Boolean(TempAddForm.cbDiscretDefValue.ItemIndex);
+    TempDev.DefHolding := TempAddForm.speHoldingDefValue.Value;
+    TempDev.DefInput   := TempAddForm.speInputDefValue.Value;
+
+    if TempAddForm.cgFunctions.Checked[0] then // установлена функция 1
+     begin
+      if not (fn01 in TempDev.DeviceFunctions) then  // новая функция
+       begin
+        TempDev.DeviceFunctions := TempDev.DeviceFunctions + [fn01];
+        TempDev.AddRegisters(rgCoils,0,65535);
+        TempDev.InitializeCoils;
+       end;
+     end
+    else
+     begin // снята функция
+      if fn01 in TempDev.DeviceFunctions then
+       begin
+        TempDev.DeviceFunctions := TempDev.DeviceFunctions - [fn01];
+        TempDev.ClearCoils;
+       end;
+     end;
+
+    if TempAddForm.cgFunctions.Checked[1] then // установлена функция 2
+     begin
+      if not (fn02 in TempDev.DeviceFunctions) then  // новая функция
+       begin
+        TempDev.DeviceFunctions := TempDev.DeviceFunctions + [fn02];
+        TempDev.AddRegisters(rgDiscrete,0,65535);
+        TempDev.InitializeDiscrets;
+       end;
+     end
+    else
+     begin // снята функция
+      if fn02 in TempDev.DeviceFunctions then
+       begin
+        TempDev.DeviceFunctions := TempDev.DeviceFunctions - [fn02];
+        TempDev.ClearDiscrets;
+       end;
+     end;
+
+    if TempAddForm.cgFunctions.Checked[2] then // установлена функция 3
+     begin
+      if not (fn03 in TempDev.DeviceFunctions) then  // новая функция
+       begin
+        TempDev.DeviceFunctions := TempDev.DeviceFunctions + [fn03];
+        TempDev.AddRegisters(rgHolding,0,65535);
+        TempDev.InitializeHoldings;
+       end;
+     end
+    else
+     begin // снята функция
+      if fn03 in TempDev.DeviceFunctions then
+       begin
+        TempDev.DeviceFunctions := TempDev.DeviceFunctions - [fn03];
+        TempDev.ClearHoldings;
+       end;
+     end;
+
+    if TempAddForm.cgFunctions.Checked[3] then // установлена функция 4
+     begin
+      if not (fn04 in TempDev.DeviceFunctions) then  // новая функция
+       begin
+        TempDev.DeviceFunctions := TempDev.DeviceFunctions + [fn04];
+        TempDev.AddRegisters(rgInput,0,65535);
+        TempDev.InitializeInputs;
+       end;
+     end
+    else
+     begin // снята функция
+      if fn04 in TempDev.DeviceFunctions then
+       begin
+        TempDev.DeviceFunctions := TempDev.DeviceFunctions - [fn04];
+        TempDev.ClearInputs;
+       end;
+     end;
+
+    if TempAddForm.cgFunctions.Checked[4] then // установлена функция 5
+     begin
+      if not (fn05 in TempDev.DeviceFunctions) then  // новая функция
+       begin
+        TempDev.DeviceFunctions := TempDev.DeviceFunctions + [fn05];
+        if TempDev.CoilCount = 0 then // если забыли добавить функцию чтения
+         begin
+          TempDev.DeviceFunctions := TempDev.DeviceFunctions + [fn01];
+          TempDev.AddRegisters(rgCoils,0,65535);
+          TempDev.InitializeCoils;
+         end;
+       end;
+     end
+    else
+     begin // снята функция
+      if fn05 in TempDev.DeviceFunctions then TempDev.DeviceFunctions := TempDev.DeviceFunctions - [fn05];
+     end;
+
+    if TempAddForm.cgFunctions.Checked[5] then // установлена функция 6
+     begin
+      if not (fn06 in TempDev.DeviceFunctions) then  // новая функция
+       begin
+        TempDev.DeviceFunctions := TempDev.DeviceFunctions + [fn06];
+        if TempDev.HoldingCount = 0 then // если забыли добавить функцию чтения
+         begin
+          TempDev.DeviceFunctions := TempDev.DeviceFunctions + [fn03];
+          TempDev.AddRegisters(rgHolding,0,65535);
+          TempDev.InitializeHoldings;
+         end;
+       end;
+     end
+    else
+     begin // снята функция
+      if fn06 in TempDev.DeviceFunctions then TempDev.DeviceFunctions := TempDev.DeviceFunctions - [fn06];
+     end;
+
+    if TempAddForm.cgFunctions.Checked[6] then // установлена функция 15
+     begin
+      if not (fn15 in TempDev.DeviceFunctions) then  // новая функция
+       begin
+        TempDev.DeviceFunctions := TempDev.DeviceFunctions + [fn15];
+        if TempDev.CoilCount = 0 then // если забыли добавить функцию чтения
+         begin
+          TempDev.DeviceFunctions := TempDev.DeviceFunctions + [fn01];
+          TempDev.AddRegisters(rgCoils,0,65535);
+          TempDev.InitializeCoils;
+         end;
+       end;
+     end
+    else
+     begin // снята функция
+      if fn15 in TempDev.DeviceFunctions then TempDev.DeviceFunctions := TempDev.DeviceFunctions - [fn15];
+     end;
+
+    if TempAddForm.cgFunctions.Checked[7] then // установлена функция 16
+     begin
+      if not (fn16 in TempDev.DeviceFunctions) then  // новая функция
+       begin
+        TempDev.DeviceFunctions := TempDev.DeviceFunctions + [fn16];
+        if TempDev.HoldingCount = 0 then // если забыли добавить функцию чтения
+         begin
+          TempDev.DeviceFunctions := TempDev.DeviceFunctions + [fn03];
+          TempDev.AddRegisters(rgHolding,0,65535);
+          TempDev.InitializeHoldings;
+         end;
+       end;
+     end
+    else
+     begin // снята функция
+      if fn16 in TempDev.DeviceFunctions then TempDev.DeviceFunctions := TempDev.DeviceFunctions - [fn16];
+     end;
+
+    if TempAddForm.cgFunctions.Checked[8] then // установлена функция 17
+     begin
+      if not (fn17 in TempDev.DeviceFunctions) then  // новая функция
+       begin
+        TempDev.DeviceFunctions := TempDev.DeviceFunctions + [fn17];
+        if TempDev.HoldingCount = 0 then // если забыли добавить функцию чтения
+         begin
+          TempDev.DeviceFunctions := TempDev.DeviceFunctions + [fn03];
+          TempDev.AddRegisters(rgHolding,0,65535);
+          TempDev.InitializeHoldings;
+         end;
+       end;
+     end
+    else
+     begin // снята функция
+      if fn17 in TempDev.DeviceFunctions then TempDev.DeviceFunctions := TempDev.DeviceFunctions - [fn17];
+     end;
+
+    if TempDev.DeviceFunctions = [] then raise ENeitherFunctioIsNotSet.Create;
+
+    LoggerObj.info(rsDevEdit2, Format(rsDevEdit1,[OldCaption]));
 
    finally
     UnLock;

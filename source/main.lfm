@@ -185,6 +185,7 @@ object frmMain: TfrmMain
     ItemHeight = 0
     OnDblClick = lbDeviceListDblClick
     ParentShowHint = False
+    PopupMenu = ppmDevOperations
     ScrollWidth = 199
     ShowHint = True
     TabOrder = 1
@@ -217,6 +218,7 @@ object frmMain: TfrmMain
       Width = 691
       Anchors = [akLeft, akRight, akBottom]
       OnChange = memLogChange
+      PopupMenu = ppmLogOperations
       ParentShowHint = False
       ScrollBars = ssAutoBoth
       ShowHint = True
@@ -1928,8 +1930,12 @@ object frmMain: TfrmMain
     top = 176
   end
   object ppmChennalOperations: TPopupMenu
+    Images = ImgListAct
     left = 504
     top = 96
+    object mmpiAddChennal: TMenuItem
+      Action = actChennelAdd
+    end
     object mppiOpenChennal: TMenuItem
       Action = actChennelOpen
     end
@@ -4473,5 +4479,35 @@ object frmMain: TfrmMain
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000
     }
+  end
+  object ppmDevOperations: TPopupMenu
+    Images = ImgListAct
+    left = 693
+    top = 96
+    object mmpiDevAdd: TMenuItem
+      Action = actDevAdd
+    end
+    object mmpiDevEdit: TMenuItem
+      Action = actDevEdit
+    end
+    object mmpiDevView: TMenuItem
+      Action = actDevView
+    end
+    object mmpiDevDel: TMenuItem
+      Action = actDevDel
+    end
+    object mmpiDevClearList: TMenuItem
+      Action = actDevClearList
+    end
+  end
+  object ppmLogOperations: TPopupMenu
+    left = 501
+    top = 340
+    object mmpiLogClear: TMenuItem
+      Action = actLogClear
+    end
+    object mmpiLogSave: TMenuItem
+      Action = actLogSave
+    end
   end
 end

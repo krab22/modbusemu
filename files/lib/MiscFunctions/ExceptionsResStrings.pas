@@ -43,6 +43,10 @@ resourcestring
   rsExceptXlmNoAttr                          = '%s Тег %s. Отсутствует обязательный атрибут %s';
   rsExceptXMLAttrVal                         = '%s Тег %s. Атрибут %s имеет недопустимое значение %s';
 
+  rsExceptAddDevAlreadyExists                = 'Устройство с адресом %d уже существует.';
+  rsExceptNeitherFunctioIsNotSet             = 'Ни одна функция не установлена';
+
+
 implementation
 
 end.

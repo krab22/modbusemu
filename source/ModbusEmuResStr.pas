@@ -120,6 +120,23 @@ resourcestring
  rsMBError4                 = 'Ошибка записи пакета в порт.';
  rsMBError5                 = 'Признак нестандартного префикса установлен, а сам префикс не задан.';
 
+ rsDevAdd13                 = 'Устройство: %d;';
+ rsDevAdd14                 = '%s Функция 1;';
+ rsDevAdd3                  = '%s Функция 2;';
+ rsDevAdd4                  = '%s Функция 3;';
+ rsDevAdd5                  = '%s Функция 4;';
+ rsDevAdd6                  = '%s Функция 5;';
+ rsDevAdd7                  = '%s Функция 6;';
+ rsDevAdd8                  = '%s Функция 15;';
+ rsDevAdd9                  = '%s Функция 16;';
+ rsDevAdd10                 = '%s Функция 17;';
+ rsDevAdd11                 = 'Создание устроств';
+ rsDevAdd12                 = 'Добавлено: %s';
+
+ rsDevEdit1                 = 'Устройство(%s) успешно изменено';
+ rsDevEdit2                 = 'Редактирование параметров устройств';
+
+
 
 implementation
 

@@ -121,6 +121,21 @@ type
     constructor Create(AClassName, ANodeName, AAttrName, AValue : String);
   end;
 
+  { EAddDevAlreadyExists }
+
+  EAddDevAlreadyExists = class(Exception)
+   public
+    constructor Create(ADevNum : Byte);
+  end;
+
+  { ENeitherFunctioIsNotSet }
+
+  ENeitherFunctioIsNotSet = class(Exception)
+   public
+    constructor Create;
+  end;
+
+
   function GetMBErrorString(Error : Cardinal) : String;
 
 implementation
@@ -157,6 +172,20 @@ begin
  else
   Result:=RS_MB_UNINSPACTED;
  end;
+end;
+
+{ ENeitherFunctioIsNotSet }
+
+constructor ENeitherFunctioIsNotSet.Create;
+begin
+  Message := rsExceptNeitherFunctioIsNotSet;
+end;
+
+{ EAddDevAlreadyExists }
+
+constructor EAddDevAlreadyExists.Create(ADevNum : Byte);
+begin
+  Message := Format(rsExceptAddDevAlreadyExists,[ADevNum]);
 end;
 
 { EXmlAttributeValue }

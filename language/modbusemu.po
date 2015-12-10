@@ -1,6 +1,14 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
+#: exceptionsresstrings.rsexceptadddevalreadyexists
+msgid "Ð£ÑÑÑÐ¾Ð¹ÑÑÐ²Ð¾ Ñ Ð°Ð´ÑÐµÑÐ¾Ð¼ %d ÑÐ¶Ðµ ÑÑÑÐµÑÑÐ²ÑÐµÑ."
+msgstr ""
+
+#: exceptionsresstrings.rsexceptneitherfunctioisnotset
+msgid "ÐÐ¸ Ð¾Ð´Ð½Ð° ÑÑÐ½ÐºÑÐ¸Ñ Ð½Ðµ ÑÑÑÐ°Ð½Ð¾Ð²Ð»ÐµÐ½Ð°"
+msgstr ""
+
 #: exceptionsresstrings.rsexceptxlmnoattr
 msgid "%s Ð¢ÐµÐ³ %s. ÐÑÑÑÑÑÑÐ²ÑÐµÑ Ð¾Ð±ÑÐ·Ð°ÑÐµÐ»ÑÐ½ÑÐ¹ Ð°ÑÑÐ¸Ð±ÑÑ %s"
 msgstr ""
@@ -223,8 +231,64 @@ msgid ""
 "ÐÐ¾Ð¼ÐµÑ Ð´Ð¾Ð»Ð¶ÐµÐ½ Ð±ÑÑÑ ÑÐ¸ÑÐ»Ð¾Ð¼ Ð¾Ñ 1 Ð´Ð¾ 255\n"
 msgstr ""
 
+#: modbusemuresstr.rsdevadd10
+msgid "%s Ð¤ÑÐ½ÐºÑÐ¸Ñ 17;"
+msgstr ""
+
+#: modbusemuresstr.rsdevadd11
+msgid "Ð¡Ð¾Ð·Ð´Ð°Ð½Ð¸Ðµ ÑÑÑÑÐ¾ÑÑÐ²"
+msgstr ""
+
+#: modbusemuresstr.rsdevadd12
+msgid "ÐÐ¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¾: %s"
+msgstr ""
+
+#: modbusemuresstr.rsdevadd13
+msgid "Ð£ÑÑÑÐ¾Ð¹ÑÑÐ²Ð¾: %d;"
+msgstr ""
+
+#: modbusemuresstr.rsdevadd14
+msgid "%s Ð¤ÑÐ½ÐºÑÐ¸Ñ 1;"
+msgstr ""
+
 #: modbusemuresstr.rsdevadd2
 msgid "Ð£ÑÑÑÐ¾Ð¹ÑÑÐ²Ð¾: %d"
+msgstr ""
+
+#: modbusemuresstr.rsdevadd3
+msgid "%s Ð¤ÑÐ½ÐºÑÐ¸Ñ 2;"
+msgstr ""
+
+#: modbusemuresstr.rsdevadd4
+msgid "%s Ð¤ÑÐ½ÐºÑÐ¸Ñ 3;"
+msgstr ""
+
+#: modbusemuresstr.rsdevadd5
+msgid "%s Ð¤ÑÐ½ÐºÑÐ¸Ñ 4;"
+msgstr ""
+
+#: modbusemuresstr.rsdevadd6
+msgid "%s Ð¤ÑÐ½ÐºÑÐ¸Ñ 5;"
+msgstr ""
+
+#: modbusemuresstr.rsdevadd7
+msgid "%s Ð¤ÑÐ½ÐºÑÐ¸Ñ 6;"
+msgstr ""
+
+#: modbusemuresstr.rsdevadd8
+msgid "%s Ð¤ÑÐ½ÐºÑÐ¸Ñ 15;"
+msgstr ""
+
+#: modbusemuresstr.rsdevadd9
+msgid "%s Ð¤ÑÐ½ÐºÑÐ¸Ñ 16;"
+msgstr ""
+
+#: modbusemuresstr.rsdevedit1
+msgid "Ð£ÑÑÑÐ¾Ð¹ÑÑÐ²Ð¾(%s) ÑÑÐ¿ÐµÑÐ½Ð¾ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¾"
+msgstr ""
+
+#: modbusemuresstr.rsdevedit2
+msgid "Ð ÐµÐ´Ð°ÐºÑÐ¸ÑÐ¾Ð²Ð°Ð½Ð¸Ðµ Ð¿Ð°ÑÐ°Ð¼ÐµÑÑÐ¾Ð² ÑÑÑÑÐ¾Ð¹ÑÑÐ²"
 msgstr ""
 
 #: modbusemuresstr.rseditchennel
