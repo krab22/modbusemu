@@ -1,7 +1,7 @@
 object TfrmChennelRSAdd: TTfrmChennelRSAdd
-  Left = 2128
+  Left = 2173
   Height = 247
-  Top = 469
+  Top = 388
   Width = 381
   Caption = 'Добавить последовательный канал'
   ClientHeight = 247

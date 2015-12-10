@@ -1,7 +1,7 @@
 object formChenAdd: TformChenAdd
-  Left = 1945
+  Left = 2115
   Height = 124
-  Top = 81
+  Top = 178
   Width = 289
   BorderStyle = bsDialog
   Caption = 'Добавить канал'

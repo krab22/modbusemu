@@ -6,8 +6,8 @@ object frameChennelTCP: TframeChennelTCP
   ClientHeight = 129
   ClientWidth = 434
   TabOrder = 0
-  DesignLeft = 3249
-  DesignTop = 547
+  DesignLeft = 3041
+  DesignTop = 560
   object lbChennelCapt: TLabel
     Left = 8
     Height = 20

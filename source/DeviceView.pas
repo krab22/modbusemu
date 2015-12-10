@@ -13,18 +13,18 @@ type
   { TfrmDeviceView }
 
   TfrmDeviceView = class(TForm)
-     edDevNum : TEdit;
-     lbDevNum : TLabel;
+    lbDeviceNumber : TLabel;
+    lbDevNum : TLabel;
    private
-     FDevice   : TMBDevice;
-     FCSection : TCriticalSection;
-     procedure SetDevice(AValue : TMBDevice);
-     procedure ClearForm;
-     procedure Lock;
-     procedure UnLock;
+    FDevice   : TMBDevice;
+    FCSection : TCriticalSection;
+    procedure SetDevice(AValue : TMBDevice);
+    procedure ClearForm;
+    procedure Lock;
+    procedure UnLock;
    public
-     property Device   : TMBDevice read FDevice write SetDevice;
-     property CSection : TCriticalSection read FCSection write FCSection;
+    property Device   : TMBDevice read FDevice write SetDevice;
+    property CSection : TCriticalSection read FCSection write FCSection;
   end;
 
 var frmDeviceView : TfrmDeviceView;
@@ -48,7 +48,7 @@ begin
 
   Lock;
   try
-   edDevNum.Text := IntToStr(FDevice.DeviceNum);
+   lbDeviceNumber.Caption := IntToStr(FDevice.DeviceNum);
   finally
     UnLock;
   end;
@@ -56,7 +56,7 @@ end;
 
 procedure TfrmDeviceView.ClearForm;
 begin
-  edDevNum.Text := '';
+  lbDeviceNumber.Caption := '';
 end;
 
 procedure TfrmDeviceView.Lock;

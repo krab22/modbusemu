@@ -1,7 +1,7 @@
 object frmChennelTCPAdd: TfrmChennelTCPAdd
-  Left = 2145
+  Left = 2183
   Height = 168
-  Top = 215
+  Top = 226
   Width = 301
   BorderIcons = []
   BorderStyle = bsDialog

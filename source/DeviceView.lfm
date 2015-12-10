@@ -1,7 +1,7 @@
 object frmDeviceView: TfrmDeviceView
-  Left = 463
+  Left = 2102
   Height = 495
-  Top = 231
+  Top = 227
   Width = 967
   Caption = 'Просмотр устройства'
   ClientHeight = 495
@@ -12,16 +12,16 @@ object frmDeviceView: TfrmDeviceView
     Left = 8
     Height = 20
     Top = 8
-    Width = 123
-    Caption = 'Номер устройства'
+    Width = 122
+    Caption = 'Адрес устройства:'
     ParentColor = False
   end
-  object edDevNum: TEdit
+  object lbDeviceNumber: TLabel
     Left = 136
-    Height = 32
+    Height = 20
     Top = 8
-    Width = 80
-    ReadOnly = True
-    TabOrder = 0
+    Width = 107
+    Caption = 'lbDeviceNumber'
+    ParentColor = False
   end
 end

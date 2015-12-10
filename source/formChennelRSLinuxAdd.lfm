@@ -1,7 +1,7 @@
 object frmChennelRSAdd: TfrmChennelRSAdd
-  Left = 2137
+  Left = 2150
   Height = 241
-  Top = 160
+  Top = 268
   Width = 382
   BorderStyle = bsDialog
   Caption = 'Добавить последовательный канал'

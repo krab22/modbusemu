@@ -3,12 +3,12 @@
   <ProjectSession>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="4">
+    <Units Count="12">
       <Unit0>
         <Filename Value="modbusemu.lpr"/>
         <IsPartOfProject Value="True"/>
-        <CursorPos X="53" Y="10"/>
-        <UsageCount Value="126"/>
+        <CursorPos X="69" Y="12"/>
+        <UsageCount Value="128"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -17,40 +17,129 @@
         <ComponentName Value="frmMain"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="629"/>
-        <CursorPos Y="632"/>
+        <CursorPos X="24" Y="925"/>
         <ComponentState Value="1"/>
-        <UsageCount Value="126"/>
+        <UsageCount Value="128"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="files/lib/MiscFunctions/ExceptionsResStrings.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <TopLine Value="8"/>
         <CursorPos X="33" Y="47"/>
-        <UsageCount Value="77"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="79"/>
       </Unit2>
       <Unit3>
         <Filename Value="source/ModbusEmuResStr.pas"/>
         <IsPartOfProject Value="True"/>
-        <WindowIndex Value="1"/>
-        <TopLine Value="100"/>
-        <CursorPos X="30" Y="127"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="59" Y="18"/>
         <ExtraEditorCount Value="1"/>
         <ExtraEditor1>
           <EditorIndex Value="-1"/>
-          <CursorPos X="59" Y="18"/>
+          <WindowIndex Value="1"/>
+          <TopLine Value="100"/>
+          <CursorPos X="30" Y="127"/>
         </ExtraEditor1>
-        <UsageCount Value="77"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="79"/>
       </Unit3>
+      <Unit4>
+        <Filename Value="source/DeviceAdd.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmAddDevice"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="16" Y="15"/>
+        <UsageCount Value="23"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="source/DeviceView.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmDeviceView"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="4"/>
+        <CursorPos X="5" Y="27"/>
+        <UsageCount Value="23"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="source/formChennelAdd.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="formChenAdd"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="15" Y="11"/>
+        <UsageCount Value="23"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="source/formChennelRSLinuxAdd.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmChennelRSAdd"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <EditorIndex Value="-1"/>
+        <ExtraEditorCount Value="1"/>
+        <ExtraEditor1>
+          <EditorIndex Value="-1"/>
+          <CursorPos X="19" Y="15"/>
+        </ExtraEditor1>
+        <UsageCount Value="23"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="source/formChennelRSWindowsAdd.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="TfrmChennelRSAdd"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="91" Y="12"/>
+        <ExtraEditorCount Value="1"/>
+        <ExtraEditor1>
+          <EditorIndex Value="-1"/>
+          <CursorPos X="20" Y="16"/>
+        </ExtraEditor1>
+        <UsageCount Value="23"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="source/formChennelTCPAdd.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmChennelTCPAdd"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="20" Y="14"/>
+        <UsageCount Value="23"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="source/framChennelRSClasses.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frameChennelRS"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="18" Y="14"/>
+        <UsageCount Value="23"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="source/framChennelTCPClasses.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frameChennelTCP"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="19" Y="15"/>
+        <UsageCount Value="23"/>
+      </Unit11>
     </Units>
   </ProjectSession>
   <Debugging>

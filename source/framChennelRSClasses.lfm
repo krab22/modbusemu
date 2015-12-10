@@ -6,8 +6,8 @@ object frameChennelRS: TframeChennelRS
   ClientHeight = 177
   ClientWidth = 437
   TabOrder = 0
-  DesignLeft = 3246
-  DesignTop = 328
+  DesignLeft = 2909
+  DesignTop = 351
   object lbChennelCapt: TLabel
     Left = 8
     Height = 20

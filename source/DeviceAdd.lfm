@@ -1,7 +1,7 @@
 object frmAddDevice: TfrmAddDevice
-  Left = 2061
+  Left = 2188
   Height = 258
-  Top = 189
+  Top = 256
   Width = 487
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog

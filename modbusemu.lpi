@@ -21,7 +21,7 @@
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MinorVersionNr Value="5"/>
-      <BuildNr Value="12"/>
+      <BuildNr Value="17"/>
       <Language Value="0419"/>
       <Attributes pvaDebug="True"/>
       <StringTable ProductVersion=""/>
@@ -45,7 +45,7 @@
         <PackageName Value="LCL"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="4">
+    <Units Count="12">
       <Unit0>
         <Filename Value="modbusemu.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -65,6 +65,62 @@
         <Filename Value="source/ModbusEmuResStr.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit3>
+      <Unit4>
+        <Filename Value="source/DeviceAdd.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmAddDevice"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="source/DeviceView.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmDeviceView"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="source/formChennelAdd.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="formChenAdd"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="source/formChennelRSLinuxAdd.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmChennelRSAdd"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="source/formChennelRSWindowsAdd.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="TfrmChennelRSAdd"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="source/formChennelTCPAdd.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmChennelTCPAdd"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="source/framChennelRSClasses.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frameChennelRS"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="source/framChennelTCPClasses.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frameChennelTCP"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+      </Unit11>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
