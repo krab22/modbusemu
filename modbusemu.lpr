@@ -11,7 +11,7 @@ uses
   DeviceView,formChennelAdd,
   {$IFDEF UNIX}formChennelRSLinuxAdd,{$ELSE}formChennelRSWindowsAdd,{$ENDIF}
   formChennelTCPAdd,
-  framChennelRSClasses,framChennelTCPClasses;
+  framChennelRSClasses,framChennelTCPClasses, TestDeviceView;
 
 {$R *.res}
 
@@ -19,6 +19,7 @@ begin
   RequireDerivedFormResource:=True;
   Application.Initialize;
   Application.CreateForm(TfrmMain, frmMain);
+  Application.CreateForm(TformTestDevView, formTestDevView);
   Application.Run;
 end.
 

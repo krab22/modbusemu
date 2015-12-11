@@ -364,27 +364,52 @@ end;
 
 procedure TChennelRSThread.ResponseF5(ADev : TMBDevice);
 begin
+  ADev.BeginPacketUpdate;
+  try
 
+  finally
+   ADev.EndPacketUpdate;
+  end;
 end;
 
 procedure TChennelRSThread.ResponseF6(ADev : TMBDevice);
 begin
+  ADev.BeginPacketUpdate;
+  try
 
+  finally
+   ADev.EndPacketUpdate;
+  end;
 end;
 
 procedure TChennelRSThread.ResponseF15(ADev : TMBDevice);
 begin
+  ADev.BeginPacketUpdate;
+  try
 
+  finally
+   ADev.EndPacketUpdate;
+  end;
 end;
 
 procedure TChennelRSThread.ResponseF16(ADev : TMBDevice);
 begin
+  ADev.BeginPacketUpdate;
+  try
 
+  finally
+   ADev.EndPacketUpdate;
+  end;
 end;
 
 procedure TChennelRSThread.ResponseF17(ADev : TMBDevice);
 begin
+  ADev.BeginPacketUpdate;
+  try
 
+  finally
+   ADev.EndPacketUpdate;
+  end;
 end;
 
 procedure TChennelRSThread.SendErrorMsg(ADevNum, AFuncNum, AError : Byte);

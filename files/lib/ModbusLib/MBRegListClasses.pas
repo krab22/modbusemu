@@ -791,4 +791,4 @@ begin
   if MBRegister[Address] <> nil then MBRegister[Address].Value:= Value;
 end;
 
-end.
+end.

@@ -462,7 +462,12 @@ begin
     else TempBool := True;
 
    try
-    ADev.Coils[TempStartAddr].Value := TempBool;
+    ADev.BeginPacketUpdate;
+    try
+     ADev.Coils[TempStartAddr].Value := TempBool;
+    finally
+     ADev.EndPacketUpdate;
+    end;
 
     TempResp5_6.TCPHeader.TransactioID := Swap(FReader.TransactionID);
     TempResp5_6.TCPHeader.ProtocolID   := Swap(FReader.ProtocolID);
@@ -506,7 +511,12 @@ begin
    TempStartAddr := swap(PMBF1_6FRequestData(TempPackData)^.StartingAddress); // адрес
    TempQuantity  := swap(PMBF1_6FRequestData(TempPackData)^.Quantity);        // значение
    try
-    ADev.Inputs[TempStartAddr].Value := TempQuantity;
+    ADev.BeginPacketUpdate;
+    try
+     ADev.Inputs[TempStartAddr].Value := TempQuantity;
+    finally
+     ADev.EndPacketUpdate;
+    end;
 
     TempResp5_6.TCPHeader.TransactioID := Swap(FReader.TransactionID);
     TempResp5_6.TCPHeader.ProtocolID   := Swap(FReader.ProtocolID);

@@ -561,6 +561,26 @@ msgctxt "TFORMCHENADD.CAPTION"
 msgid "Добавить канал"
 msgstr ""
 
+#: tformtestdevview.btcoilwrite.caption
+msgid "Записать Coil"
+msgstr ""
+
+#: tformtestdevview.btdiscretwrite.caption
+msgid "Записать Discret"
+msgstr ""
+
+#: tformtestdevview.btholdingwrite.caption
+msgid "Записать Holding"
+msgstr ""
+
+#: tformtestdevview.btinputwrite.caption
+msgid "Записать Input"
+msgstr ""
+
+#: tformtestdevview.caption
+msgid "formTestDevView"
+msgstr ""
+
 #: tframechennelrs.btchennelclose.caption
 msgctxt "tframechennelrs.btchennelclose.caption"
 msgid "Закрыть"
@@ -842,6 +862,10 @@ msgstr ""
 
 #: tfrmchenneltcpadd.lbport.caption
 msgid "Порт"
+msgstr ""
+
+#: tfrmdeviceview.bttestdevview.caption
+msgid "btTestDevView"
 msgstr ""
 
 #: tfrmdeviceview.caption

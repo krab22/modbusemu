@@ -200,7 +200,7 @@ begin
   FMBRegType  := rgHolding;
   FNumber     := 0;
   FStrAddress := '400001';
-  FReadOnly   := True;
+  FReadOnly   := False;
 end;
 
 function TMBRegister.GetStrAddress: String;
@@ -330,7 +330,6 @@ end;
 procedure TMBWordRegister.SetValue(const aValue: Word);
 begin
   if FReadOnly then raise Exception.Create(ErrReadOnly);
-  FValue := aValue;
   ServerSideSetValue(aValue);
 end;
 

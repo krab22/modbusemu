@@ -14,6 +14,8 @@ uses
 
 type
 
+
+
   { TfrmMain }
 
   TfrmMain = class(TForm)
@@ -149,8 +151,8 @@ type
      procedure memLogChange(Sender: TObject);
    private
      FDevArray     : TDeviceArray;
+     FDevForms     : TDevFormArray;
      FIsConfModify : Boolean;
-     FDevView      : TfrmDeviceView;
      FCSection     : TCriticalSection;
      FChenRSFrame  : TframeChennelRS;
      FChenTCPFrame : TframeChennelTCP;
@@ -196,7 +198,6 @@ end;
 procedure TfrmMain.actChennelAddExecute(Sender: TObject);
 var TempFrm : TformChenAdd;
     TempIndex : Integer;
-//    TempChenName : String;
     TempRes  : TModalResult;
 begin
   TempFrm := TformChenAdd.Create(Self);
@@ -212,7 +213,6 @@ begin
   if TempRes <> mrOK then Exit;
   if TempIndex = -1 then Exit;
   libChennelList.ItemIndex := TempIndex;
-//  TempChenName := libChennelList.Items.Strings[TempIndex];
   FIsConfModify := True;
 end;
 
@@ -505,28 +505,48 @@ begin
     if TempAddForm.cgFunctions.Checked[3] then // функция 4
      begin
       FDevArray[TempDevNum].DeviceFunctions := FDevArray[TempDevNum].DeviceFunctions+[fn04];
-      FDevArray[TempDevNum].AddRegisters(rgDiscrete,0,65535);
+      FDevArray[TempDevNum].AddRegisters(rgInput,0,65535);
       TempStr := Format(rsDevAdd5,[TempStr]);
      end;
     if TempAddForm.cgFunctions.Checked[4] then // функция 5
      begin
       FDevArray[TempDevNum].DeviceFunctions := FDevArray[TempDevNum].DeviceFunctions+[fn05];
       TempStr := Format(rsDevAdd6,[TempStr]);
+      if not(fn01 in FDevArray[TempDevNum].DeviceFunctions) then
+       begin
+        FDevArray[TempDevNum].DeviceFunctions := FDevArray[TempDevNum].DeviceFunctions+[fn01];
+        FDevArray[TempDevNum].AddRegisters(rgCoils,0,65535);
+       end;
      end;
     if TempAddForm.cgFunctions.Checked[5] then // функция 6
      begin
       FDevArray[TempDevNum].DeviceFunctions := FDevArray[TempDevNum].DeviceFunctions+[fn06];
       TempStr := Format(rsDevAdd7,[TempStr]);
+      if not(fn03 in FDevArray[TempDevNum].DeviceFunctions) then
+       begin
+        FDevArray[TempDevNum].DeviceFunctions := FDevArray[TempDevNum].DeviceFunctions+[fn03];
+        FDevArray[TempDevNum].AddRegisters(rgHolding,0,65535);
+       end;
      end;
     if TempAddForm.cgFunctions.Checked[6] then // функция 15
      begin
       FDevArray[TempDevNum].DeviceFunctions := FDevArray[TempDevNum].DeviceFunctions+[fn15];
       TempStr := Format(rsDevAdd8,[TempStr]);
+      if not(fn01 in FDevArray[TempDevNum].DeviceFunctions) then
+       begin
+        FDevArray[TempDevNum].DeviceFunctions := FDevArray[TempDevNum].DeviceFunctions+[fn01];
+        FDevArray[TempDevNum].AddRegisters(rgCoils,0,65535);
+       end;
      end;
     if TempAddForm.cgFunctions.Checked[7] then // функция 16
      begin
       FDevArray[TempDevNum].DeviceFunctions := FDevArray[TempDevNum].DeviceFunctions+[fn16];
       TempStr := Format(rsDevAdd9,[TempStr]);
+      if not(fn03 in FDevArray[TempDevNum].DeviceFunctions) then
+       begin
+        FDevArray[TempDevNum].DeviceFunctions := FDevArray[TempDevNum].DeviceFunctions+[fn03];
+        FDevArray[TempDevNum].AddRegisters(rgHolding,0,65535);
+       end;
      end;
     if TempAddForm.cgFunctions.Checked[8] then // функция 17
      begin
@@ -535,6 +555,11 @@ begin
      end;
 
     FDevArray[TempDevNum].InitializeDevice;
+
+    FDevForms[TempDevNum] := TfrmDeviceView.Create(Self);
+    FDevForms[TempDevNum].Logger   := LoggerObj as IDLogger;
+    FDevForms[TempDevNum].CSection := FCSection;
+    FDevForms[TempDevNum].Device   := FDevArray[TempDevNum];
 
     LoggerObj.info(rsDevAdd11,Format(rsDevAdd12,[TempStr]));
    finally
@@ -553,12 +578,10 @@ var TempDev : TMBDevice;
 begin
   if lbDeviceList.ItemIndex = -1 then Exit;
   TempDev := TMBDevice(lbDeviceList.Items.Objects[lbDeviceList.ItemIndex]);
-  if Assigned(FDevView) then
-   if FDevView.Device = TempDev then
-    begin
-     if FDevView.IsVisible then FDevView.Close;
-     FDevView.Device := nil;
-    end;
+
+  FDevForms[TempDev.DeviceNum].Free;
+  FDevForms[TempDev.DeviceNum] := nil;
+
   lbDeviceList.Items.Objects[lbDeviceList.ItemIndex] := nil;
   lbDeviceList.Items.Delete(lbDeviceList.ItemIndex);
   if lbDeviceList.Items.Count > 0 then lbDeviceList.ItemIndex := 0;
@@ -577,6 +600,7 @@ var TempDev     : TMBDevice;
     TempAddForm : TfrmAddDevice;
     OldCaption  : String;
     TempIndex   : Integer;
+    TempForm    : TfrmDeviceView;
 begin
   if lbDeviceList.ItemIndex = -1 then Exit;
   TempIndex := lbDeviceList.ItemIndex;
@@ -627,13 +651,16 @@ begin
    if TempAddForm.ShowModal <> mrOK then Exit;
    Lock;
    try
+    TempForm := FDevForms[TempDev.DeviceNum];
     if TempAddForm.speDevNumber.Value <> TempDev.DeviceNum then // изменен номер устройства
      begin
        if Assigned(FDevArray[TempAddForm.speDevNumber.Value]) then raise EAddDevAlreadyExists.Create(TempAddForm.speDevNumber.Value);
        lbDeviceList.Items.Strings[TempIndex] := Format(rsDevAdd2,[TempAddForm.speDevNumber.Value]);
+       FDevForms[TempDev.DeviceNum] := nil;
        FDevArray[TempDev.DeviceNum] := nil;
        TempDev.DeviceNum := TempAddForm.speDevNumber.Value;
        FDevArray[TempAddForm.speDevNumber.Value] := TempDev;
+       FDevForms[TempAddForm.speDevNumber.Value] := TempForm;
      end;
 
     TempDev.DefCoil    := Boolean(TempAddForm.cbCoilsDefValue.ItemIndex);
@@ -803,6 +830,10 @@ begin
       if fn17 in TempDev.DeviceFunctions then TempDev.DeviceFunctions := TempDev.DeviceFunctions - [fn17];
      end;
 
+    TempForm.Device := TempDev;
+
+    FIsConfModify := True;
+
     if TempDev.DeviceFunctions = [] then raise ENeitherFunctioIsNotSet.Create;
 
     LoggerObj.info(rsDevEdit2, Format(rsDevEdit1,[OldCaption]));
@@ -816,15 +847,13 @@ begin
 end;
 
 procedure TfrmMain.actDevViewExecute(Sender : TObject);
+var TempDev : TMBDevice;
 begin
   if lbDeviceList.ItemIndex = -1 then Exit;
-  if not Assigned(FDevView) then
-   begin
-    FDevView := TfrmDeviceView.Create(nil);
-    FDevView.CSection := FCSection;
-   end;
-  FDevView.Device := TMBDevice(lbDeviceList.Items.Objects[lbDeviceList.ItemIndex]);
-  FDevView.Show;
+
+  TempDev := TMBDevice(lbDeviceList.Items.Objects[lbDeviceList.ItemIndex]);
+
+  FDevForms[TempDev.DeviceNum].Show;
 end;
 
 procedure TfrmMain.actDevClearListExecute(Sender : TObject);
@@ -841,12 +870,19 @@ begin
  try
   for i := 0 to 255 do
    begin
+    if Assigned(FDevForms[i]) then
+     begin
+      FDevForms[i].Free;
+      FDevForms[i] := nil;
+     end;
     if Assigned(FDevArray[i]) then
      begin
       FDevArray[i].Free;
       FDevArray[i] := nil;
      end;
    end;
+
+  FIsConfModify := True;
  finally
   UnLock;
  end;
@@ -890,11 +926,6 @@ end;
 
 procedure TfrmMain.FormClose(Sender : TObject; var CloseAction : TCloseAction);
 begin
-  if Assigned(FDevView) then
-   begin
-    FDevView.Device := nil;
-    FDevView.Free;
-   end;
   ClearChennals;
   ClearFrames;
   ClearDevices;
