@@ -291,6 +291,52 @@ msgstr ""
 msgid "Ð ÐµÐ´Ð°ÐºÑÐ¸ÑÐ¾Ð²Ð°Ð½Ð¸Ðµ Ð¿Ð°ÑÐ°Ð¼ÐµÑÑÐ¾Ð² ÑÑÑÑÐ¾Ð¹ÑÑÐ²"
 msgstr ""
 
+#: modbusemuresstr.rsdevview1
+msgid "OnInputsChangeProc"
+msgstr ""
+
+#: modbusemuresstr.rsdevview10
+msgid "ÐÐµÐ½ÑÐµÐ¼ %d Ð·Ð°Ð½ÑÐµÐ½Ð¸Ð¹"
+msgstr ""
+
+#: modbusemuresstr.rsdevview11
+msgctxt "modbusemuresstr.rsdevview11"
+msgid "btCoilAplyAllClick"
+msgstr ""
+
+#: modbusemuresstr.rsdevview2
+msgid "Inputs. ÐÑÐ¸ÑÐ»Ð¾ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ðµ %d Ð·Ð½Ð°ÑÐµÐ½Ð¸Ð¹"
+msgstr ""
+
+#: modbusemuresstr.rsdevview3
+msgid "OnHoldingsChangeProc"
+msgstr ""
+
+#: modbusemuresstr.rsdevview4
+msgid "Holdings. ÐÑÐ¸ÑÐ»Ð¾ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ðµ %d Ð·Ð½Ð°ÑÐµÐ½Ð¸Ð¹"
+msgstr ""
+
+#: modbusemuresstr.rsdevview5
+msgid "OnDiscretsChangeProc"
+msgstr ""
+
+#: modbusemuresstr.rsdevview6
+msgid "Discrets. ÐÑÐ¸ÑÐ»Ð¾ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ðµ %d Ð·Ð½Ð°ÑÐµÐ½Ð¸Ð¹"
+msgstr ""
+
+#: modbusemuresstr.rsdevview7
+msgid "OnCoilsChangeProc"
+msgstr ""
+
+#: modbusemuresstr.rsdevview8
+msgid "Coils. ÐÑÐ¸ÑÐ»Ð¾ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ðµ %d Ð·Ð½Ð°ÑÐµÐ½Ð¸Ð¹"
+msgstr ""
+
+#: modbusemuresstr.rsdevview9
+msgctxt "modbusemuresstr.rsdevview9"
+msgid "btCoilAplyAllClick"
+msgstr ""
+
 #: modbusemuresstr.rseditchennel
 msgid "ÐÐ·Ð¼ÐµÐ½ÐµÐ½Ð¸Ðµ ÐºÐ°Ð½Ð°Ð»Ð°. ÐÐµ Ð²ÑÐ±ÑÐ°Ð½ ÐºÐ°Ð½Ð°Ð» Ð´Ð»Ñ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ñ."
 msgstr ""
@@ -453,6 +499,10 @@ msgstr ""
 msgid "ÐÑÐµ ÐºÐ°Ð½Ð°Ð»Ñ Ð¾ÑÐºÑÑÑÑ"
 msgstr ""
 
+#: modbusemuresstr.rsrageedit1
+msgid "ÐÐ´ÑÐµÑ Ð½Ð°ÑÐ°Ð»ÑÐ½Ð¾Ð³Ð¾ ÑÐµÐ³Ð¸ÑÑÑÐ° Ð½Ðµ Ð¼Ð¾Ð¶ÐµÑ Ð±ÑÑÑ Ð¼ÐµÐ½ÑÑÐµ Ð°Ð´ÑÐµÑÐ° ÐºÐ¾Ð½ÐµÑÐ½Ð¾Ð³Ð¾ ÑÐµÐ³Ð¸ÑÑÑÐ°!"
+msgstr ""
+
 #: modbusemuresstr.rsresponsef15_1
 msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. ÐÐ¾Ð¿ÑÑÐºÐ° Ð²ÑÐ·Ð¾Ð²Ð° Ð½ÐµÑÐµÐ°Ð»Ð¸Ð·Ð¾Ð²Ð°Ð½Ð½Ð¾Ð¹ ÑÑÐ½ÐºÑÐ¸Ð¸ 15"
 msgstr ""
@@ -575,6 +625,14 @@ msgstr ""
 
 #: tformtestdevview.btinputwrite.caption
 msgid "Записать Input"
+msgstr ""
+
+#: tformtestdevview.btthreadstart.caption
+msgid "Thread Start"
+msgstr ""
+
+#: tformtestdevview.btthreadstop.caption
+msgid "Thread Stop"
 msgstr ""
 
 #: tformtestdevview.caption
@@ -864,13 +922,169 @@ msgstr ""
 msgid "Порт"
 msgstr ""
 
-#: tfrmdeviceview.bttestdevview.caption
-msgid "btTestDevView"
+#: tfrmdeviceview.btcoilaply.caption
+msgctxt "tfrmdeviceview.btcoilaply.caption"
+msgid "Применить"
+msgstr ""
+
+#: tfrmdeviceview.btcoilaplyall.caption
+msgctxt "tfrmdeviceview.btcoilaplyall.caption"
+msgid "Применить ко всем"
+msgstr ""
+
+#: tfrmdeviceview.btcoilaplyfor.caption
+msgctxt "tfrmdeviceview.btcoilaplyfor.caption"
+msgid "Применить к ..."
+msgstr ""
+
+#: tfrmdeviceview.btdiscretsaply.caption
+msgctxt "TFRMDEVICEVIEW.BTDISCRETSAPLY.CAPTION"
+msgid "Применить"
+msgstr ""
+
+#: tfrmdeviceview.btdiscretsaplyall.caption
+msgctxt "TFRMDEVICEVIEW.BTDISCRETSAPLYALL.CAPTION"
+msgid "Применить ко всем"
+msgstr ""
+
+#: tfrmdeviceview.btdiscretsaplyfor.caption
+msgctxt "TFRMDEVICEVIEW.BTDISCRETSAPLYFOR.CAPTION"
+msgid "Применить к ..."
+msgstr ""
+
+#: tfrmdeviceview.btholdingsaply.caption
+msgctxt "TFRMDEVICEVIEW.BTHOLDINGSAPLY.CAPTION"
+msgid "Применить"
+msgstr ""
+
+#: tfrmdeviceview.btholdingsaplyall.caption
+msgctxt "TFRMDEVICEVIEW.BTHOLDINGSAPLYALL.CAPTION"
+msgid "Применить ко всем"
+msgstr ""
+
+#: tfrmdeviceview.btholdingsaplyfor.caption
+msgctxt "TFRMDEVICEVIEW.BTHOLDINGSAPLYFOR.CAPTION"
+msgid "Применить к ..."
 msgstr ""
 
 #: tfrmdeviceview.caption
 msgctxt "TFRMDEVICEVIEW.CAPTION"
 msgid "Просмотр устройства"
+msgstr ""
+
+#: tfrmdeviceview.cbholdingsbit0.caption
+msgctxt "tfrmdeviceview.cbholdingsbit0.caption"
+msgid "0"
+msgstr ""
+
+#: tfrmdeviceview.cbholdingsbit1.caption
+msgid "1"
+msgstr ""
+
+#: tfrmdeviceview.cbholdingsbit10.caption
+msgid "10"
+msgstr ""
+
+#: tfrmdeviceview.cbholdingsbit11.caption
+msgid "11"
+msgstr ""
+
+#: tfrmdeviceview.cbholdingsbit12.caption
+msgid "12"
+msgstr ""
+
+#: tfrmdeviceview.cbholdingsbit13.caption
+msgid "13"
+msgstr ""
+
+#: tfrmdeviceview.cbholdingsbit14.caption
+msgid "14"
+msgstr ""
+
+#: tfrmdeviceview.cbholdingsbit15.caption
+msgid "15"
+msgstr ""
+
+#: tfrmdeviceview.cbholdingsbit2.caption
+msgid "2"
+msgstr ""
+
+#: tfrmdeviceview.cbholdingsbit3.caption
+msgid "3"
+msgstr ""
+
+#: tfrmdeviceview.cbholdingsbit4.caption
+msgid "4"
+msgstr ""
+
+#: tfrmdeviceview.cbholdingsbit5.caption
+msgid "5"
+msgstr ""
+
+#: tfrmdeviceview.cbholdingsbit6.caption
+msgid "6"
+msgstr ""
+
+#: tfrmdeviceview.cbholdingsbit7.caption
+msgid "7"
+msgstr ""
+
+#: tfrmdeviceview.cbholdingsbit8.caption
+msgctxt "TFRMDEVICEVIEW.CBHOLDINGSBIT8.CAPTION"
+msgid "8"
+msgstr ""
+
+#: tfrmdeviceview.cbholdingsbit9.caption
+msgid "9"
+msgstr ""
+
+#: tfrmdeviceview.edholdingsvalhex.text
+msgctxt "TFRMDEVICEVIEW.EDHOLDINGSVALHEX.TEXT"
+msgid "0000"
+msgstr ""
+
+#: tfrmdeviceview.gbcoileditreg.caption
+msgctxt "tfrmdeviceview.gbcoileditreg.caption"
+msgid "Изменение регистра"
+msgstr ""
+
+#: tfrmdeviceview.gbcoilvalue.caption
+msgctxt "tfrmdeviceview.gbcoilvalue.caption"
+msgid "Значение"
+msgstr ""
+
+#: tfrmdeviceview.gbdiscretseditreg.caption
+msgctxt "TFRMDEVICEVIEW.GBDISCRETSEDITREG.CAPTION"
+msgid "Изменение регистра"
+msgstr ""
+
+#: tfrmdeviceview.gbdiscretsvalue.caption
+msgctxt "TFRMDEVICEVIEW.GBDISCRETSVALUE.CAPTION"
+msgid "Значение"
+msgstr ""
+
+#: tfrmdeviceview.gbholdingsbits.caption
+msgid "Биты"
+msgstr ""
+
+#: tfrmdeviceview.gbholdingseditreg.caption
+msgctxt "TFRMDEVICEVIEW.GBHOLDINGSEDITREG.CAPTION"
+msgid "Изменение регистра"
+msgstr ""
+
+#: tfrmdeviceview.gbholdingsvalue.caption
+msgctxt "TFRMDEVICEVIEW.GBHOLDINGSVALUE.CAPTION"
+msgid "Значение"
+msgstr ""
+
+#: tfrmdeviceview.lbcoilcomment.caption
+msgctxt "tfrmdeviceview.lbcoilcomment.caption"
+msgid "Коментарий:"
+msgstr ""
+
+#: tfrmdeviceview.lbcoilregnum.caption
+msgctxt "tfrmdeviceview.lbcoilregnum.caption"
+msgid "Номер регистра:"
 msgstr ""
 
 #: tfrmdeviceview.lbdevicenumber.caption
@@ -879,6 +1093,46 @@ msgstr ""
 
 #: tfrmdeviceview.lbdevnum.caption
 msgid "Адрес устройства:"
+msgstr ""
+
+#: tfrmdeviceview.lbdiscretscomment.caption
+msgctxt "TFRMDEVICEVIEW.LBDISCRETSCOMMENT.CAPTION"
+msgid "Коментарий:"
+msgstr ""
+
+#: tfrmdeviceview.lbdiscretsregnum.caption
+msgctxt "TFRMDEVICEVIEW.LBDISCRETSREGNUM.CAPTION"
+msgid "Номер регистра:"
+msgstr ""
+
+#: tfrmdeviceview.lbholdingscomment.caption
+msgctxt "TFRMDEVICEVIEW.LBHOLDINGSCOMMENT.CAPTION"
+msgid "Коментарий:"
+msgstr ""
+
+#: tfrmdeviceview.lbholdingsregnum.caption
+msgctxt "TFRMDEVICEVIEW.LBHOLDINGSREGNUM.CAPTION"
+msgid "Номер регистра:"
+msgstr ""
+
+#: tfrmdeviceview.rbcoilfalse.caption
+msgctxt "TFRMDEVICEVIEW.RBCOILFALSE.CAPTION"
+msgid "False"
+msgstr ""
+
+#: tfrmdeviceview.rbcoiltrue.caption
+msgctxt "tfrmdeviceview.rbcoiltrue.caption"
+msgid "True"
+msgstr ""
+
+#: tfrmdeviceview.rbdiscretsfalse.caption
+msgctxt "TFRMDEVICEVIEW.RBDISCRETSFALSE.CAPTION"
+msgid "False"
+msgstr ""
+
+#: tfrmdeviceview.rbdiscretstrue.caption
+msgctxt "TFRMDEVICEVIEW.RBDISCRETSTRUE.CAPTION"
+msgid "True"
 msgstr ""
 
 #: tfrmdeviceview.tscoils.caption
@@ -1125,6 +1379,28 @@ msgstr ""
 
 #: tfrmmain.tbsplitter3.caption
 msgid "tbSplitter3"
+msgstr ""
+
+#: tfrmrangeedit.brcancel.caption
+msgctxt "TFRMRANGEEDIT.BRCANCEL.CAPTION"
+msgid "Отмена"
+msgstr ""
+
+#: tfrmrangeedit.btok.caption
+msgctxt "TFRMRANGEEDIT.BTOK.CAPTION"
+msgid "Применить"
+msgstr ""
+
+#: tfrmrangeedit.caption
+msgid "Диапазон регистров"
+msgstr ""
+
+#: tfrmrangeedit.lbregstart.caption
+msgid "Начало диапазона"
+msgstr ""
+
+#: tfrmrangeedit.lbregstop.caption
+msgid "Конец диапазона"
 msgstr ""
 
 #: ttfrmchennelrsadd.btcancel.caption

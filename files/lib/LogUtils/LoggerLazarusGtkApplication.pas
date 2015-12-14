@@ -154,6 +154,7 @@ begin
      else
        if Pos('[error]', TempRep) = 0 then WriteLn(StdOut,TempRep)
         else WriteLn(StdErr,TempRep);
+    if FLoggerStrings.Count > 10000 then FLoggerStrings.Delete(0);
    end;
  finally
   FCSection.Leave;

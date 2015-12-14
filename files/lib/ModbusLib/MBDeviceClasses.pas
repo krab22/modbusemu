@@ -472,7 +472,7 @@ begin
 end;
 
 procedure TMBDevice.OnDiscretChangeProc(Sender: TMBBitRegister);
-var i : Integer;
+var Count,i : Integer;
 begin
   if not FIsPacketUpdate then
    begin
@@ -480,16 +480,20 @@ begin
    end
   else
    begin
-    i := Length(FDiscretsBuff);
-    SetLength(FDiscretsBuff,i+1);
-    FDiscretsBuff[i]:=Sender;
+    Count := Length(FDiscretsBuff);
+
+    for i := 0 to Count-1 do
+     if FDiscretsBuff[i] = Sender then Exit;
+
+    SetLength(FDiscretsBuff,Count+1);
+    FDiscretsBuff[Count]:=Sender;
 
     FIsDiscretChangedData := True;
    end;
 end;
 
 procedure TMBDevice.OnCoilChangeProc(Sender: TMBBitRegister);
-var i : Integer;
+var i,Count : Integer;
 begin
   if not FIsPacketUpdate then
    begin
@@ -497,16 +501,20 @@ begin
    end
   else
    begin
-    i := Length(FCoilsBuff);
-    SetLength(FCoilsBuff,i+1);
-    FCoilsBuff[i]:=Sender;
+    Count := Length(FCoilsBuff);
+
+    for i := 0 to Count-1 do
+     if FCoilsBuff[i] = Sender then Exit;
+
+    SetLength(FCoilsBuff, Count+1);
+    FCoilsBuff[Count] := Sender;
 
     FIsCoilChangedData := True;
    end;
 end;
 
 procedure TMBDevice.OnInputChangeProc(Sender: TMBWordRegister; ChangeBitSet: TRegBits);
-var i : Integer;
+var i,Count : Integer;
 begin
   if not FIsPacketUpdate then
    begin
@@ -514,16 +522,20 @@ begin
    end
   else
    begin
-   i := Length(FInputsBuff);
-   SetLength(FInputsBuff,i+1);
-   FInputsBuff[i]:=Sender;
+   Count := Length(FInputsBuff);
+
+   for i := 0 to Count-1 do
+     if FInputsBuff[i] = Sender then Exit;
+
+   SetLength(FInputsBuff,Count+1);
+   FInputsBuff[Count]:=Sender;
 
    FIsInputChangedData := True;
   end;
 end;
 
 procedure TMBDevice.OnHoldingChangeProc(Sender: TMBWordRegister; ChangeBitSet: TRegBits);
-var i : Integer;
+var i,Count : Integer;
 begin
   if not FIsPacketUpdate then
    begin
@@ -531,9 +543,13 @@ begin
    end
   else
    begin
-    i := Length(FHoldingsBuff);
-    SetLength(FHoldingsBuff,i+1);
-    FHoldingsBuff[i]:=Sender;
+    Count := Length(FHoldingsBuff);
+
+    for i := 0 to Count-1 do
+     if FHoldingsBuff[i] = Sender then Exit;
+
+    SetLength(FHoldingsBuff,Count+1);
+    FHoldingsBuff[Count]:=Sender;
 
     FIsHoldingChangedData := True;
    end;

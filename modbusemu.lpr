@@ -11,7 +11,7 @@ uses
   DeviceView,formChennelAdd,
   {$IFDEF UNIX}formChennelRSLinuxAdd,{$ELSE}formChennelRSWindowsAdd,{$ENDIF}
   formChennelTCPAdd,
-  framChennelRSClasses,framChennelTCPClasses, TestDeviceView;
+  framChennelRSClasses,framChennelTCPClasses, TestDeviceView, formRahgeEdit;
 
 {$R *.res}
 
@@ -20,6 +20,7 @@ begin
   Application.Initialize;
   Application.CreateForm(TfrmMain, frmMain);
   Application.CreateForm(TformTestDevView, formTestDevView);
+  Application.CreateForm(TfrmRangeEdit, frmRangeEdit);
   Application.Run;
 end.
 

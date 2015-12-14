@@ -42,6 +42,8 @@ type
                                ChangedRegs : TMBBitRegsArray
                               ) of object;
 
+  { TMBRegister }
+
   TMBRegister = class(TObject) // базовый класс для регистров не содержит полей данных, содержит только поля для обработки адреса
    private
     FMBRegType  : TRegMBTypes;       // тип диапазона регистров
@@ -54,7 +56,8 @@ type
     procedure SetMBRegType(const aValue: TRegMBTypes);
    protected
     FReadOnly : Boolean;           // флаг регистр только на чтение
-    function CheckType(const aValue: TRegMBTypes): boolean; virtual;
+    function  CheckType(const aValue: TRegMBTypes): boolean; virtual;
+    procedure SetDescr(const AValue : String); virtual;
    public
     constructor Create; virtual;
     function GetStrAddress : String; virtual;
@@ -62,10 +65,12 @@ type
     property Address       : DWORD read GetAddress write SetAddress;
     property RegNumber     : Word read FNumber write SetRegNumber;
     property RegReadOnly   : Boolean read FReadOnly write FReadOnly;
-    property Description   : String read FDescr write FDescr;
+    property Description   : String read FDescr write SetDescr;
   end;
 
   TMBRegisterArray = array[0..65535] of TMBRegister;
+
+  { TMBBitRegister }
 
   TMBBitRegister = class(TMBRegister)// класс описывающий битовый регистр
    protected
@@ -78,6 +83,7 @@ type
     FLastUpdateTime: TDateTime;         // время последнего обновления переменной
     function  GetValue: Boolean; virtual;
     procedure SetValue(const aValue: Boolean); virtual;
+    procedure SetDescr(const AValue : String); override;
     function  CheckType(const aValue: TRegMBTypes): boolean; override;
    public
     constructor Create; override;
@@ -99,6 +105,8 @@ type
     property BefoChange    : TBefoRegBitChange read FBefoChange write FBefoChange;
   end;
 
+  { TMBWordRegister }
+
   TMBWordRegister = class(TMBRegister)// класс описывающий word регистр Modbus
    protected
     FValue         : Word;               // значение, содержащееся в регистре
@@ -110,6 +118,7 @@ type
     FBefoChange    : TBefoRegWordChange; // обработчик события возбуждаемого перед изменением значения
     function  GetValue: Word; virtual;
     procedure SetValue(const aValue: Word); virtual;
+    procedure SetDescr(const AValue : String); override;
     function  GetWordChange(aValue:Word): TRegBits; virtual;
     function  CheckType(const aValue: TRegMBTypes): boolean; override;
    public
@@ -224,6 +233,11 @@ begin
   FStrAddress:= TMBAddressActions.GetStringAddress(aValue);
 end;
 
+procedure TMBRegister.SetDescr(const AValue : String);
+begin
+  FDescr := AValue;
+end;
+
 procedure TMBRegister.SetRegNumber(const aValue: Word);
 begin
   if FNumber = aValue then Exit;
@@ -277,6 +291,14 @@ begin
   ServerSideSetValue(aValue);
 end;
 
+procedure TMBBitRegister.SetDescr(const AValue : String);
+begin
+  if SameText(AValue,Description) then Exit;
+  inherited SetDescr(AValue);
+  FIsChanged := True;
+  if Assigned(FOnChange) then FOnChange(Self);
+end;
+
 procedure TMBBitRegister.SetDefValue(aValue: Boolean);
 begin
   FValue := aValue;
@@ -299,7 +321,7 @@ begin
   FValue         := aValue;
   FLastUpdateTime:= Now;
   FIsChanged     := True;
-  if Assigned(FOnChange) then FOnChange(Self)
+  if Assigned(FOnChange) then FOnChange(Self);
 end;
 
 { TMBWordRegister }
@@ -331,6 +353,16 @@ procedure TMBWordRegister.SetValue(const aValue: Word);
 begin
   if FReadOnly then raise Exception.Create(ErrReadOnly);
   ServerSideSetValue(aValue);
+end;
+
+procedure TMBWordRegister.SetDescr(const AValue : String);
+var TempBits : TRegBits;
+begin
+  if SameText(AValue,Description) then Exit;
+  inherited SetDescr(AValue);
+  TempBits   := [];
+  FIsChanged := True;
+  if Assigned(FOnChange) then FOnChange(Self, TempBits);
 end;
 
 function TMBWordRegister.GetWordChange(aValue: Word): TRegBits;

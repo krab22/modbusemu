@@ -5,10 +5,24 @@ unit TestDeviceView;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
+  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls, syncobjs,
   MBDeviceClasses;
 
 type
+
+  { TTestThread }
+
+  TTestThread = class(TThread)
+  private
+    FCSection : TCriticalSection;
+    FDevice : TMBDevice;
+   protected
+    procedure Execute; override;
+   public
+    property Device   : TMBDevice read FDevice write FDevice;
+    property CSection : TCriticalSection read FCSection write FCSection;
+  end;
+
 
   { TformTestDevView }
 
@@ -17,15 +31,22 @@ type
     btDiscretWrite : TButton;
     btHoldingWrite : TButton;
     btInputWrite   : TButton;
+    btThreadStart : TButton;
+    btThreadStop : TButton;
     procedure btCoilWriteClick(Sender : TObject);
     procedure btDiscretWriteClick(Sender : TObject);
     procedure btHoldingWriteClick(Sender : TObject);
     procedure btInputWriteClick(Sender : TObject);
+    procedure btThreadStartClick(Sender : TObject);
+    procedure btThreadStopClick(Sender : TObject);
     procedure FormClose(Sender : TObject; var CloseAction : TCloseAction);
   private
-   FDevice : TMBDevice;
+   FCSection : TCriticalSection;
+   FDevice   : TMBDevice;
+   FThread   : TTestThread;
   public
-   property Device : TMBDevice read FDevice write FDevice;
+   property Device   : TMBDevice read FDevice write FDevice;
+   property CSection : TCriticalSection read FCSection write FCSection;
   end;
 
 var
@@ -34,6 +55,34 @@ var
 implementation
 
 {$R *.lfm}
+
+{ TTestThread }
+
+procedure TTestThread.Execute;
+var TempVal : Integer;
+begin
+  TempVal := 1;
+  while not Terminated do
+   begin
+    FCSection.Enter;
+    try
+     FDevice.BeginPacketUpdate;
+     try
+      FDevice.Holdings[1].Value := TempVal+1;
+      FDevice.Holdings[3].Value := TempVal+2;
+      FDevice.Holdings[5].Value := TempVal+3;
+      FDevice.Holdings[7].Value := TempVal+4;
+      FDevice.Holdings[9].Value := TempVal+5;
+     finally
+      FDevice.EndPacketUpdate;
+     end;
+    finally
+     FCSection.Leave;
+    end;
+    Inc(TempVal);
+    Sleep(5000);
+   end;
+end;
 
 { TformTestDevView }
 
@@ -91,6 +140,30 @@ begin
   finally
    FDevice.EndPacketUpdate;
   end;
+end;
+
+procedure TformTestDevView.btThreadStartClick(Sender : TObject);
+begin
+  FThread := TTestThread.Create(True,65535);
+  FThread.Device   := FDevice;
+  FThread.CSection := FCSection;
+  FThread.Start;
+
+  btThreadStart.Enabled := False;
+  btThreadStop.Enabled  := True;
+end;
+
+procedure TformTestDevView.btThreadStopClick(Sender : TObject);
+begin
+  try
+   FThread.Terminate;
+   FThread.WaitFor;
+   FreeAndNil(FThread);
+  except
+  end;
+
+  btThreadStart.Enabled := True;
+  btThreadStop.Enabled  := False;
 end;
 
 procedure TformTestDevView.FormClose(Sender : TObject; var CloseAction : TCloseAction);

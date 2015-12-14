@@ -136,7 +136,19 @@ resourcestring
  rsDevEdit1                 = 'Устройство(%s) успешно изменено';
  rsDevEdit2                 = 'Редактирование параметров устройств';
 
+ rsRageEdit1                = 'Адрес начального регистра не может быть меньше адреса конечного регистра!';
 
+ rsDevView1                 = 'OnInputsChangeProc';
+ rsDevView2                 = 'Inputs. Пришло изменение %d значений';
+ rsDevView3                 = 'OnHoldingsChangeProc';
+ rsDevView4                 = 'Holdings. Пришло изменение %d значений';
+ rsDevView5                 = 'OnDiscretsChangeProc';
+ rsDevView6                 = 'Discrets. Пришло изменение %d значений';
+ rsDevView7                 = 'OnCoilsChangeProc';
+ rsDevView8                 = 'Coils. Пришло изменение %d значений';
+ rsDevView9                 = 'btCoilAplyAllClick';
+ rsDevView10                = 'Меняем %d занчений';
+ rsDevView11                = 'btCoilAplyAllClick';
 
 implementation
 
