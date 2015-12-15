@@ -153,6 +153,14 @@ resourcestring
  rsDevView13                = 'btInputsAplyAllClick';
  rsDevView14                = 'btDiscretsAplyAllClick';
 
+ rsLoadConf1                = 'Загрузка конфигурации';
+ rsLoadConf2                = 'Ошибка загрузки: %s (%s)';
+ rsLoadConf3                = 'Загрузка конфигурационного файла %s произведена успешно';
+
+ rsSaveConf1                = 'Сохранение конфигурации';
+ rsSaveConf2                = 'Ошибка сохранения: %s (%s)';
+ rsSaveConf3                = 'Сохранение конфигурационного файла %s произведено успешно';
+
 implementation
 
 end.

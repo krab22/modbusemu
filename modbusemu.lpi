@@ -21,7 +21,7 @@
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MinorVersionNr Value="5"/>
-      <BuildNr Value="77"/>
+      <BuildNr Value="84"/>
       <Language Value="0419"/>
       <Attributes pvaDebug="True"/>
       <StringTable ProductVersion=""/>
@@ -142,9 +142,9 @@
       <Filename Value="bin/$(TargetCPU)-$(TargetOS)/modbusemu" ApplyConventions="False"/>
     </Target>
     <SearchPaths>
-      <IncludeFiles Value="$(ProjOutDir)"/>
+      <IncludeFiles Value="$(ProjOutDir);files/lib/NativeXML/nativexml"/>
       <Libraries Value="/usr/lib/codetyphon/binLibraries/x86_64-linux/"/>
-      <OtherUnitFiles Value="source;files/lib/CRC16;files/lib/LogUtils;files/lib/ModbusLib;files/lib/ModbusLib/MBFunctions;files/lib/ModbusLib/MBTCPMasterDispatcher;files/lib/SocketUtils;files/lib/COMPort;files/lib/MiscFunctions"/>
+      <OtherUnitFiles Value="source;files/lib/CRC16;files/lib/LogUtils;files/lib/ModbusLib;files/lib/ModbusLib/MBFunctions;files/lib/ModbusLib/MBTCPMasterDispatcher;files/lib/SocketUtils;files/lib/COMPort;files/lib/MiscFunctions;files/lib/NativeXML/nativexml;files/lib/NativeXML/general;files/lib/NativeXML/extlib/eldos_aes;files/lib/NativeXML/extlib/utility_lib"/>
       <UnitOutputDirectory Value="dcu/$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <CodeGeneration>

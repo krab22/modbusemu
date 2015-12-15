@@ -10,8 +10,8 @@ uses
   Forms, main, ModbusEmuResStr, ExceptionsResStrings, DeviceAdd,
   DeviceView,formChennelAdd,
   {$IFDEF UNIX}formChennelRSLinuxAdd,{$ELSE}formChennelRSWindowsAdd,{$ENDIF}
-  formChennelTCPAdd,
-  framChennelRSClasses,framChennelTCPClasses, TestDeviceView, formRahgeEdit;
+  formChennelTCPAdd, framChennelRSClasses, framChennelTCPClasses,
+  TestDeviceView, formRahgeEdit;
 
 {$R *.res}
 

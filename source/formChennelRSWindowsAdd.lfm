@@ -1,7 +1,7 @@
 object TfrmChennelRSAdd: TTfrmChennelRSAdd
-  Left = 2173
+  Left = 3320
   Height = 247
-  Top = 388
+  Top = 121
   Width = 381
   Caption = 'Добавить последовательный канал'
   ClientHeight = 247
@@ -161,7 +161,7 @@ object TfrmChennelRSAdd: TTfrmChennelRSAdd
     Top = 162
     Width = 100
     ItemHeight = 0
-    ItemIndex = 1
+    ItemIndex = 0
     Items.Strings = (
       '1'
       '1,5'
@@ -169,7 +169,7 @@ object TfrmChennelRSAdd: TTfrmChennelRSAdd
     )
     Style = csDropDownList
     TabOrder = 6
-    Text = '1,5'
+    Text = '1'
   end
   object lbName: TLabel
     Left = 8

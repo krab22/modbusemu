@@ -14,8 +14,6 @@ uses
 
 type
 
-
-
   { TfrmMain }
 
   TfrmMain = class(TForm)
@@ -119,7 +117,7 @@ type
      tbChannelCloseAll : TToolButton;
      tbChannelOpenAll  : TToolButton;
      tbDevEditDev      : TToolButton;
-     tbDevViewDev : TToolButton;
+     tbDevViewDev      : TToolButton;
      procedure actChennelAddExecute(Sender: TObject);
      procedure actChennelCloseAllExecute(Sender: TObject);
      procedure actChennelCloseExecute(Sender: TObject);
@@ -152,6 +150,7 @@ type
    private
      FDevArray     : TDeviceArray;
      FDevForms     : TDevFormArray;
+
      FIsConfModify : Boolean;
      FCSection     : TCriticalSection;
      FChenRSFrame  : TframeChennelRS;
@@ -163,6 +162,7 @@ type
      procedure Lock;
      procedure UnLock;
      procedure SetChennelFrame(AChennel : TChennelBase);
+     procedure OnDevChangeProc(ASender : TObject);
    public
   end;
 
@@ -179,20 +179,55 @@ uses DeviceAdd,
      ModbusEmuResStr, MBDefine,
      LoggerLazarusGtkApplication,
      LoggerItf,
-     ExceptionsTypes;
+     ExceptionsTypes,
+     MBEmuLoaderClasses;
 
 { TfrmMain }
 
 procedure TfrmMain.actFileLoadConfExecute(Sender : TObject);
+var TempLoader : TMBEmuLoader;
 begin
   if not odConf.Execute then Exit;
 
+  TempLoader := TMBEmuLoader.Create(lbDeviceList.Items,@FDevArray,@FDevForms,libChennelList.Items,FCSection,@OnDevChangeProc);
+  TempLoader.Logger := LoggerObj as IDLogger;
+  try
+   try
+    TempLoader.LoadConfig(odConf.FileName);
+    FIsConfModify := False;
+   except
+    on E : Exception do
+     begin
+      LoggerObj.error(rsLoadConf1,Format(rsLoadConf2,[E.Message,odConf.FileName]));
+     end;
+   end;
+  finally
+   FreeAndNil(TempLoader);
+  end;
+  LoggerObj.info(rsLoadConf1,Format(rsLoadConf3,[odConf.FileName]));
 end;
 
 procedure TfrmMain.actFileSaveConfExecute(Sender : TObject);
+var TempLoader : TMBEmuLoader;
 begin
   if not sdConf.Execute then Exit;
 
+  TempLoader := TMBEmuLoader.Create(lbDeviceList.Items,@FDevArray,@FDevForms,libChennelList.Items,FCSection,@OnDevChangeProc);
+  TempLoader.Logger := LoggerObj as IDLogger;
+  try
+   try
+    TempLoader.SaveConfig(sdConf.FileName);
+    FIsConfModify := False;
+   except
+    on E : Exception do
+     begin
+      LoggerObj.error(rsSaveConf1,Format(rsSaveConf2,[E.Message,sdConf.FileName]));
+     end;
+   end;
+  finally
+   FreeAndNil(TempLoader);
+  end;
+  LoggerObj.info(rsSaveConf1,Format(rsSaveConf3,[sdConf.FileName]));
 end;
 
 procedure TfrmMain.actChennelAddExecute(Sender: TObject);
@@ -437,6 +472,11 @@ begin
    end;
 end;
 
+procedure TfrmMain.OnDevChangeProc(ASender : TObject);
+begin
+  FIsConfModify := True;
+end;
+
 procedure TfrmMain.cbLogDebugChange(Sender: TObject);
 begin
   LoggerObj.EnableDebug := cbLogDebug.Checked;
@@ -557,9 +597,10 @@ begin
     FDevArray[TempDevNum].InitializeDevice;
 
     FDevForms[TempDevNum] := TfrmDeviceView.Create(Self);
-    FDevForms[TempDevNum].Logger   := LoggerObj as IDLogger;
-    FDevForms[TempDevNum].CSection := FCSection;
-    FDevForms[TempDevNum].Device   := FDevArray[TempDevNum];
+    FDevForms[TempDevNum].Logger      := LoggerObj as IDLogger;
+    FDevForms[TempDevNum].CSection    := FCSection;
+    FDevForms[TempDevNum].Device      := FDevArray[TempDevNum];
+    FDevForms[TempDevNum].OnDevChange := @OnDevChangeProc;
 
     LoggerObj.info(rsDevAdd11,Format(rsDevAdd12,[TempStr]));
    finally

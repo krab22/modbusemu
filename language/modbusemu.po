@@ -407,6 +407,18 @@ msgstr ""
 msgid "ÐÑÐ¸ Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ð¸ ÐºÐ°Ð½Ð°Ð»Ð° Ð¿ÑÐ¾Ð¸Ð·Ð¾ÑÐ»Ð° Ð¾ÑÐ¸Ð±ÐºÐ°: %s"
 msgstr ""
 
+#: modbusemuresstr.rsloadconf1
+msgid "ÐÐ°Ð³ÑÑÐ·ÐºÐ° ÐºÐ¾Ð½ÑÐ¸Ð³ÑÑÐ°ÑÐ¸Ð¸"
+msgstr ""
+
+#: modbusemuresstr.rsloadconf2
+msgid "ÐÑÐ¸Ð±ÐºÐ° Ð·Ð°Ð³ÑÑÐ·ÐºÐ¸: %s (%s)"
+msgstr ""
+
+#: modbusemuresstr.rsloadconf3
+msgid "ÐÐ°Ð³ÑÑÐ·ÐºÐ° ÐºÐ¾Ð½ÑÐ¸Ð³ÑÑÐ°ÑÐ¸Ð¾Ð½Ð½Ð¾Ð³Ð¾ ÑÐ°Ð¹Ð»Ð° %s Ð¿ÑÐ¾Ð¸Ð·Ð²ÐµÐ´ÐµÐ½Ð° ÑÑÐ¿ÐµÑÐ½Ð¾"
+msgstr ""
+
 #: modbusemuresstr.rsmberror1
 msgid "ÐÐ¾ÑÑ %d. ÐÑÐ¸Ð±ÐºÐ° Ð¿Ð¾Ð»ÑÑÐµÐ½Ð¸Ñ Ð·Ð½Ð°ÑÐµÐ½Ð¸Ð¹ Coil ÑÐµÐ³Ð¸ÑÑÑÐ¾Ð²(%d:%d:%d): %s"
 msgstr ""
@@ -597,6 +609,18 @@ msgstr ""
 
 #: modbusemuresstr.rsresponsef6_3
 msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. Write Input. ÐÑÐ¿ÑÐ°Ð²Ð¸Ð»Ð¸ Ð¾ÑÐ²ÐµÑ Ð½Ð° Ð·Ð°Ð¿ÑÐ¾Ñ ÐºÐ»Ð¸ÐµÐ½ÑÐ°."
+msgstr ""
+
+#: modbusemuresstr.rssaveconf1
+msgid "Ð¡Ð¾ÑÑÐ°Ð½ÐµÐ½Ð¸Ðµ ÐºÐ¾Ð½ÑÐ¸Ð³ÑÑÐ°ÑÐ¸Ð¸"
+msgstr ""
+
+#: modbusemuresstr.rssaveconf2
+msgid "ÐÑÐ¸Ð±ÐºÐ° ÑÐ¾ÑÑÐ°Ð½ÐµÐ½Ð¸Ñ: %s (%s)"
+msgstr ""
+
+#: modbusemuresstr.rssaveconf3
+msgid "Ð¡Ð¾ÑÑÐ°Ð½ÐµÐ½Ð¸Ðµ ÐºÐ¾Ð½ÑÐ¸Ð³ÑÑÐ°ÑÐ¸Ð¾Ð½Ð½Ð¾Ð³Ð¾ ÑÐ°Ð¹Ð»Ð° %s Ð¿ÑÐ¾Ð¸Ð·Ð²ÐµÐ´ÐµÐ½Ð¾ ÑÑÐ¿ÐµÑÐ½Ð¾"
 msgstr ""
 
 #: modbusemuresstr.rssenderrormsg1
@@ -852,7 +876,7 @@ msgstr ""
 
 #: tfrmchennelrsadd.cmbstopbits.text
 msgctxt "tfrmchennelrsadd.cmbstopbits.text"
-msgid "1,5"
+msgid "1"
 msgstr ""
 
 #: tfrmchennelrsadd.edchennalname.text
@@ -1607,7 +1631,7 @@ msgstr ""
 
 #: ttfrmchennelrsadd.cmbstopbits.text
 msgctxt "TTFRMCHENNELRSADD.CMBSTOPBITS.TEXT"
-msgid "1,5"
+msgid "1"
 msgstr ""
 
 #: ttfrmchennelrsadd.edchennalname.text

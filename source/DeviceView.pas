@@ -15,13 +15,9 @@ type
   { TfrmDeviceView }
 
   TfrmDeviceView = class(TForm)
-
     lbDeviceNumber           : TLabel;
     lbDevNum                 : TLabel;
-
     pcDeviceRegisters        : TPageControl;
-
-
     tsCoils                  : TTabSheet;
     sgCoils                  : TStringGrid;
     btCoilAply               : TButton;
@@ -35,7 +31,6 @@ type
     rbCoilFalse              : TRadioButton;
     rbCoilTrue               : TRadioButton;
     speCoilRegNum            : TSpinEdit;
-
     tsDiscrets               : TTabSheet;
     sgDiscrets               : TStringGrid;
     btDiscretsAply           : TButton;
@@ -49,7 +44,6 @@ type
     rbDiscretsFalse          : TRadioButton;
     rbDiscretsTrue           : TRadioButton;
     speDiscretsRegNum        : TSpinEdit;
-
     tsHoldings               : TTabSheet;
     sgHoldings               : TStringGrid;
     btHoldingsAply           : TButton;
@@ -80,7 +74,6 @@ type
     gbHoldingsValue          : TGroupBox;
     gbHoldingsBits           : TGroupBox;
     speHoldingsValue         : TSpinEdit;
-
     tsInputs                 : TTabSheet;
     sgInputs                 : TStringGrid;
     btInputsAply             : TButton;
@@ -111,7 +104,6 @@ type
     lbInputsRegNum           : TLabel;
     speInputsRegNum          : TSpinEdit;
     speInputsValue           : TSpinEdit;
-
     procedure btCoilAplyAllClick(Sender : TObject);
     procedure btCoilAplyClick(Sender : TObject);
     procedure btCoilAplyForClick(Sender : TObject);
@@ -165,9 +157,10 @@ type
     procedure speHoldingsValueEditingDone(Sender : TObject);
     procedure speInputsValueEditingDone(Sender : TObject);
    private
-    FDevice   : TMBDevice;
-    FCSection : TCriticalSection;
-    FLogger   : IDLogger;
+    FDevice      : TMBDevice;
+    FCSection    : TCriticalSection;
+    FLogger      : IDLogger;
+    FOnDevChange : TNotifyEvent;
     procedure SetDevice(AValue : TMBDevice);
     procedure ClearForm;
     procedure UpdateCoils;
@@ -177,17 +170,20 @@ type
     procedure Lock;
     procedure UnLock;
 
+    procedure OnDevChangeProc;
     procedure OnCoilsChangeProc(Sender : TObject; ChangedRegs : TMBBitRegsArray);
     procedure OnDiscretsChangeProc(Sender : TObject; ChangedRegs : TMBBitRegsArray);
     procedure OnHoldingsChangeProc(Sender : TObject; ChangedRegs : TMBWordRegsArray);
     procedure OnInputsChangeProc(Sender : TObject; ChangedRegs : TMBWordRegsArray);
    public
-    property Device   : TMBDevice read FDevice write SetDevice;
-    property CSection : TCriticalSection read FCSection write FCSection;
-    property Logger   : IDLogger read FLogger write FLogger;
+    property Device      : TMBDevice read FDevice write SetDevice;
+    property CSection    : TCriticalSection read FCSection write FCSection;
+    property Logger      : IDLogger read FLogger write FLogger;
+    property OnDevChange : TNotifyEvent read FOnDevChange write FOnDevChange;
   end;
 
   TDevFormArray = array [0..255] of TfrmDeviceView;
+  PDevFormArray = ^TDevFormArray;
 
 var frmDeviceView : TfrmDeviceView;
 
@@ -1208,6 +1204,11 @@ begin
   if Assigned(FCSection) then FCSection.Leave;
 end;
 
+procedure TfrmDeviceView.OnDevChangeProc;
+begin
+  if Assigned(FOnDevChange) then FOnDevChange(FDevice);
+end;
+
 procedure TfrmDeviceView.OnCoilsChangeProc(Sender : TObject; ChangedRegs : TMBBitRegsArray);
 var i,Count : Integer;
     TempReg : TMBBitRegister;
@@ -1225,6 +1226,7 @@ begin
   finally
    UnLock;
   end;
+  OnDevChangeProc;
 end;
 
 procedure TfrmDeviceView.OnDiscretsChangeProc(Sender : TObject; ChangedRegs : TMBBitRegsArray);
@@ -1244,6 +1246,7 @@ begin
   finally
    UnLock;
   end;
+  OnDevChangeProc;
 end;
 
 procedure TfrmDeviceView.OnHoldingsChangeProc(Sender : TObject; ChangedRegs : TMBWordRegsArray);
@@ -1264,6 +1267,7 @@ begin
   finally
    UnLock;
   end;
+  OnDevChangeProc;
 end;
 
 procedure TfrmDeviceView.OnInputsChangeProc(Sender : TObject; ChangedRegs : TMBWordRegsArray);
@@ -1284,6 +1288,7 @@ begin
   finally
    UnLock;
   end;
+  OnDevChangeProc;
 end;
 
 end.

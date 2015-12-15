@@ -103,6 +103,7 @@ const
 
   cCOMPrefixPathWindows = '\\.\COM';
   cCOMPrefixPathLinux   = '/dev/ttyS';
+  cCOMPrefixPathLinuxOther   = 'other';
 
   //CMSPAR= $40000000; { mark or space (stick) parity }
 
@@ -203,12 +204,19 @@ const
 function GetBaudRateIDFromValue(Value : Longint): TComPortBaudRate;
 function GetBaudRateIDFromNumValue(Value : Longint): TComPortBaudRate;
 function GetBaudRateStrFromValue(Value : Longint): String;
+
+function GetBaudRateStrFromID(Value : TComPortBaudRate): String;
+function GetBaudRateIDFromStr(Value : String): TComPortBaudRate;
+
 function GetLinuxBaudRateID(Value : Longint):LongInt;
 function GetBaudRateValueFromID(Value : TComPortBaudRate): LongInt;
 function GetDataBitsIDFromValue(Value : Longint): TComPortDataBits;
 function GetDataBitsValueFromID(Value : TComPortDataBits): LongInt;
 function GetStopBitsIDFromValue(Value : Longint): TComPortStopBits;
 function GetStopBitsIDStrFromValue(Value : TComPortStopBits): String;
+
+function GetStopBitsIDStrFromValue1(Value : TComPortStopBits): String;
+
 function GetParityIDStrFromValue(Value : TComPortParity): String;
 function GetParityIDFromString(Value : String): TComPortParity;
 function GetCOMPortErrorMessage(AErrorCode : Integer): String;
@@ -222,6 +230,20 @@ implementation
 
 uses strutils;
 
+function GetStopBitsIDStrFromValue1(Value : TComPortStopBits): String;
+begin
+ Result := ComPortStopBitsSymbol[Value];
+end;
+
+function GetBaudRateStrFromID(Value : TComPortBaudRate): String;
+begin
+  Result := ComPortBaudRateNames[Value];
+end;
+
+function GetBaudRateIDFromStr(Value : String): TComPortBaudRate;
+begin
+
+end;
 
 function GetPacketAsStringHex(Packet: array of Byte; aLen: Integer; Delimeter : String = ':'): String;
 var i : Integer;
