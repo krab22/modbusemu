@@ -304,6 +304,18 @@ msgctxt "modbusemuresstr.rsdevview11"
 msgid "btCoilAplyAllClick"
 msgstr ""
 
+#: modbusemuresstr.rsdevview12
+msgid "btHoldingsAplyAllClick"
+msgstr ""
+
+#: modbusemuresstr.rsdevview13
+msgid "btInputsAplyAllClick"
+msgstr ""
+
+#: modbusemuresstr.rsdevview14
+msgid "btDiscretsAplyAllClick"
+msgstr ""
+
 #: modbusemuresstr.rsdevview2
 msgid "Inputs. ÐÑÐ¸ÑÐ»Ð¾ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ðµ %d Ð·Ð½Ð°ÑÐµÐ½Ð¸Ð¹"
 msgstr ""
@@ -967,6 +979,21 @@ msgctxt "TFRMDEVICEVIEW.BTHOLDINGSAPLYFOR.CAPTION"
 msgid "Применить к ..."
 msgstr ""
 
+#: tfrmdeviceview.btinputsaply.caption
+msgctxt "TFRMDEVICEVIEW.BTINPUTSAPLY.CAPTION"
+msgid "Применить"
+msgstr ""
+
+#: tfrmdeviceview.btinputsaplyall.caption
+msgctxt "TFRMDEVICEVIEW.BTINPUTSAPLYALL.CAPTION"
+msgid "Применить ко всем"
+msgstr ""
+
+#: tfrmdeviceview.btinputsaplyfor.caption
+msgctxt "TFRMDEVICEVIEW.BTINPUTSAPLYFOR.CAPTION"
+msgid "Применить к ..."
+msgstr ""
+
 #: tfrmdeviceview.caption
 msgctxt "TFRMDEVICEVIEW.CAPTION"
 msgid "Просмотр устройства"
@@ -978,54 +1005,67 @@ msgid "0"
 msgstr ""
 
 #: tfrmdeviceview.cbholdingsbit1.caption
+msgctxt "tfrmdeviceview.cbholdingsbit1.caption"
 msgid "1"
 msgstr ""
 
 #: tfrmdeviceview.cbholdingsbit10.caption
+msgctxt "tfrmdeviceview.cbholdingsbit10.caption"
 msgid "10"
 msgstr ""
 
 #: tfrmdeviceview.cbholdingsbit11.caption
+msgctxt "tfrmdeviceview.cbholdingsbit11.caption"
 msgid "11"
 msgstr ""
 
 #: tfrmdeviceview.cbholdingsbit12.caption
+msgctxt "tfrmdeviceview.cbholdingsbit12.caption"
 msgid "12"
 msgstr ""
 
 #: tfrmdeviceview.cbholdingsbit13.caption
+msgctxt "tfrmdeviceview.cbholdingsbit13.caption"
 msgid "13"
 msgstr ""
 
 #: tfrmdeviceview.cbholdingsbit14.caption
+msgctxt "tfrmdeviceview.cbholdingsbit14.caption"
 msgid "14"
 msgstr ""
 
 #: tfrmdeviceview.cbholdingsbit15.caption
+msgctxt "tfrmdeviceview.cbholdingsbit15.caption"
 msgid "15"
 msgstr ""
 
 #: tfrmdeviceview.cbholdingsbit2.caption
+msgctxt "tfrmdeviceview.cbholdingsbit2.caption"
 msgid "2"
 msgstr ""
 
 #: tfrmdeviceview.cbholdingsbit3.caption
+msgctxt "tfrmdeviceview.cbholdingsbit3.caption"
 msgid "3"
 msgstr ""
 
 #: tfrmdeviceview.cbholdingsbit4.caption
+msgctxt "tfrmdeviceview.cbholdingsbit4.caption"
 msgid "4"
 msgstr ""
 
 #: tfrmdeviceview.cbholdingsbit5.caption
+msgctxt "tfrmdeviceview.cbholdingsbit5.caption"
 msgid "5"
 msgstr ""
 
 #: tfrmdeviceview.cbholdingsbit6.caption
+msgctxt "tfrmdeviceview.cbholdingsbit6.caption"
 msgid "6"
 msgstr ""
 
 #: tfrmdeviceview.cbholdingsbit7.caption
+msgctxt "tfrmdeviceview.cbholdingsbit7.caption"
 msgid "7"
 msgstr ""
 
@@ -1035,11 +1075,107 @@ msgid "8"
 msgstr ""
 
 #: tfrmdeviceview.cbholdingsbit9.caption
+msgctxt "tfrmdeviceview.cbholdingsbit9.caption"
 msgid "9"
+msgstr ""
+
+#: tfrmdeviceview.cbinputsbit0.caption
+msgctxt "TFRMDEVICEVIEW.CBINPUTSBIT0.CAPTION"
+msgid "0"
+msgstr ""
+
+#: tfrmdeviceview.cbinputsbit1.caption
+msgctxt "TFRMDEVICEVIEW.CBINPUTSBIT1.CAPTION"
+msgid "1"
+msgstr ""
+
+#: tfrmdeviceview.cbinputsbit10.caption
+msgctxt "TFRMDEVICEVIEW.CBINPUTSBIT10.CAPTION"
+msgid "10"
+msgstr ""
+
+#: tfrmdeviceview.cbinputsbit11.caption
+msgctxt "TFRMDEVICEVIEW.CBINPUTSBIT11.CAPTION"
+msgid "11"
+msgstr ""
+
+#: tfrmdeviceview.cbinputsbit12.caption
+msgctxt "TFRMDEVICEVIEW.CBINPUTSBIT12.CAPTION"
+msgid "12"
+msgstr ""
+
+#: tfrmdeviceview.cbinputsbit13.caption
+msgctxt "TFRMDEVICEVIEW.CBINPUTSBIT13.CAPTION"
+msgid "13"
+msgstr ""
+
+#: tfrmdeviceview.cbinputsbit14.caption
+msgctxt "TFRMDEVICEVIEW.CBINPUTSBIT14.CAPTION"
+msgid "14"
+msgstr ""
+
+#: tfrmdeviceview.cbinputsbit15.caption
+msgctxt "TFRMDEVICEVIEW.CBINPUTSBIT15.CAPTION"
+msgid "15"
+msgstr ""
+
+#: tfrmdeviceview.cbinputsbit2.caption
+msgctxt "TFRMDEVICEVIEW.CBINPUTSBIT2.CAPTION"
+msgid "2"
+msgstr ""
+
+#: tfrmdeviceview.cbinputsbit3.caption
+msgctxt "TFRMDEVICEVIEW.CBINPUTSBIT3.CAPTION"
+msgid "3"
+msgstr ""
+
+#: tfrmdeviceview.cbinputsbit4.caption
+msgctxt "TFRMDEVICEVIEW.CBINPUTSBIT4.CAPTION"
+msgid "4"
+msgstr ""
+
+#: tfrmdeviceview.cbinputsbit5.caption
+msgctxt "TFRMDEVICEVIEW.CBINPUTSBIT5.CAPTION"
+msgid "5"
+msgstr ""
+
+#: tfrmdeviceview.cbinputsbit6.caption
+msgctxt "TFRMDEVICEVIEW.CBINPUTSBIT6.CAPTION"
+msgid "6"
+msgstr ""
+
+#: tfrmdeviceview.cbinputsbit7.caption
+msgctxt "TFRMDEVICEVIEW.CBINPUTSBIT7.CAPTION"
+msgid "7"
+msgstr ""
+
+#: tfrmdeviceview.cbinputsbit8.caption
+msgctxt "TFRMDEVICEVIEW.CBINPUTSBIT8.CAPTION"
+msgid "8"
+msgstr ""
+
+#: tfrmdeviceview.cbinputsbit9.caption
+msgctxt "TFRMDEVICEVIEW.CBINPUTSBIT9.CAPTION"
+msgid "9"
+msgstr ""
+
+#: tfrmdeviceview.edholdingsvalhex.hint
+msgctxt "TFRMDEVICEVIEW.EDHOLDINGSVALHEX.HINT"
+msgid "Для подтверждения ввода нажмите Enter"
 msgstr ""
 
 #: tfrmdeviceview.edholdingsvalhex.text
 msgctxt "TFRMDEVICEVIEW.EDHOLDINGSVALHEX.TEXT"
+msgid "0000"
+msgstr ""
+
+#: tfrmdeviceview.edinputsvalhex.hint
+msgctxt "TFRMDEVICEVIEW.EDINPUTSVALHEX.HINT"
+msgid "Для подтверждения ввода нажмите Enter"
+msgstr ""
+
+#: tfrmdeviceview.edinputsvalhex.text
+msgctxt "TFRMDEVICEVIEW.EDINPUTSVALHEX.TEXT"
 msgid "0000"
 msgstr ""
 
@@ -1064,6 +1200,7 @@ msgid "Значение"
 msgstr ""
 
 #: tfrmdeviceview.gbholdingsbits.caption
+msgctxt "tfrmdeviceview.gbholdingsbits.caption"
 msgid "Биты"
 msgstr ""
 
@@ -1074,6 +1211,21 @@ msgstr ""
 
 #: tfrmdeviceview.gbholdingsvalue.caption
 msgctxt "TFRMDEVICEVIEW.GBHOLDINGSVALUE.CAPTION"
+msgid "Значение"
+msgstr ""
+
+#: tfrmdeviceview.gbinputsbits.caption
+msgctxt "TFRMDEVICEVIEW.GBINPUTSBITS.CAPTION"
+msgid "Биты"
+msgstr ""
+
+#: tfrmdeviceview.gbinputseditreg.caption
+msgctxt "TFRMDEVICEVIEW.GBINPUTSEDITREG.CAPTION"
+msgid "Изменение регистра"
+msgstr ""
+
+#: tfrmdeviceview.gbinputsvalue.caption
+msgctxt "TFRMDEVICEVIEW.GBINPUTSVALUE.CAPTION"
 msgid "Значение"
 msgstr ""
 
@@ -1115,6 +1267,16 @@ msgctxt "TFRMDEVICEVIEW.LBHOLDINGSREGNUM.CAPTION"
 msgid "Номер регистра:"
 msgstr ""
 
+#: tfrmdeviceview.lbinputscomment.caption
+msgctxt "TFRMDEVICEVIEW.LBINPUTSCOMMENT.CAPTION"
+msgid "Коментарий:"
+msgstr ""
+
+#: tfrmdeviceview.lbinputsregnum.caption
+msgctxt "TFRMDEVICEVIEW.LBINPUTSREGNUM.CAPTION"
+msgid "Номер регистра:"
+msgstr ""
+
 #: tfrmdeviceview.rbcoilfalse.caption
 msgctxt "TFRMDEVICEVIEW.RBCOILFALSE.CAPTION"
 msgid "False"
@@ -1133,6 +1295,16 @@ msgstr ""
 #: tfrmdeviceview.rbdiscretstrue.caption
 msgctxt "TFRMDEVICEVIEW.RBDISCRETSTRUE.CAPTION"
 msgid "True"
+msgstr ""
+
+#: tfrmdeviceview.speholdingsvalue.hint
+msgctxt "tfrmdeviceview.speholdingsvalue.hint"
+msgid "Для подтверждения ввода нажмите Enter"
+msgstr ""
+
+#: tfrmdeviceview.speinputsvalue.hint
+msgctxt "TFRMDEVICEVIEW.SPEINPUTSVALUE.HINT"
+msgid "Для подтверждения ввода нажмите Enter"
 msgstr ""
 
 #: tfrmdeviceview.tscoils.caption

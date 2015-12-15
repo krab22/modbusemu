@@ -7,7 +7,7 @@ object frmDeviceView: TfrmDeviceView
   ClientHeight = 754
   ClientWidth = 681
   OnClose = FormClose
-  Position = poDesktopCenter
+  Position = poMainFormCenter
   LCLVersion = '1.5'
   object lbDevNum: TLabel
     Left = 8
@@ -30,8 +30,8 @@ object frmDeviceView: TfrmDeviceView
     Height = 705
     Top = 40
     Width = 664
-    ActivePage = tsHoldings
-    TabIndex = 2
+    ActivePage = tsInputs
+    TabIndex = 3
     TabOrder = 0
     object tsCoils: TTabSheet
       Caption = 'Coils'
@@ -413,9 +413,13 @@ object frmDeviceView: TfrmDeviceView
           object speHoldingsValue: TSpinEdit
             Left = 8
             Height = 32
+            Hint = 'Для подтверждения ввода нажмите Enter'
             Top = 8
             Width = 96
             MaxValue = 65535
+            OnEditingDone = speHoldingsValueEditingDone
+            ParentShowHint = False
+            ShowHint = True
             TabOrder = 0
           end
           object gbHoldingsBits: TGroupBox
@@ -575,11 +579,14 @@ object frmDeviceView: TfrmDeviceView
           object edHoldingsValHex: TEdit
             Left = 8
             Height = 32
+            Hint = 'Для подтверждения ввода нажмите Enter'
             Top = 46
             Width = 96
             MaxLength = 4
-            OnChange = edHoldingsValHexChange
+            OnEditingDone = edHoldingsValHexEditingDone
             OnKeyPress = edHoldingsValHexKeyPress
+            ParentShowHint = False
+            ShowHint = True
             TabOrder = 2
             Text = '0000'
           end
@@ -592,8 +599,8 @@ object frmDeviceView: TfrmDeviceView
       ClientWidth = 654
       object sgInputs: TStringGrid
         Left = 1
-        Height = 547
-        Top = 124
+        Height = 453
+        Top = 211
         Width = 653
         ColCount = 4
         DefaultRowHeight = 25
@@ -623,6 +630,264 @@ object frmDeviceView: TfrmDeviceView
           0
           'Коментарий'
         )
+      end
+      object gbInputsEditReg: TGroupBox
+        Left = 5
+        Height = 205
+        Top = 3
+        Width = 644
+        Caption = 'Изменение регистра'
+        ClientHeight = 184
+        ClientWidth = 642
+        TabOrder = 1
+        object speInputsRegNum: TSpinEdit
+          Left = 128
+          Height = 32
+          Top = 4
+          Width = 90
+          MaxValue = 65534
+          TabOrder = 0
+        end
+        object lbInputsRegNum: TLabel
+          Left = 8
+          Height = 20
+          Top = 4
+          Width = 112
+          Caption = 'Номер регистра:'
+          ParentColor = False
+        end
+        object btInputsAply: TButton
+          Left = 490
+          Height = 25
+          Top = 4
+          Width = 147
+          Caption = 'Применить'
+          OnClick = btInputsAplyClick
+          TabOrder = 2
+        end
+        object btInputsAplyAll: TButton
+          Left = 490
+          Height = 25
+          Top = 36
+          Width = 147
+          Caption = 'Применить ко всем'
+          OnClick = btInputsAplyAllClick
+          TabOrder = 3
+        end
+        object btInputsAplyFor: TButton
+          Left = 490
+          Height = 25
+          Top = 69
+          Width = 147
+          Caption = 'Применить к ...'
+          OnClick = btInputsAplyForClick
+          TabOrder = 4
+        end
+        object lbInputsComment: TLabel
+          Left = 8
+          Height = 20
+          Top = 144
+          Width = 85
+          Caption = 'Коментарий:'
+          ParentColor = False
+        end
+        object edInputsRegDescription: TEdit
+          Left = 96
+          Height = 32
+          Top = 146
+          Width = 392
+          TabOrder = 1
+        end
+        object gbInputsValue: TGroupBox
+          Left = 8
+          Height = 105
+          Top = 35
+          Width = 480
+          Caption = 'Значение'
+          ClientHeight = 84
+          ClientWidth = 478
+          TabOrder = 5
+          object speInputsValue: TSpinEdit
+            Left = 8
+            Height = 32
+            Hint = 'Для подтверждения ввода нажмите Enter'
+            Top = 8
+            Width = 96
+            MaxValue = 65535
+            OnEditingDone = speInputsValueEditingDone
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 0
+          end
+          object gbInputsBits: TGroupBox
+            Left = 107
+            Height = 90
+            Top = -8
+            Width = 369
+            Caption = 'Биты'
+            ClientHeight = 69
+            ClientWidth = 367
+            TabOrder = 1
+            object cbInputsBit0: TCheckBox
+              Left = 3
+              Height = 24
+              Top = 0
+              Width = 35
+              Caption = '0'
+              OnChange = cbInputsBit0Change
+              TabOrder = 0
+            end
+            object cbInputsBit1: TCheckBox
+              Left = 42
+              Height = 24
+              Top = 0
+              Width = 35
+              Caption = '1'
+              OnChange = cbInputsBit1Change
+              TabOrder = 1
+            end
+            object cbInputsBit2: TCheckBox
+              Left = 83
+              Height = 24
+              Top = 0
+              Width = 35
+              Caption = '2'
+              OnChange = cbInputsBit2Change
+              TabOrder = 2
+            end
+            object cbInputsBit3: TCheckBox
+              Left = 130
+              Height = 24
+              Top = 0
+              Width = 35
+              Caption = '3'
+              OnChange = cbInputsBit3Change
+              TabOrder = 3
+            end
+            object cbInputsBit4: TCheckBox
+              Left = 179
+              Height = 24
+              Top = 0
+              Width = 35
+              Caption = '4'
+              OnChange = cbInputsBit4Change
+              TabOrder = 4
+            end
+            object cbInputsBit5: TCheckBox
+              Left = 226
+              Height = 24
+              Top = 0
+              Width = 35
+              Caption = '5'
+              OnChange = cbInputsBit5Change
+              TabOrder = 5
+            end
+            object cbInputsBit6: TCheckBox
+              Left = 273
+              Height = 24
+              Top = 0
+              Width = 35
+              Caption = '6'
+              OnChange = cbInputsBit6Change
+              TabOrder = 6
+            end
+            object cbInputsBit7: TCheckBox
+              Left = 322
+              Height = 24
+              Top = 0
+              Width = 35
+              Caption = '7'
+              OnChange = cbInputsBit7Change
+              TabOrder = 7
+            end
+            object cbInputsBit8: TCheckBox
+              Left = 3
+              Height = 24
+              Top = 36
+              Width = 35
+              Caption = '8'
+              OnChange = cbInputsBit8Change
+              TabOrder = 8
+            end
+            object cbInputsBit9: TCheckBox
+              Left = 42
+              Height = 24
+              Top = 36
+              Width = 35
+              Caption = '9'
+              OnChange = cbInputsBit9Change
+              TabOrder = 9
+            end
+            object cbInputsBit10: TCheckBox
+              Left = 83
+              Height = 24
+              Top = 36
+              Width = 44
+              Caption = '10'
+              OnChange = cbInputsBit10Change
+              TabOrder = 10
+            end
+            object cbInputsBit11: TCheckBox
+              Left = 130
+              Height = 24
+              Top = 36
+              Width = 44
+              Caption = '11'
+              OnChange = cbInputsBit11Change
+              TabOrder = 11
+            end
+            object cbInputsBit12: TCheckBox
+              Left = 179
+              Height = 24
+              Top = 36
+              Width = 44
+              Caption = '12'
+              OnChange = cbInputsBit12Change
+              TabOrder = 12
+            end
+            object cbInputsBit13: TCheckBox
+              Left = 226
+              Height = 24
+              Top = 36
+              Width = 44
+              Caption = '13'
+              OnChange = cbInputsBit13Change
+              TabOrder = 13
+            end
+            object cbInputsBit14: TCheckBox
+              Left = 273
+              Height = 24
+              Top = 36
+              Width = 44
+              Caption = '14'
+              OnChange = cbInputsBit14Change
+              TabOrder = 14
+            end
+            object cbInputsBit15: TCheckBox
+              Left = 322
+              Height = 24
+              Top = 36
+              Width = 44
+              Caption = '15'
+              OnChange = cbInputsBit15Change
+              TabOrder = 15
+            end
+          end
+          object edInputsValHex: TEdit
+            Left = 8
+            Height = 32
+            Hint = 'Для подтверждения ввода нажмите Enter'
+            Top = 46
+            Width = 96
+            MaxLength = 4
+            OnEditingDone = edInputsValHexEditingDone
+            OnKeyPress = edHoldingsValHexKeyPress
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 2
+            Text = '0000'
+          end
+        end
       end
     end
   end

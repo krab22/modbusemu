@@ -149,6 +149,9 @@ resourcestring
  rsDevView9                 = 'btCoilAplyAllClick';
  rsDevView10                = 'Меняем %d занчений';
  rsDevView11                = 'btCoilAplyAllClick';
+ rsDevView12                = 'btHoldingsAplyAllClick';
+ rsDevView13                = 'btInputsAplyAllClick';
+ rsDevView14                = 'btDiscretsAplyAllClick';
 
 implementation
 
