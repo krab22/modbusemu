@@ -5,23 +5,36 @@ unit MBEmuXMLConst;
 interface
 
 const
-  csNodeRoot     = 'modbusemu';
-  csNodeChannels = 'channels';
-  csNodeChannel  = 'channel';
-  csNodeDevices  = 'devices';
-  csNodeDevice   = 'device';
+  csNodeRoot     = 'ModbusEmu';
+  csNodeChannels = 'Channels';
+  csNodeChannel  = 'Channel';
+  csNodeDevices  = 'Devices';
+  csNodeDevice   = 'Device';
+  csNodeDefVal   = 'DefValues';
+  csNodeCoils    = 'CoilRegs';
+  csNodeDiscr    = 'DiscretRegs';
+  csNodeHold     = 'HoldingRegs';
+  csNodeInp      = 'InputRegs';
+  csNodeReg      = 'Register';
 
-  csAttrType     = 'type';
-  csAttrName     = 'name';
-  csAttrDescr    = 'descr';
-  csAttrAddres   = 'adress';
-  csAttrPort     = 'port';
-  csAttrPref     = 'prefix';
-  csAttrPrefOther= 'prefother';
-  csAttrBauRate  = 'baudrate';
-  csAttrByteSize = 'bytesize';
-  csAttrParity   = 'parity';
-  csAttrStopBit  = 'stopbit';
+  csAttrType     = 'Type';
+  csAttrName     = 'Name';
+  csAttrDescr    = 'Descr';
+  csAttrAddres   = 'Adress';
+  csAttrPort     = 'Port';
+  csAttrPref     = 'Prefix';
+  csAttrPrefOther= 'PrefOther';
+  csAttrBauRate  = 'BaudRate';
+  csAttrByteSize = 'ByteSize';
+  csAttrParity   = 'Parity';
+  csAttrStopBit  = 'StopBit';
+  csAttrDefCoil  = 'DefCoil';
+  csAttrDefDiscr = 'DefDiscret';
+  csAttrDefHold  = 'DefHolding';
+  csAttrDefInput = 'DefInput';
+  csAttrFunction = 'Functions';
+  csAttrValue    = 'Value';
+  csAttrDescript = 'Description';
 
   csTypeRS       = 'RS';
   csTypeTCP      = 'TCP';

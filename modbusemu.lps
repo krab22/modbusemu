@@ -3,12 +3,12 @@
   <ProjectSession>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="14">
+    <Units Count="13">
       <Unit0>
         <Filename Value="modbusemu.lpr"/>
         <IsPartOfProject Value="True"/>
-        <CursorPos Y="25"/>
-        <UsageCount Value="183"/>
+        <CursorPos Y="24"/>
+        <UsageCount Value="201"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -18,10 +18,16 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="181"/>
-        <CursorPos X="56" Y="215"/>
-        <ComponentState Value="1"/>
-        <UsageCount Value="183"/>
+        <TopLine Value="186"/>
+        <CursorPos X="70" Y="195"/>
+        <ExtraEditorCount Value="1"/>
+        <ExtraEditor1>
+          <EditorIndex Value="-1"/>
+          <WindowIndex Value="1"/>
+          <TopLine Value="577"/>
+          <CursorPos X="101" Y="614"/>
+        </ExtraEditor1>
+        <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
@@ -32,22 +38,21 @@
         <WindowIndex Value="1"/>
         <TopLine Value="8"/>
         <CursorPos X="33" Y="47"/>
-        <UsageCount Value="134"/>
+        <UsageCount Value="153"/>
       </Unit2>
       <Unit3>
         <Filename Value="source/ModbusEmuResStr.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="122"/>
-        <CursorPos X="13" Y="154"/>
+        <TopLine Value="129"/>
+        <CursorPos X="11" Y="165"/>
         <ExtraEditorCount Value="1"/>
         <ExtraEditor1>
           <EditorIndex Value="-1"/>
-          <WindowIndex Value="1"/>
-          <TopLine Value="123"/>
-          <CursorPos X="13" Y="162"/>
+          <TopLine Value="138"/>
+          <CursorPos X="11" Y="171"/>
         </ExtraEditor1>
-        <UsageCount Value="134"/>
+        <UsageCount Value="153"/>
       </Unit3>
       <Unit4>
         <Filename Value="source/DeviceAdd.pas"/>
@@ -57,7 +62,7 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="16" Y="15"/>
-        <UsageCount Value="78"/>
+        <UsageCount Value="97"/>
       </Unit4>
       <Unit5>
         <Filename Value="source/DeviceView.pas"/>
@@ -65,17 +70,19 @@
         <ComponentName Value="frmDeviceView"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="-1"/>
-        <WindowIndex Value="-1"/>
-        <TopLine Value="462"/>
-        <CursorPos X="7" Y="496"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="1212"/>
+        <CursorPos X="3" Y="1216"/>
         <ExtraEditorCount Value="1"/>
         <ExtraEditor1>
           <EditorIndex Value="-1"/>
           <TopLine Value="169"/>
           <CursorPos X="4" Y="186"/>
         </ExtraEditor1>
-        <UsageCount Value="78"/>
+        <UsageCount Value="97"/>
+        <Loaded Value="True"/>
       </Unit5>
       <Unit6>
         <Filename Value="source/formChennelAdd.pas"/>
@@ -85,7 +92,7 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="15" Y="11"/>
-        <UsageCount Value="78"/>
+        <UsageCount Value="97"/>
       </Unit6>
       <Unit7>
         <Filename Value="source/formChennelRSLinuxAdd.pas"/>
@@ -101,7 +108,7 @@
           <TopLine Value="116"/>
           <CursorPos Y="141"/>
         </ExtraEditor1>
-        <UsageCount Value="78"/>
+        <UsageCount Value="97"/>
       </Unit7>
       <Unit8>
         <Filename Value="source/formChennelRSWindowsAdd.pas"/>
@@ -116,7 +123,7 @@
           <EditorIndex Value="-1"/>
           <CursorPos X="91" Y="12"/>
         </ExtraEditor1>
-        <UsageCount Value="78"/>
+        <UsageCount Value="97"/>
       </Unit8>
       <Unit9>
         <Filename Value="source/formChennelTCPAdd.pas"/>
@@ -126,7 +133,7 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="20" Y="14"/>
-        <UsageCount Value="78"/>
+        <UsageCount Value="97"/>
       </Unit9>
       <Unit10>
         <Filename Value="source/framChennelRSClasses.pas"/>
@@ -136,7 +143,7 @@
         <ResourceBaseClass Value="Frame"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="18" Y="14"/>
-        <UsageCount Value="78"/>
+        <UsageCount Value="97"/>
       </Unit10>
       <Unit11>
         <Filename Value="source/framChennelTCPClasses.pas"/>
@@ -146,35 +153,21 @@
         <ResourceBaseClass Value="Frame"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="19" Y="15"/>
-        <UsageCount Value="78"/>
+        <UsageCount Value="97"/>
       </Unit11>
       <Unit12>
-        <Filename Value="source/TestDeviceView.pas"/>
-        <IsPartOfProject Value="True"/>
-        <ComponentName Value="formTestDevView"/>
-        <HasResources Value="True"/>
-        <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="130"/>
-        <CursorPos X="15" Y="83"/>
-        <UsageCount Value="56"/>
-      </Unit12>
-      <Unit13>
         <Filename Value="source/formRahgeEdit.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmRangeEdit"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="16" Y="15"/>
-        <UsageCount Value="47"/>
-      </Unit13>
+        <UsageCount Value="66"/>
+      </Unit12>
     </Units>
-    <General>
-      <ActiveWindowIndexAtStart Value="1"/>
-    </General>
   </ProjectSession>
   <Debugging>
-    <BreakPoints Count="2">
+    <BreakPoints Count="3">
       <Item1>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
@@ -189,6 +182,13 @@
         <Source Value="files/lib/ModbusLib/MBRegistersCalsses.pas"/>
         <Line Value="37"/>
       </Item2>
+      <Item3>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="source/MBEmuLoaderClasses.pas"/>
+        <Line Value="365"/>
+      </Item3>
     </BreakPoints>
   </Debugging>
 </CONFIG>

@@ -184,9 +184,19 @@ uses DeviceAdd,
 
 { TfrmMain }
 
+procedure TfrmMain.OnDevChangeProc(ASender : TObject);
+begin
+  FIsConfModify := True;
+end;
+
 procedure TfrmMain.actFileLoadConfExecute(Sender : TObject);
 var TempLoader : TMBEmuLoader;
 begin
+  if FIsConfModify then // предварительно сохранить текущие изменения
+   begin
+
+   end;
+
   if not odConf.Execute then Exit;
 
   TempLoader := TMBEmuLoader.Create(lbDeviceList.Items,@FDevArray,@FDevForms,libChennelList.Items,FCSection,@OnDevChangeProc);
@@ -248,7 +258,7 @@ begin
   if TempRes <> mrOK then Exit;
   if TempIndex = -1 then Exit;
   libChennelList.ItemIndex := TempIndex;
-  FIsConfModify := True;
+  OnDevChangeProc(Self);
 end;
 
 procedure TfrmMain.actChennelDelExecute(Sender: TObject);
@@ -269,7 +279,7 @@ begin
   if libChennelList.Items.Count > 0 then libChennelList.ItemIndex := 0
    else libChennelList.ItemIndex := -1;
   LoggerObj.info(rsDelChannel2,Format(rsDelChannel3,[TempChenName]));
-  FIsConfModify := True;
+  OnDevChangeProc(Self);
 end;
 
 procedure TfrmMain.actChennelEditExecute(Sender : TObject);
@@ -306,7 +316,7 @@ begin
          TempChen.Active := True;
         end;
        if Assigned(FChenTCPFrame) then FChenTCPFrame.UpdateChenInfo;
-       FIsConfModify := True;
+       OnDevChangeProc(Self);
       end;
     finally
      FreeAndNil(TempForm);
@@ -334,7 +344,7 @@ begin
          TempChen.Active := True;
         end;
        if Assigned(FChenRSFrame) then FChenRSFrame.UpdateChenInfo;
-       FIsConfModify := True;
+       OnDevChangeProc(Self);
       end;
     finally
      FreeAndNil(TempForm);
@@ -415,7 +425,7 @@ begin
   libChennelList.ItemIndex := -1;
   libChennelList.Items.Clear;
   LoggerObj.info(rsDelChennelAll1,rsDelChennelAll2);
-  FIsConfModify := True;
+  OnDevChangeProc(Self);
 end;
 
 procedure TfrmMain.actLogClearExecute(Sender: TObject);
@@ -472,11 +482,6 @@ begin
    end;
 end;
 
-procedure TfrmMain.OnDevChangeProc(ASender : TObject);
-begin
-  FIsConfModify := True;
-end;
-
 procedure TfrmMain.cbLogDebugChange(Sender: TObject);
 begin
   LoggerObj.EnableDebug := cbLogDebug.Checked;
@@ -499,7 +504,7 @@ end;
 
 procedure TfrmMain.cmbLogLineCountChange(Sender: TObject);
 begin
-  FIsConfModify := True;
+  OnDevChangeProc(Self);
 end;
 
 procedure TfrmMain.actDevAddExecute(Sender : TObject);
@@ -608,7 +613,7 @@ begin
    end;
    TempDevNum := lbDeviceList.Items.AddObject(Format(rsDevAdd2,[TempDevNum]),FDevArray[TempDevNum]);
    lbDeviceList.ItemIndex := TempDevNum;
-   FIsConfModify := True;
+   OnDevChangeProc(Self);
   finally
     FreeAndNil(TempAddForm);
   end;
@@ -633,7 +638,7 @@ begin
   finally
    UnLock;
   end;
-  FIsConfModify := True;
+  OnDevChangeProc(Self);
 end;
 
 procedure TfrmMain.actDevEditExecute(Sender : TObject);
@@ -873,7 +878,7 @@ begin
 
     TempForm.Device := TempDev;
 
-    FIsConfModify := True;
+    OnDevChangeProc(Self);
 
     if TempDev.DeviceFunctions = [] then raise ENeitherFunctioIsNotSet.Create;
 
@@ -901,7 +906,7 @@ procedure TfrmMain.actDevClearListExecute(Sender : TObject);
 begin
   lbDeviceList.Clear;
   ClearDevices;
-  FIsConfModify := True;
+  OnDevChangeProc(Self);
 end;
 
 procedure TfrmMain.ClearDevices;
@@ -923,7 +928,7 @@ begin
      end;
    end;
 
-  FIsConfModify := True;
+  OnDevChangeProc(Self);
  finally
   UnLock;
  end;

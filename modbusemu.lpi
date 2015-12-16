@@ -21,7 +21,7 @@
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MinorVersionNr Value="5"/>
-      <BuildNr Value="84"/>
+      <BuildNr Value="100"/>
       <Language Value="0419"/>
       <Attributes pvaDebug="True"/>
       <StringTable ProductVersion=""/>
@@ -45,7 +45,7 @@
         <PackageName Value="LCL"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="14">
+    <Units Count="13">
       <Unit0>
         <Filename Value="modbusemu.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -122,18 +122,11 @@
         <ResourceBaseClass Value="Frame"/>
       </Unit11>
       <Unit12>
-        <Filename Value="source/TestDeviceView.pas"/>
-        <IsPartOfProject Value="True"/>
-        <ComponentName Value="formTestDevView"/>
-        <HasResources Value="True"/>
-        <ResourceBaseClass Value="Form"/>
-      </Unit12>
-      <Unit13>
         <Filename Value="source/formRahgeEdit.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmRangeEdit"/>
         <ResourceBaseClass Value="Form"/>
-      </Unit13>
+      </Unit12>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
