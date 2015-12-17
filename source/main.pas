@@ -975,6 +975,14 @@ end;
 
 procedure TfrmMain.FormClose(Sender : TObject; var CloseAction : TCloseAction);
 begin
+  if FIsConfModify then // предварительно сохранить текущие изменения
+   begin
+    if MessageDlg(rsSaveConf1,rsLoader9,mtConfirmation,[mbOK, mbCancel],0) = mrOK then
+     begin
+      actFileSaveConfExecute(Self);
+     end;
+   end;
+
   ClearChennals;
   ClearFrames;
   ClearDevices;
