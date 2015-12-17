@@ -21,7 +21,7 @@
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MinorVersionNr Value="5"/>
-      <BuildNr Value="100"/>
+      <BuildNr Value="109"/>
       <Language Value="0419"/>
       <Attributes pvaDebug="True"/>
       <StringTable ProductVersion=""/>

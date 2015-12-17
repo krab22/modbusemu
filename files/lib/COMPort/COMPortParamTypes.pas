@@ -57,17 +57,17 @@ type
 
  {$IFDEF WINDOWS}
  TComPortBaudRate   = ( br75, br110, br150, br300, br600, br1200, br1800, br2400, br4800,
-                      br9600, br14400, br19200, br28800, br38400, br57600, br115200 );
+                      br9600, br14400, br19200, br28800, br38400, br57600, br115200, brNone);
  {$ELSE}
   TComPortBaudRate  = ( br0, br50, br75, br110, br134, br150, br200, br300, br600, br1200, br1800,
                         br2400, br4800, br9600, br19200, br38400, br57600, br115200, br230400, br460800,
                         br500000, br576000, br921600, br1000000, br1152000, br1500000, br2000000, br2500000,
-                        br3000000, br3500000, br4000000);
+                        br3000000, br3500000, br4000000, brNone);
  {$ENDIF}
 
- TComPortDataBits   = ( db5BITS, db6BITS, db7BITS, db8BITS );
- TComPortStopBits   = ( sb1BITS, sb1HALFBITS, sb2BITS );
- TComPortParity     = ( ptNONE, ptODD, ptEVEN, ptMARK, ptSPACE );
+ TComPortDataBits   = ( db5BITS, db6BITS, db7BITS, db8BITS, dbNone);
+ TComPortStopBits   = ( sb1BITS, sb1HALFBITS, sb2BITS, sbNone );
+ TComPortParity     = ( ptNONE, ptODD, ptEVEN, ptMARK, ptSPACE, ptError);
  TComPortPrefixPath = (pptLinux,pptWindows,pptOther);
  TComPortEvFlag     = (flRXCHAR, flRXFLAG, flTXEMPTY, flCTS, flDSR, flRLSD, flBREAK, flERR, flRING);
  TComPortEvFlags = set of TComPortEvFlag;
@@ -111,32 +111,32 @@ const
   INVALID_HANDLE_VALUE = THandle(-1);
   {$ENDIF}
 
-  ComPortParityNames   : TComPortParityNames =('', '', '', '', '');
-  ComPortParityEngNames: TComPortParityNames =('NONE', 'ODD', 'EVEN', 'MARK', 'SPACE');
+  ComPortParityNames   : TComPortParityNames =('Нет', 'Нечетный', 'Четный', 'Маркер', 'Не маркер', 'Ошибка');
+  ComPortParityEngNames: TComPortParityNames =('NONE', 'ODD', 'EVEN', 'MARK', 'SPACE', 'Error');
   {$IFDEF WINDOWS}
   ComPortBaudRateNames : TComPortBaudRateNames = ('75', '110', '150', '300', '600', '1200', '1800',
                                                   '2400', '4800','9600', '14400', '19200', '28800',
-                                                  '38400', '57600', '115200');
+                                                  '38400', '57600', '115200', 'None');
   WinBaudRate : array [TComPortBaudRate] of DWORD = ( 75, 110, 150, 300, 600, 1200, 1800, 2400, 4800,  // COM Port Baud Rates
-                                                   9600, 14400, 19200, 28800, 38400, 57600, 115200 );
+                                                   9600, 14400, 19200, 28800, 38400, 57600, 115200, 0 );
   {$ELSE}
    ComPortBaudRateNames : TComPortBaudRateNames = ('0','50','75','110','134','150','200','300','600',
                                                    '1200','1800','2400','4800','9600','19200','38400',
                                                    '57600','115200','230400','460800','500000','576000',
                                                    '921600','1000000','1152000','1500000','2000000',
-                                                   '2500000','3000000','3500000','4000000');
+                                                   '2500000','3000000','3500000','4000000', 'None');
    ComPortBaudRateValue : TComPortBaudRateValue = ( $0000000, $0000001, $0000002, $0000003, $0000004, $0000005,
                                                     $0000006, $0000007, $0000008, $0000009, $000000A, $000000B,
                                                     $000000C, $000000D, $000000E, $000000F, $0001001, $0001002,
                                                     $0001003, $0001004, $0001005, $0001006, $0001007, $0001008,
                                                     $0001009, $000100A, $000100B, $000100C, $000100D, $000100E,
-                                                    $000100F);
+                                                    $000100F, $FFFFFFF);
   {$ENDIF}
-  ComPortDataBitsNames   : TComPortDataBitsNames   = ('5 ','6 ','7 ','8 ');
-  ComPortDataBitsValue   : TComPortDataBitsValue   = (5,6,7,8);
-  ComPortStopBitsNames   : TComPortStopBitsNames   = ('1 ','1,5 ','2 ');
-  ComPortDataBitsSymbol  : TComPortDataBitsNames   = ('5','6','7','8');
-  ComPortStopBitsSymbol  : TComPortStopBitsNames   = ('1','1,5','2');
+  ComPortDataBitsNames   : TComPortDataBitsNames   = ('5 ','6 ','7 ','8 ','0 ');
+  ComPortDataBitsValue   : TComPortDataBitsValue   = (5,6,7,8,0);
+  ComPortStopBitsNames   : TComPortStopBitsNames   = ('1 ','1,5 ','2 ','0 ');
+  ComPortDataBitsSymbol  : TComPortDataBitsNames   = ('5','6','7','8','0');
+  ComPortStopBitsSymbol  : TComPortStopBitsNames   = ('1','1,5','2','0');
   ComPortPrefixPathNames : TComPortPrefixPathNames = (cCOMPrefixPathLinux,cCOMPrefixPathWindows,rsOther);
   ComPortPrefixPathValue : TComPortPrefixPathValue = (cCOMPrefixPathLinux,cCOMPrefixPathWindows,'');
 
@@ -210,15 +210,19 @@ function GetBaudRateIDFromStr(Value : String): TComPortBaudRate;
 
 function GetLinuxBaudRateID(Value : Longint):LongInt;
 function GetBaudRateValueFromID(Value : TComPortBaudRate): LongInt;
+
 function GetDataBitsIDFromValue(Value : Longint): TComPortDataBits;
 function GetDataBitsValueFromID(Value : TComPortDataBits): LongInt;
+function GetDataBitsIDFromStr(Value : String): TComPortDataBits;
+
 function GetStopBitsIDFromValue(Value : Longint): TComPortStopBits;
 function GetStopBitsIDStrFromValue(Value : TComPortStopBits): String;
-
 function GetStopBitsIDStrFromValue1(Value : TComPortStopBits): String;
+function GetStopBitsIDFromStr(Value : String): TComPortStopBits;
 
 function GetParityIDStrFromValue(Value : TComPortParity): String;
 function GetParityIDFromString(Value : String): TComPortParity;
+
 function GetCOMPortErrorMessage(AErrorCode : Integer): String;
 function GetMaxWaitTimeFromBaudRate(ABaudRate : TComPortBaudRate): Cardinal;
 
@@ -229,6 +233,24 @@ function  GetPacketFromStringHex(AString : string; var aPacket : array of Byte; 
 implementation
 
 uses strutils;
+
+function GetDataBitsIDFromStr(Value : String): TComPortDataBits;
+begin
+  Result := dbNone;
+  if SameText(ComPortDataBitsSymbol[db5BITS], Value) then Result:=db5BITS;
+  if SameText(ComPortDataBitsSymbol[db6BITS], Value) then Result:=db6BITS;
+  if SameText(ComPortDataBitsSymbol[db7BITS], Value) then Result:=db7BITS;
+  if SameText(ComPortDataBitsSymbol[db8BITS], Value) then Result:=db8BITS;
+end;
+
+function GetStopBitsIDFromStr(Value : String): TComPortStopBits;
+begin
+ Result := sbNone;
+ if Value = '' then Exit;
+ if SameText(Value,ComPortStopBitsSymbol[sb1BITS]) then Result := sb1BITS
+  else if SameText(Value,ComPortStopBitsSymbol[sb1HALFBITS]) then Result := sb1HALFBITS
+   else if SameText(Value,ComPortStopBitsSymbol[sb2BITS]) then Result := sb2BITS;
+end;
 
 function GetStopBitsIDStrFromValue1(Value : TComPortStopBits): String;
 begin
@@ -242,7 +264,57 @@ end;
 
 function GetBaudRateIDFromStr(Value : String): TComPortBaudRate;
 begin
-
+  Result := brNone;
+  {$IFDEF UNIX}
+  if SameText(ComPortBaudRateNames[br0], Value) then Result := br0;
+  if SameText(ComPortBaudRateNames[br50], Value) then Result := br50;
+  if SameText(ComPortBaudRateNames[br75], Value) then Result := br75;
+  if SameText(ComPortBaudRateNames[br110], Value) then Result := br110;
+  if SameText(ComPortBaudRateNames[br134], Value) then Result := br134;
+  if SameText(ComPortBaudRateNames[br150], Value) then Result := br150;
+  if SameText(ComPortBaudRateNames[br200], Value) then Result := br200;
+  if SameText(ComPortBaudRateNames[br300], Value) then Result := br300;
+  if SameText(ComPortBaudRateNames[br600], Value) then Result := br600;
+  if SameText(ComPortBaudRateNames[br1200], Value) then Result := br1200;
+  if SameText(ComPortBaudRateNames[br1800],Value) then Result := br1800;
+  if SameText(ComPortBaudRateNames[br2400],Value) then Result := br2400;
+  if SameText(ComPortBaudRateNames[br4800],Value) then Result := br4800;
+  if SameText(ComPortBaudRateNames[br9600],Value) then Result := br9600;
+  if SameText(ComPortBaudRateNames[br19200],Value) then Result := br19200;
+  if SameText(ComPortBaudRateNames[br38400],Value) then Result := br38400;
+  if SameText(ComPortBaudRateNames[br57600],Value) then Result := br57600;
+  if SameText(ComPortBaudRateNames[br115200],Value) then Result := br115200;
+  if SameText(ComPortBaudRateNames[br230400],Value) then Result := br230400;
+  if SameText(ComPortBaudRateNames[br460800],Value) then Result := br460800;
+  if SameText(ComPortBaudRateNames[br500000],Value) then Result := br500000;
+  if SameText(ComPortBaudRateNames[br576000],Value) then Result := br576000;
+  if SameText(ComPortBaudRateNames[br921600],Value) then Result := br921600;
+  if SameText(ComPortBaudRateNames[br1000000],Value) then Result := br1000000;
+  if SameText(ComPortBaudRateNames[br1152000],Value) then Result := br1152000;
+  if SameText(ComPortBaudRateNames[br1500000],Value) then Result := br1500000;
+  if SameText(ComPortBaudRateNames[br2000000],Value) then Result := br2000000;
+  if SameText(ComPortBaudRateNames[br2500000],Value) then Result := br2500000;
+  if SameText(ComPortBaudRateNames[br3000000],Value) then Result := br3000000;
+  if SameText(ComPortBaudRateNames[br3500000],Value) then Result := br3500000;
+  if SameText(ComPortBaudRateNames[br4000000],Value) then Result := br4000000;
+  {$ELSE}
+  if SameText(ComPortBaudRateNames[br75], Value) then Result := br75;
+  if SameText(ComPortBaudRateNames[br110], Value) then Result := br110;
+  if SameText(ComPortBaudRateNames[br150], Value) then Result := br150;
+  if SameText(ComPortBaudRateNames[br300], Value) then Result := br300;
+  if SameText(ComPortBaudRateNames[br600], Value) then Result := br600;
+  if SameText(ComPortBaudRateNames[br1200], Value) then Result := br1200;
+  if SameText(ComPortBaudRateNames[br1800], Value) then Result := br1800;
+  if SameText(ComPortBaudRateNames[br2400], Value) then Result := br2400;
+  if SameText(ComPortBaudRateNames[br4800], Value) then Result := br4800;
+  if SameText(ComPortBaudRateNames[br9600], Value) then Result := br9600;
+  if SameText(ComPortBaudRateNames[br14400],Value) then Result := br14400;
+  if SameText(ComPortBaudRateNames[br19200],Value) then Result := br19200;
+  if SameText(ComPortBaudRateNames[br28800],Value) then Result := br28800;
+  if SameText(ComPortBaudRateNames[br38400],Value) then Result := br38400;
+  if SameText(ComPortBaudRateNames[br57600],Value) then Result := br57600;
+  if SameText(ComPortBaudRateNames[br115200],Value) then Result := br115200;
+  {$ENDIF}
 end;
 
 function GetPacketAsStringHex(Packet: array of Byte; aLen: Integer; Delimeter : String = ':'): String;
@@ -387,7 +459,7 @@ begin
          else
           if Value = 's' then Result := ptSPACE
            else
-            Result := ptEVEN;
+            Result := ptError;
 
 end;
 

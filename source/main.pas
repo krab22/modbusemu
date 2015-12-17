@@ -194,7 +194,10 @@ var TempLoader : TMBEmuLoader;
 begin
   if FIsConfModify then // предварительно сохранить текущие изменения
    begin
-
+    if MessageDlg(rsSaveConf1,rsLoader9,mtConfirmation,[mbOK, mbCancel],0) = mrOK then
+     begin
+      actFileSaveConfExecute(Self);
+     end;
    end;
 
   if not odConf.Execute then Exit;
@@ -532,25 +535,25 @@ begin
     if TempAddForm.cgFunctions.Checked[0] then // функция 1
      begin
       FDevArray[TempDevNum].DeviceFunctions := FDevArray[TempDevNum].DeviceFunctions+[fn01];
-      FDevArray[TempDevNum].AddRegisters(rgCoils,0,65535);
+      FDevArray[TempDevNum].AddRegisters(rgCoils,0,10000);
       TempStr := Format(rsDevAdd14,[TempStr]);
      end;
     if TempAddForm.cgFunctions.Checked[1] then // функция 2
      begin
       FDevArray[TempDevNum].DeviceFunctions := FDevArray[TempDevNum].DeviceFunctions+[fn02];
-      FDevArray[TempDevNum].AddRegisters(rgDiscrete,0,65535);
+      FDevArray[TempDevNum].AddRegisters(rgDiscrete,0,10000);
       TempStr := Format(rsDevAdd3,[TempStr]);
      end;
     if TempAddForm.cgFunctions.Checked[2] then // функция 3
      begin
       FDevArray[TempDevNum].DeviceFunctions := FDevArray[TempDevNum].DeviceFunctions+[fn03];
-      FDevArray[TempDevNum].AddRegisters(rgHolding,0,65535);
+      FDevArray[TempDevNum].AddRegisters(rgHolding,0,10000);
       TempStr := Format(rsDevAdd4,[TempStr]);
      end;
     if TempAddForm.cgFunctions.Checked[3] then // функция 4
      begin
       FDevArray[TempDevNum].DeviceFunctions := FDevArray[TempDevNum].DeviceFunctions+[fn04];
-      FDevArray[TempDevNum].AddRegisters(rgInput,0,65535);
+      FDevArray[TempDevNum].AddRegisters(rgInput,0,10000);
       TempStr := Format(rsDevAdd5,[TempStr]);
      end;
     if TempAddForm.cgFunctions.Checked[4] then // функция 5
@@ -560,7 +563,7 @@ begin
       if not(fn01 in FDevArray[TempDevNum].DeviceFunctions) then
        begin
         FDevArray[TempDevNum].DeviceFunctions := FDevArray[TempDevNum].DeviceFunctions+[fn01];
-        FDevArray[TempDevNum].AddRegisters(rgCoils,0,65535);
+        FDevArray[TempDevNum].AddRegisters(rgCoils,0,10000);
        end;
      end;
     if TempAddForm.cgFunctions.Checked[5] then // функция 6
@@ -570,7 +573,7 @@ begin
       if not(fn03 in FDevArray[TempDevNum].DeviceFunctions) then
        begin
         FDevArray[TempDevNum].DeviceFunctions := FDevArray[TempDevNum].DeviceFunctions+[fn03];
-        FDevArray[TempDevNum].AddRegisters(rgHolding,0,65535);
+        FDevArray[TempDevNum].AddRegisters(rgHolding,0,10000);
        end;
      end;
     if TempAddForm.cgFunctions.Checked[6] then // функция 15
@@ -580,7 +583,7 @@ begin
       if not(fn01 in FDevArray[TempDevNum].DeviceFunctions) then
        begin
         FDevArray[TempDevNum].DeviceFunctions := FDevArray[TempDevNum].DeviceFunctions+[fn01];
-        FDevArray[TempDevNum].AddRegisters(rgCoils,0,65535);
+        FDevArray[TempDevNum].AddRegisters(rgCoils,0,10000);
        end;
      end;
     if TempAddForm.cgFunctions.Checked[7] then // функция 16
@@ -590,7 +593,7 @@ begin
       if not(fn03 in FDevArray[TempDevNum].DeviceFunctions) then
        begin
         FDevArray[TempDevNum].DeviceFunctions := FDevArray[TempDevNum].DeviceFunctions+[fn03];
-        FDevArray[TempDevNum].AddRegisters(rgHolding,0,65535);
+        FDevArray[TempDevNum].AddRegisters(rgHolding,0,10000);
        end;
      end;
     if TempAddForm.cgFunctions.Checked[8] then // функция 17
@@ -719,7 +722,7 @@ begin
       if not (fn01 in TempDev.DeviceFunctions) then  // новая функция
        begin
         TempDev.DeviceFunctions := TempDev.DeviceFunctions + [fn01];
-        TempDev.AddRegisters(rgCoils,0,65535);
+        TempDev.AddRegisters(rgCoils,0,10000);
         TempDev.InitializeCoils;
        end;
      end
@@ -737,7 +740,7 @@ begin
       if not (fn02 in TempDev.DeviceFunctions) then  // новая функция
        begin
         TempDev.DeviceFunctions := TempDev.DeviceFunctions + [fn02];
-        TempDev.AddRegisters(rgDiscrete,0,65535);
+        TempDev.AddRegisters(rgDiscrete,0,10000);
         TempDev.InitializeDiscrets;
        end;
      end
@@ -755,7 +758,7 @@ begin
       if not (fn03 in TempDev.DeviceFunctions) then  // новая функция
        begin
         TempDev.DeviceFunctions := TempDev.DeviceFunctions + [fn03];
-        TempDev.AddRegisters(rgHolding,0,65535);
+        TempDev.AddRegisters(rgHolding,0,10000);
         TempDev.InitializeHoldings;
        end;
      end
@@ -773,7 +776,7 @@ begin
       if not (fn04 in TempDev.DeviceFunctions) then  // новая функция
        begin
         TempDev.DeviceFunctions := TempDev.DeviceFunctions + [fn04];
-        TempDev.AddRegisters(rgInput,0,65535);
+        TempDev.AddRegisters(rgInput,0,10000);
         TempDev.InitializeInputs;
        end;
      end
@@ -794,7 +797,7 @@ begin
         if TempDev.CoilCount = 0 then // если забыли добавить функцию чтения
          begin
           TempDev.DeviceFunctions := TempDev.DeviceFunctions + [fn01];
-          TempDev.AddRegisters(rgCoils,0,65535);
+          TempDev.AddRegisters(rgCoils,0,10000);
           TempDev.InitializeCoils;
          end;
        end;
@@ -812,7 +815,7 @@ begin
         if TempDev.HoldingCount = 0 then // если забыли добавить функцию чтения
          begin
           TempDev.DeviceFunctions := TempDev.DeviceFunctions + [fn03];
-          TempDev.AddRegisters(rgHolding,0,65535);
+          TempDev.AddRegisters(rgHolding,0,10000);
           TempDev.InitializeHoldings;
          end;
        end;
@@ -830,7 +833,7 @@ begin
         if TempDev.CoilCount = 0 then // если забыли добавить функцию чтения
          begin
           TempDev.DeviceFunctions := TempDev.DeviceFunctions + [fn01];
-          TempDev.AddRegisters(rgCoils,0,65535);
+          TempDev.AddRegisters(rgCoils,0,10000);
           TempDev.InitializeCoils;
          end;
        end;
@@ -848,7 +851,7 @@ begin
         if TempDev.HoldingCount = 0 then // если забыли добавить функцию чтения
          begin
           TempDev.DeviceFunctions := TempDev.DeviceFunctions + [fn03];
-          TempDev.AddRegisters(rgHolding,0,65535);
+          TempDev.AddRegisters(rgHolding,0,10000);
           TempDev.InitializeHoldings;
          end;
        end;
@@ -866,7 +869,7 @@ begin
         if TempDev.HoldingCount = 0 then // если забыли добавить функцию чтения
          begin
           TempDev.DeviceFunctions := TempDev.DeviceFunctions + [fn03];
-          TempDev.AddRegisters(rgHolding,0,65535);
+          TempDev.AddRegisters(rgHolding,0,10000);
           TempDev.InitializeHoldings;
          end;
        end;

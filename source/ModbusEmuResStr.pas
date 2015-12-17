@@ -12,6 +12,9 @@ resourcestring
  rsAddChennel3              = 'Добавить';
  rsAddChennel4              = 'Добавить последовательный канал';
 
+ rsDefChannelRSName         = 'Последовательный канал';
+ rsDefChannelTCPName        = 'TCP канал';
+
  rsEditChennel1             = 'Изменение сетевого канала';
  rsEditChennel2             = 'Сохранить';
  rsEditChennel3             = 'Канал %s изменен';
@@ -169,6 +172,8 @@ resourcestring
  rsLoader6                  = 'Загрузка конфигурации';
  rsLoader7                  = 'Раздел %s не найден в конфигурационном файле %s';
  rsLoader8                  = 'Конфигурационный файл %s успешно загружен';
+ rsLoader9                  = 'Конфигурация изменена. Сохранить?';
+
 
 implementation
 

@@ -28,7 +28,7 @@ var formChenAdd : TformChenAdd;
 
 implementation
 
-uses {$IFDEF UNIX}formChennelRSLinuxAdd{$ELSE}formChennelRSWindowsAdd{$ENDIF}, formChennelTCPAdd;
+uses {$IFDEF UNIX}formChennelRSLinuxAdd{$ELSE}formChennelRSWindowsAdd{$ENDIF}, formChennelTCPAdd, ModbusEmuResStr;
 
 {$R *.lfm}
 
@@ -42,6 +42,7 @@ begin
   TempForm := TfrmChennelRSAdd.Create(Self);
   try
     TempForm.Logger := FLogger;
+    TempForm.edChennalName.Text := rsDefChannelRSName;
     TempForm.ChennelList := FChennelList;
     TempForm.DevArray := FDevArray;
     TempForm.ShowModal;
@@ -61,6 +62,7 @@ begin
   TempForm := TfrmChennelTCPAdd.Create(Self);
   try
     TempForm.Logger := FLogger;
+    TempForm.edName.Text := rsDefChannelTCPName;
     TempForm.ChennelList := FChennelList;
     TempForm.DevArray := FDevArray;
     TempForm.ShowModal;

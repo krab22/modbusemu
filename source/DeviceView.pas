@@ -1214,9 +1214,6 @@ var i,Count : Integer;
     TempReg : TMBBitRegister;
 begin
   Count := Length(ChangedRegs)-1;
-
-  Logger.debug('TfrmDeviceView.OnCoilsChangeProc',Format('Пришло %d измененных регистров',[Count]));
-
   Lock;
   try
    Logger.debug(rsDevView7,Format(rsDevView8,[Count+1]));

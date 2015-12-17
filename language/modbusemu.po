@@ -205,6 +205,14 @@ msgstr ""
 msgid "ÐÑÐµ ÐºÐ°Ð½Ð°Ð»Ñ Ð·Ð°ÐºÑÑÑÑ"
 msgstr ""
 
+#: modbusemuresstr.rsdefchannelrsname
+msgid "ÐÐ¾ÑÐ»ÐµÐ´Ð¾Ð²Ð°ÑÐµÐ»ÑÐ½ÑÐ¹ ÐºÐ°Ð½Ð°Ð»"
+msgstr ""
+
+#: modbusemuresstr.rsdefchanneltcpname
+msgid "TCP ÐºÐ°Ð½Ð°Ð»"
+msgstr ""
+
 #: modbusemuresstr.rsdelchannel1
 msgid "Ð£Ð´Ð°Ð»ÐµÐ½Ð¸Ðµ ÐºÐ°Ð½Ð°Ð»Ð°. ÐÐµ Ð²ÑÐ±ÑÐ°Ð½ ÐºÐ°Ð½Ð°Ð» Ð´Ð»Ñ ÑÐ´Ð°Ð»ÐµÐ½Ð¸Ñ."
 msgstr ""
@@ -451,6 +459,10 @@ msgstr ""
 
 #: modbusemuresstr.rsloader8
 msgid "ÐÐ¾Ð½ÑÐ¸Ð³ÑÑÐ°ÑÐ¸Ð¾Ð½Ð½ÑÐ¹ ÑÐ°Ð¹Ð» %s ÑÑÐ¿ÐµÑÐ½Ð¾ Ð·Ð°Ð³ÑÑÐ¶ÐµÐ½"
+msgstr ""
+
+#: modbusemuresstr.rsloader9
+msgid "ÐÐ¾Ð½ÑÐ¸Ð³ÑÑÐ°ÑÐ¸Ñ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð°. Ð¡Ð¾ÑÑÐ°Ð½Ð¸ÑÑ?"
 msgstr ""
 
 #: modbusemuresstr.rsmberror1

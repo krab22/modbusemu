@@ -32,6 +32,9 @@ type
 
     procedure LoadDevices(ADevicesNode : TXmlNode);
     procedure LoadChannels(AChannelsNode : TXmlNode);
+
+    function  IsRSChannelExist(APortNum : Byte) : Boolean;
+    function  IsTCPChannelExist(AAddres : String; APort : Word) : Boolean;
    public
     constructor Create(ADevList         : TStrings;
                        ADevArray        : PDeviceArray;
@@ -100,7 +103,6 @@ begin
    if Assigned(TempNode) then LoadDevices(TempNode)
     else SendLogMessage(llInfo,rsLoader6,Format(rsLoader7,[csNodeDevices,AFileName]));;
 
-   SendLogMessage(llInfo,rsLoader6,Format(rsLoader8,[AFileName]));
   finally
    FreeAndNil(TempDoc);
   end;
@@ -153,9 +155,6 @@ begin
     TempAttr := TempNode.AttributeByName[csAttrFunction];
     if Assigned(TempAttr) then TempFuncStr := TempAttr.Value;
 
-    SendLogMessage(llDebug,'TMBEmuLoader.LoadDevices','Получили атрибуты');
-
-
     TempDev := TMBDevice.Create(nil);
 
     TempDev.DeviceNum := TempDevAddr;
@@ -167,42 +166,36 @@ begin
 
     TempDev.DeviceFunctions := TempDev.DeviceFunctions + GetFunctionSetFromString(TempFuncStr);
 
-    SendLogMessage(llDebug,'TMBEmuLoader.LoadDevices',GetFunctionSetAsString(TempDev.DeviceFunctions));
-
-    if fn01 in TempDev.DeviceFunctions then TempDev.AddRegisters(rgCoils,0,65535);
-    if fn02 in TempDev.DeviceFunctions then TempDev.AddRegisters(rgDiscrete,0,65535);
-    if fn03 in TempDev.DeviceFunctions then TempDev.AddRegisters(rgHolding,0,65535);
-    if fn04 in TempDev.DeviceFunctions then TempDev.AddRegisters(rgInput,0,65535);
+    if fn01 in TempDev.DeviceFunctions then TempDev.AddRegisters(rgCoils,0,10000);
+    if fn02 in TempDev.DeviceFunctions then TempDev.AddRegisters(rgDiscrete,0,10000);
+    if fn03 in TempDev.DeviceFunctions then TempDev.AddRegisters(rgHolding,0,10000);
+    if fn04 in TempDev.DeviceFunctions then TempDev.AddRegisters(rgInput,0,10000);
     if fn05 in TempDev.DeviceFunctions then
      if not (fn01 in TempDev.DeviceFunctions) then
       begin
        TempDev.DeviceFunctions := TempDev.DeviceFunctions+[fn01];
-       TempDev.AddRegisters(rgCoils,0,65535);
+       TempDev.AddRegisters(rgCoils,0,10000);
       end;
     if fn06 in TempDev.DeviceFunctions then
      if not (fn03 in TempDev.DeviceFunctions) then
       begin
        TempDev.DeviceFunctions := TempDev.DeviceFunctions+[fn03];
-       TempDev.AddRegisters(rgHolding,0,65535);
+       TempDev.AddRegisters(rgHolding,0,10000);
       end;
     if fn15 in TempDev.DeviceFunctions then
      if not (fn01 in TempDev.DeviceFunctions) then
       begin
        TempDev.DeviceFunctions := TempDev.DeviceFunctions+[fn01];
-       TempDev.AddRegisters(rgCoils,0,65535);
+       TempDev.AddRegisters(rgCoils,0,10000);
       end;
     if fn16 in TempDev.DeviceFunctions then
      if not (fn03 in TempDev.DeviceFunctions) then
       begin
        TempDev.DeviceFunctions := TempDev.DeviceFunctions+[fn03];
-       TempDev.AddRegisters(rgHolding,0,65535);
+       TempDev.AddRegisters(rgHolding,0,10000);
       end;
 
-    SendLogMessage(llDebug,'TMBEmuLoader.LoadDevices','Создали устройство');
-
     TempDev.InitializeDevice;
-
-    SendLogMessage(llDebug,'TMBEmuLoader.LoadDevices','Инициализировали устройство');
 
     FDevArray^[TempDevAddr] := TempDev;
 
@@ -212,16 +205,10 @@ begin
     FDevFormArray^[TempDevAddr].Device      := TempDev;
     FDevFormArray^[TempDevAddr].OnDevChange := FOnDevChangeProc;
 
-    SendLogMessage(llDebug,'TMBEmuLoader.LoadDevices','Создали форму');
-
     FDevList.AddObject(Format(rsDevAdd2,[TempDevAddr]),TempDev);
-
-    SendLogMessage(llDebug,'TMBEmuLoader.LoadDevices','Добавили форму в список');
 
     TempDev.BeginPacketUpdate;
     try
-
-     SendLogMessage(llDebug,'TMBEmuLoader.LoadDevices','1');
 
      TempNodeRegs := TempNode.NodeByName(csNodeCoils);
      if Assigned(TempNodeRegs) then
@@ -247,15 +234,10 @@ begin
          TempAttr := TempNodeReg.AttributeByName[csAttrDescript];
          if Assigned(TempAttr) then TempDescr := TempAttr.Value;
 
-         SendLogMessage(llDebug,'TMBEmuLoader.LoadDevices',Format('Coil. Установили регистр %d',[TempAddr]));
-
          TempDev.Coils[TempAddr].Value       := TempBoolVal;
          TempDev.Coils[TempAddr].Description := TempDescr;
         end;
-      end
-     else SendLogMessage(llDebug,'TMBEmuLoader.LoadDevices',Format('Coil. не нашли %s',[csNodeCoils]));
-
-     SendLogMessage(llDebug,'TMBEmuLoader.LoadDevices','2');
+      end;
 
      TempNodeRegs := TempNode.NodeByName(csNodeDiscr);
      if Assigned(TempNodeRegs) then
@@ -281,15 +263,10 @@ begin
          TempAttr := TempNodeReg.AttributeByName[csAttrDescript];
          if Assigned(TempAttr) then TempDescr := TempAttr.Value;
 
-         SendLogMessage(llDebug,'TMBEmuLoader.LoadDevices',Format('Discrets. Установили регистр %d',[TempAddr]));
-
          TempDev.Discrets[TempAddr].ServerSideSetValue(TempBoolVal);
          TempDev.Discrets[TempAddr].Description := TempDescr;
         end;
-      end
-     else SendLogMessage(llDebug,'TMBEmuLoader.LoadDevices',Format('Discrets. не нашли %s',[csNodeDiscr]));
-
-     SendLogMessage(llDebug,'TMBEmuLoader.LoadDevices','3');
+      end;
 
      TempNodeRegs := TempNode.NodeByName(csNodeHold);
      if Assigned(TempNodeRegs) then
@@ -315,15 +292,10 @@ begin
          TempAttr := TempNodeReg.AttributeByName[csAttrDescript];
          if Assigned(TempAttr) then TempDescr := TempAttr.Value;
 
-         SendLogMessage(llDebug,'TMBEmuLoader.LoadDevices',Format('Holding. Установили регистр %d',[TempAddr]));
-
          TempDev.Holdings[TempAddr].Value       := TempWordVal;
          TempDev.Holdings[TempAddr].Description := TempDescr;
         end;
-      end
-     else SendLogMessage(llDebug,'TMBEmuLoader.LoadDevices',Format('Holding. не нашли %s',[csNodeHold]));
-
-     SendLogMessage(llDebug,'TMBEmuLoader.LoadDevices','4');
+      end;
 
      TempNodeRegs := TempNode.NodeByName(csNodeInp);
      if Assigned(TempNodeRegs) then
@@ -349,25 +321,187 @@ begin
          TempAttr := TempNodeReg.AttributeByName[csAttrDescript];
          if Assigned(TempAttr) then TempDescr := TempAttr.Value;
 
-         SendLogMessage(llDebug,'TMBEmuLoader.LoadDevices',Format('Input. Установили регистр %d',[TempAddr]));
-
          TempDev.Inputs[TempAddr].ServerSideSetValue(TempWordVal);
          TempDev.Inputs[TempAddr].Description := TempDescr;
         end;
-      end
-     else SendLogMessage(llDebug,'TMBEmuLoader.LoadDevices',Format('Input. не нашли %s',[csNodeInp]));
-
-     SendLogMessage(llDebug,'TMBEmuLoader.LoadDevices','5');
+      end;
     finally
      TempDev.EndPacketUpdate;
     end;
-    SendLogMessage(llDebug,'TMBEmuLoader.LoadDevices','6');
    end;
 end;
 
 procedure TMBEmuLoader.LoadChannels(AChannelsNode : TXmlNode);
+var TempNode : TXmlNode;
+    TempAttr : TsdAttribute;
+    Count, i : Integer;
+    TempType : String;
+    TempName : String;
+    TempPrefixStr : String;
+    TempPrefixOth : String;
+    TempPort : Word;
+    TempAddres : String;
+    TempChenTCP : TChennelTCP;
+    TempChenRS  : TChennelRS;
+    TempPrefix : TComPortPrefixPath;
+    TempPortNum : Byte;
+    //TempBaudRateStr : String;
+    TempBaudRate : TComPortBaudRate;
+    TempByteSize : TComPortDataBits;
+    TempStopBits : TComPortStopBits;
+    TempParity   : TComPortParity;
 begin
+  Count := AChannelsNode.NodeCount-1;
+  for i := 0 to Count do
+   begin
+    TempNode := AChannelsNode.Nodes[i];
+    if TempNode.ElementType <> xeElement then Continue;
+    if not SameText(TempNode.Name,csNodeChannel) then Continue;
 
+    TempAttr := TempNode.AttributeByName[csAttrName];
+    if Assigned(TempAttr) then TempName := TempAttr.Value
+     else TempName := '';
+
+    TempAttr := TempNode.AttributeByName[csAttrType];
+    if not Assigned(TempAttr) then raise EXmlAttribute.Create(ClassName,TempNode.Name,csAttrType);
+    TempType := TempAttr.Value;
+
+    if SameText(TempType,csTypeTCP) then
+     begin
+      if TempName = '' then TempName := rsDefChannelTCPName;
+
+      TempAttr := TempNode.AttributeByName[csAttrAddres];
+      if Assigned(TempAttr) then TempAddres := TempAttr.Value
+       else TempAddres := '0.0.0.0';
+
+      TempAttr := TempNode.AttributeByName[csAttrPort];
+      if Assigned(TempAttr) then TempPort := Word(TempAttr.ValueAsInteger)
+       else TempPort := 502;
+
+      // если такой порт уже существует то ничего не добавляем
+      if IsTCPChannelExist(TempAddres,TempPort) then Continue;
+
+      TempChenTCP := TChennelTCP.Create;
+      TempChenTCP.Logger      := Logger;
+      TempChenTCP.Name        := TempName;
+      TempChenTCP.BindAddress := TempAddres;
+      TempChenTCP.Port        := TempPort;
+      TempChenTCP.DeviceArray := FDevArray;
+
+      FChannelList.AddObject(TempName,TempChenTCP);
+     end
+    else
+     if SameText(TempType,csTypeRS) then
+      begin
+       if TempName = '' then TempName := rsDefChannelRSName;
+
+       TempAttr := TempNode.AttributeByName[csAttrPref];
+       if not Assigned(TempAttr) then raise EXmlAttribute.Create(ClassName,TempNode.Name,csAttrPref);
+       TempPrefixStr := TempAttr.Value;
+
+       {$IFDEF UNIX}
+         if SameText(TempPrefixStr,cCOMPrefixPathLinux) then TempPrefix := pptLinux
+          else
+           if SameText(TempPrefixStr,cCOMPrefixPathLinuxOther) then
+            begin
+             TempAttr := TempNode.AttributeByName[csAttrPrefOther];
+             if not Assigned(TempAttr) then raise EXmlAttribute.Create(ClassName,TempNode.Name,csAttrPrefOther);
+             TempPrefix := pptOther;
+             TempPrefixOth := TempAttr.Value;
+            end
+           else raise EXmlAttribute.Create(ClassName,TempNode.Name,csAttrPref);
+       {$ELSE}
+         if SameText(TempPrefixStr,cCOMPrefixPathWindows) then TempPrefix := pptWindows
+          else raise EXmlAttributeValue.Create(ClassName,TempNode.Name,csAttrPref,TempPrefixStr);
+       {$ENDIF}
+
+       TempAttr := TempNode.AttributeByName[csAttrPort];
+       if not Assigned(TempAttr) then raise EXmlAttribute.Create(ClassName,TempNode.Name,csAttrPort);
+       TempPortNum := Byte(TempAttr.ValueAsInteger);
+
+       // если такой порт уже существует то ничего не добавляем
+       if IsRSChannelExist(TempPortNum) then Continue;
+
+       TempAttr := TempNode.AttributeByName[csAttrBauRate];
+       if not Assigned(TempAttr) then raise EXmlAttribute.Create(ClassName,TempNode.Name,csAttrBauRate)
+        else
+         begin
+          TempBaudRate := GetBaudRateIDFromStr(TempAttr.Value);
+          if TempBaudRate = brNone then raise EXmlAttributeValue.Create(ClassName,TempNode.Name,csAttrBauRate,TempAttr.Value);
+         end;
+
+       TempAttr := TempNode.AttributeByName[csAttrByteSize];
+       if not Assigned(TempAttr) then raise EXmlAttribute.Create(ClassName,TempNode.Name,csAttrByteSize)
+        else
+         begin
+          TempByteSize := GetDataBitsIDFromStr(TempAttr.Value);
+          if TempByteSize = dbNone then raise EXmlAttributeValue.Create(ClassName,TempNode.Name,csAttrByteSize,TempAttr.Value);
+         end;
+
+       TempAttr := TempNode.AttributeByName[csAttrParity];
+       if not Assigned(TempAttr) then raise EXmlAttribute.Create(ClassName,TempNode.Name,csAttrParity)
+        else
+         begin
+          TempParity := GetParityIDFromString(TempAttr.Value);
+          if TempParity = ptError then raise EXmlAttributeValue.Create(ClassName,TempNode.Name,csAttrParity,TempAttr.Value);
+         end;
+
+       TempAttr := TempNode.AttributeByName[csAttrStopBit];
+       if not Assigned(TempAttr) then raise EXmlAttribute.Create(ClassName,TempNode.Name,csAttrStopBit)
+        else
+         begin
+          TempStopBits := GetStopBitsIDFromStr(TempAttr.Value);
+          if TempStopBits = sbNone then raise EXmlAttributeValue.Create(ClassName,TempNode.Name,csAttrStopBit,TempAttr.Value);
+         end;
+
+       TempChenRS := TChennelRS.Create;
+       TempChenRS.Logger     := Logger;
+       TempChenRS.PortPrefix := TempPrefix;
+       if TempPrefix = pptOther then TempChenRS.PortPrefixOther := TempPrefixOth;
+       TempChenRS.PortNum    := TempPortNum;
+       TempChenRS.BaudRate   := TempBaudRate;
+       TempChenRS.ByteSize   := TempByteSize;
+       TempChenRS.Parity     := TempParity;
+       TempChenRS.StopBits   := TempStopBits;
+       TempChenRS.Name       := TempName;
+
+       FChannelList.AddObject(TempName,TempChenRS);
+
+      end
+     else raise EXmlAttributeValue.Create(ClassName,TempNode.Name,csAttrType,TempType);
+   end;
+end;
+
+function TMBEmuLoader.IsRSChannelExist(APortNum : Byte) : Boolean;
+var Count, i : Integer;
+begin
+  Result := False;
+  Count := FChannelList.Count-1;
+  for i := 0 to Count do
+   begin
+    if FChannelList.Objects[i].ClassType <> TChennelRS then Continue;
+    if TChennelRS(FChannelList.Objects[i]).PortNum = APortNum then
+     begin
+      Result := True;
+      Break;
+     end;
+   end;
+end;
+
+function TMBEmuLoader.IsTCPChannelExist(AAddres : String; APort : Word) : Boolean;
+var Count, i : Integer;
+begin
+  Result := False;
+  Count := FChannelList.Count-1;
+  for i := 0 to Count do
+   begin
+    if FChannelList.Objects[i].ClassType <> TChennelTCP then Continue;
+    if (SameText(TChennelTCP(FChannelList.Objects[i]).BindAddress,AAddres)) and (TChennelTCP(FChannelList.Objects[i]).Port = APort) then
+     begin
+      Result := True;
+      Break;
+     end;
+   end;
 end;
 
 procedure TMBEmuLoader.SaveConfig(AFileName : String);
@@ -412,7 +546,7 @@ begin
   TempNode := AChannelsNode.NodeNew(csNodeChannel);
   TempNode.AttributeAdd(csAttrName,AChannel.Name);
   TempNode.AttributeAdd(csAttrType,csTypeRS);
-  TempNode.AttributeAdd(csAttrDescr,ADescr);
+  //TempNode.AttributeAdd(csAttrDescr,ADescr);
   {$IFDEF UNIX}
   if AChannel.PortPrefix = pptLinux then TempNode.AttributeAdd(csAttrPref,cCOMPrefixPathLinux);
   if AChannel.PortPrefix = pptOther then
@@ -436,7 +570,7 @@ begin
   TempNode := AChannelsNode.NodeNew(csNodeChannel);
   TempNode.AttributeAdd(csAttrName,AChannel.Name);
   TempNode.AttributeAdd(csAttrType,csTypeTCP);
-  TempNode.AttributeAdd(csAttrDescr,ADescr);
+//  TempNode.AttributeAdd(csAttrDescr,ADescr);
   TempNode.AttributeAdd(csAttrAddres,AChannel.BindAddress);
   TempNode.AttributeAdd(csAttrPort,IntToStr(AChannel.Port));
 end;
