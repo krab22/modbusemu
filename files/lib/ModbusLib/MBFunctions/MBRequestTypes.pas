@@ -137,6 +137,13 @@ type
    ByteCount : Byte;
   end;
 
+  TMBF15ReguestPacketData = packed record
+   StartingAddress : Word;
+   Quantity        : Word;
+   ByteCount       : Byte;
+  end;
+  PMBF15ReguestPacketData = ^TMBF15ReguestPacketData;
+
   PMBTCPF15Request = ^TMBTCPF15Request;   // 13 байт
   TMBTCPF15Request = packed record
    TCPHeader : TMBTCPHeader;

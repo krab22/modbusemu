@@ -548,7 +548,30 @@ begin
 end;
 
 procedure TChennelTCPThread.ResponseF15(ADev : TMBDevice; AClient : TServerClientObj);
+var TempPackData     : Pointer;
+    TempPackDataSize : Cardinal;
+    TempBitArray     : PByteArray;
+    TempStartAddr    : Word;
+    TempQuantity     : Word;
+    TempByteCount    : Byte;
 begin
+  TempPackData := FReader.GetPacketData(TempPackDataSize);
+  {
+   StartAddres
+   Quantity
+   ByteCount
+   Size(DataBytes) = ByteCount
+  }
+  TempStartAddr := Swap(PMBF15ReguestPacketData(TempPackData)^.StartingAddress);
+  TempQuantity  := Swap(PMBF15ReguestPacketData(TempPackData)^.Quantity);
+  TempByteCount := PMBF15ReguestPacketData(TempPackData)^.ByteCount;
+  TempBitArray  := PByteArray(Pointer(PtrUInt(@PMBF15ReguestPacketData(TempPackData)^.ByteCount)+1));
+  try
+
+  finally
+   if Assigned(TempPackData) then Freemem(TempPackData);
+  end;
+
   SendLogMessage(llError,rsChanTCP1,Format(rsResponseF15_1,[AClient.ClientAddr,AClient.ClientPort]));
   SendErrorMsg(FReader.TransactionID,FReader.ProtocolID,FReader.DeviceAddress,FReader.FunctionCode,ERR_MB_ILLEGAL_FUNCTION - ERR_MB_ERR_CUSTOM,AClient);
 end;
