@@ -21,13 +21,125 @@
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MinorVersionNr Value="5"/>
-      <BuildNr Value="111"/>
+      <BuildNr Value="118"/>
       <Language Value="0419"/>
       <Attributes pvaDebug="True"/>
       <StringTable ProductVersion=""/>
     </VersionInfo>
-    <BuildModes Count="1">
-      <Item1 Name="Default" Default="True"/>
+    <BuildModes Count="4">
+      <Item1 Name="Linux_x64" Default="True"/>
+      <Item2 Name="Linux_x86">
+        <CompilerOptions>
+          <Version Value="11"/>
+          <Target>
+            <Filename Value="bin/$(TargetCPU)-$(TargetOS)/modbusemu" ApplyConventions="False"/>
+          </Target>
+          <SearchPaths>
+            <IncludeFiles Value="$(ProjOutDir);files/lib/NativeXML/nativexml"/>
+            <Libraries Value="/usr/lib/codetyphon/binLibraries/i386-linux/"/>
+            <OtherUnitFiles Value="source;files/lib/CRC16;files/lib/LogUtils;files/lib/ModbusLib;files/lib/ModbusLib/MBFunctions;files/lib/ModbusLib/MBTCPMasterDispatcher;files/lib/SocketUtils;files/lib/COMPort;files/lib/MiscFunctions;files/lib/NativeXML/nativexml;files/lib/NativeXML/general;files/lib/NativeXML/extlib/eldos_aes;files/lib/NativeXML/extlib/utility_lib"/>
+            <UnitOutputDirectory Value="dcu/$(TargetCPU)-$(TargetOS)"/>
+          </SearchPaths>
+          <CodeGeneration>
+            <TargetCPU Value="i386"/>
+            <TargetOS Value="linux"/>
+          </CodeGeneration>
+          <Linking>
+            <Debugging>
+              <GenerateDebugInfo Value="False"/>
+              <UseLineInfoUnit Value="False"/>
+            </Debugging>
+            <Options>
+              <Win32>
+                <GraphicApplication Value="True"/>
+              </Win32>
+            </Options>
+          </Linking>
+          <Other>
+            <Verbosity>
+              <ShoLineNum Value="True"/>
+              <ShowDebugInfo Value="True"/>
+              <ShowHintsForUnusedUnitsInMainSrc Value="True"/>
+            </Verbosity>
+            <CustomOptions Value="-B
+-dUseCThreads"/>
+          </Other>
+        </CompilerOptions>
+      </Item2>
+      <Item3 Name="Windows_x64">
+        <CompilerOptions>
+          <Version Value="11"/>
+          <Target>
+            <Filename Value="bin/$(TargetCPU)-$(TargetOS)/modbusemu.exe" ApplyConventions="False"/>
+          </Target>
+          <SearchPaths>
+            <IncludeFiles Value="$(ProjOutDir);files/lib/NativeXML/nativexml"/>
+            <OtherUnitFiles Value="source;files/lib/CRC16;files/lib/LogUtils;files/lib/ModbusLib;files/lib/ModbusLib/MBFunctions;files/lib/ModbusLib/MBTCPMasterDispatcher;files/lib/SocketUtils;files/lib/COMPort;files/lib/MiscFunctions;files/lib/NativeXML/nativexml;files/lib/NativeXML/general;files/lib/NativeXML/extlib/eldos_aes;files/lib/NativeXML/extlib/utility_lib"/>
+            <UnitOutputDirectory Value="dcu/$(TargetCPU)-$(TargetOS)"/>
+          </SearchPaths>
+          <CodeGeneration>
+            <TargetCPU Value="x86_64"/>
+            <TargetOS Value="win64"/>
+          </CodeGeneration>
+          <Linking>
+            <Debugging>
+              <GenerateDebugInfo Value="False"/>
+              <UseLineInfoUnit Value="False"/>
+            </Debugging>
+            <Options>
+              <Win32>
+                <GraphicApplication Value="True"/>
+              </Win32>
+            </Options>
+          </Linking>
+          <Other>
+            <Verbosity>
+              <ShoLineNum Value="True"/>
+              <ShowDebugInfo Value="True"/>
+              <ShowHintsForUnusedUnitsInMainSrc Value="True"/>
+            </Verbosity>
+            <CustomOptions Value="-B
+-dUseCThreads"/>
+          </Other>
+        </CompilerOptions>
+      </Item3>
+      <Item4 Name="Windows_x86">
+        <CompilerOptions>
+          <Version Value="11"/>
+          <Target>
+            <Filename Value="bin/$(TargetCPU)-$(TargetOS)/modbusemu.exe" ApplyConventions="False"/>
+          </Target>
+          <SearchPaths>
+            <IncludeFiles Value="$(ProjOutDir);files/lib/NativeXML/nativexml"/>
+            <OtherUnitFiles Value="source;files/lib/CRC16;files/lib/LogUtils;files/lib/ModbusLib;files/lib/ModbusLib/MBFunctions;files/lib/ModbusLib/MBTCPMasterDispatcher;files/lib/SocketUtils;files/lib/COMPort;files/lib/MiscFunctions;files/lib/NativeXML/nativexml;files/lib/NativeXML/general;files/lib/NativeXML/extlib/eldos_aes;files/lib/NativeXML/extlib/utility_lib"/>
+            <UnitOutputDirectory Value="dcu/$(TargetCPU)-$(TargetOS)"/>
+          </SearchPaths>
+          <CodeGeneration>
+            <TargetCPU Value="i386"/>
+            <TargetOS Value="win32"/>
+          </CodeGeneration>
+          <Linking>
+            <Debugging>
+              <GenerateDebugInfo Value="False"/>
+              <UseLineInfoUnit Value="False"/>
+            </Debugging>
+            <Options>
+              <Win32>
+                <GraphicApplication Value="True"/>
+              </Win32>
+            </Options>
+          </Linking>
+          <Other>
+            <Verbosity>
+              <ShoLineNum Value="True"/>
+              <ShowDebugInfo Value="True"/>
+              <ShowHintsForUnusedUnitsInMainSrc Value="True"/>
+            </Verbosity>
+            <CustomOptions Value="-B
+-dUseCThreads"/>
+          </Other>
+        </CompilerOptions>
+      </Item4>
       <SharedMatrixOptions Count="1">
         <Item1 ID="957602769568" Value="-dEnableUTF8RTL"/>
       </SharedMatrixOptions>
@@ -146,7 +258,8 @@
     </CodeGeneration>
     <Linking>
       <Debugging>
-        <UseHeaptrc Value="True"/>
+        <GenerateDebugInfo Value="False"/>
+        <UseLineInfoUnit Value="False"/>
       </Debugging>
       <Options>
         <Win32>

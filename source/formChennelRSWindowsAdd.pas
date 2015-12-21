@@ -11,9 +11,9 @@ uses
 
 type
 
-  { TTfrmChennelRSAdd }
+  { TfrmChennelRSAdd }
 
-  TTfrmChennelRSAdd = class(TForm)
+  TfrmChennelRSAdd = class(TForm)
     btCancel      : TButton;
     btOk          : TButton;
     cmbBaudRate   : TComboBox;
@@ -36,21 +36,21 @@ type
     FChennalName   : String;
     FChennalObj    : TChennelBase;
     FChennelList   : TStrings;
-    FDevArray      : TDeviceArray;
+    FDevArray      : PDeviceArray;
     FIsChennalEdit : Boolean;
     FLogger        : IDLogger;
     procedure SetChennalObj(const AValue : TChennelBase);
     procedure SetIsChennalEdit(const AValue : Boolean);
    public
     property ChennelList   : TStrings read FChennelList write FChennelList;
-    property DevArray      : TDeviceArray read FDevArray write FDevArray;
+    property DevArray      : PDeviceArray read FDevArray write FDevArray;
     property Logger        : IDLogger read FLogger write FLogger;
     property IsChennalEdit : Boolean read FIsChennalEdit write SetIsChennalEdit;
     property ChennalObj    : TChennelBase read FChennalObj write SetChennalObj;
     property ChennalName   : String read FChennalName write FChennalName;
   end;
 
-var TfrmChennelRSAdd : TTfrmChennelRSAdd;
+var frmChennelRSAdd : TfrmChennelRSAdd;
 
 implementation
 
@@ -60,9 +60,9 @@ uses ChennelRSClasses,
 
 {$R *.lfm}
 
-{ TTfrmChennelRSAdd }
+{ TfrmChennelRSAdd }
 
-procedure TTfrmChennelRSAdd.btOkClick(Sender : TObject);
+procedure TfrmChennelRSAdd.btOkClick(Sender : TObject);
 var TempChen : TChennelRS;
     OldName  : String;
 begin
@@ -101,7 +101,7 @@ begin
    end;
 end;
 
-procedure TTfrmChennelRSAdd.SetChennalObj(const AValue : TChennelBase);
+procedure TfrmChennelRSAdd.SetChennalObj(const AValue : TChennelBase);
 begin
   if FChennalObj = AValue then Exit;
   FChennalObj := AValue;
@@ -114,7 +114,7 @@ begin
   cmbStopBits.ItemIndex := Integer(TChennelRS(FChennalObj).StopBits);
 end;
 
-procedure TTfrmChennelRSAdd.SetIsChennalEdit(const AValue : Boolean);
+procedure TfrmChennelRSAdd.SetIsChennalEdit(const AValue : Boolean);
 begin
   if FIsChennalEdit = AValue then Exit;
   FIsChennalEdit := AValue;
