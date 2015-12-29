@@ -154,6 +154,10 @@ type
     procedure FormClose(Sender : TObject; var CloseAction : TCloseAction);
     procedure sgCoilsSelectCell(Sender : TObject; aCol, aRow : Integer; var CanSelect : Boolean);
     procedure sgDiscretsSelectCell(Sender : TObject; aCol, aRow : Integer; var CanSelect : Boolean);
+    procedure sgHoldingsSelectCell(Sender : TObject; aCol, aRow : Integer;
+      var CanSelect : Boolean);
+    procedure sgInputsSelectCell(Sender : TObject; aCol, aRow : Integer;
+      var CanSelect : Boolean);
     procedure speHoldingsValueEditingDone(Sender : TObject);
     procedure speInputsValueEditingDone(Sender : TObject);
    private
@@ -217,6 +221,26 @@ begin
    if StrToBool(sgDiscrets.Cells[1,aRow]) then rbDiscretsTrue.Checked := True
     else rbDiscretsFalse.Checked := True;
   edDiscretsRegDescription.Text := sgDiscrets.Cells[2,aRow];
+end;
+
+procedure TfrmDeviceView.sgHoldingsSelectCell(Sender : TObject; aCol, aRow : Integer; var CanSelect : Boolean);
+begin
+  if sgHoldings.Cells[0,aRow] <> '' then speHoldingsRegNum.Value := StrToInt(sgHoldings.Cells[0,aRow]);
+  if sgHoldings.Cells[1,aRow] <> '' then
+   begin
+    speHoldingsValue.Value := StrToInt(sgHoldings.Cells[1,aRow]);
+   end;
+  edHoldingsRegDescription.Text := sgHoldings.Cells[3,aRow];
+end;
+
+procedure TfrmDeviceView.sgInputsSelectCell(Sender : TObject; aCol, aRow : Integer; var CanSelect : Boolean);
+begin
+  if sgInputs.Cells[0,aRow] <> '' then speInputsRegNum.Value := StrToInt(sgInputs.Cells[0,aRow]);
+  if sgInputs.Cells[1,aRow] <> '' then
+   begin
+    speInputsValue.Value := StrToInt(sgInputs.Cells[1,aRow]);
+   end;
+  edInputsRegDescription.Text := sgInputs.Cells[3,aRow];
 end;
 
 procedure TfrmDeviceView.btCoilAplyClick(Sender : TObject);

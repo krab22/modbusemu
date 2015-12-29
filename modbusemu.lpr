@@ -9,7 +9,7 @@ uses
   Interfaces,
   Forms, main, ModbusEmuResStr, ExceptionsResStrings, DeviceAdd,
   DeviceView,formChennelAdd,
-  {$IFDEF UNIX}formChennelRSLinuxAdd,{$ELSE}formChennelRSWindowsAdd,{$ENDIF}
+  formChennelRSLinuxAdd, formChennelRSWindowsAdd,
   formChennelTCPAdd, framChennelRSClasses, framChennelTCPClasses,
   formRahgeEdit;
 
@@ -19,7 +19,6 @@ begin
   RequireDerivedFormResource:=True;
   Application.Initialize;
   Application.CreateForm(TfrmMain, frmMain);
-  Application.CreateForm(TfrmRangeEdit, frmRangeEdit);
   Application.Run;
 end.
 

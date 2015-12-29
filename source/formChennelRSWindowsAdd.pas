@@ -11,9 +11,9 @@ uses
 
 type
 
-  { TfrmChennelRSAdd }
+  { TfrmChennelRSAddWin }
 
-  TfrmChennelRSAdd = class(TForm)
+  TfrmChennelRSAddWin = class(TForm)
     btCancel      : TButton;
     btOk          : TButton;
     cmbBaudRate   : TComboBox;
@@ -50,7 +50,7 @@ type
     property ChennalName   : String read FChennalName write FChennalName;
   end;
 
-var frmChennelRSAdd : TfrmChennelRSAdd;
+//var frmChennelRSAdd : TfrmChennelRSAdd;
 
 implementation
 
@@ -60,9 +60,9 @@ uses ChennelRSClasses,
 
 {$R *.lfm}
 
-{ TfrmChennelRSAdd }
+{ TfrmChennelRSAddWin }
 
-procedure TfrmChennelRSAdd.btOkClick(Sender : TObject);
+procedure TfrmChennelRSAddWin.btOkClick(Sender : TObject);
 var TempChen : TChennelRS;
     OldName  : String;
 begin
@@ -81,7 +81,7 @@ begin
     end;
 
   TempChen.PortNum    := spePortNum.Value;
-  TempChen.BaudRate   := TComPortBaudRate(cmbBaudRate.ItemIndex+1);
+  TempChen.BaudRate   := TComPortBaudRate(cmbBaudRate.ItemIndex);
   TempChen.ByteSize   := TComPortDataBits(cmbByteSize.ItemIndex);
   TempChen.Parity     := TComPortParity(cmbParitet.ItemIndex);
   TempChen.StopBits   := TComPortStopBits(cmbStopBits.ItemIndex);
@@ -101,20 +101,20 @@ begin
    end;
 end;
 
-procedure TfrmChennelRSAdd.SetChennalObj(const AValue : TChennelBase);
+procedure TfrmChennelRSAddWin.SetChennalObj(const AValue : TChennelBase);
 begin
   if FChennalObj = AValue then Exit;
   FChennalObj := AValue;
 
   edChennalName.Text    := FChennalObj.Name;
   spePortNum.Value      := TChennelRS(FChennalObj).PortNum;
-  cmbBaudRate.ItemIndex := Integer(TChennelRS(FChennalObj).BaudRate)-1;
+  cmbBaudRate.ItemIndex := Integer(TChennelRS(FChennalObj).BaudRate);
   cmbByteSize.ItemIndex := Integer(TChennelRS(FChennalObj).ByteSize);
   cmbParitet.ItemIndex  := Integer(TChennelRS(FChennalObj).Parity);
   cmbStopBits.ItemIndex := Integer(TChennelRS(FChennalObj).StopBits);
 end;
 
-procedure TfrmChennelRSAdd.SetIsChennalEdit(const AValue : Boolean);
+procedure TfrmChennelRSAddWin.SetIsChennalEdit(const AValue : Boolean);
 begin
   if FIsChennalEdit = AValue then Exit;
   FIsChennalEdit := AValue;

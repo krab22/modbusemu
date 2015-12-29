@@ -485,6 +485,14 @@ msgstr ""
 msgid "ÐÑÐ¸Ð·Ð½Ð°Ðº Ð½ÐµÑÑÐ°Ð½Ð´Ð°ÑÑÐ½Ð¾Ð³Ð¾ Ð¿ÑÐµÑÐ¸ÐºÑÐ° ÑÑÑÐ°Ð½Ð¾Ð²Ð»ÐµÐ½, Ð° ÑÐ°Ð¼ Ð¿ÑÐµÑÐ¸ÐºÑ Ð½Ðµ Ð·Ð°Ð´Ð°Ð½."
 msgstr ""
 
+#: modbusemuresstr.rsmberror6
+msgid "ÐÐ¾ÑÑ %d. ÐÑÐ¸Ð±ÐºÐ° Ð¿Ð¾Ð»ÑÑÐµÐ½Ð¸Ñ Ð·Ð½Ð°ÑÐµÐ½Ð¸Ð¹ Holding ÑÐµÐ³Ð¸ÑÑÑÐ¾Ð²(%d:%d:%d): %s"
+msgstr ""
+
+#: modbusemuresstr.rsmberror7
+msgid "ÐÐ¾ÑÑ %d. ÐÑÐ¸Ð±ÐºÐ° Ð¿Ð¾Ð»ÑÑÐµÐ½Ð¸Ñ Ð·Ð½Ð°ÑÐµÐ½Ð¸Ð¹ Input ÑÐµÐ³Ð¸ÑÑÑÐ¾Ð²(%d:%d:%d): %s"
+msgstr ""
+
 #: modbusemuresstr.rsmbobj
 msgid "ResponseF1"
 msgstr ""
@@ -531,6 +539,14 @@ msgstr ""
 
 #: modbusemuresstr.rsonserverreadproc5
 msgid "ÐÐ¾ÑÑ %d. ÐÐ°Ð¿ÑÐ°ÑÐ¸Ð²Ð°ÐµÐ¼Ð°Ñ ÑÑÐ½ÐºÑÐ¸Ñ(%d) Ð½Ðµ Ð¿Ð¾Ð´Ð´ÐµÑÐ¶Ð¸Ð²Ð°ÐµÑÑÑ ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð¾Ð¼ %d"
+msgstr ""
+
+#: modbusemuresstr.rsonserverreadproc6
+msgid "ÐÑÐ¸Ð±ÐºÐ° Ð¿Ð¾Ð»ÑÑÐµÐ½Ð¸Ñ Ð°Ð´ÑÐµÑÐ° ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð°: %s"
+msgstr ""
+
+#: modbusemuresstr.rsonserverreadproc7
+msgid "ÐÑÐ¸Ð±ÐºÐ° ÑÐ°Ð·Ð±Ð¾ÑÐ° Ð¿Ð°ÐºÐµÑÐ°: %d - %s"
 msgstr ""
 
 #: modbusemuresstr.rsopenchennel1
@@ -962,6 +978,86 @@ msgstr ""
 
 #: tfrmchennelrsadd.lbstopbits.caption
 msgctxt "tfrmchennelrsadd.lbstopbits.caption"
+msgid "Стоповых бит:"
+msgstr ""
+
+#: tfrmchennelrsaddwin.btcancel.caption
+msgctxt "TFRMCHENNELRSADDWIN.BTCANCEL.CAPTION"
+msgid "Отмена"
+msgstr ""
+
+#: tfrmchennelrsaddwin.btok.caption
+msgctxt "TFRMCHENNELRSADDWIN.BTOK.CAPTION"
+msgid "Добавить"
+msgstr ""
+
+#: tfrmchennelrsaddwin.caption
+msgctxt "TFRMCHENNELRSADDWIN.CAPTION"
+msgid "Добавить последовательный канал"
+msgstr ""
+
+#: tfrmchennelrsaddwin.cmbbaudrate.text
+msgctxt "TFRMCHENNELRSADDWIN.CMBBAUDRATE.TEXT"
+msgid "9600"
+msgstr ""
+
+#: tfrmchennelrsaddwin.cmbbytesize.text
+msgctxt "TFRMCHENNELRSADDWIN.CMBBYTESIZE.TEXT"
+msgid "8"
+msgstr ""
+
+#: tfrmchennelrsaddwin.cmbparitet.text
+msgctxt "TFRMCHENNELRSADDWIN.CMBPARITET.TEXT"
+msgid "EVEN"
+msgstr ""
+
+#: tfrmchennelrsaddwin.cmbstopbits.text
+msgctxt "TFRMCHENNELRSADDWIN.CMBSTOPBITS.TEXT"
+msgid "1"
+msgstr ""
+
+#: tfrmchennelrsaddwin.edchennalname.text
+msgctxt "TFRMCHENNELRSADDWIN.EDCHENNALNAME.TEXT"
+msgid "Последовательный канал"
+msgstr ""
+
+#: tfrmchennelrsaddwin.lbbaudrate.caption
+msgctxt "TFRMCHENNELRSADDWIN.LBBAUDRATE.CAPTION"
+msgid "Скорость:"
+msgstr ""
+
+#: tfrmchennelrsaddwin.lbbytesize.caption
+msgctxt "TFRMCHENNELRSADDWIN.LBBYTESIZE.CAPTION"
+msgid "Размер байта:"
+msgstr ""
+
+#: tfrmchennelrsaddwin.lbname.caption
+msgctxt "TFRMCHENNELRSADDWIN.LBNAME.CAPTION"
+msgid "Имя канала:"
+msgstr ""
+
+#: tfrmchennelrsaddwin.lbparitet.caption
+msgctxt "TFRMCHENNELRSADDWIN.LBPARITET.CAPTION"
+msgid "Паритет:"
+msgstr ""
+
+#: tfrmchennelrsaddwin.lbportnum.caption
+msgctxt "TFRMCHENNELRSADDWIN.LBPORTNUM.CAPTION"
+msgid "Номер порта:"
+msgstr ""
+
+#: tfrmchennelrsaddwin.lbprefix.caption
+msgctxt "TFRMCHENNELRSADDWIN.LBPREFIX.CAPTION"
+msgid "Префикс:"
+msgstr ""
+
+#: tfrmchennelrsaddwin.lbprefixname.caption
+msgctxt "TFRMCHENNELRSADDWIN.LBPREFIXNAME.CAPTION"
+msgid "\\\\.\\COM"
+msgstr ""
+
+#: tfrmchennelrsaddwin.lbstopbits.caption
+msgctxt "TFRMCHENNELRSADDWIN.LBSTOPBITS.CAPTION"
 msgid "Стоповых бит:"
 msgstr ""
 
@@ -1716,6 +1812,7 @@ msgid "Префикс:"
 msgstr ""
 
 #: ttfrmchennelrsadd.lbprefixname.caption
+msgctxt "ttfrmchennelrsadd.lbprefixname.caption"
 msgid "\\\\.\\COM"
 msgstr ""
 

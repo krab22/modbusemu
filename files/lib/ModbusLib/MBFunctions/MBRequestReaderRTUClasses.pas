@@ -117,10 +117,16 @@ begin
 end;
 
 function TMBRTURequestReader.CheckCRC(Packet: Pointer; PacketLen: Cardinal): Boolean;
+var TempByteArray : PByteArray;
 begin
   Result     := False;
   FErrorCode := ERR_MASTER_CRC;
-  Result:= GetCRC16(Packet,PacketLen)=0;
+  TempByteArray := Packet;
+  case TempByteArray^[1] of
+   1,2,3,4,5,6 : Result:= GetCRC16(Packet,8)=0;
+  else
+   Result:= GetCRC16(Packet,PacketLen)=0;
+  end;
   if Result then FErrorCode:=0;
 end;
 

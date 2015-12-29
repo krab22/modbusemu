@@ -725,6 +725,7 @@ begin
     Exit;
    end;
 
+  TempTimeouts.ReadIntervalTimeout := 0;
   FillByte(TempTimeouts,SizeOf(TCOMMTIMEOUTS),0);
   TempTimeouts.ReadIntervalTimeout        := FPackRuptureTime;
   TempTimeouts.ReadTotalTimeoutMultiplier := 10;
@@ -767,6 +768,19 @@ begin
    end;
 
   FlushAllBuff;
+
+  SendLogMessage(llInfo,rsPortName,Format(rsOpen1,[PortPath]));
+
+  if not FIsServerSide then Exit;
+
+  // Запускаем наблюдение за приходом запросов(данных)
+  StartServerSide;
+
+  if LastError <> 0 then
+   begin
+    Close;
+    Exit;
+   end;
 
 {$ENDIF}
 end;
@@ -816,6 +830,7 @@ begin
    end;
  {$ELSE}
   TempErrors := 0;
+  TempCOMStat.flag0 := 0;
   FillByte(TempCOMStat,SizeOf(TCOMSTAT),0);
   if not ClearCommError(FHandle,TempErrors,@TempCOMStat) then
    begin
@@ -828,8 +843,7 @@ begin
 end;
 
 function TNPCCustomCOMPort.ReadData(var Buff; Count: Integer): Integer;
-var TempCount : Integer;
-    Counter   : Integer;
+var Counter   : Integer;
     TempBuff  : Byte;
     {$IFDEF WINDOWS}
     ReadCount,
@@ -837,6 +851,7 @@ var TempCount : Integer;
     ReadRes      : Boolean;
     TempOver     : TOVERLAPPED;
     TempWaiteRes : DWORD;
+    NumRead      : DWORD;
     {$ENDIF}
 begin
   Result   := -1;
@@ -855,17 +870,6 @@ begin
 
   Lock;
   try
-   TempCount := GetNumberDataCame;
-   if TempCount = -1 then Exit;
-   if TempCount > Count then
-    begin
-
-     SendLogMessage(llDebug,'TNPCCustomCOMPort.ReadData', Format(rsReadData1,[TempCount,Count]));
-
-     TempCount := Count;
-     SetLastError(ErrPortBuffSmoll,'TNPCCustomCOMPort.ReadData(3)');
-    end;
-
    Result  := -1;
    Counter := 0;
    {$IFDEF UNIX}
@@ -891,7 +895,9 @@ begin
      end;
     end;
   {$ELSE}
+   TempOver.hEvent := 0;
    FillByte(TempOver,SizeOf(TempOver),0);
+   TempOver.hEvent := CreateEvent(nil,False,False,'');
    try
     ReadCount := 0;
     While Result <> 0 do
@@ -902,15 +908,44 @@ begin
         LastErr := GetLastOSError;
          if LastErr <> ERROR_IO_PENDING then
           begin
-          SetLastError(LastErr,'TNPCCustomCOMPort.ReadData(4)');
-          Exit;
-         end;
+           SetLastError(LastErr,'TNPCCustomCOMPort.ReadData(4)');
+           Exit;
+          end
+         else
+          begin
+           TempWaiteRes := WaitForSingleObject(TempOver.hEvent,500);
+           case TempWaiteRes of
+            WAIT_TIMEOUT       : SendLogMessage(llDebug,rsPortName,'WAIT_TIMEOUT');
+            WAIT_FAILED        : SendLogMessage(llDebug,rsPortName,'WAIT_FAILED');
+            WAIT_OBJECT_0      : begin
+                                  NumRead := 0;
+                                  if not GetOverlappedResult(FHandle,TempOver,NumRead,True) then
+                                   begin
+                                    LastErr := GetLastError;
+                                    SetLastError(LastErr,'TNPCCustomCOMPort.ReadData(4.0)');
+                                    Result := -1;
+                                    Exit;
+                                   end;
+                                  ReadCount := NumRead;
+                                 end;
+            WAIT_ABANDONED     : SendLogMessage(llDebug,rsPortName,'WAIT_ABANDONED');
+            WAIT_IO_COMPLETION : SendLogMessage(llDebug,rsPortName,'WAIT_IO_COMPLETION');
+           end;
+          end;
        end;
       case ReadCount of
        0 : begin // прочитали все
             Result := Counter;
             if Result = 0 then
              begin
+//              SendLogMessage(llDebug,rsPortName,Format('InternalHigh %d; Internal %d; OffsetHigh %d; Offset %d; NumRead %d; ReadCount %d;',
+//                                                          [TempOver.InternalHigh,
+//                                                           TempOver.Internal,
+//                                                           TempOver.OffsetHigh,
+//                                                           TempOver.Offset,
+//                                                           NumRead,
+//                                                           ReadCount
+//                                                           ]));
               LastErr := ERROR_TIMEOUT;
               SetLastError(LastErr,'TNPCCustomCOMPort.ReadData(4.1)');
               Result := -1;
@@ -927,6 +962,7 @@ begin
      end;
 
    finally
+    CloseHandle(TempOver.hEvent);
     FlushReadBuff;
    end;
   {$ENDIF}
@@ -999,6 +1035,7 @@ begin
      FlushWriteBuff;
     end;
    {$ELSE}
+   TempOver.hEvent := 0;
    FillByte(TempOver,SizeOf(TOVERLAPPED),0);
    TempOver.hEvent := CreateEvent(nil,True,False,nil);
    if TempOver.hEvent = 0 then
@@ -1025,7 +1062,7 @@ begin
       end;
      if WaitCommEvent(FHandle,TempEvent,@TempOver) then
       begin
-       if not GetOverlappedResult(FHandle,TempOver,WriteCount,False) then // возможна ошибка - запись не окончена - 996 - ERROR_IO_INCOMPLETE
+       if not GetOverlappedResult(FHandle,TempOver,WriteCount,True) then // возможна ошибка - запись не окончена - 996 - ERROR_IO_INCOMPLETE
         begin
          SetLastError(GetLastOSError,'TNPCCustomCOMPort.WriteData(5)');
          Exit;
@@ -1087,13 +1124,6 @@ var TempOver     : TOVERLAPPED;
     TempWaiteRes : DWORD;
     ByteTras     : DWORD;
     TempEvent    : DWORD;
-
-    SleepStartTime,
-    SleepTime,
-    Counter        : Integer;
-    TempTimeOut    : DWORD;
-    NowBytes,
-    OldBytes       : DWORD;
 {$ENDIF}
 begin
   Result := wrError;
@@ -1557,7 +1587,7 @@ end;
 
 procedure TNPCCustomCOMPort.SetMonitorStatusBits;
 var TempStatus : Cardinal;
-    Res : Integer;
+    {$IFDEF UNIX}Res : Integer;{$ENDIF}
 begin
  if not Active then Exit;
 
@@ -1618,13 +1648,15 @@ begin
 end;
 
 procedure TNPCCustomCOMPort.SetBitStatus(var AField: Boolean; ABitFlag: Cardinal);
+{$IFDEF UNIX}
 var TempStatus : Cardinal;
     Res : Integer;
+{$ENDIF}
 begin
  if not Active then Exit;
- TempStatus := 0;
- Res := -1;
  {$IFDEF UNIX}
+  TempStatus := 0;
+  Res := -1;
   Res := FpIOCtl(FHandle,TIOCMGET,@TempStatus);
   if Res = -1 then
    begin
@@ -1734,7 +1766,7 @@ end;
 
 procedure TNPCCustomCOMPort.GetMonitorStatusBits;
 var TempStatus : Cardinal;
-    Res : Integer;
+    {$IFDEF UNIX}Res : Integer;{$ENDIF}
 begin
  if not Active then Exit;
  TempStatus := 0;
@@ -1770,7 +1802,7 @@ end;
 
 procedure TNPCCustomCOMPort.GetBitStatus(var AField: Boolean; ABitFlag: Cardinal);
 var TempStatus : Cardinal;
-    Res : Integer;
+    {$IFDEF UNIX}Res : Integer;{$ENDIF}
 begin
  TempStatus := 0;
  if not Active then Exit;

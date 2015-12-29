@@ -112,6 +112,8 @@ resourcestring
  rsOnServerReadProc3        = 'Порт №%d. Ошибка получения устройства: %s';
  rsOnServerReadProc4        = 'Порт №%d. Запрашивается несуществующее устройство - %d';
  rsOnServerReadProc5        = 'Порт %d. Запрашиваемая функция(%d) не поддерживается устройством %d';
+ rsOnServerReadProc6        = 'Ошибка получения адреса устройства: %s';
+ rsOnServerReadProc7        = 'Ошибка разбора пакета: %d - %s';
 
  rsMBObj                    = 'ResponseF1';
  rsMBObj1                   = 'ResponseF2';
@@ -122,6 +124,8 @@ resourcestring
  rsMBError3                 = 'Порт %d. Ошибка получения значений Discret регистров(%d:%d:%d): %s';
  rsMBError4                 = 'Ошибка записи пакета в порт.';
  rsMBError5                 = 'Признак нестандартного префикса установлен, а сам префикс не задан.';
+ rsMBError6                 = 'Порт %d. Ошибка получения значений Holding регистров(%d:%d:%d): %s';
+ rsMBError7                 = 'Порт %d. Ошибка получения значений Input регистров(%d:%d:%d): %s';
 
  rsDevAdd13                 = 'Устройство: %d;';
  rsDevAdd14                 = '%s Функция 1;';

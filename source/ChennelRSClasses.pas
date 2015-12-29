@@ -86,7 +86,11 @@ implementation
 
 uses LoggerItf, ModbusEmuResStr,
      MBDefine, ExceptionsTypes,
-     MBRequestTypes;
+     MBRequestTypes
+     {$IFDEF WINDOWS}
+     ,Windows
+     {$ENDIF}
+     ;
 
 { TChennelRS }
 
@@ -161,16 +165,23 @@ procedure TChennelRSThread.OnServerReadProc(Sender : TObject);
 var Buff : array [0..2047] of Byte;
     ReadRes : Integer;
     TempDevice : TMBDevice;
+    TempDevAddr : Byte;
 begin
   TempDevice := nil;
   Buff[0] := 0;
   FillByte(Buff[0],2048,0);
-  ReadRes := FCOMPort.ReadData(Buff,1024);
+  ReadRes := FCOMPort.ReadData(Buff,2048);
   if ReadRes = -1 then
    begin
-    SendLogMessage(llError,rsChanRS1,Format(rsOnServerReadProc1,[FCOMPort.LastError,FCOMPort.LastErrorDesc]));
+    {$IFDEF WINDOWS}if FCOMPort.LastError <> ERROR_TIMEOUT then{$ENDIF}
+     SendLogMessage(llError,rsChanRS1,Format(rsOnServerReadProc1,[FCOMPort.LastError,FCOMPort.LastErrorDesc]));
     Exit;
    end;
+
+  SendLogMessage(llDebug,rsChanRS1,Format('<- %s',[GetBuffAsStringHex(@Buff[0],ReadRes)]));
+
+
+
 
   try
    FRequestReader.RequestRead(@Buff[0],ReadRes);
@@ -181,10 +192,25 @@ begin
     end;
   end;
 
+  if FRequestReader.ErrorCode <> 0 then
+   begin
+    SendLogMessage(llError,rsChanRS1,Format(rsOnServerReadProc7,[FRequestReader.ErrorCode, GetMBErrorString(FRequestReader.ErrorCode)]));
+    Exit;
+   end;
+
+  try
+   TempDevAddr := FRequestReader.DeviceAddress;
+  except
+   on E : Exception do
+    begin
+     SendLogMessage(llError,rsChanRS1,Format(rsOnServerReadProc6,[E.Message]));
+    end;
+  end;
+
   Lock;
   try
    try
-    TempDevice := DeviceArray^[FRequestReader.DeviceAddress];
+    TempDevice := DeviceArray^[TempDevAddr];
    except
     on E : Exception do
      begin
@@ -291,6 +317,8 @@ begin
     begin
      SendLogMessage(llError,rsMBObj,rsMBError2);
     end;
+
+   SendLogMessage(llDebug,rsChanRS1,Format('-> %s',[GetBuffAsStringHex(TempPackData,TempPackDataSize)]));
   finally
    if Assigned(TempPackData) then Freemem(TempPackData);
   end;
@@ -342,24 +370,129 @@ begin
   TempPackData     := FAnswBit.Packet;
   TempPackDataSize := FAnswBit.LenPacket;
   try
+
+
+
    TempRes := FCOMPort.WriteData(TempPackData^,TempPackDataSize);
    if TempRes = -1 then
     begin
      SendLogMessage(llError,rsMBObj1,rsMBError2);
     end;
+
+   SendLogMessage(llDebug,rsChanRS1,Format('-> %s',[GetBuffAsStringHex(TempPackData,TempPackDataSize)]));
   finally
    if Assigned(TempPackData) then Freemem(TempPackData);
   end;
 end;
 
 procedure TChennelRSThread.ResponseF3(ADev : TMBDevice);
+var TempPackData     : Pointer;
+    TempPackDataSize : Cardinal;
+    TempStartAddr    : Word;
+    TempQuantity     : Word;
+    TempValues       : TWordRegsValues;
+    TempRes          : Integer;
 begin
+  TempPackData := nil;
+  TempPackData := FRequestReader.GetPacketData(TempPackDataSize);
 
+  if not Assigned(TempPackData) then Exit;
+
+  TempStartAddr := swap(PMBF1_6FRequestData(TempPackData)^.StartingAddress);
+  TempQuantity  := swap(PMBF1_6FRequestData(TempPackData)^.Quantity);
+
+  if Assigned(TempPackData) then Freemem(TempPackData);
+
+  try
+   try
+    TempValues := ADev.GetHoldingRegValues(TempStartAddr,TempQuantity);
+   except
+    on E : Exception do
+     begin
+      SendLogMessage(llError,rsChanRS1, Format(rsMBError6,[FCOMPort.PortNumber,FRequestReader.DeviceAddress, TempStartAddr,TempQuantity,E.Message]));
+      SendErrorMsg(FRequestReader.DeviceAddress,FRequestReader.FunctionCode,ERR_MB_SLAVE_DEVICE_FAILURE - ERR_MB_ERR_CUSTOM);
+      Exit;
+     end;
+   end;
+   FAnswWord.DeviceAddress   := FRequestReader.DeviceAddress;
+   FAnswWord.FunctionNum     := TMBFunctionsEnum(FRequestReader.FunctionCode);
+   FAnswWord.StartingAddress := swap(TempStartAddr);
+   FAnswWord.Quantity        := swap(TempQuantity);
+   FAnswWord.WordData        := TempValues;
+  finally
+   SetLength(TempValues,0);
+  end;
+
+  FAnswWord.Build;
+  TempPackData     := FAnswWord.Packet;
+  TempPackDataSize := FAnswWord.LenPacket;
+  try
+
+   TempRes := FCOMPort.WriteData(TempPackData^,TempPackDataSize);
+   if TempRes = -1 then
+    begin
+     SendLogMessage(llError,rsMBObj1,rsMBError2);
+    end;
+
+   SendLogMessage(llDebug,rsChanRS1,Format('-> %s',[GetBuffAsStringHex(TempPackData,TempPackDataSize)]));
+  finally
+   if Assigned(TempPackData) then Freemem(TempPackData);
+  end;
 end;
 
 procedure TChennelRSThread.ResponseF4(ADev : TMBDevice);
+var TempPackData     : Pointer;
+    TempPackDataSize : Cardinal;
+    TempStartAddr    : Word;
+    TempQuantity     : Word;
+    TempValues       : TWordRegsValues;
+    TempRes          : Integer;
 begin
+  TempPackData := nil;
+  TempPackData := FRequestReader.GetPacketData(TempPackDataSize);
 
+  if not Assigned(TempPackData) then Exit;
+
+  TempStartAddr := swap(PMBF1_6FRequestData(TempPackData)^.StartingAddress);
+  TempQuantity  := swap(PMBF1_6FRequestData(TempPackData)^.Quantity);
+
+  if Assigned(TempPackData) then Freemem(TempPackData);
+
+  try
+   try
+    TempValues := ADev.GetInputRegValues(TempStartAddr,TempQuantity);
+   except
+    on E : Exception do
+     begin
+      SendLogMessage(llError,rsChanRS1, Format(rsMBError6,[FCOMPort.PortNumber,FRequestReader.DeviceAddress, TempStartAddr,TempQuantity,E.Message]));
+      SendErrorMsg(FRequestReader.DeviceAddress,FRequestReader.FunctionCode,ERR_MB_SLAVE_DEVICE_FAILURE - ERR_MB_ERR_CUSTOM);
+      Exit;
+     end;
+   end;
+   FAnswWord.DeviceAddress   := FRequestReader.DeviceAddress;
+   FAnswWord.FunctionNum     := TMBFunctionsEnum(FRequestReader.FunctionCode);
+   FAnswWord.StartingAddress := swap(TempStartAddr);
+   FAnswWord.Quantity        := swap(TempQuantity);
+   FAnswWord.WordData        := TempValues;
+  finally
+   SetLength(TempValues,0);
+  end;
+
+  FAnswWord.Build;
+  TempPackData     := FAnswWord.Packet;
+  TempPackDataSize := FAnswWord.LenPacket;
+  try
+
+   TempRes := FCOMPort.WriteData(TempPackData^,TempPackDataSize);
+   if TempRes = -1 then
+    begin
+     SendLogMessage(llError,rsMBObj1,rsMBError2);
+    end;
+
+   SendLogMessage(llDebug,rsChanRS1,Format('-> %s',[GetBuffAsStringHex(TempPackData,TempPackDataSize)]));
+  finally
+   if Assigned(TempPackData) then Freemem(TempPackData);
+  end;
 end;
 
 procedure TChennelRSThread.ResponseF5(ADev : TMBDevice);

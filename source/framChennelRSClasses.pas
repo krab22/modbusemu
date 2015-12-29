@@ -43,7 +43,8 @@ type
 
 implementation
 
-uses COMPortParamTypes;
+uses COMPortParamTypes,
+     ModbusEmuResStr;
 
 {$R *.lfm}
 
@@ -60,7 +61,14 @@ end;
 procedure TframeChennelRS.btChennelStartClick(Sender : TObject);
 begin
   FChennel.Active := True;
-  if not FChennel.Active then Exit;
+
+  if FChennel.Active then FChennel.Logger.info(rsOpenChennel2,Format(rsOpenChennel3,[FChennel.Name]))
+   else
+    begin
+     FChennel.Logger.info(rsOpenChennel2,Format(rsOpenChennel4,[FChennel.Name]));
+     Exit;
+    end;
+
   btChennelStart.Enabled := False;
   btChennelClose.Enabled := True;
 end;
@@ -68,7 +76,14 @@ end;
 procedure TframeChennelRS.btChennelCloseClick(Sender : TObject);
 begin
   FChennel.Active := False;
-  if FChennel.Active then Exit;
+
+  if FChennel.Active then
+   begin
+    FChennel.Logger.info(rsCloseChennel2,Format(rsCloseChennel3,[FChennel.Name]));
+    Exit;
+   end
+  else FChennel.Logger.info(rsCloseChennel2,Format(rsCloseChennel4,[FChennel.Name]));
+
   btChennelStart.Enabled := True;
   btChennelClose.Enabled := False;
 end;

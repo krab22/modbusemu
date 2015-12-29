@@ -68,7 +68,8 @@ implementation
 
 uses LoggerItf, ModbusEmuResStr,
      MBDefine, ExceptionsTypes,
-     MBRequestTypes, MBResponseTypes;
+     MBRequestTypes, MBResponseTypes,
+     MBRegistersCalsses;
 
 { TChennelTCP }
 
@@ -120,6 +121,8 @@ begin
   TempDevice := nil;
   if (Length(Buff) = 0) or (DataSize = 0) then Exit;
 
+  SendLogMessage(llDebug,rsChanTCP1,Format('<- %s',[GetBuffAsStringHexMB(@Buff[0],DataSize)]));
+
   // читаем пакет
   try
    FReader.RequestRead(@Buff[0],DataSize);
@@ -130,6 +133,7 @@ begin
     Exit;
    end;
   end;
+
   Lock; // в ходим в критическую секцию для работы с массивом устройств
   try
     // получаем требуемый девайс
@@ -256,16 +260,16 @@ begin
    TempPackData     := FAnswBits.Packet;
    TempPackDataSize := FAnswBits.LenPacket;
    try
+
     // посылаем ответ
     TempSendRes := AClient.SendDada(TempPackData^,TempPackDataSize);
     if TempSendRes = -1 then
      begin
       SendLogMessage(llDebug, rsChanTCP1,Format(rsResponseF1_2,[AClient.ClientAddr,AClient.ClientPort]));
+      Exit;
      end;
-//    else
-//     begin
-//      SendLogMessage(llDebug, rsChanTCP1,Format(rsResponseF1_3,[AClient.ClientAddr,AClient.ClientPort]));
-//     end;
+
+    SendLogMessage(llDebug,rsChanTCP1,Format('-> %s',[GetBuffAsStringHexMB(TempPackData,TempPackDataSize)]));
    finally
     // освобождаем память выделенную для пакета
     Freemem(TempPackData);
@@ -315,15 +319,15 @@ begin
   TempPackData     := FAnswBits.Packet;
   TempPackDataSize := FAnswBits.LenPacket;
   try
+
    TempSendRes := AClient.SendDada(TempPackData^,TempPackDataSize);
    if TempSendRes = -1 then
     begin
      SendLogMessage(llDebug, rsChanTCP1,Format(rsResponseF2_2,[AClient.ClientAddr,AClient.ClientPort]));
+     Exit;
     end;
-//   else
-//    begin
-//     SendLogMessage(llDebug, rsChanTCP1,Format(rsResponseF2_3,[AClient.ClientAddr,AClient.ClientPort]));
-//    end;
+
+   SendLogMessage(llDebug,rsChanTCP1,Format('-> %s',[GetBuffAsStringHexMB(TempPackData,TempPackDataSize)]));
   finally
    Freemem(TempPackData);
   end;
@@ -372,15 +376,15 @@ begin
   TempPackData     := FAnswWord.Packet;
   TempPackDataSize := FAnswWord.LenPacket;
   try
+
    TempSendRes := AClient.SendDada(TempPackData^,TempPackDataSize);
    if TempSendRes = -1 then
     begin
      SendLogMessage(llDebug, rsChanTCP1,Format(rsResponseF3_2,[AClient.ClientAddr,AClient.ClientPort]));
+     Exit;
     end;
-//   else
-//    begin
-//     SendLogMessage(llDebug, rsChanTCP1,Format(rsResponseF3_3,[AClient.ClientAddr,AClient.ClientPort]));
-//    end;
+
+   SendLogMessage(llDebug,rsChanTCP1,Format('-> %s',[GetBuffAsStringHexMB(TempPackData,TempPackDataSize)]));
   finally
    Freemem(TempPackData);
   end;
@@ -429,15 +433,15 @@ begin
   TempPackData     := FAnswWord.Packet;
   TempPackDataSize := FAnswWord.LenPacket;
   try
+
    TempSendRes := AClient.SendDada(TempPackData^,TempPackDataSize);
    if TempSendRes = -1 then
     begin
      SendLogMessage(llDebug, rsChanTCP1,Format(rsResponseF4_2,[AClient.ClientAddr,AClient.ClientPort]));
+     Exit;
     end;
-//   else
-//    begin
-//     SendLogMessage(llDebug, rsChanTCP1,Format(rsResponseF4_3,[AClient.ClientAddr,AClient.ClientPort]));
-//    end;
+
+   SendLogMessage(llDebug,rsChanTCP1,Format('-> %s',[GetBuffAsStringHexMB(TempPackData,TempPackDataSize)]));
   finally
    Freemem(TempPackData);
   end;
@@ -481,11 +485,10 @@ begin
     if TempSendRes = -1 then
      begin
       SendLogMessage(llDebug, rsChanTCP1,Format(rsResponseF5_2,[AClient.ClientAddr,AClient.ClientPort]));
-     end
-    else
-     begin
-      SendLogMessage(llDebug, rsChanTCP1,Format(rsResponseF5_3,[AClient.ClientAddr,AClient.ClientPort]));
+      Exit;
      end;
+
+    SendLogMessage(llDebug,rsChanTCP1,Format('-> %s',[GetBuffAsStringHexMB(@TempResp5_6,SizeOf(TempResp5_6))]));
    except
     on E : Exception do
      begin
@@ -530,11 +533,10 @@ begin
     if TempSendRes = -1 then
      begin
       SendLogMessage(llDebug, rsChanTCP1,Format(rsResponseF6_2,[AClient.ClientAddr,AClient.ClientPort]));
-     end
-    else
-     begin
-      SendLogMessage(llDebug, rsChanTCP1,Format(rsResponseF6_3,[AClient.ClientAddr,AClient.ClientPort]));
+      Exit;
      end;
+
+    SendLogMessage(llDebug,rsChanTCP1,Format('-> %s',[GetBuffAsStringHexMB(@TempResp5_6,SizeOf(TempResp5_6))]));
    except
     on E : Exception do
      begin
@@ -553,7 +555,13 @@ var TempPackData     : Pointer;
     TempBitArray     : PByteArray;
     TempStartAddr    : Word;
     TempQuantity     : Word;
-    TempByteCount    : Byte;
+    TempByteCount,
+    TempByte,ByteVal : Byte;
+    TempRegNum       : Word;
+    i,ii,Count       : Integer;
+    TempReg          : TMBBitRegister;
+    TempSendRes      : Integer;
+    TempResp5_6      : TMBTCPF1RequestNew;
 begin
   TempPackData := FReader.GetPacketData(TempPackDataSize);
   {
@@ -567,13 +575,54 @@ begin
   TempByteCount := PMBF15ReguestPacketData(TempPackData)^.ByteCount;
   TempBitArray  := PByteArray(Pointer(PtrUInt(@PMBF15ReguestPacketData(TempPackData)^.ByteCount)+1));
   try
+   try
+    if TempByteCount <> (TempPackDataSize-5) then Exit; // нужно исключение ?
+    Count := TempByteCount-1;
+    ADev.BeginPacketUpdate;
+    try
+     for i := 0 to Count do
+      begin
+       TempByte := TempBitArray^[i];
+       ByteVal  := 1;
+       for ii := 0 to 7 do
+        begin
+         TempRegNum := TempStartAddr+(i*8)+ii;
+         if TempRegNum > (TempStartAddr+TempQuantity-1) then Break;
+         TempReg := ADev.Coils[TempRegNum];
+         TempReg.Value := TempByte and ByteVal = ByteVal;
+         ByteVal := ByteVal * 2;
+        end;
+      end;
+    finally
+     ADev.EndPacketUpdate;
+    end;
+   finally
+    if Assigned(TempPackData) then Freemem(TempPackData);
+   end;
 
-  finally
-   if Assigned(TempPackData) then Freemem(TempPackData);
+   TempResp5_6.TCPHeader.TransactioID := Swap(FReader.TransactionID);
+   TempResp5_6.TCPHeader.ProtocolID   := Swap(FReader.ProtocolID);
+   TempResp5_6.TCPHeader.Length       := Swap(FReader.Len);
+   TempResp5_6.Header.DeviceInfo.DeviceAddress := FReader.DeviceAddress;
+   TempResp5_6.Header.DeviceInfo.FunctionCode  := 15;
+   TempResp5_6.Header.RequestData.StartingAddress := Swap(TempStartAddr);
+   TempResp5_6.Header.RequestData.Quantity        := Swap(TempQuantity);
+
+   TempSendRes := AClient.SendDada(TempResp5_6,SizeOf(TempResp5_6));
+   if TempSendRes = -1 then
+    begin
+     SendLogMessage(llDebug, rsChanTCP1,Format(rsResponseF5_2,[AClient.ClientAddr,AClient.ClientPort]));
+     Exit;
+    end;
+
+   SendLogMessage(llDebug,rsChanTCP1,Format('-> %s',[GetBuffAsStringHexMB(@TempResp5_6,SizeOf(TempResp5_6))]));
+  except
+   on E : Exception do
+    begin
+     SendLogMessage(llError,rsChanTCP1,Format(rsResponseF5_1,[AClient.ClientAddr,AClient.ClientPort,FReader.DeviceAddress, TempStartAddr,TempQuantity,E.Message]));
+     SendErrorMsg(FReader.TransactionID,FReader.ProtocolID,FReader.DeviceAddress,FReader.FunctionCode,ERR_MB_SLAVE_DEVICE_FAILURE - ERR_MB_ERR_CUSTOM,AClient);
+    end;
   end;
-
-  SendLogMessage(llError,rsChanTCP1,Format(rsResponseF15_1,[AClient.ClientAddr,AClient.ClientPort]));
-  SendErrorMsg(FReader.TransactionID,FReader.ProtocolID,FReader.DeviceAddress,FReader.FunctionCode,ERR_MB_ILLEGAL_FUNCTION - ERR_MB_ERR_CUSTOM,AClient);
 end;
 
 procedure TChennelTCPThread.ResponseF16(ADev : TMBDevice; AClient : TServerClientObj);

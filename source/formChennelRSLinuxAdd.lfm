@@ -1,16 +1,16 @@
 object frmChennelRSAdd: TfrmChennelRSAdd
-  Left = 3320
+  Left = 2407
   Height = 241
-  Top = 236
-  Width = 382
+  Top = 258
+  Width = 395
   BorderStyle = bsDialog
   Caption = 'Добавить последовательный канал'
   ClientHeight = 241
-  ClientWidth = 382
+  ClientWidth = 395
   Position = poOwnerFormCenter
   LCLVersion = '1.5'
   object btOk: TButton
-    Left = 208
+    Left = 221
     Height = 25
     Top = 204
     Width = 80
@@ -21,7 +21,7 @@ object frmChennelRSAdd: TfrmChennelRSAdd
     TabOrder = 8
   end
   object btCancel: TButton
-    Left = 296
+    Left = 309
     Height = 25
     Top = 204
     Width = 75
@@ -59,7 +59,7 @@ object frmChennelRSAdd: TfrmChennelRSAdd
     Left = 192
     Height = 32
     Top = 46
-    Width = 183
+    Width = 192
     ReadOnly = True
     TabOrder = 2
   end
@@ -73,7 +73,7 @@ object frmChennelRSAdd: TfrmChennelRSAdd
     ParentColor = False
   end
   object spePortNum: TSpinEdit
-    Left = 104
+    Left = 112
     Height = 32
     Top = 86
     Width = 80
@@ -81,7 +81,7 @@ object frmChennelRSAdd: TfrmChennelRSAdd
     TabOrder = 3
   end
   object lbBaudRate: TLabel
-    Left = 192
+    Left = 201
     Height = 20
     Top = 86
     Width = 66
@@ -90,7 +90,7 @@ object frmChennelRSAdd: TfrmChennelRSAdd
     ParentColor = False
   end
   object cmbBaudRate: TComboBox
-    Left = 263
+    Left = 272
     Height = 28
     Top = 86
     Width = 112
@@ -142,7 +142,7 @@ object frmChennelRSAdd: TfrmChennelRSAdd
     ParentColor = False
   end
   object cmbByteSize: TComboBox
-    Left = 108
+    Left = 112
     Height = 28
     Top = 126
     Width = 76
@@ -159,7 +159,7 @@ object frmChennelRSAdd: TfrmChennelRSAdd
     Text = '8'
   end
   object lbParitet: TLabel
-    Left = 192
+    Left = 201
     Height = 20
     Top = 126
     Width = 59
@@ -168,10 +168,10 @@ object frmChennelRSAdd: TfrmChennelRSAdd
     ParentColor = False
   end
   object cmbParitet: TComboBox
-    Left = 263
+    Left = 272
     Height = 28
     Top = 126
-    Width = 108
+    Width = 112
     ItemHeight = 0
     ItemIndex = 2
     Items.Strings = (
@@ -222,7 +222,7 @@ object frmChennelRSAdd: TfrmChennelRSAdd
     Left = 96
     Height = 32
     Top = 8
-    Width = 279
+    Width = 288
     TabOrder = 0
     Text = 'Последовательный канал'
   end

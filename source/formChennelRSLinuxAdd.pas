@@ -51,7 +51,7 @@ type
     property ChennalName   : String read FChennalName write FChennalName;
   end;
 
-var frmChennelRSAdd : TfrmChennelRSAdd;
+//var frmChennelRSAdd : TfrmChennelRSAdd;
 
 implementation
 
@@ -60,6 +60,7 @@ uses ChennelRSClasses,
      ModbusEmuResStr;
 
 {$R *.lfm}
+
 
 { TfrmChennelRSAdd }
 

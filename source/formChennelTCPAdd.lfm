@@ -28,6 +28,7 @@ object frmChennelTCPAdd: TfrmChennelTCPAdd
     Width = 75
     Anchors = [akRight, akBottom]
     Caption = 'Отмена'
+    ModalResult = 2
     TabOrder = 1
   end
   object lbName: TLabel

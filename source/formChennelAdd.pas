@@ -35,16 +35,17 @@ uses {$IFDEF UNIX}formChennelRSLinuxAdd{$ELSE}formChennelRSWindowsAdd{$ENDIF}, f
 { TformChenAdd }
 
 procedure TformChenAdd.btAddRSChennelClick(Sender : TObject);
-var TempForm : TfrmChennelRSAdd;
+var TempForm : {$IFDEF UNIX}TfrmChennelRSAdd{$ELSE}TfrmChennelRSAddWin{$ENDIF};
     TempRes  : TModalResult;
 begin
   TempRes := mrCancel;
-  TempForm := TfrmChennelRSAdd.Create(Self);
+  TempForm := {$IFDEF UNIX}TfrmChennelRSAdd{$ELSE}TfrmChennelRSAddWin{$ENDIF}.Create(Self);
   try
-    TempForm.Logger := FLogger;
+    TempForm.Logger             := FLogger;
     TempForm.edChennalName.Text := rsDefChannelRSName;
-    TempForm.ChennelList := FChennelList;
-    TempForm.DevArray := FDevArray;
+    TempForm.ChennelList        := FChennelList;
+    TempForm.DevArray           := FDevArray;
+
     TempForm.ShowModal;
     TempRes := TempForm.ModalResult;
     Tag := TempForm.Tag;

@@ -328,19 +328,19 @@ begin
 
   if TempChen.ClassType = TChennelRS then
    begin
-    TempForm := TfrmChennelRSAdd.Create(nil);
+    TempForm := {$IFDEF UNIX}TfrmChennelRSAdd{$ELSE}TfrmChennelRSAddWin{$ENDIF}.Create(nil);
     try
-     TfrmChennelRSAdd(TempForm).Logger         := LoggerObj as IDLogger;
-     TfrmChennelRSAdd(TempForm).IsChennalEdit  := True;
-     TfrmChennelRSAdd(TempForm).ChennelList    := libChennelList.Items;
-     TfrmChennelRSAdd(TempForm).DevArray       := @FDevArray;
-     TfrmChennelRSAdd(TempForm).ChennalName    := TempChenName;
-     TfrmChennelRSAdd(TempForm).ChennalObj     := TempChen;
+     {$IFDEF UNIX}TfrmChennelRSAdd{$ELSE}TfrmChennelRSAddWin{$ENDIF}(TempForm).Logger         := LoggerObj as IDLogger;
+     {$IFDEF UNIX}TfrmChennelRSAdd{$ELSE}TfrmChennelRSAddWin{$ENDIF}(TempForm).IsChennalEdit  := True;
+     {$IFDEF UNIX}TfrmChennelRSAdd{$ELSE}TfrmChennelRSAddWin{$ENDIF}(TempForm).ChennelList    := libChennelList.Items;
+     {$IFDEF UNIX}TfrmChennelRSAdd{$ELSE}TfrmChennelRSAddWin{$ENDIF}(TempForm).DevArray       := @FDevArray;
+     {$IFDEF UNIX}TfrmChennelRSAdd{$ELSE}TfrmChennelRSAddWin{$ENDIF}(TempForm).ChennalName    := TempChenName;
+     {$IFDEF UNIX}TfrmChennelRSAdd{$ELSE}TfrmChennelRSAddWin{$ENDIF}(TempForm).ChennalObj     := TempChen;
 
      TempForm.ShowModal;
      if TempForm.ModalResult = mrOK then
       begin
-       libChennelList.Items.Strings[libChennelList.ItemIndex] := TfrmChennelRSAdd(TempForm).ChennalName;
+       libChennelList.Items.Strings[libChennelList.ItemIndex] := {$IFDEF UNIX}TfrmChennelRSAdd{$ELSE}TfrmChennelRSAddWin{$ENDIF}(TempForm).ChennalName;
        if TempChen.Active then
         begin
          TempChen.Active := False;
@@ -364,12 +364,20 @@ begin
     libChennelList.SetFocus;
     raise Exception.Create(rsOpenChennel1);
    end;
+
   TempChen := TChennelBase(libChennelList.Items.Objects[libChennelList.ItemIndex]);
-  if not Assigned(TempChen) then Exit;
+  if not Assigned(TempChen) then
+   begin
+    LoggerObj.info(rsOpenChennel2,'Канал не существует');
+    Exit;
+   end;
+
   TempChen.Active := True;
   TempChenName :=libChennelList.Items.Strings[libChennelList.ItemIndex];
   if TempChen.Active then LoggerObj.info(rsOpenChennel2,Format(rsOpenChennel3,[TempChenName]))
    else LoggerObj.info(rsOpenChennel2,Format(rsOpenChennel4,[TempChenName]));
+
+  LoggerObj.debug(rsOpenChennel2,'6');
 end;
 
 procedure TfrmMain.actChennelCloseExecute(Sender: TObject);
@@ -385,6 +393,7 @@ begin
   if not Assigned(TempChen) then Exit;
   TempChen.Active := False;
   TempChenName :=libChennelList.Items.Strings[libChennelList.ItemIndex];
+
   if TempChen.Active then LoggerObj.info(rsCloseChennel2,Format(rsCloseChennel3,[TempChenName]))
    else LoggerObj.info(rsCloseChennel2,Format(rsCloseChennel4,[TempChenName]));
 end;

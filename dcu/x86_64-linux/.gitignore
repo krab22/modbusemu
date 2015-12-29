@@ -139,3 +139,6 @@
 /sdStreams.ppu
 /sdStringTable.o
 /sdStringTable.ppu
+/formChennelRSWindowsAdd.lfm
+/formChennelRSWindowsAdd.o
+/formChennelRSWindowsAdd.ppu
