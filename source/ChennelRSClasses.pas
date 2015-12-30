@@ -189,6 +189,7 @@ begin
    on E : Exception do
     begin
      SendLogMessage(llError,rsChanRS1,Format(rsOnServerReadProc2,[E.Message]));
+     Exit;
     end;
   end;
 
