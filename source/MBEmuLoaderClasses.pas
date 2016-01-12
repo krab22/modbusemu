@@ -351,6 +351,8 @@ var TempNode : TXmlNode;
     TempStopBits : TComPortStopBits;
     TempParity   : TComPortParity;
 begin
+  TempPrefix := pptLinux;
+  TempPrefixOth := '';
   Count := AChannelsNode.NodeCount-1;
   for i := 0 to Count do
    begin
@@ -455,15 +457,16 @@ begin
          end;
 
        TempChenRS := TChennelRS.Create;
-       TempChenRS.Logger     := Logger;
-       TempChenRS.PortPrefix := TempPrefix;
+       TempChenRS.Logger      := Logger;
+       TempChenRS.PortPrefix  := TempPrefix;
        if TempPrefix = pptOther then TempChenRS.PortPrefixOther := TempPrefixOth;
-       TempChenRS.PortNum    := TempPortNum;
-       TempChenRS.BaudRate   := TempBaudRate;
-       TempChenRS.ByteSize   := TempByteSize;
-       TempChenRS.Parity     := TempParity;
-       TempChenRS.StopBits   := TempStopBits;
-       TempChenRS.Name       := TempName;
+       TempChenRS.PortNum     := TempPortNum;
+       TempChenRS.BaudRate    := TempBaudRate;
+       TempChenRS.ByteSize    := TempByteSize;
+       TempChenRS.Parity      := TempParity;
+       TempChenRS.StopBits    := TempStopBits;
+       TempChenRS.Name        := TempName;
+       TempChenRS.DeviceArray := FDevArray;
 
        FChannelList.AddObject(TempName,TempChenRS);
 

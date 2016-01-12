@@ -38,7 +38,6 @@ object frmMain: TfrmMain
       Left = 1
       Top = 2
       Action = actFileLoadConf
-      MenuItem = mmFileLoadConf
       ParentShowHint = False
       ShowHint = True
     end
@@ -46,7 +45,6 @@ object frmMain: TfrmMain
       Left = 31
       Top = 2
       Action = actFileSaveConf
-      MenuItem = mmFileSaveConf
       ParentShowHint = False
       ShowHint = True
     end
@@ -54,7 +52,6 @@ object frmMain: TfrmMain
       Left = 61
       Top = 2
       Action = actExit
-      MenuItem = mmExit
       ParentShowHint = False
       ShowHint = True
     end
@@ -70,7 +67,6 @@ object frmMain: TfrmMain
       Left = 99
       Top = 2
       Action = actDevAdd
-      MenuItem = mmDevAddDev
       ParentShowHint = False
       ShowHint = True
     end
@@ -78,7 +74,6 @@ object frmMain: TfrmMain
       Left = 159
       Top = 2
       Action = actDevDel
-      MenuItem = mmDevDelDev
       ParentShowHint = False
       ShowHint = True
     end
@@ -86,7 +81,6 @@ object frmMain: TfrmMain
       Left = 189
       Top = 2
       Action = actDevClearList
-      MenuItem = mmDevClearDevList
       ParentShowHint = False
       ShowHint = True
     end

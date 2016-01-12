@@ -182,7 +182,7 @@ begin
      16 : begin // запись множества Holding
            ResponseF16(TempDevice,Sender);
           end;
-     17 : begin // Чтение/запись Holdong регистров одним вызовом
+     23 : begin // Чтение/запись Holdong регистров одним вызовом
            ResponseF17(TempDevice,Sender);
           end;
     end;

@@ -1,7 +1,7 @@
 object frmAddDevice: TfrmAddDevice
-  Left = 2188
+  Left = 2903
   Height = 258
-  Top = 256
+  Top = 265
   Width = 487
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
@@ -75,7 +75,7 @@ object frmAddDevice: TfrmAddDevice
       '6'
       '15'
       '16'
-      '17'
+      '23'
     )
     TabOrder = 3
     Data = {

@@ -11,6 +11,9 @@ uses Classes, SysUtils,
      MBDeviceClasses;
 
 type
+
+  { TChennelRSThread }
+
   TChennelRSThread = class(TChennelBaseThread)
    private
     FCOMPort         : TNPCCustomCOMPort;
@@ -44,6 +47,8 @@ type
     procedure ResponseF17(ADev : TMBDevice); virtual;
 
     procedure SendErrorMsg(ADevNum,AFuncNum,AError: Byte);
+
+    procedure SendResponse(ABuff : Pointer; ABuffLen : Cardinal);
 
    public
     constructor Create(CreateSuspended: Boolean; const StackSize: SizeUInt = 65535); reintroduce;
@@ -162,109 +167,45 @@ begin
 end;
 
 procedure TChennelRSThread.OnServerReadProc(Sender : TObject);
-var Buff : array [0..2047] of Byte;
-    ReadRes : Integer;
-    TempDevice : TMBDevice;
-    TempDevAddr : Byte;
+var Buff        : array [0..2047] of Byte;
+    ReadRes     : Integer;
+    TempIndex   : Integer;
+    TempLen     : Cardinal;
+    TempBuffLen : Cardinal;
 begin
-  TempDevice := nil;
   Buff[0] := 0;
   FillByte(Buff[0],2048,0);
   ReadRes := FCOMPort.ReadData(Buff,2048);
   if ReadRes = -1 then
    begin
     {$IFDEF WINDOWS}if FCOMPort.LastError <> ERROR_TIMEOUT then{$ENDIF}
-     SendLogMessage(llError,rsChanRS1,Format(rsOnServerReadProc1,[FCOMPort.LastError,FCOMPort.LastErrorDesc]));
+    SendLogMessage(llError,rsChanRS1,Format(rsOnServerReadProc1,[FCOMPort.LastError,FCOMPort.LastErrorDesc]));
     Exit;
    end;
 
   SendLogMessage(llDebug,rsChanRS1,Format('<- %s',[GetBuffAsStringHex(@Buff[0],ReadRes)]));
 
-
-
-
-  try
-   FRequestReader.RequestRead(@Buff[0],ReadRes);
-  except
-   on E : Exception do
-    begin
-     SendLogMessage(llError,rsChanRS1,Format(rsOnServerReadProc2,[E.Message]));
-     Exit;
-    end;
-  end;
-
-  if FRequestReader.ErrorCode <> 0 then
+  TempIndex   := 0;
+  TempBufflen := ReadRes;
+  while TempBuffLen > 0 do
    begin
-    SendLogMessage(llError,rsChanRS1,Format(rsOnServerReadProc7,[FRequestReader.ErrorCode, GetMBErrorString(FRequestReader.ErrorCode)]));
-    Exit;
-   end;
+    case Buff[TempIndex+1] of // функция запроса
+     1,2,3,4,5,6 : begin
+                    TempLen := 8;
+                   end;
+     15,16       : begin
+                    TempLen := Buff[TempIndex + 6] + 9;
+                   end;
+     23          : begin
 
-  try
-   TempDevAddr := FRequestReader.DeviceAddress;
-  except
-   on E : Exception do
-    begin
-     SendLogMessage(llError,rsChanRS1,Format(rsOnServerReadProc6,[E.Message]));
-    end;
-  end;
-
-  Lock;
-  try
-   try
-    TempDevice := DeviceArray^[TempDevAddr];
-   except
-    on E : Exception do
-     begin
-      SendLogMessage(llError,rsChanRS1,Format(rsOnServerReadProc3,[FCOMPort.PortNumber,E.Message]));
-      Exit;
-     end;
-   end;
-
-   if not Assigned(TempDevice) then
-    begin
-     SendLogMessage(llDebug,rsChanRS1,Format(rsOnServerReadProc4,[FCOMPort.PortNumber,FRequestReader.DeviceAddress]));
-     Exit;
+                   end;
     end;
 
-   if not(TMBFunctionsEnum(FRequestReader.FunctionCode) in TempDevice.DeviceFunctions) then
-    begin
-     SendLogMessage(llDebug, rsChanRS1,Format(rsOnServerReadProc5,[FCOMPort.PortNumber,FRequestReader.FunctionCode,FRequestReader.DeviceAddress]));
-     SendErrorMsg(FRequestReader.DeviceAddress,FRequestReader.FunctionCode,ERR_MB_ILLEGAL_FUNCTION - ERR_MB_ERR_CUSTOM);
-     Exit;
-    end;
+    SendResponse(@Buff[TempIndex],TempLen);
 
-   case FRequestReader.FunctionCode of
-    1  : begin // чтение Coils rw
-          ResponseF1(TempDevice);
-         end;
-    2  : begin // чтение Discrete r
-          ResponseF2(TempDevice);
-         end;
-    3  : begin // чтение Holdings rw
-          ResponseF3(TempDevice);
-         end;
-    4  : begin // чтение Input r
-          ResponseF4(TempDevice);
-         end;
-    5  : begin // запись одного Coil
-          ResponseF5(TempDevice);
-         end;
-    6  : begin // запись одного Holding
-          ResponseF6(TempDevice);
-         end;
-    15 : begin // запись множества Coils
-          ResponseF15(TempDevice);
-         end;
-    16 : begin // запись множества Holding
-          ResponseF16(TempDevice);
-         end;
-    17 : begin // Чтение/запись Holdong регистров одним вызовом
-          ResponseF17(TempDevice);
-         end;
+    TempBuffLen := TempBuffLen - TempLen;
+    TempIndex := TempIndex + TempLen;
    end;
-  finally
-   UnLock;
-  end;
 end;
 
 procedure TChennelRSThread.ResponseF1(ADev : TMBDevice);
@@ -500,7 +441,8 @@ procedure TChennelRSThread.ResponseF5(ADev : TMBDevice);
 begin
   ADev.BeginPacketUpdate;
   try
-
+   SendLogMessage(llError,rsChanRS1,Format(rsMBError8,[5]));
+   SendErrorMsg(FRequestReader.DeviceAddress,FRequestReader.FunctionCode,ERR_MB_ILLEGAL_FUNCTION - ERR_MB_ERR_CUSTOM);
   finally
    ADev.EndPacketUpdate;
   end;
@@ -510,7 +452,8 @@ procedure TChennelRSThread.ResponseF6(ADev : TMBDevice);
 begin
   ADev.BeginPacketUpdate;
   try
-
+   SendLogMessage(llError,rsChanRS1,Format(rsMBError8,[6]));
+   SendErrorMsg(FRequestReader.DeviceAddress,FRequestReader.FunctionCode,ERR_MB_ILLEGAL_FUNCTION - ERR_MB_ERR_CUSTOM);
   finally
    ADev.EndPacketUpdate;
   end;
@@ -520,7 +463,8 @@ procedure TChennelRSThread.ResponseF15(ADev : TMBDevice);
 begin
   ADev.BeginPacketUpdate;
   try
-
+   SendLogMessage(llError,rsChanRS1,Format(rsMBError8,[15]));
+   SendErrorMsg(FRequestReader.DeviceAddress,FRequestReader.FunctionCode,ERR_MB_ILLEGAL_FUNCTION - ERR_MB_ERR_CUSTOM);
   finally
    ADev.EndPacketUpdate;
   end;
@@ -530,7 +474,8 @@ procedure TChennelRSThread.ResponseF16(ADev : TMBDevice);
 begin
   ADev.BeginPacketUpdate;
   try
-
+   SendLogMessage(llError,rsChanRS1,Format(rsMBError8,[16]));
+   SendErrorMsg(FRequestReader.DeviceAddress,FRequestReader.FunctionCode,ERR_MB_ILLEGAL_FUNCTION - ERR_MB_ERR_CUSTOM);
   finally
    ADev.EndPacketUpdate;
   end;
@@ -540,7 +485,8 @@ procedure TChennelRSThread.ResponseF17(ADev : TMBDevice);
 begin
   ADev.BeginPacketUpdate;
   try
-
+   SendLogMessage(llError,rsChanRS1,Format(rsMBError8,[23]));
+   SendErrorMsg(FRequestReader.DeviceAddress,FRequestReader.FunctionCode,ERR_MB_ILLEGAL_FUNCTION - ERR_MB_ERR_CUSTOM);
   finally
    ADev.EndPacketUpdate;
   end;
@@ -575,13 +521,101 @@ begin
   end;
 end;
 
+procedure TChennelRSThread.SendResponse(ABuff : Pointer; ABuffLen : Cardinal);
+var TempDevice  : TMBDevice;
+    TempDevAddr : Byte;
+begin
+  try
+   FRequestReader.RequestRead(ABuff,ABuffLen);
+  except
+   on E : Exception do
+    begin
+     SendLogMessage(llError,rsChanRS1,Format(rsOnServerReadProc2,[E.Message]));
+     Exit;
+    end;
+  end;
+
+  if FRequestReader.ErrorCode <> 0 then
+   begin
+    SendLogMessage(llError,rsChanRS1,Format(rsOnServerReadProc7,[FRequestReader.ErrorCode, GetMBErrorString(FRequestReader.ErrorCode)]));
+    Exit;
+   end;
+
+  try
+   TempDevAddr := FRequestReader.DeviceAddress;
+  except
+   on E : Exception do
+    begin
+     SendLogMessage(llError,rsChanRS1,Format(rsOnServerReadProc6,[E.Message]));
+    end;
+  end;
+
+  Lock;
+  try
+   try
+    TempDevice := DeviceArray^[TempDevAddr];
+   except
+    on E : Exception do
+     begin
+      SendLogMessage(llError,rsChanRS1,Format(rsOnServerReadProc3,[FCOMPort.PortNumber,E.Message]));
+      Exit;
+     end;
+   end;
+
+   if not Assigned(TempDevice) then
+    begin
+     SendLogMessage(llDebug,rsChanRS1,Format(rsOnServerReadProc4,[FCOMPort.PortNumber,FRequestReader.DeviceAddress]));
+     Exit;
+    end;
+
+   if not(TMBFunctionsEnum(FRequestReader.FunctionCode) in TempDevice.DeviceFunctions) then
+    begin
+     SendLogMessage(llDebug, rsChanRS1,Format(rsOnServerReadProc5,[FCOMPort.PortNumber,FRequestReader.FunctionCode,FRequestReader.DeviceAddress]));
+     SendErrorMsg(FRequestReader.DeviceAddress,FRequestReader.FunctionCode,ERR_MB_ILLEGAL_FUNCTION - ERR_MB_ERR_CUSTOM);
+     Exit;
+    end;
+
+   case FRequestReader.FunctionCode of
+    1  : begin // чтение Coils rw
+          ResponseF1(TempDevice);
+         end;
+    2  : begin // чтение Discrete r
+          ResponseF2(TempDevice);
+         end;
+    3  : begin // чтение Holdings rw
+          ResponseF3(TempDevice);
+         end;
+    4  : begin // чтение Input r
+          ResponseF4(TempDevice);
+         end;
+    5  : begin // запись одного Coil
+          ResponseF5(TempDevice);
+         end;
+    6  : begin // запись одного Holding
+          ResponseF6(TempDevice);
+         end;
+    15 : begin // запись множества Coils
+          ResponseF15(TempDevice);
+         end;
+    16 : begin // запись множества Holding
+          ResponseF16(TempDevice);
+         end;
+    23 : begin // Чтение/запись Holdong регистров одним вызовом
+          ResponseF17(TempDevice);
+         end;
+   end;
+  finally
+   UnLock;
+  end;
+end;
+
 procedure TChennelRSThread.Execute;
 begin
   InitThread;
   try
    while not Terminated do
     begin
-     Sleep(500);
+     Sleep(100);
     end;
   finally
    CloseThread;

@@ -207,6 +207,8 @@ begin
   try
    try
     TempLoader.LoadConfig(odConf.FileName);
+    if libChennelList.Items.Count > 0 then libChennelList.ItemIndex := 0;
+    if lbDeviceList.Items.Count >0 then lbDeviceList.ItemIndex := 0;
     FIsConfModify := False;
    except
     on E : Exception do
@@ -605,9 +607,9 @@ begin
         FDevArray[TempDevNum].AddRegisters(rgHolding,0,10000);
        end;
      end;
-    if TempAddForm.cgFunctions.Checked[8] then // функция 17
+    if TempAddForm.cgFunctions.Checked[8] then // функция 23
      begin
-      FDevArray[TempDevNum].DeviceFunctions := FDevArray[TempDevNum].DeviceFunctions+[fn17];
+      FDevArray[TempDevNum].DeviceFunctions := FDevArray[TempDevNum].DeviceFunctions+[fn23];
       TempStr := Format(rsDevAdd10,[TempStr]);
      end;
 
@@ -694,7 +696,7 @@ begin
    if fn16 in TempDev.DeviceFunctions then TempAddForm.cgFunctions.Checked[7] := True
     else TempAddForm.cgFunctions.Checked[7] := False;
 
-   if fn17 in TempDev.DeviceFunctions then TempAddForm.cgFunctions.Checked[8] := True
+   if fn23 in TempDev.DeviceFunctions then TempAddForm.cgFunctions.Checked[8] := True
     else TempAddForm.cgFunctions.Checked[8] := False;
 
    if TempDev.DefCoil then TempAddForm.cbCoilsDefValue.ItemIndex := 1
@@ -870,11 +872,11 @@ begin
       if fn16 in TempDev.DeviceFunctions then TempDev.DeviceFunctions := TempDev.DeviceFunctions - [fn16];
      end;
 
-    if TempAddForm.cgFunctions.Checked[8] then // установлена функция 17
+    if TempAddForm.cgFunctions.Checked[8] then // установлена функция 23
      begin
-      if not (fn17 in TempDev.DeviceFunctions) then  // новая функция
+      if not (fn23 in TempDev.DeviceFunctions) then  // новая функция
        begin
-        TempDev.DeviceFunctions := TempDev.DeviceFunctions + [fn17];
+        TempDev.DeviceFunctions := TempDev.DeviceFunctions + [fn23];
         if TempDev.HoldingCount = 0 then // если забыли добавить функцию чтения
          begin
           TempDev.DeviceFunctions := TempDev.DeviceFunctions + [fn03];
@@ -885,7 +887,7 @@ begin
      end
     else
      begin // снята функция
-      if fn17 in TempDev.DeviceFunctions then TempDev.DeviceFunctions := TempDev.DeviceFunctions - [fn17];
+      if fn23 in TempDev.DeviceFunctions then TempDev.DeviceFunctions := TempDev.DeviceFunctions - [fn23];
      end;
 
     TempForm.Device := TempDev;

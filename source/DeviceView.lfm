@@ -23,7 +23,9 @@ object frmDeviceView: TfrmDeviceView
     Top = 8
     Width = 107
     Caption = 'lbDeviceNumber'
+    Font.Color = clRed
     ParentColor = False
+    ParentFont = False
   end
   object pcDeviceRegisters: TPageControl
     Left = 8
