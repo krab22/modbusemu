@@ -17,15 +17,13 @@
         <ComponentName Value="frmMain"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="192"/>
-        <CursorPos Y="195"/>
+        <TopLine Value="225"/>
+        <CursorPos X="22" Y="234"/>
         <ExtraEditorCount Value="1"/>
         <ExtraEditor1>
-          <IsVisibleTab Value="True"/>
           <EditorIndex Value="-1"/>
-          <WindowIndex Value="1"/>
+          <WindowIndex Value="-1"/>
           <TopLine Value="243"/>
           <CursorPos X="22" Y="248"/>
         </ExtraEditor1>
@@ -36,9 +34,8 @@
       <Unit2>
         <Filename Value="files/lib/MiscFunctions/ExceptionsResStrings.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="-1"/>
-        <WindowIndex Value="1"/>
+        <WindowIndex Value="-1"/>
         <TopLine Value="8"/>
         <CursorPos X="33" Y="47"/>
         <UsageCount Value="200"/>
@@ -65,7 +62,7 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="3" Y="15"/>
-        <UsageCount Value="162"/>
+        <UsageCount Value="187"/>
       </Unit4>
       <Unit5>
         <Filename Value="source/DeviceView.pas"/>
@@ -82,7 +79,7 @@
           <TopLine Value="227"/>
           <CursorPos X="42" Y="243"/>
         </ExtraEditor1>
-        <UsageCount Value="162"/>
+        <UsageCount Value="187"/>
       </Unit5>
       <Unit6>
         <Filename Value="source/formChennelAdd.pas"/>
@@ -93,7 +90,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="29"/>
         <CursorPos Y="49"/>
-        <UsageCount Value="162"/>
+        <UsageCount Value="187"/>
       </Unit6>
       <Unit7>
         <Filename Value="source/formChennelRSLinuxAdd.pas"/>
@@ -102,13 +99,13 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="115"/>
-        <CursorPos X="62" Y="87"/>
         <ExtraEditorCount Value="1"/>
         <ExtraEditor1>
           <EditorIndex Value="-1"/>
+          <TopLine Value="119"/>
+          <CursorPos X="69" Y="141"/>
         </ExtraEditor1>
-        <UsageCount Value="162"/>
+        <UsageCount Value="187"/>
       </Unit7>
       <Unit8>
         <Filename Value="source/formChennelRSWindowsAdd.pas"/>
@@ -117,13 +114,13 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="103"/>
-        <CursorPos X="18" Y="126"/>
         <ExtraEditorCount Value="1"/>
         <ExtraEditor1>
           <EditorIndex Value="-1"/>
+          <TopLine Value="15"/>
+          <CursorPos X="45" Y="42"/>
         </ExtraEditor1>
-        <UsageCount Value="162"/>
+        <UsageCount Value="187"/>
       </Unit8>
       <Unit9>
         <Filename Value="source/formChennelTCPAdd.pas"/>
@@ -133,7 +130,7 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="19" Y="33"/>
-        <UsageCount Value="162"/>
+        <UsageCount Value="187"/>
       </Unit9>
       <Unit10>
         <Filename Value="source/framChennelRSClasses.pas"/>
@@ -144,7 +141,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="53"/>
         <CursorPos X="82" Y="68"/>
-        <UsageCount Value="162"/>
+        <UsageCount Value="187"/>
       </Unit10>
       <Unit11>
         <Filename Value="source/framChennelTCPClasses.pas"/>
@@ -154,7 +151,7 @@
         <ResourceBaseClass Value="Frame"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="19" Y="15"/>
-        <UsageCount Value="162"/>
+        <UsageCount Value="187"/>
       </Unit11>
       <Unit12>
         <Filename Value="source/formRahgeEdit.pas"/>
@@ -163,12 +160,12 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="16" Y="15"/>
-        <UsageCount Value="131"/>
+        <UsageCount Value="156"/>
       </Unit12>
     </Units>
   </ProjectSession>
   <Debugging>
-    <BreakPoints Count="6">
+    <BreakPoints Count="7">
       <Item1>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
@@ -195,22 +192,29 @@
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="source/ChennelRSClasses.pas"/>
-        <Line Value="186"/>
+        <Line Value="207"/>
       </Item4>
       <Item5>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
-        <Source Value="source/ChennelRSClasses.pas"/>
-        <Line Value="556"/>
+        <Source Value="source/MBEmuLoaderClasses.pas"/>
+        <Line Value="200"/>
       </Item5>
       <Item6>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
-        <Source Value="source/MBEmuLoaderClasses.pas"/>
-        <Line Value="200"/>
+        <Source Value="files/lib/COMPort/COMCrossTypes.pas"/>
+        <Line Value="911"/>
       </Item6>
+      <Item7>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="files/lib/COMPort/COMCrossTypes.pas"/>
+        <Line Value="734"/>
+      </Item7>
     </BreakPoints>
   </Debugging>
 </CONFIG>

@@ -59,6 +59,8 @@ type
    FIsServerSide       : Boolean;
    FCSection           : TCriticalSection;
    FPackRuptureTime    : Cardinal;
+   FTimeoutMultiplier  : Cardinal;
+   FTimeoutConst       : Cardinal;
 
    FServerThread       : TNPCServerCOMPortThread;
    FServerReadTimeout  : Cardinal;
@@ -224,7 +226,7 @@ type
    function WriteData(var Buff; Count : Integer): Integer;
 
    // Ожидание прихода данных
-   function WaitForData(var ATimeOut : Cardinal): TWaitResult;
+   function WaitForData(var ATimeOut : QWord): TWaitResult;
 
    // очистка буфера записи
    function FlushWriteBuff : Integer;
@@ -291,6 +293,8 @@ type
    property ServerReadTimeout  : Cardinal read FServerReadTimeout write FServerReadTimeout default 5000;
    property MonitorInterval    : Cardinal read FMonitorInterval write FMonitorInterval default 1000;
    property PackRuptureTime    : Cardinal read FPackRuptureTime write FPackRuptureTime default 50;
+   property TimeoutMultiplier  : Cardinal read FTimeoutMultiplier write FTimeoutMultiplier default 10;
+   property TimeoutConst       : Cardinal read FTimeoutConst write FTimeoutConst default 10;
 
    // События на изменение статусных сигналов. Возбуждаются только при мониторинге этих сигналов
    property OnLEChange         : TNotifyEvent read FOnLEChange write FOnLEChange;
@@ -490,7 +494,7 @@ end;
 
 procedure TNPCServerCOMPortThread.Execute;
 var Res : TWaitResult;
-    TempTimeOut : Cardinal;
+    TempTimeOut : QWord;
 begin
   while not Terminated do
    begin
@@ -565,7 +569,9 @@ begin
   FMonitorInterval := 1000;
   FMonitorThread   := nil;
 
-  FPackRuptureTime := 50;
+  FPackRuptureTime   := 50;
+  FTimeoutMultiplier := 10;
+  FTimeoutConst      := 10;
 
   {$IFDEF UNIX}
   FillByte(FOldPortParams,sizeof(Termios),0);
@@ -728,8 +734,8 @@ begin
   TempTimeouts.ReadIntervalTimeout := 0;
   FillByte(TempTimeouts,SizeOf(TCOMMTIMEOUTS),0);
   TempTimeouts.ReadIntervalTimeout        := FPackRuptureTime;
-  TempTimeouts.ReadTotalTimeoutMultiplier := 10;
-  TempTimeouts.ReadTotalTimeoutConstant   := 100;
+  TempTimeouts.ReadTotalTimeoutMultiplier := FTimeoutMultiplier;
+  TempTimeouts.ReadTotalTimeoutConstant   := FTimeoutConst;
 
   if not SetCommTimeouts(FHandle,TempTimeouts) then
    begin
@@ -852,6 +858,8 @@ var Counter   : Integer;
     TempOver     : TOVERLAPPED;
     TempWaiteRes : DWORD;
     NumRead      : DWORD;
+    TempTicks    : QWord;
+    TempTicks1   : QWord;
     {$ENDIF}
 begin
   Result   := -1;
@@ -902,20 +910,47 @@ begin
     ReadCount := 0;
     While Result <> 0 do
      begin;
+      TempTicks := GetTickCount64;
       ReadRes := ReadFile(FHandle,TempBuff,1,ReadCount,@TempOver);
       if not ReadRes then
        begin
         LastErr := GetLastOSError;
-         if LastErr <> ERROR_IO_PENDING then
+         if LastErr = ERROR_IO_PENDING then
           begin
-           SetLastError(LastErr,'TNPCCustomCOMPort.ReadData(4)');
-           Exit;
-          end
-         else
-          begin
-           TempWaiteRes := WaitForSingleObject(TempOver.hEvent,500);
+           NumRead := 0;
+           if not GetOverlappedResult(FHandle,TempOver,NumRead,True) then
+            begin
+             LastErr := GetLastError;
+             SetLastError(LastErr,'TNPCCustomCOMPort.ReadData(4.0)');
+             Result := -1;
+             Exit;
+            end;
+
+           TempTicks1 := GetTickCount64 - TempTicks;
+//           SendLogMessage(llDebug,rsPortName,Format('Over TempTicks: %d; Counter: %d',[TempTicks1,Counter]));
+
+//           if Counter > 0 then ReadCount := 0
+//            else ReadCount := NumRead;
+           ReadCount := NumRead;
+
+//           SendLogMessage(llDebug,rsPortName,Format('InternalHigh %d; Internal %d; OffsetHigh %d; Offset %d; NumRead %d; ReadCount %d;',
+//                                                    [TempOver.InternalHigh,
+//                                                     TempOver.Internal,
+//                                                     TempOver.OffsetHigh,
+//                                                     TempOver.Offset,
+//                                                     NumRead,
+//                                                     ReadCount
+//                                                     ]));
+
+           {TempWaiteRes := WaitForSingleObject(TempOver.hEvent,500);
            case TempWaiteRes of
-            WAIT_TIMEOUT       : SendLogMessage(llDebug,rsPortName,'WAIT_TIMEOUT');
+            WAIT_TIMEOUT       : begin
+                                  SendLogMessage(llDebug,rsPortName,'WAIT_TIMEOUT');
+
+                                  TempTicks1 := GetTickCount64 - TempTicks;
+                                  SendLogMessage(llDebug,rsPortName,Format('1 TempTicks: %d; Counter: %d',[TempTicks1,Counter]));
+
+                                 end;
             WAIT_FAILED        : SendLogMessage(llDebug,rsPortName,'WAIT_FAILED');
             WAIT_OBJECT_0      : begin
                                   NumRead := 0;
@@ -926,19 +961,30 @@ begin
                                     Result := -1;
                                     Exit;
                                    end;
+
+                                  TempTicks1 := GetTickCount64 - TempTicks;
+                                  SendLogMessage(llDebug,rsPortName,Format('2 TempTicks: %d; Counter: %d',[TempTicks1,Counter]));
+
                                   ReadCount := NumRead;
                                  end;
             WAIT_ABANDONED     : SendLogMessage(llDebug,rsPortName,'WAIT_ABANDONED');
             WAIT_IO_COMPLETION : SendLogMessage(llDebug,rsPortName,'WAIT_IO_COMPLETION');
-           end;
+           end;}
+          end
+         else
+          begin
+           SetLastError(LastErr,'TNPCCustomCOMPort.ReadData(4)');
+           Exit;
           end;
        end;
+
+
       case ReadCount of
        0 : begin // прочитали все
             Result := Counter;
-            if Result = 0 then
-             begin
-//              SendLogMessage(llDebug,rsPortName,Format('InternalHigh %d; Internal %d; OffsetHigh %d; Offset %d; NumRead %d; ReadCount %d;',
+            case Result of
+             0 : begin
+//                SendLogMessage(llDebug,rsPortName,Format('InternalHigh %d; Internal %d; OffsetHigh %d; Offset %d; NumRead %d; ReadCount %d;',
 //                                                          [TempOver.InternalHigh,
 //                                                           TempOver.Internal,
 //                                                           TempOver.OffsetHigh,
@@ -946,17 +992,34 @@ begin
 //                                                           NumRead,
 //                                                           ReadCount
 //                                                           ]));
-              LastErr := ERROR_TIMEOUT;
-              SetLastError(LastErr,'TNPCCustomCOMPort.ReadData(4.1)');
-              Result := -1;
-             end;
+                  LastErr := GetLastError; //ERROR_TIMEOUT;
+                  if LastErr = ERROR_IO_PENDING then
+                   begin
+                    LastErr := 0;
+                    Continue;
+                   end;
+                  SetLastError(LastErr,'TNPCCustomCOMPort.ReadData(4.1)');
+                  Result := -1;
+                 end;
+             1..7 : begin
+                     Continue;
+                     SendLogMessage(llDebug,rsPortName,'Пришел один ба1т.Продолжаем');
+                    end;
+            end;
+            CancelIo(FHandle);
             Exit;
            end;
        1 : begin // прочитали еще один байт из порта
             Byte((@Buff+Counter)^) := TempBuff;
             Inc(Counter);
             Result := Counter;
-            if Counter = Count then Exit;
+            if Counter = Count then
+             begin
+              CancelIo(FHandle);
+              Exit;
+//            TempTicks1 := GetTickCount64 - TempTicks;
+//            SendLogMessage(llDebug,rsPortName,Format('Read TempTicks: %d; Counter: %d',[TempTicks1,Counter]));
+             end;
            end;
       end;
      end;
@@ -1111,7 +1174,7 @@ begin
   end;
 end;
 
-function TNPCCustomCOMPort.WaitForData(var ATimeOut: Cardinal): TWaitResult;
+function TNPCCustomCOMPort.WaitForData(var ATimeOut: QWord): TWaitResult;
 {$IFDEF UNIX}
 var TempReadSet : TFDSet;
     TempTimeVal : TTimeVal;
@@ -1119,7 +1182,7 @@ var TempReadSet : TFDSet;
     TempTick    : Cardinal;
 {$ELSE}
 var TempOver     : TOVERLAPPED;
-    TempTick     : Integer;
+    TempTick     : QWord;
     TempErr      : DWORD;
     TempWaiteRes : DWORD;
     ByteTras     : DWORD;
@@ -1157,7 +1220,8 @@ begin
   end;
   ATimeOut := GetTickCount64 - TempTick;
   {$ELSE}
-  TempTick := GetTickCount;
+  TempTick := GetTickCount64;
+  ByteTras := 0;
   FillByte(TempOver,sizeof(TOVERLAPPED),0);
   TempOver.hEvent := CreateEvent(nil,True,False,nil);
   TempEvent := EV_RXCHAR;
@@ -1204,7 +1268,7 @@ begin
       end;
     end;
   finally
-   ATimeOut := GetTickCount - TempTick;
+   ATimeOut := GetTickCount64 - TempTick;
    CloseHandle(TempOver.hEvent);
   end;
   {$ENDIF}
@@ -1249,7 +1313,7 @@ begin
   Result := TCFlush(FHandle,TCIOFLUSH);
   if Result = -1 then SetLastError(fpgeterrno);
   {$ELSE}
-  if not PurgeComm(FHandle,PURGE_RXCLEAR or PURGE_TXCLEAR) then
+  if not PurgeComm(FHandle,PURGE_RXCLEAR or PURGE_TXCLEAR or PURGE_TXABORT or PURGE_RXABORT) then
    begin
     SetLastError(GetLastOSError,'TNPCCustomCOMPort.FlushAllBuff');
     Exit;

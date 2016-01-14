@@ -1,18 +1,18 @@
 object frmChennelRSAdd: TfrmChennelRSAdd
   Left = 2407
-  Height = 241
+  Height = 278
   Top = 258
   Width = 395
   BorderStyle = bsDialog
   Caption = 'Добавить последовательный канал'
-  ClientHeight = 241
+  ClientHeight = 278
   ClientWidth = 395
   Position = poOwnerFormCenter
   LCLVersion = '1.5'
   object btOk: TButton
     Left = 221
     Height = 25
-    Top = 204
+    Top = 241
     Width = 80
     Anchors = [akRight, akBottom]
     Caption = 'Добавить'
@@ -23,7 +23,7 @@ object frmChennelRSAdd: TfrmChennelRSAdd
   object btCancel: TButton
     Left = 309
     Height = 25
-    Top = 204
+    Top = 241
     Width = 75
     Anchors = [akRight, akBottom]
     Caption = 'Отмена'
@@ -225,5 +225,23 @@ object frmChennelRSAdd: TfrmChennelRSAdd
     Width = 288
     TabOrder = 0
     Text = 'Последовательный канал'
+  end
+  object lbPackRuptureTime: TLabel
+    Left = 7
+    Height = 20
+    Top = 200
+    Width = 102
+    Caption = 'IntervalTimeout'
+    FocusControl = spIntervalTimeout
+    ParentColor = False
+  end
+  object spIntervalTimeout: TSpinEdit
+    Left = 112
+    Height = 32
+    Top = 200
+    Width = 102
+    MaxValue = 65535
+    TabOrder = 10
+    Value = 200
   end
 end

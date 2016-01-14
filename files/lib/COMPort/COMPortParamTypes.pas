@@ -335,6 +335,9 @@ begin
  Result := '';
  if not Assigned(Buff) then Exit;
  TempByte := Buff;
+
+ Result := Format('%s:',[IntToHex(aLen,4)]);
+
  for i := 0 to aLen-1 do
   begin
    if Result = '' then Result := Result + IntToHex(TempByte^,2)

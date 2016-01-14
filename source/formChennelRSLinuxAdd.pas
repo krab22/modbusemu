@@ -22,6 +22,7 @@ type
     cmbStopBits   : TComboBox;
     edChennalName : TEdit;
     edPrefixOther : TEdit;
+    lbPackRuptureTime : TLabel;
     lbName        : TLabel;
     lbStopBits    : TLabel;
     lbParitet     : TLabel;
@@ -30,6 +31,7 @@ type
     lbPortNum     : TLabel;
     lbPrefix      : TLabel;
     spePortNum    : TSpinEdit;
+    spIntervalTimeout : TSpinEdit;
 
     procedure btOkClick(Sender : TObject);
     procedure cmbPrefixChange(Sender : TObject);
@@ -89,6 +91,7 @@ begin
   TempChen.Parity   := TComPortParity(cmbParitet.ItemIndex);
   TempChen.StopBits := TComPortStopBits(cmbStopBits.ItemIndex);
   TempChen.Name     := edChennalName.Text;
+  TempChen.PackRuptureTime := spIntervalTimeout.Value;
 
   if not FIsChennalEdit then
     begin
@@ -135,6 +138,7 @@ begin
   cmbByteSize.ItemIndex := Integer(TChennelRS(FChennalObj).ByteSize);
   cmbParitet.ItemIndex  := Integer(TChennelRS(FChennalObj).Parity);
   cmbStopBits.ItemIndex := Integer(TChennelRS(FChennalObj).StopBits);
+  spIntervalTimeout.Value := TChennelRS(FChennalObj).PackRuptureTime;
 end;
 
 procedure TfrmChennelRSAdd.SetIsChennalEdit(const AValue : Boolean);

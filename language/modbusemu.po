@@ -965,6 +965,11 @@ msgctxt "tfrmchennelrsadd.lbname.caption"
 msgid "Имя канала:"
 msgstr ""
 
+#: tfrmchennelrsadd.lbpackrupturetime.caption
+msgctxt "tfrmchennelrsadd.lbpackrupturetime.caption"
+msgid "IntervalTimeout"
+msgstr ""
+
 #: tfrmchennelrsadd.lbparitet.caption
 msgctxt "tfrmchennelrsadd.lbparitet.caption"
 msgid "Паритет:"
@@ -1040,6 +1045,11 @@ msgctxt "TFRMCHENNELRSADDWIN.LBNAME.CAPTION"
 msgid "Имя канала:"
 msgstr ""
 
+#: tfrmchennelrsaddwin.lbpackrupt.caption
+msgctxt "TFRMCHENNELRSADDWIN.LBPACKRUPT.CAPTION"
+msgid "IntervalTimeout"
+msgstr ""
+
 #: tfrmchennelrsaddwin.lbparitet.caption
 msgctxt "TFRMCHENNELRSADDWIN.LBPARITET.CAPTION"
 msgid "Паритет:"
@@ -1063,6 +1073,14 @@ msgstr ""
 #: tfrmchennelrsaddwin.lbstopbits.caption
 msgctxt "TFRMCHENNELRSADDWIN.LBSTOPBITS.CAPTION"
 msgid "Стоповых бит:"
+msgstr ""
+
+#: tfrmchennelrsaddwin.lbtotalconst.caption
+msgid "TotalTimeoutConstant"
+msgstr ""
+
+#: tfrmchennelrsaddwin.lbtotalmulti.caption
+msgid "TotalTimeoutMultiplier"
 msgstr ""
 
 #: tfrmchenneltcpadd.btcancel.caption

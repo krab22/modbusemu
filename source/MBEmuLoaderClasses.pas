@@ -350,6 +350,9 @@ var TempNode : TXmlNode;
     TempByteSize : TComPortDataBits;
     TempStopBits : TComPortStopBits;
     TempParity   : TComPortParity;
+    TempInterval : Cardinal;
+    TempTotalMulti : Cardinal;
+    TempTotalConst : Cardinal;
 begin
   TempPrefix := pptLinux;
   TempPrefixOth := '';
@@ -456,6 +459,27 @@ begin
           if TempStopBits = sbNone then raise EXmlAttributeValue.Create(ClassName,TempNode.Name,csAttrStopBit,TempAttr.Value);
          end;
 
+       TempAttr := TempNode.AttributeByName[csAttrIntervalTimeout];
+       if not Assigned(TempAttr) then raise EXmlAttribute.Create(ClassName,TempNode.Name,csAttrIntervalTimeout)
+        else
+         begin
+          TempInterval := Cardinal(TempAttr.ValueAsInteger);
+         end;
+
+       TempAttr := TempNode.AttributeByName[csAttrTotalTimeoutMultiplier];
+       if not Assigned(TempAttr) then raise EXmlAttribute.Create(ClassName,TempNode.Name,csAttrTotalTimeoutMultiplier)
+        else
+         begin
+          TempTotalMulti := Cardinal(TempAttr.ValueAsInteger);
+         end;
+
+       TempAttr := TempNode.AttributeByName[csAttrTotalTimeoutConstant];
+       if not Assigned(TempAttr) then raise EXmlAttribute.Create(ClassName,TempNode.Name,csAttrTotalTimeoutConstant)
+        else
+         begin
+          TempTotalConst := Cardinal(TempAttr.ValueAsInteger);
+         end;
+
        TempChenRS := TChennelRS.Create;
        TempChenRS.Logger      := Logger;
        TempChenRS.PortPrefix  := TempPrefix;
@@ -467,6 +491,9 @@ begin
        TempChenRS.StopBits    := TempStopBits;
        TempChenRS.Name        := TempName;
        TempChenRS.DeviceArray := FDevArray;
+       TempChenRS.PackRuptureTime := TempInterval;
+       TempChenRS.TimeoutMultiplier := TempTotalMulti;
+       TempChenRS.TimeoutConst := TempTotalConst;
 
        FChannelList.AddObject(TempName,TempChenRS);
 
@@ -565,6 +592,9 @@ begin
   TempNode.AttributeAdd(csAttrByteSize, ComPortDataBitsSymbol[AChannel.ByteSize]);
   TempNode.AttributeAdd(csAttrParity, GetParityIDStrFromValue(AChannel.Parity));
   TempNode.AttributeAdd(csAttrStopBit, GetStopBitsIDStrFromValue1(AChannel.StopBits));
+  TempNode.AttributeAdd(csAttrIntervalTimeout, IntToStr(AChannel.PackRuptureTime));
+  TempNode.AttributeAdd(csAttrTotalTimeoutConstant, IntToStr(AChannel.TimeoutConst));
+  TempNode.AttributeAdd(csAttrTotalTimeoutMultiplier, IntToStr(AChannel.TimeoutMultiplier));
 end;
 
 procedure TMBEmuLoader.SaveChannelTCP(AChannelsNode : TXmlNode; AChannel : TChennelTCP; ADescr : String);

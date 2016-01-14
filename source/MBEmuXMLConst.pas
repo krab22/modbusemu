@@ -35,6 +35,9 @@ const
   csAttrFunction = 'Functions';
   csAttrValue    = 'Value';
   csAttrDescript = 'Description';
+  csAttrIntervalTimeout = 'IntervalTimeout';
+  csAttrTotalTimeoutMultiplier = 'TotalTimeoutMultiplier';
+  csAttrTotalTimeoutConstant = 'TotalTimeoutConstant';
 
   csTypeRS       = 'RS';
   csTypeTCP      = 'TCP';

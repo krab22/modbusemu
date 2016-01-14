@@ -14,22 +14,28 @@ type
   { TfrmChennelRSAddWin }
 
   TfrmChennelRSAddWin = class(TForm)
-    btCancel      : TButton;
-    btOk          : TButton;
-    cmbBaudRate   : TComboBox;
-    cmbByteSize   : TComboBox;
-    cmbParitet    : TComboBox;
-    cmbStopBits   : TComboBox;
-    edChennalName : TEdit;
-    lbPrefixName  : TLabel;
-    lbBaudRate    : TLabel;
-    lbByteSize    : TLabel;
-    lbName        : TLabel;
-    lbParitet     : TLabel;
-    lbPortNum     : TLabel;
-    lbPrefix      : TLabel;
-    lbStopBits    : TLabel;
-    spePortNum    : TSpinEdit;
+    btCancel          : TButton;
+    btOk              : TButton;
+    cmbBaudRate       : TComboBox;
+    cmbByteSize       : TComboBox;
+    cmbParitet        : TComboBox;
+    cmbStopBits       : TComboBox;
+    edChennalName     : TEdit;
+    lbTotalConst      : TLabel;
+    lbTotalMulti      : TLabel;
+    lbPackRupt        : TLabel;
+    lbPrefixName      : TLabel;
+    lbBaudRate        : TLabel;
+    lbByteSize        : TLabel;
+    lbName            : TLabel;
+    lbParitet         : TLabel;
+    lbPortNum         : TLabel;
+    lbPrefix          : TLabel;
+    lbStopBits        : TLabel;
+    spePortNum        : TSpinEdit;
+    spTotalConst      : TSpinEdit;
+    spTotalMulti      : TSpinEdit;
+    spIntervalTimeout : TSpinEdit;
 
     procedure btOkClick(Sender : TObject);
    private
@@ -49,8 +55,6 @@ type
     property ChennalObj    : TChennelBase read FChennalObj write SetChennalObj;
     property ChennalName   : String read FChennalName write FChennalName;
   end;
-
-//var frmChennelRSAdd : TfrmChennelRSAdd;
 
 implementation
 
@@ -86,6 +90,9 @@ begin
   TempChen.Parity     := TComPortParity(cmbParitet.ItemIndex);
   TempChen.StopBits   := TComPortStopBits(cmbStopBits.ItemIndex);
   TempChen.Name       := edChennalName.Text;
+  TempChen.PackRuptureTime   := spIntervalTimeout.Value;
+  TempChen.TimeoutMultiplier := spTotalMulti.Value;
+  TempChen.TimeoutConst      := spTotalConst.Value;
 
   if not FIsChennalEdit then
     begin
@@ -112,6 +119,9 @@ begin
   cmbByteSize.ItemIndex := Integer(TChennelRS(FChennalObj).ByteSize);
   cmbParitet.ItemIndex  := Integer(TChennelRS(FChennalObj).Parity);
   cmbStopBits.ItemIndex := Integer(TChennelRS(FChennalObj).StopBits);
+  spIntervalTimeout.Value := TChennelRS(FChennalObj).PackRuptureTime;
+  spTotalMulti.Value      := TChennelRS(FChennalObj).TimeoutMultiplier;
+  spTotalConst.Value      := TChennelRS(FChennalObj).TimeoutConst;
 end;
 
 procedure TfrmChennelRSAddWin.SetIsChennalEdit(const AValue : Boolean);

@@ -16,19 +16,22 @@ type
 
   TChennelRSThread = class(TChennelBaseThread)
    private
-    FCOMPort         : TNPCCustomCOMPort;
-    FRequestReader   : TMBRTURequestReader;
-    FAnswError       : TBuilderMBRTUErrorPacket;
-    FAnswBit         : TBuilderMBRTUBitAswerPacket;
-    FAnswWord        : TBuilderMBRTUWordAswerPacket;
+    FCOMPort           : TNPCCustomCOMPort;
+    FPackRuptureTime   : Cardinal;
+    FRequestReader     : TMBRTURequestReader;
+    FAnswError         : TBuilderMBRTUErrorPacket;
+    FAnswBit           : TBuilderMBRTUBitAswerPacket;
+    FAnswWord          : TBuilderMBRTUWordAswerPacket;
 
-    FBaudRate        : TComPortBaudRate;
-    FByteSize        : TComPortDataBits;
-    FParity          : TComPortParity;
-    FPortNum         : Word;
-    FPortPrefix      : TComPortPrefixPath;
-    FPortPrefixOther : String;
-    FStopBits        : TComPortStopBits;
+    FBaudRate          : TComPortBaudRate;
+    FByteSize          : TComPortDataBits;
+    FParity            : TComPortParity;
+    FPortNum           : Word;
+    FPortPrefix        : TComPortPrefixPath;
+    FPortPrefixOther   : String;
+    FStopBits          : TComPortStopBits;
+    FTimeoutConst      : Cardinal;
+    FTimeoutMultiplier : Cardinal;
    protected
     procedure Execute; override;
     procedure InitThread;
@@ -54,37 +57,46 @@ type
     constructor Create(CreateSuspended: Boolean; const StackSize: SizeUInt = 65535); reintroduce;
     destructor  Destroy; override;
 
-    property PortNum         : Word read FPortNum write FPortNum default 1;
-    property PortPrefix      : TComPortPrefixPath read FPortPrefix write FPortPrefix default {$IFDEF WINDOWS}pptWindows{$ELSE}pptLinux{$ENDIF};
-    property PortPrefixOther : String read FPortPrefixOther write FPortPrefixOther;
-    property BaudRate        : TComPortBaudRate read FBaudRate write FBaudRate default br9600;
-    property ByteSize        : TComPortDataBits read FByteSize write FByteSize default db8BITS;
-    property Parity          : TComPortParity read FParity write FParity default ptEVEN;
-    property StopBits        : TComPortStopBits read FStopBits write FStopBits default sb1BITS;
+    property PortNum           : Word read FPortNum write FPortNum default 1;
+    property PortPrefix        : TComPortPrefixPath read FPortPrefix write FPortPrefix default {$IFDEF WINDOWS}pptWindows{$ELSE}pptLinux{$ENDIF};
+    property PortPrefixOther   : String read FPortPrefixOther write FPortPrefixOther;
+    property BaudRate          : TComPortBaudRate read FBaudRate write FBaudRate default br9600;
+    property ByteSize          : TComPortDataBits read FByteSize write FByteSize default db8BITS;
+    property Parity            : TComPortParity read FParity write FParity default ptEVEN;
+    property StopBits          : TComPortStopBits read FStopBits write FStopBits default sb1BITS;
+    property PackRuptureTime   : Cardinal read FPackRuptureTime write FPackRuptureTime default 200;
+    property TimeoutMultiplier : Cardinal read FTimeoutMultiplier write FTimeoutMultiplier default 10;
+    property TimeoutConst      : Cardinal read FTimeoutConst write FTimeoutConst default 10;
   end;
 
   TChennelRS = class(TChennelBase)
   private
-    FBaudRate        : TComPortBaudRate;
-    FByteSize        : TComPortDataBits;
-    FParity          : TComPortParity;
-    FPortNum         : Word;
-    FPortPrefix      : TComPortPrefixPath;
-    FPortPrefixOther : String;
-    FStopBits        : TComPortStopBits;
+    FBaudRate          : TComPortBaudRate;
+    FByteSize          : TComPortDataBits;
+    FPackRuptureTime   : Cardinal;
+    FParity            : TComPortParity;
+    FPortNum           : Word;
+    FPortPrefix        : TComPortPrefixPath;
+    FPortPrefixOther   : String;
+    FStopBits          : TComPortStopBits;
+    FTimeoutConst      : Cardinal;
+    FTimeoutMultiplier : Cardinal;
    protected
     procedure SetActiveTrue; override;
    public
     constructor Create; override;
     destructor  Destroy; override;
 
-    property PortNum         : Word read FPortNum write FPortNum default 1;
-    property PortPrefix      : TComPortPrefixPath read FPortPrefix write FPortPrefix default {$IFDEF WINDOWS}pptWindows{$ELSE}pptLinux{$ENDIF};
-    property PortPrefixOther : String read FPortPrefixOther write FPortPrefixOther;
-    property BaudRate        : TComPortBaudRate read FBaudRate write FBaudRate default br9600;
-    property ByteSize        : TComPortDataBits read FByteSize write FByteSize default db8BITS;
-    property Parity          : TComPortParity read FParity write FParity default ptEVEN;
-    property StopBits        : TComPortStopBits read FStopBits write FStopBits default sb1BITS;
+    property PortNum           : Word read FPortNum write FPortNum default 1;
+    property PortPrefix        : TComPortPrefixPath read FPortPrefix write FPortPrefix default {$IFDEF WINDOWS}pptWindows{$ELSE}pptLinux{$ENDIF};
+    property PortPrefixOther   : String read FPortPrefixOther write FPortPrefixOther;
+    property BaudRate          : TComPortBaudRate read FBaudRate write FBaudRate default br9600;
+    property ByteSize          : TComPortDataBits read FByteSize write FByteSize default db8BITS;
+    property Parity            : TComPortParity read FParity write FParity default ptEVEN;
+    property StopBits          : TComPortStopBits read FStopBits write FStopBits default sb1BITS;
+    property PackRuptureTime   : Cardinal read FPackRuptureTime write FPackRuptureTime default 200;
+    property TimeoutMultiplier : Cardinal read FTimeoutMultiplier write FTimeoutMultiplier default 10;
+    property TimeoutConst      : Cardinal read FTimeoutConst write FTimeoutConst default 10;
   end;
 
 implementation
@@ -103,13 +115,16 @@ constructor TChennelRS.Create;
 begin
   inherited Create;
 
-  FBaudRate        := br9600;
-  FByteSize        := db8BITS;
-  FParity          := ptEVEN;
-  FPortNum         := 1;
-  FPortPrefix      := {$IFDEF WINDOWS}pptWindows{$ELSE}pptLinux{$ENDIF};
-  FPortPrefixOther := '';
-  FStopBits        := sb1BITS;
+  FBaudRate          := br9600;
+  FByteSize          := db8BITS;
+  FParity            := ptEVEN;
+  FPortNum           := 1;
+  FPortPrefix        := {$IFDEF WINDOWS}pptWindows{$ELSE}pptLinux{$ENDIF};
+  FPortPrefixOther   := '';
+  FStopBits          := sb1BITS;
+  FPackRuptureTime   := 200;
+  FTimeoutMultiplier := 10;
+  FTimeoutConst      := 10;
 end;
 
 destructor TChennelRS.Destroy;
@@ -124,13 +139,16 @@ begin
   FChennelThread.Logger := Logger;
   FChennelThread.DeviceArray := DeviceArray;
 
-  TChennelRSThread(FChennelThread).BaudRate        := FBaudRate;
-  TChennelRSThread(FChennelThread).ByteSize        := FByteSize;
-  TChennelRSThread(FChennelThread).Parity          := FParity;
-  TChennelRSThread(FChennelThread).PortNum         := FPortNum;
-  TChennelRSThread(FChennelThread).PortPrefix      := FPortPrefix;
-  TChennelRSThread(FChennelThread).PortPrefixOther := FPortPrefixOther;
-  TChennelRSThread(FChennelThread).StopBits        := FStopBits;
+  TChennelRSThread(FChennelThread).BaudRate          := FBaudRate;
+  TChennelRSThread(FChennelThread).ByteSize          := FByteSize;
+  TChennelRSThread(FChennelThread).Parity            := FParity;
+  TChennelRSThread(FChennelThread).PortNum           := FPortNum;
+  TChennelRSThread(FChennelThread).PortPrefix        := FPortPrefix;
+  TChennelRSThread(FChennelThread).PortPrefixOther   := FPortPrefixOther;
+  TChennelRSThread(FChennelThread).StopBits          := FStopBits;
+  TChennelRSThread(FChennelThread).PackRuptureTime   := FPackRuptureTime;
+  TChennelRSThread(FChennelThread).TimeoutMultiplier := FTimeoutMultiplier;
+  TChennelRSThread(FChennelThread).TimeoutConst      := FTimeoutConst;
 
   FChennelThread.Start;
 end;
@@ -141,13 +159,16 @@ constructor TChennelRSThread.Create(CreateSuspended : Boolean; const StackSize :
 begin
   inherited Create(CreateSuspended,StackSize);
 
-  FBaudRate        := br9600;
-  FByteSize        := db8BITS;
-  FParity          := ptEVEN;
-  FPortNum         := 1;
-  FPortPrefix      := {$IFDEF WINDOWS}pptWindows{$ELSE}pptLinux{$ENDIF};
-  FPortPrefixOther := '';
-  FStopBits        := sb1BITS;
+  FBaudRate          := br9600;
+  FByteSize          := db8BITS;
+  FParity            := ptEVEN;
+  FPortNum           := 1;
+  FPortPrefix        := {$IFDEF WINDOWS}pptWindows{$ELSE}pptLinux{$ENDIF};
+  FPortPrefixOther   := '';
+  FStopBits          := sb1BITS;
+  FPackRuptureTime   := 200;
+  FTimeoutMultiplier := 10;
+  FTimeoutConst      := 10;
 
   FRequestReader   := TMBRTURequestReader.Create(nil);
 
@@ -171,7 +192,7 @@ var Buff        : array [0..2047] of Byte;
     ReadRes     : Integer;
     TempIndex   : Integer;
     TempLen     : Cardinal;
-    TempBuffLen : Cardinal;
+//    TempBuffLen : Cardinal;
 begin
   Buff[0] := 0;
   FillByte(Buff[0],2048,0);
@@ -186,9 +207,9 @@ begin
   SendLogMessage(llDebug,rsChanRS1,Format('<- %s',[GetBuffAsStringHex(@Buff[0],ReadRes)]));
 
   TempIndex   := 0;
-  TempBufflen := ReadRes;
-  while TempBuffLen > 0 do
-   begin
+//  TempBufflen := ReadRes;
+//  while TempBuffLen > 0 do
+//   begin
     case Buff[TempIndex+1] of // функция запроса
      1,2,3,4,5,6 : begin
                     TempLen := 8;
@@ -203,9 +224,9 @@ begin
 
     SendResponse(@Buff[TempIndex],TempLen);
 
-    TempBuffLen := TempBuffLen - TempLen;
-    TempIndex := TempIndex + TempLen;
-   end;
+//    TempBuffLen := TempBuffLen - TempLen;
+//    TempIndex := TempIndex + TempLen;
+//   end;
 end;
 
 procedure TChennelRSThread.ResponseF1(ADev : TMBDevice);
@@ -640,12 +661,15 @@ begin
                end;
    end;
 
-   FCOMPort.PortNumber   := FPortNum;
-   FCOMPort.BaudRate     := FBaudRate;
-   FCOMPort.ByteSize     := FByteSize;
-   FCOMPort.Parity       := FParity;
-   FCOMPort.StopBits     := FStopBits;
-   FCOMPort.RecvBuffSize := 2048;
+   FCOMPort.PortNumber        := FPortNum;
+   FCOMPort.BaudRate          := FBaudRate;
+   FCOMPort.ByteSize          := FByteSize;
+   FCOMPort.Parity            := FParity;
+   FCOMPort.StopBits          := FStopBits;
+   FCOMPort.PackRuptureTime   := FPackRuptureTime;
+   FCOMPort.TimeoutMultiplier := FTimeoutMultiplier;
+   FCOMPort.TimeoutConst      := FTimeoutConst;
+   FCOMPort.RecvBuffSize      := 2048;
 
    FCOMPort.Open;
 
