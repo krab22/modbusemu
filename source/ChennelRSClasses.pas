@@ -190,13 +190,10 @@ end;
 procedure TChennelRSThread.OnServerReadProc(Sender : TObject);
 var Buff        : array [0..2047] of Byte;
     ReadRes     : Integer;
-    TempIndex   : Integer;
-    TempLen     : Cardinal;
-//    TempBuffLen : Cardinal;
 begin
   Buff[0] := 0;
   FillByte(Buff[0],2048,0);
-  ReadRes := FCOMPort.ReadData(Buff,2048);
+  ReadRes := FCOMPort.ReadData(Buff,8);
   if ReadRes = -1 then
    begin
     {$IFDEF WINDOWS}if FCOMPort.LastError <> ERROR_TIMEOUT then{$ENDIF}
@@ -206,27 +203,7 @@ begin
 
   SendLogMessage(llDebug,rsChanRS1,Format('<- %s',[GetBuffAsStringHex(@Buff[0],ReadRes)]));
 
-  TempIndex   := 0;
-//  TempBufflen := ReadRes;
-//  while TempBuffLen > 0 do
-//   begin
-    case Buff[TempIndex+1] of // функция запроса
-     1,2,3,4,5,6 : begin
-                    TempLen := 8;
-                   end;
-     15,16       : begin
-                    TempLen := Buff[TempIndex + 6] + 9;
-                   end;
-     23          : begin
-
-                   end;
-    end;
-
-    SendResponse(@Buff[TempIndex],TempLen);
-
-//    TempBuffLen := TempBuffLen - TempLen;
-//    TempIndex := TempIndex + TempLen;
-//   end;
+  SendResponse(@Buff[0],ReadRes);
 end;
 
 procedure TChennelRSThread.ResponseF1(ADev : TMBDevice);

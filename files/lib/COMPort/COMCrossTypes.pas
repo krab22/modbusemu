@@ -856,10 +856,9 @@ var Counter   : Integer;
     LastErr      : DWORD;
     ReadRes      : Boolean;
     TempOver     : TOVERLAPPED;
-    TempWaiteRes : DWORD;
     NumRead      : DWORD;
     TempTicks    : QWord;
-    TempTicks1   : QWord;
+//    TempTicks1   : QWord;
     {$ENDIF}
 begin
   Result   := -1;
@@ -904,129 +903,36 @@ begin
     end;
   {$ELSE}
    TempOver.hEvent := 0;
+   NumRead := 0;
    FillByte(TempOver,SizeOf(TempOver),0);
    TempOver.hEvent := CreateEvent(nil,False,False,'');
    try
     ReadCount := 0;
-    While Result <> 0 do
-     begin;
-      TempTicks := GetTickCount64;
-      ReadRes := ReadFile(FHandle,TempBuff,1,ReadCount,@TempOver);
-      if not ReadRes then
+    ReadRes := ReadFile(FHandle,Buff,Count,ReadCount,@TempOver);
+    if not ReadRes then
+     begin
+      LastErr := GetLastOSError;
+      if LastErr = ERROR_IO_PENDING then
        begin
-        LastErr := GetLastOSError;
-         if LastErr = ERROR_IO_PENDING then
-          begin
-           NumRead := 0;
-           if not GetOverlappedResult(FHandle,TempOver,NumRead,True) then
-            begin
-             LastErr := GetLastError;
-             SetLastError(LastErr,'TNPCCustomCOMPort.ReadData(4.0)');
-             Result := -1;
-             Exit;
-            end;
-
-           TempTicks1 := GetTickCount64 - TempTicks;
-//           SendLogMessage(llDebug,rsPortName,Format('Over TempTicks: %d; Counter: %d',[TempTicks1,Counter]));
-
-//           if Counter > 0 then ReadCount := 0
-//            else ReadCount := NumRead;
-           ReadCount := NumRead;
-
-//           SendLogMessage(llDebug,rsPortName,Format('InternalHigh %d; Internal %d; OffsetHigh %d; Offset %d; NumRead %d; ReadCount %d;',
-//                                                    [TempOver.InternalHigh,
-//                                                     TempOver.Internal,
-//                                                     TempOver.OffsetHigh,
-//                                                     TempOver.Offset,
-//                                                     NumRead,
-//                                                     ReadCount
-//                                                     ]));
-
-           {TempWaiteRes := WaitForSingleObject(TempOver.hEvent,500);
-           case TempWaiteRes of
-            WAIT_TIMEOUT       : begin
-                                  SendLogMessage(llDebug,rsPortName,'WAIT_TIMEOUT');
-
-                                  TempTicks1 := GetTickCount64 - TempTicks;
-                                  SendLogMessage(llDebug,rsPortName,Format('1 TempTicks: %d; Counter: %d',[TempTicks1,Counter]));
-
-                                 end;
-            WAIT_FAILED        : SendLogMessage(llDebug,rsPortName,'WAIT_FAILED');
-            WAIT_OBJECT_0      : begin
-                                  NumRead := 0;
-                                  if not GetOverlappedResult(FHandle,TempOver,NumRead,True) then
-                                   begin
-                                    LastErr := GetLastError;
-                                    SetLastError(LastErr,'TNPCCustomCOMPort.ReadData(4.0)');
-                                    Result := -1;
-                                    Exit;
-                                   end;
-
-                                  TempTicks1 := GetTickCount64 - TempTicks;
-                                  SendLogMessage(llDebug,rsPortName,Format('2 TempTicks: %d; Counter: %d',[TempTicks1,Counter]));
-
-                                  ReadCount := NumRead;
-                                 end;
-            WAIT_ABANDONED     : SendLogMessage(llDebug,rsPortName,'WAIT_ABANDONED');
-            WAIT_IO_COMPLETION : SendLogMessage(llDebug,rsPortName,'WAIT_IO_COMPLETION');
-           end;}
-          end
-         else
-          begin
-           SetLastError(LastErr,'TNPCCustomCOMPort.ReadData(4)');
-           Exit;
-          end;
+        if not GetOverlappedResult(FHandle,TempOver,NumRead,True) then
+         begin
+          LastErr := GetLastError;
+          SetLastError(LastErr,'TNPCCustomCOMPort.ReadData GetOverlappedResult');
+          Result := -1;
+          Exit;
+         end;
+        Result := NumRead;
+        Exit;
+       end
+      else
+       begin
+        SetLastError(LastErr,'TNPCCustomCOMPort.ReadData ReadFile');
+        Exit;
        end;
-
-
-      case ReadCount of
-       0 : begin // прочитали все
-            Result := Counter;
-            case Result of
-             0 : begin
-//                SendLogMessage(llDebug,rsPortName,Format('InternalHigh %d; Internal %d; OffsetHigh %d; Offset %d; NumRead %d; ReadCount %d;',
-//                                                          [TempOver.InternalHigh,
-//                                                           TempOver.Internal,
-//                                                           TempOver.OffsetHigh,
-//                                                           TempOver.Offset,
-//                                                           NumRead,
-//                                                           ReadCount
-//                                                           ]));
-                  LastErr := GetLastError; //ERROR_TIMEOUT;
-                  if LastErr = ERROR_IO_PENDING then
-                   begin
-                    LastErr := 0;
-                    Continue;
-                   end;
-                  SetLastError(LastErr,'TNPCCustomCOMPort.ReadData(4.1)');
-                  Result := -1;
-                 end;
-             1..7 : begin
-                     Continue;
-                     SendLogMessage(llDebug,rsPortName,'Пришел один ба1т.Продолжаем');
-                    end;
-            end;
-            CancelIo(FHandle);
-            Exit;
-           end;
-       1 : begin // прочитали еще один байт из порта
-            Byte((@Buff+Counter)^) := TempBuff;
-            Inc(Counter);
-            Result := Counter;
-            if Counter = Count then
-             begin
-              CancelIo(FHandle);
-              Exit;
-//            TempTicks1 := GetTickCount64 - TempTicks;
-//            SendLogMessage(llDebug,rsPortName,Format('Read TempTicks: %d; Counter: %d',[TempTicks1,Counter]));
-             end;
-           end;
-      end;
      end;
-
+    Result := ReadCount;
    finally
     CloseHandle(TempOver.hEvent);
-    FlushReadBuff;
    end;
   {$ENDIF}
   finally
@@ -1100,7 +1006,7 @@ begin
    {$ELSE}
    TempOver.hEvent := 0;
    FillByte(TempOver,SizeOf(TOVERLAPPED),0);
-   TempOver.hEvent := CreateEvent(nil,True,False,nil);
+   TempOver.hEvent := CreateEvent(nil,False,False,nil);
    if TempOver.hEvent = 0 then
     begin
      SetLastError(GetLastOSError,'TNPCCustomCOMPort.WriteData(3)');
@@ -1123,42 +1029,21 @@ begin
        SetLastError(LastErr,'TNPCCustomCOMPort.WriteData(4)');
        Exit;
       end;
-     if WaitCommEvent(FHandle,TempEvent,@TempOver) then
-      begin
-       if not GetOverlappedResult(FHandle,TempOver,WriteCount,True) then // возможна ошибка - запись не окончена - 996 - ERROR_IO_INCOMPLETE
-        begin
-         SetLastError(GetLastOSError,'TNPCCustomCOMPort.WriteData(5)');
-         Exit;
-        end;
-       Result := WriteCount;
-      end
-     else
+     if not WaitCommEvent(FHandle,TempEvent,@TempOver) then
       begin
        LastErr := GetLastOSError;
        if LastErr <> ERROR_IO_PENDING then
         begin
-         SetLastError(LastErr,'TNPCCustomCOMPort.WriteData(4)');
+         SetLastError(LastErr,'TNPCCustomCOMPort.WriteData(6)');
          Exit;
         end;
-
-       TempWaiteRes := WaitForSingleObject(TempOver.hEvent, FServerReadTimeout);
-        case TempWaiteRes of
-         WAIT_OBJECT_0 : begin
-                          if not GetOverlappedResult(FHandle,TempOver,WriteCount,False) then // возможна ошибка - запись не окончена - 996 - ERROR_IO_INCOMPLETE
-                           begin
-                            SetLastError(GetLastOSError,'TNPCCustomCOMPort.WriteData(5)');
-                            Exit;
-                           end;
-                          Result := WriteCount;
-                         end;
-         WAIT_TIMEOUT : begin
-                          SetLastError(ERROR_TIMEOUT,'TNPCCustomCOMPort.WriteData(6)');
-                        end;
-         WAIT_FAILED  : begin
-                         SetLastError(GetLastOSError,'TNPCCustomCOMPort.WriteData(7)');
-                        end;
-        end;
       end;
+     if not GetOverlappedResult(FHandle,TempOver,WriteCount,True) then // возможна ошибка - запись не окончена - 996 - ERROR_IO_INCOMPLETE
+      begin
+       SetLastError(GetLastOSError,'TNPCCustomCOMPort.WriteData(7)');
+       Exit;
+      end;
+     Result := WriteCount;
     end
    else
     begin // чтение закончено успешно сразу же
@@ -1229,11 +1114,11 @@ begin
   try
   if WaitCommEvent(FHandle,TempEvent,@TempOver) then
    begin
-    if not GetOverlappedResult(FHandle,TempOver,ByteTras,True) then
-     begin
-      SetLastError(GetLastOSError,'TNPCCustomCOMPort.WaitForData(2)');
-      Exit;
-     end;
+//    if not GetOverlappedResult(FHandle,TempOver,ByteTras,True) then
+//     begin
+//      SetLastError(GetLastOSError,'TNPCCustomCOMPort.WaitForData(2)');
+//      Exit;
+//     end;
     Result := wrSignaled;
    end
   else
@@ -1586,7 +1471,7 @@ begin
     try
 
     FLastError     := ALastError;
-    FLastErrorDesc := Format('%s(%s)',[GetCOMPortErrorMessage(ALastError),PlaceOfOrigin])  ;
+    FLastErrorDesc := Format('%s(%s)',[PlaceOfOrigin,GetCOMPortErrorMessage(ALastError)])  ;
     if IsRaiseException then raise ENPCCOMPortError.CreateBasedOnError(ALastError);
     SendLogMessage(llError,rsPortName,FLastErrorDesc);
 

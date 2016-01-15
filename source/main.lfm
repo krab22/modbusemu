@@ -1,7 +1,7 @@
 object frmMain: TfrmMain
   Left = 2736
   Height = 605
-  Top = 313
+  Top = 350
   Width = 900
   Caption = 'Эмулятор Modbus-slave '
   ClientHeight = 579

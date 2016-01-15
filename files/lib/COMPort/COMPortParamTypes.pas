@@ -452,15 +452,15 @@ end;
 
 function GetParityIDFromString(Value : String): TComPortParity;
 begin
-  if Value = 'm' then Result := ptMARK
+  if SameText(Value,'m') then Result := ptMARK
    else
-    if Value = 'n' then Result := ptNONE
+    if SameText(Value,'n') then Result := ptNONE
      else
-      if Value = 'o' then Result := ptODD
+      if SameText(Value,'o') then Result := ptODD
        else
-        if Value = 'e' then Result := ptEVEN
+        if SameText(Value,'e') then Result := ptEVEN
          else
-          if Value = 's' then Result := ptSPACE
+          if SameText(Value,'s') then Result := ptSPACE
            else
             Result := ptError;
 
