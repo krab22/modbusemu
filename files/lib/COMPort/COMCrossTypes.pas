@@ -849,20 +849,21 @@ begin
 end;
 
 function TNPCCustomCOMPort.ReadData(var Buff; Count: Integer): Integer;
-var Counter   : Integer;
+var {$IFDEF UNIX}
+    Counter   : Integer;
     TempBuff  : Byte;
+    {$ENDIF}
     {$IFDEF WINDOWS}
     ReadCount,
     LastErr      : DWORD;
     ReadRes      : Boolean;
     TempOver     : TOVERLAPPED;
     NumRead      : DWORD;
-    TempTicks    : QWord;
-//    TempTicks1   : QWord;
+    TempCommStat : TCOMSTAT;
+    TempLastErr  : Cardinal;
     {$ENDIF}
 begin
   Result   := -1;
-  TempBuff := 0;
   if not Active then
    begin
     SetLastError(ErrPortNotOpen,'TNPCCustomCOMPort.ReadData(1)');  //-1
@@ -878,8 +879,9 @@ begin
   Lock;
   try
    Result  := -1;
-   Counter := 0;
    {$IFDEF UNIX}
+   TempBuff := 0;
+   Counter := 0;
    while Result<>0 do
     begin;
      Result := FpRead(FHandle,TempBuff,1);
@@ -906,6 +908,11 @@ begin
    NumRead := 0;
    FillByte(TempOver,SizeOf(TempOver),0);
    TempOver.hEvent := CreateEvent(nil,False,False,'');
+
+   TempLastErr := 0;
+   FillByte(TempCommStat,sizeof(TCOMSTAT),0);
+   ClearCommError(FHandle,TempLastErr,@TempCommStat);
+
    try
     ReadCount := 0;
     ReadRes := ReadFile(FHandle,Buff,Count,ReadCount,@TempOver);
@@ -976,7 +983,6 @@ var WriteCount, LastErr,
     ByteToWrite  : DWORD;
     WriteRes     : Boolean;
     TempOver     : TOVERLAPPED;
-    TempWaiteRes : DWORD;
     TempEvent    : DWORD;
 {$ENDIF}
 begin
@@ -1006,7 +1012,7 @@ begin
    {$ELSE}
    TempOver.hEvent := 0;
    FillByte(TempOver,SizeOf(TOVERLAPPED),0);
-   TempOver.hEvent := CreateEvent(nil,False,False,nil);
+   TempOver.hEvent := CreateEvent(nil,True,True,nil);
    if TempOver.hEvent = 0 then
     begin
      SetLastError(GetLastOSError,'TNPCCustomCOMPort.WriteData(3)');
@@ -1034,23 +1040,23 @@ begin
        LastErr := GetLastOSError;
        if LastErr <> ERROR_IO_PENDING then
         begin
-         SetLastError(LastErr,'TNPCCustomCOMPort.WriteData(6)');
+         SetLastError(LastErr,'TNPCCustomCOMPort.WriteData(5)');
          Exit;
         end;
       end;
      if not GetOverlappedResult(FHandle,TempOver,WriteCount,True) then // возможна ошибка - запись не окончена - 996 - ERROR_IO_INCOMPLETE
       begin
-       SetLastError(GetLastOSError,'TNPCCustomCOMPort.WriteData(7)');
+       SetLastError(GetLastOSError,'TNPCCustomCOMPort.WriteData(6)');
        Exit;
       end;
+     FlushFileBuffers(FHandle);
      Result := WriteCount;
     end
    else
-    begin // чтение закончено успешно сразу же
+    begin // запись закончена успешно сразу же
      Result := WriteCount;
     end;
    finally
-    FlushWriteBuff;
     CloseHandle(TempOver.hEvent);
    end;
    {$ENDIF}
@@ -1072,6 +1078,8 @@ var TempOver     : TOVERLAPPED;
     TempWaiteRes : DWORD;
     ByteTras     : DWORD;
     TempEvent    : DWORD;
+    TempCommStat : TCOMSTAT;
+    TempLastErr  : Cardinal;
 {$ENDIF}
 begin
   Result := wrError;
@@ -1082,6 +1090,9 @@ begin
     Exit;
    end;
 
+  TempTick := GetTickCount64;
+  Lock;
+  try
   {$IFDEF UNIX}
   // заполняем временные параметры
   TempTimeVal.tv_sec  := ATimeOut div 1000;
@@ -1090,7 +1101,6 @@ begin
   fpFD_ZERO(TempReadSet);
   fpFD_SET(FHandle,TempReadSet);
   // ждем события
-  TempTick := GetTickCount64;
   Res := fpSelect(FHandle+1,@TempReadSet,nil,nil,@TempTimeVal);
   case Res of
    -1 : begin
@@ -1103,22 +1113,28 @@ begin
    fpFD_CLR(FHandle,TempReadSet);
    Result := wrSignaled;
   end;
-  ATimeOut := GetTickCount64 - TempTick;
   {$ELSE}
-  TempTick := GetTickCount64;
   ByteTras := 0;
+
   FillByte(TempOver,sizeof(TOVERLAPPED),0);
-  TempOver.hEvent := CreateEvent(nil,True,False,nil);
+  TempOver.hEvent := CreateEvent(nil,True,True,nil);
   TempEvent := EV_RXCHAR;
   SetCommMask(FHandle,TempEvent);
+
+  TempLastErr := 0;
+  FillByte(TempCommStat,sizeof(TCOMSTAT),0);
+  ClearCommError(FHandle,TempLastErr,@TempCommStat);
+
   try
   if WaitCommEvent(FHandle,TempEvent,@TempOver) then
    begin
-//    if not GetOverlappedResult(FHandle,TempOver,ByteTras,True) then
-//     begin
-//      SetLastError(GetLastOSError,'TNPCCustomCOMPort.WaitForData(2)');
-//      Exit;
-//     end;
+    if not GetOverlappedResult(FHandle,TempOver,ByteTras,True) then
+     begin
+      SetLastError(GetLastOSError,'TNPCCustomCOMPort.WaitForData(2)');
+      Exit;
+     end;
+
+    ClearCommError(FHandle,TempLastErr,@TempCommStat);
     Result := wrSignaled;
    end
   else
@@ -1138,25 +1154,27 @@ begin
                           SetLastError(GetLastOSError,'TNPCCustomCOMPort.WaitForData(4)');
                           Exit;
                          end;
+                        ClearCommError(FHandle,TempLastErr,@TempCommStat);
                         Result := wrSignaled;
                        end;
        WAIT_TIMEOUT : begin
+//                       SetLastError(GetLastOSError,'TNPCCustomCOMPort.WaitForData(5)');
                        Result := wrTimeout;
-                       CancelIo(FHandle);
-                       FlushAllBuff;
                       end;
        WAIT_FAILED  : begin
-                       SetLastError(GetLastOSError,'TNPCCustomCOMPort.WaitForData(5)');
-                       CancelIo(FHandle);
-                       FlushAllBuff;
+                       SetLastError(GetLastOSError,'TNPCCustomCOMPort.WaitForData(6)');
                       end;
       end;
     end;
   finally
-   ATimeOut := GetTickCount64 - TempTick;
    CloseHandle(TempOver.hEvent);
   end;
   {$ENDIF}
+
+  finally
+   ATimeOut := GetTickCount64 - TempTick;
+   Unlock;
+  end;
 end;
 
 function TNPCCustomCOMPort.FlushWriteBuff : Integer;
@@ -1166,7 +1184,7 @@ begin
   Result := TCFlush(FHandle,TCOFLUSH);
   if Result = -1 then SetLastError(fpgeterrno);
   {$ELSE}
-  if not PurgeComm(FHandle,PURGE_TXCLEAR or PURGE_TXABORT) then
+  if not PurgeComm(FHandle,PURGE_TXCLEAR) then
    begin
     SetLastError(GetLastOSError,'TNPCCustomCOMPort.FlushWriteBuff');
     Exit;
@@ -1182,7 +1200,7 @@ begin
   Result := TCFlush(FHandle,TCIFLUSH);
   if Result = -1 then SetLastError(fpgeterrno);
   {$ELSE}
-  if not PurgeComm(FHandle,PURGE_RXCLEAR or PURGE_RXABORT) then
+  if not PurgeComm(FHandle,PURGE_RXCLEAR) then
    begin
     SetLastError(GetLastOSError,'TNPCCustomCOMPort.FlushReadBuff');
     Exit;
@@ -1198,7 +1216,7 @@ begin
   Result := TCFlush(FHandle,TCIOFLUSH);
   if Result = -1 then SetLastError(fpgeterrno);
   {$ELSE}
-  if not PurgeComm(FHandle,PURGE_RXCLEAR or PURGE_TXCLEAR or PURGE_TXABORT or PURGE_RXABORT) then
+  if not PurgeComm(FHandle,PURGE_RXCLEAR or PURGE_TXCLEAR) then
    begin
     SetLastError(GetLastOSError,'TNPCCustomCOMPort.FlushAllBuff');
     Exit;
