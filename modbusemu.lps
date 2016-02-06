@@ -2,7 +2,7 @@
 <CONFIG>
   <ProjectSession>
     <Version Value="9"/>
-    <BuildModes Active="Windows_x64"/>
+    <BuildModes Active="Linux_x64"/>
     <Units Count="13">
       <Unit0>
         <Filename Value="modbusemu.lpr"/>
@@ -17,9 +17,8 @@
         <ComponentName Value="frmMain"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="159"/>
+        <TopLine Value="60"/>
         <CursorPos X="20" Y="176"/>
         <ExtraEditorCount Value="1"/>
         <ExtraEditor1>
@@ -28,6 +27,7 @@
           <TopLine Value="243"/>
           <CursorPos X="22" Y="248"/>
         </ExtraEditor1>
+        <ComponentState Value="1"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -63,7 +63,7 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="3" Y="15"/>
-        <UsageCount Value="193"/>
+        <UsageCount Value="200"/>
       </Unit4>
       <Unit5>
         <Filename Value="source/DeviceView.pas"/>
@@ -71,16 +71,20 @@
         <ComponentName Value="frmDeviceView"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="191"/>
-        <CursorPos X="3" Y="206"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="149"/>
+        <CursorPos X="3" Y="1009"/>
         <ExtraEditorCount Value="1"/>
         <ExtraEditor1>
           <EditorIndex Value="-1"/>
           <TopLine Value="227"/>
           <CursorPos X="42" Y="243"/>
         </ExtraEditor1>
-        <UsageCount Value="193"/>
+        <ComponentState Value="1"/>
+        <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
       </Unit5>
       <Unit6>
         <Filename Value="source/formChennelAdd.pas"/>
@@ -91,7 +95,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="29"/>
         <CursorPos Y="49"/>
-        <UsageCount Value="193"/>
+        <UsageCount Value="200"/>
       </Unit6>
       <Unit7>
         <Filename Value="source/formChennelRSLinuxAdd.pas"/>
@@ -106,7 +110,7 @@
           <TopLine Value="119"/>
           <CursorPos X="69" Y="141"/>
         </ExtraEditor1>
-        <UsageCount Value="193"/>
+        <UsageCount Value="200"/>
       </Unit7>
       <Unit8>
         <Filename Value="source/formChennelRSWindowsAdd.pas"/>
@@ -121,7 +125,7 @@
           <TopLine Value="15"/>
           <CursorPos X="45" Y="42"/>
         </ExtraEditor1>
-        <UsageCount Value="193"/>
+        <UsageCount Value="200"/>
       </Unit8>
       <Unit9>
         <Filename Value="source/formChennelTCPAdd.pas"/>
@@ -131,7 +135,7 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="19" Y="33"/>
-        <UsageCount Value="193"/>
+        <UsageCount Value="200"/>
       </Unit9>
       <Unit10>
         <Filename Value="source/framChennelRSClasses.pas"/>
@@ -142,7 +146,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="53"/>
         <CursorPos X="82" Y="68"/>
-        <UsageCount Value="193"/>
+        <UsageCount Value="200"/>
       </Unit10>
       <Unit11>
         <Filename Value="source/framChennelTCPClasses.pas"/>
@@ -152,7 +156,7 @@
         <ResourceBaseClass Value="Frame"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="19" Y="15"/>
-        <UsageCount Value="193"/>
+        <UsageCount Value="200"/>
       </Unit11>
       <Unit12>
         <Filename Value="source/formRahgeEdit.pas"/>
@@ -161,7 +165,7 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="16" Y="15"/>
-        <UsageCount Value="162"/>
+        <UsageCount Value="171"/>
       </Unit12>
     </Units>
   </ProjectSession>

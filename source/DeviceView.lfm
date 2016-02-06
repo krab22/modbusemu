@@ -1,7 +1,7 @@
 object frmDeviceView: TfrmDeviceView
-  Left = 2338
+  Left = 891
   Height = 754
-  Top = 183
+  Top = 170
   Width = 681
   Caption = 'Просмотр устройства'
   ClientHeight = 754
@@ -420,7 +420,8 @@ object frmDeviceView: TfrmDeviceView
             Top = 8
             Width = 96
             MaxValue = 65535
-            OnEditingDone = speHoldingsValueEditingDone
+            OnKeyUp = speHoldingsValueKeyUp
+            OnMouseUp = speHoldingsValueMouseUp
             ParentShowHint = False
             ShowHint = True
             TabOrder = 0
@@ -586,8 +587,8 @@ object frmDeviceView: TfrmDeviceView
             Top = 46
             Width = 96
             MaxLength = 4
-            OnEditingDone = edHoldingsValHexEditingDone
             OnKeyPress = edHoldingsValHexKeyPress
+            OnKeyUp = edHoldingsValHexKeyUp
             ParentShowHint = False
             ShowHint = True
             TabOrder = 2
@@ -718,7 +719,8 @@ object frmDeviceView: TfrmDeviceView
             Top = 8
             Width = 96
             MaxValue = 65535
-            OnEditingDone = speInputsValueEditingDone
+            OnKeyUp = speInputsValueKeyUp
+            OnMouseUp = speInputsValueMouseUp
             ParentShowHint = False
             ShowHint = True
             TabOrder = 0
@@ -884,8 +886,8 @@ object frmDeviceView: TfrmDeviceView
             Top = 46
             Width = 96
             MaxLength = 4
-            OnEditingDone = edInputsValHexEditingDone
             OnKeyPress = edHoldingsValHexKeyPress
+            OnKeyUp = edInputsValHexKeyUp
             ParentShowHint = False
             ShowHint = True
             TabOrder = 2

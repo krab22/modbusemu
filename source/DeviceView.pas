@@ -104,6 +104,8 @@ type
     lbInputsRegNum           : TLabel;
     speInputsRegNum          : TSpinEdit;
     speInputsValue           : TSpinEdit;
+    procedure FormClose(Sender : TObject; var CloseAction : TCloseAction);
+
     procedure btCoilAplyAllClick(Sender : TObject);
     procedure btCoilAplyClick(Sender : TObject);
     procedure btCoilAplyForClick(Sender : TObject);
@@ -116,13 +118,8 @@ type
     procedure btInputsAplyAllClick(Sender : TObject);
     procedure btInputsAplyClick(Sender : TObject);
     procedure btInputsAplyForClick(Sender : TObject);
+
     procedure cbHoldingsBit0Change(Sender : TObject);
-    procedure cbHoldingsBit10Change(Sender : TObject);
-    procedure cbHoldingsBit11Change(Sender : TObject);
-    procedure cbHoldingsBit12Change(Sender : TObject);
-    procedure cbHoldingsBit13Change(Sender : TObject);
-    procedure cbHoldingsBit14Change(Sender : TObject);
-    procedure cbHoldingsBit15Change(Sender : TObject);
     procedure cbHoldingsBit1Change(Sender : TObject);
     procedure cbHoldingsBit2Change(Sender : TObject);
     procedure cbHoldingsBit3Change(Sender : TObject);
@@ -132,13 +129,14 @@ type
     procedure cbHoldingsBit7Change(Sender : TObject);
     procedure cbHoldingsBit8Change(Sender : TObject);
     procedure cbHoldingsBit9Change(Sender : TObject);
+    procedure cbHoldingsBit10Change(Sender : TObject);
+    procedure cbHoldingsBit11Change(Sender : TObject);
+    procedure cbHoldingsBit12Change(Sender : TObject);
+    procedure cbHoldingsBit13Change(Sender : TObject);
+    procedure cbHoldingsBit14Change(Sender : TObject);
+    procedure cbHoldingsBit15Change(Sender : TObject);
+
     procedure cbInputsBit0Change(Sender : TObject);
-    procedure cbInputsBit10Change(Sender : TObject);
-    procedure cbInputsBit11Change(Sender : TObject);
-    procedure cbInputsBit12Change(Sender : TObject);
-    procedure cbInputsBit13Change(Sender : TObject);
-    procedure cbInputsBit14Change(Sender : TObject);
-    procedure cbInputsBit15Change(Sender : TObject);
     procedure cbInputsBit1Change(Sender : TObject);
     procedure cbInputsBit2Change(Sender : TObject);
     procedure cbInputsBit3Change(Sender : TObject);
@@ -148,23 +146,33 @@ type
     procedure cbInputsBit7Change(Sender : TObject);
     procedure cbInputsBit8Change(Sender : TObject);
     procedure cbInputsBit9Change(Sender : TObject);
-    procedure edHoldingsValHexEditingDone(Sender : TObject);
+    procedure cbInputsBit10Change(Sender : TObject);
+    procedure cbInputsBit11Change(Sender : TObject);
+    procedure cbInputsBit12Change(Sender : TObject);
+    procedure cbInputsBit13Change(Sender : TObject);
+    procedure cbInputsBit14Change(Sender : TObject);
+    procedure cbInputsBit15Change(Sender : TObject);
+
     procedure edHoldingsValHexKeyPress(Sender : TObject; var Key : char);
-    procedure edInputsValHexEditingDone(Sender : TObject);
-    procedure FormClose(Sender : TObject; var CloseAction : TCloseAction);
+
+		procedure edHoldingsValHexKeyUp(Sender : TObject; var Key : Word;	Shift : TShiftState);
+    procedure speHoldingsValueKeyUp(Sender : TObject; var Key : Word; Shift : TShiftState);
+    procedure speHoldingsValueMouseUp(Sender : TObject; Button : TMouseButton; Shift : TShiftState; X, Y : Integer);
+
+    procedure edInputsValHexKeyUp(Sender : TObject; var Key : Word;Shift : TShiftState);
+		procedure speInputsValueKeyUp(Sender : TObject; var Key : Word;	Shift : TShiftState);
+		procedure speInputsValueMouseUp(Sender : TObject; Button : TMouseButton; Shift : TShiftState; X, Y : Integer);
+
     procedure sgCoilsSelectCell(Sender : TObject; aCol, aRow : Integer; var CanSelect : Boolean);
     procedure sgDiscretsSelectCell(Sender : TObject; aCol, aRow : Integer; var CanSelect : Boolean);
-    procedure sgHoldingsSelectCell(Sender : TObject; aCol, aRow : Integer;
-      var CanSelect : Boolean);
-    procedure sgInputsSelectCell(Sender : TObject; aCol, aRow : Integer;
-      var CanSelect : Boolean);
-    procedure speHoldingsValueEditingDone(Sender : TObject);
-    procedure speInputsValueEditingDone(Sender : TObject);
+    procedure sgHoldingsSelectCell(Sender : TObject; aCol, aRow : Integer; var CanSelect : Boolean);
+    procedure sgInputsSelectCell(Sender : TObject; aCol, aRow : Integer; var CanSelect : Boolean);
    private
-    FDevice      : TMBDevice;
-    FCSection    : TCriticalSection;
-    FLogger      : IDLogger;
-    FOnDevChange : TNotifyEvent;
+    FDevice       : TMBDevice;
+    FCSection     : TCriticalSection;
+    FLogger       : IDLogger;
+    FOnDevChange  : TNotifyEvent;
+    FIsChange     : Boolean;
     procedure SetDevice(AValue : TMBDevice);
     procedure ClearForm;
     procedure UpdateCoils;
@@ -173,6 +181,12 @@ type
     procedure UpdateInputs;
     procedure Lock;
     procedure UnLock;
+    procedure UpdateHoldingBits;
+    procedure UpdateHoldingHexAndBits;
+    procedure UpdateHoldingNumAndBits;
+    procedure UpdateInputBits;
+    procedure UpdateInputHexAndBits;
+    procedure UpdateInputNumAndBits;
 
     procedure OnDevChangeProc;
     procedure OnCoilsChangeProc(Sender : TObject; ChangedRegs : TMBBitRegsArray);
@@ -229,6 +243,7 @@ begin
   if sgHoldings.Cells[1,aRow] <> '' then
    begin
     speHoldingsValue.Value := StrToInt(sgHoldings.Cells[1,aRow]);
+    UpdateHoldingHexAndBits;
    end;
   edHoldingsRegDescription.Text := sgHoldings.Cells[3,aRow];
 end;
@@ -518,454 +533,192 @@ end;
 
 procedure TfrmDeviceView.cbHoldingsBit0Change(Sender : TObject);
 begin
-  if cbHoldingsBit0.Checked then speHoldingsValue.Value := speHoldingsValue.Value or $0001
-   else speHoldingsValue.Value := speHoldingsValue.Value xor $0001;
-  edHoldingsValHex.Text := IntToHex(speHoldingsValue.Value,4);
+  UpdateHoldingBits;
 end;
 
 procedure TfrmDeviceView.cbHoldingsBit1Change(Sender : TObject);
 begin
-  if cbHoldingsBit1.Checked then speHoldingsValue.Value := speHoldingsValue.Value or $0002
-   else speHoldingsValue.Value := speHoldingsValue.Value xor $0002;
-  edHoldingsValHex.Text := IntToHex(speHoldingsValue.Value,4);
+  UpdateHoldingBits;
 end;
 
 procedure TfrmDeviceView.cbHoldingsBit2Change(Sender : TObject);
 begin
-  if cbHoldingsBit2.Checked then speHoldingsValue.Value := speHoldingsValue.Value or $0004
-   else speHoldingsValue.Value := speHoldingsValue.Value xor $0004;
-  edHoldingsValHex.Text := IntToHex(speHoldingsValue.Value,4);
+  UpdateHoldingBits;
 end;
 
 procedure TfrmDeviceView.cbHoldingsBit3Change(Sender : TObject);
 begin
-  if cbHoldingsBit3.Checked then speHoldingsValue.Value := speHoldingsValue.Value or $0008
-   else speHoldingsValue.Value := speHoldingsValue.Value xor $0008;
-  edHoldingsValHex.Text := IntToHex(speHoldingsValue.Value,4);
+  UpdateHoldingBits;
 end;
 
 procedure TfrmDeviceView.cbHoldingsBit4Change(Sender : TObject);
 begin
-  if cbHoldingsBit4.Checked then speHoldingsValue.Value := speHoldingsValue.Value or $0010
-   else speHoldingsValue.Value := speHoldingsValue.Value xor $0010;
-  edHoldingsValHex.Text := IntToHex(speHoldingsValue.Value,4);
+  UpdateHoldingBits;
 end;
 
 procedure TfrmDeviceView.cbHoldingsBit5Change(Sender : TObject);
 begin
-  if cbHoldingsBit5.Checked then speHoldingsValue.Value := speHoldingsValue.Value or $0020
-   else speHoldingsValue.Value := speHoldingsValue.Value xor $0020;
-  edHoldingsValHex.Text := IntToHex(speHoldingsValue.Value,4);
+  UpdateHoldingBits;
 end;
 
 procedure TfrmDeviceView.cbHoldingsBit6Change(Sender : TObject);
 begin
-  if cbHoldingsBit6.Checked then speHoldingsValue.Value := speHoldingsValue.Value or $0040
-   else speHoldingsValue.Value := speHoldingsValue.Value xor $0040;
-  edHoldingsValHex.Text := IntToHex(speHoldingsValue.Value,4);
+  UpdateHoldingBits;
 end;
 
 procedure TfrmDeviceView.cbHoldingsBit7Change(Sender : TObject);
 begin
-  if cbHoldingsBit7.Checked then speHoldingsValue.Value := speHoldingsValue.Value or $0080
-   else speHoldingsValue.Value := speHoldingsValue.Value xor $0080;
-  edHoldingsValHex.Text := IntToHex(speHoldingsValue.Value,4);
+  UpdateHoldingBits;
 end;
 
 procedure TfrmDeviceView.cbHoldingsBit8Change(Sender : TObject);
 begin
-  if cbHoldingsBit8.Checked then speHoldingsValue.Value := speHoldingsValue.Value or $0100
-   else speHoldingsValue.Value := speHoldingsValue.Value xor $0100;
-  edHoldingsValHex.Text := IntToHex(speHoldingsValue.Value,4);
+  UpdateHoldingBits;
 end;
 
 procedure TfrmDeviceView.cbHoldingsBit9Change(Sender : TObject);
 begin
-  if cbHoldingsBit9.Checked then speHoldingsValue.Value := speHoldingsValue.Value or $0200
-   else speHoldingsValue.Value := speHoldingsValue.Value xor $0200;
-  edHoldingsValHex.Text := IntToHex(speHoldingsValue.Value,4);
+  UpdateHoldingBits;
 end;
 
 procedure TfrmDeviceView.cbHoldingsBit10Change(Sender : TObject);
 begin
-  if cbHoldingsBit10.Checked then speHoldingsValue.Value := speHoldingsValue.Value or $0400
-   else speHoldingsValue.Value := speHoldingsValue.Value xor $0400;
-  edHoldingsValHex.Text := IntToHex(speHoldingsValue.Value,4);
+  UpdateHoldingBits;
 end;
 
 procedure TfrmDeviceView.cbHoldingsBit11Change(Sender : TObject);
 begin
-  if cbHoldingsBit11.Checked then speHoldingsValue.Value := speHoldingsValue.Value or $0800
-   else speHoldingsValue.Value := speHoldingsValue.Value xor $0800;
-  edHoldingsValHex.Text := IntToHex(speHoldingsValue.Value,4);
+  UpdateHoldingBits;
 end;
 
 procedure TfrmDeviceView.cbHoldingsBit12Change(Sender : TObject);
 begin
-  if cbHoldingsBit12.Checked then speHoldingsValue.Value := speHoldingsValue.Value or $1000
-   else speHoldingsValue.Value := speHoldingsValue.Value xor $1000;
-  edHoldingsValHex.Text := IntToHex(speHoldingsValue.Value,4);
+  UpdateHoldingBits;
 end;
 
 procedure TfrmDeviceView.cbHoldingsBit13Change(Sender : TObject);
 begin
-  if cbHoldingsBit13.Checked then speHoldingsValue.Value := speHoldingsValue.Value or $2000
-   else speHoldingsValue.Value := speHoldingsValue.Value xor $2000;
-  edHoldingsValHex.Text := IntToHex(speHoldingsValue.Value,4);
+  UpdateHoldingBits;
 end;
 
 procedure TfrmDeviceView.cbHoldingsBit14Change(Sender : TObject);
 begin
-  if cbHoldingsBit14.Checked then speHoldingsValue.Value := speHoldingsValue.Value or $4000
-   else speHoldingsValue.Value := speHoldingsValue.Value xor $4000;
-  edHoldingsValHex.Text := IntToHex(speHoldingsValue.Value,4);
+  UpdateHoldingBits;
 end;
 
 procedure TfrmDeviceView.cbHoldingsBit15Change(Sender : TObject);
 begin
-  if cbHoldingsBit15.Checked then speHoldingsValue.Value := speHoldingsValue.Value or $8000
-   else speHoldingsValue.Value := speHoldingsValue.Value xor $8000;
-  edHoldingsValHex.Text := IntToHex(Word(speHoldingsValue.Value),4);
+  UpdateHoldingBits;
 end;
 
-procedure TfrmDeviceView.edHoldingsValHexEditingDone(Sender : TObject);
+procedure TfrmDeviceView.edHoldingsValHexKeyUp(Sender : TObject; var Key : Word; Shift : TShiftState);
 begin
-  try
-   speHoldingsValue.Value := StrToInt(Format('$%s',[edHoldingsValHex.Text]));
-   if (speHoldingsValue.Value and $0001) = $0001 then cbHoldingsBit0.Checked := True
-    else cbHoldingsBit0.Checked := False;
-   if (speHoldingsValue.Value and $0002) = $0002 then cbHoldingsBit1.Checked := True
-    else cbHoldingsBit1.Checked := False;
-   if (speHoldingsValue.Value and $0004) = $0004 then cbHoldingsBit2.Checked := True
-    else cbHoldingsBit2.Checked := False;
-   if (speHoldingsValue.Value and $0008) = $0008 then cbHoldingsBit3.Checked := True
-    else cbHoldingsBit3.Checked := False;
-   if (speHoldingsValue.Value and $0010) = $0010 then cbHoldingsBit4.Checked := True
-    else cbHoldingsBit4.Checked := False;
-   if (speHoldingsValue.Value and $0020) = $0020 then cbHoldingsBit5.Checked := True
-    else cbHoldingsBit5.Checked := False;
-   if (speHoldingsValue.Value and $0040) = $0040 then cbHoldingsBit6.Checked := True
-    else cbHoldingsBit6.Checked := False;
-   if (speHoldingsValue.Value and $0080) = $0080 then cbHoldingsBit7.Checked := True
-    else cbHoldingsBit7.Checked := False;
-   if (speHoldingsValue.Value and $0100) = $0100 then cbHoldingsBit8.Checked := True
-    else cbHoldingsBit8.Checked := False;
-   if (speHoldingsValue.Value and $0200) = $0200 then cbHoldingsBit9.Checked := True
-    else cbHoldingsBit9.Checked := False;
-   if (speHoldingsValue.Value and $0400) = $0400 then cbHoldingsBit10.Checked := True
-    else cbHoldingsBit10.Checked := False;
-   if (speHoldingsValue.Value and $0800) = $0800 then cbHoldingsBit11.Checked := True
-    else cbHoldingsBit11.Checked := False;
-   if (speHoldingsValue.Value and $1000) = $1000 then cbHoldingsBit12.Checked := True
-    else cbHoldingsBit12.Checked := False;
-   if (speHoldingsValue.Value and $2000) = $2000 then cbHoldingsBit13.Checked := True
-    else cbHoldingsBit13.Checked := False;
-   if (speHoldingsValue.Value and $4000) = $4000 then cbHoldingsBit14.Checked := True
-    else cbHoldingsBit14.Checked := False;
-   if (speHoldingsValue.Value and $8000) = $8000 then cbHoldingsBit15.Checked := True
-    else cbHoldingsBit15.Checked := False;
-  except
-   speHoldingsValue.Value  := 0;
-   cbHoldingsBit0.Checked  := False;
-   cbHoldingsBit1.Checked  := False;
-   cbHoldingsBit2.Checked  := False;
-   cbHoldingsBit3.Checked  := False;
-   cbHoldingsBit4.Checked  := False;
-   cbHoldingsBit5.Checked  := False;
-   cbHoldingsBit6.Checked  := False;
-   cbHoldingsBit7.Checked  := False;
-   cbHoldingsBit8.Checked  := False;
-   cbHoldingsBit9.Checked  := False;
-   cbHoldingsBit10.Checked := False;
-   cbHoldingsBit11.Checked := False;
-   cbHoldingsBit12.Checked := False;
-   cbHoldingsBit13.Checked := False;
-   cbHoldingsBit14.Checked := False;
-   cbHoldingsBit15.Checked := False;
-  end;
-end;
-
-procedure TfrmDeviceView.speHoldingsValueEditingDone(Sender : TObject);
-begin
-  try
-   edHoldingsValHex.Text := IntToHex(speHoldingsValue.Value,4);
-   if (speHoldingsValue.Value and $0001) = $0001 then cbHoldingsBit0.Checked := True
-    else cbHoldingsBit0.Checked := False;
-   if (speHoldingsValue.Value and $0002) = $0002 then cbHoldingsBit1.Checked := True
-    else cbHoldingsBit1.Checked := False;
-   if (speHoldingsValue.Value and $0004) = $0004 then cbHoldingsBit2.Checked := True
-    else cbHoldingsBit2.Checked := False;
-   if (speHoldingsValue.Value and $0008) = $0008 then cbHoldingsBit3.Checked := True
-    else cbHoldingsBit3.Checked := False;
-   if (speHoldingsValue.Value and $0010) = $0010 then cbHoldingsBit4.Checked := True
-    else cbHoldingsBit4.Checked := False;
-   if (speHoldingsValue.Value and $0020) = $0020 then cbHoldingsBit5.Checked := True
-    else cbHoldingsBit5.Checked := False;
-   if (speHoldingsValue.Value and $0040) = $0040 then cbHoldingsBit6.Checked := True
-    else cbHoldingsBit6.Checked := False;
-   if (speHoldingsValue.Value and $0080) = $0080 then cbHoldingsBit7.Checked := True
-    else cbHoldingsBit7.Checked := False;
-   if (speHoldingsValue.Value and $0100) = $0100 then cbHoldingsBit8.Checked := True
-    else cbHoldingsBit8.Checked := False;
-   if (speHoldingsValue.Value and $0200) = $0200 then cbHoldingsBit9.Checked := True
-    else cbHoldingsBit9.Checked := False;
-   if (speHoldingsValue.Value and $0400) = $0400 then cbHoldingsBit10.Checked := True
-    else cbHoldingsBit10.Checked := False;
-   if (speHoldingsValue.Value and $0800) = $0800 then cbHoldingsBit11.Checked := True
-    else cbHoldingsBit11.Checked := False;
-   if (speHoldingsValue.Value and $1000) = $1000 then cbHoldingsBit12.Checked := True
-    else cbHoldingsBit12.Checked := False;
-   if (speHoldingsValue.Value and $2000) = $2000 then cbHoldingsBit13.Checked := True
-    else cbHoldingsBit13.Checked := False;
-   if (speHoldingsValue.Value and $4000) = $4000 then cbHoldingsBit14.Checked := True
-    else cbHoldingsBit14.Checked := False;
-   if (speHoldingsValue.Value and $8000) = $8000 then cbHoldingsBit15.Checked := True
-    else cbHoldingsBit15.Checked := False;
-  except
-   edHoldingsValHex.Text   := '0000';
-   cbHoldingsBit0.Checked  := False;
-   cbHoldingsBit1.Checked  := False;
-   cbHoldingsBit2.Checked  := False;
-   cbHoldingsBit3.Checked  := False;
-   cbHoldingsBit4.Checked  := False;
-   cbHoldingsBit5.Checked  := False;
-   cbHoldingsBit6.Checked  := False;
-   cbHoldingsBit7.Checked  := False;
-   cbHoldingsBit8.Checked  := False;
-   cbHoldingsBit9.Checked  := False;
-   cbHoldingsBit10.Checked := False;
-   cbHoldingsBit11.Checked := False;
-   cbHoldingsBit12.Checked := False;
-   cbHoldingsBit13.Checked := False;
-   cbHoldingsBit14.Checked := False;
-   cbHoldingsBit15.Checked := False;
-  end;
+  UpdateHoldingNumAndBits;
 end;
 
 procedure TfrmDeviceView.cbInputsBit0Change(Sender : TObject);
 begin
-  if cbInputsBit0.Checked then speInputsValue.Value := speInputsValue.Value or $0001
-   else speInputsValue.Value := speInputsValue.Value xor $0001;
-  edInputsValHex.Text := IntToHex(speInputsValue.Value,4);
+  UpdateInputBits;
 end;
 
 procedure TfrmDeviceView.cbInputsBit1Change(Sender : TObject);
 begin
-  if cbInputsBit1.Checked then speInputsValue.Value := speInputsValue.Value or $0002
-   else speInputsValue.Value := speInputsValue.Value xor $0002;
-  edInputsValHex.Text := IntToHex(speInputsValue.Value,4);
+  UpdateInputBits;
 end;
 
 procedure TfrmDeviceView.cbInputsBit2Change(Sender : TObject);
 begin
-  if cbInputsBit2.Checked then speInputsValue.Value := speInputsValue.Value or $0004
-   else speInputsValue.Value := speInputsValue.Value xor $0004;
-  edInputsValHex.Text := IntToHex(speInputsValue.Value,4);
+  UpdateInputBits;
 end;
 
 procedure TfrmDeviceView.cbInputsBit3Change(Sender : TObject);
 begin
-  if cbInputsBit3.Checked then speInputsValue.Value := speInputsValue.Value or $0008
-   else speInputsValue.Value := speInputsValue.Value xor $0008;
-  edInputsValHex.Text := IntToHex(speInputsValue.Value,4);
+  UpdateInputBits;
 end;
 
 procedure TfrmDeviceView.cbInputsBit4Change(Sender : TObject);
 begin
-  if cbInputsBit4.Checked then speInputsValue.Value := speInputsValue.Value or $0010
-   else speInputsValue.Value := speInputsValue.Value xor $0010;
-  edInputsValHex.Text := IntToHex(speInputsValue.Value,4);
+  UpdateInputBits;
 end;
 
 procedure TfrmDeviceView.cbInputsBit5Change(Sender : TObject);
 begin
-  if cbInputsBit5.Checked then speInputsValue.Value := speInputsValue.Value or $0020
-   else speInputsValue.Value := speInputsValue.Value xor $0020;
-  edInputsValHex.Text := IntToHex(speInputsValue.Value,4);
+  UpdateInputBits;
 end;
 
 procedure TfrmDeviceView.cbInputsBit6Change(Sender : TObject);
 begin
-  if cbInputsBit6.Checked then speInputsValue.Value := speInputsValue.Value or $0040
-   else speInputsValue.Value := speInputsValue.Value xor $0040;
-  edInputsValHex.Text := IntToHex(speInputsValue.Value,4);
+  UpdateInputBits;
 end;
 
 procedure TfrmDeviceView.cbInputsBit7Change(Sender : TObject);
 begin
-  if cbInputsBit7.Checked then speInputsValue.Value := speInputsValue.Value or $0080
-   else speInputsValue.Value := speInputsValue.Value xor $0080;
-  edInputsValHex.Text := IntToHex(speInputsValue.Value,4);
+  UpdateInputBits;
 end;
 
 procedure TfrmDeviceView.cbInputsBit8Change(Sender : TObject);
 begin
-  if cbInputsBit8.Checked then speInputsValue.Value := speInputsValue.Value or $0100
-   else speInputsValue.Value := speInputsValue.Value xor $0100;
-  edInputsValHex.Text := IntToHex(speInputsValue.Value,4);
+  UpdateInputBits;
 end;
 
 procedure TfrmDeviceView.cbInputsBit9Change(Sender : TObject);
 begin
-  if cbInputsBit9.Checked then speInputsValue.Value := speInputsValue.Value or $0200
-   else speInputsValue.Value := speInputsValue.Value xor $0200;
-  edInputsValHex.Text := IntToHex(speInputsValue.Value,4);
+  UpdateInputBits;
 end;
 
 procedure TfrmDeviceView.cbInputsBit10Change(Sender : TObject);
 begin
-  if cbInputsBit10.Checked then speInputsValue.Value := speInputsValue.Value or $0400
-   else speInputsValue.Value := speInputsValue.Value xor $0400;
-  edInputsValHex.Text := IntToHex(speInputsValue.Value,4);
+  UpdateInputBits;
 end;
 
 procedure TfrmDeviceView.cbInputsBit11Change(Sender : TObject);
 begin
-  if cbInputsBit11.Checked then speInputsValue.Value := speInputsValue.Value or $0800
-   else speInputsValue.Value := speInputsValue.Value xor $0800;
-  edInputsValHex.Text := IntToHex(speInputsValue.Value,4);
+  UpdateInputBits;
 end;
 
 procedure TfrmDeviceView.cbInputsBit12Change(Sender : TObject);
 begin
-  if cbInputsBit12.Checked then speInputsValue.Value := speInputsValue.Value or $1000
-   else speInputsValue.Value := speInputsValue.Value xor $1000;
-  edInputsValHex.Text := IntToHex(speInputsValue.Value,4);
+  UpdateInputBits;
 end;
 
 procedure TfrmDeviceView.cbInputsBit13Change(Sender : TObject);
 begin
-  if cbInputsBit13.Checked then speInputsValue.Value := speInputsValue.Value or $2000
-   else speInputsValue.Value := speInputsValue.Value xor $2000;
-  edInputsValHex.Text := IntToHex(speInputsValue.Value,4);
+  UpdateInputBits;
 end;
 
 procedure TfrmDeviceView.cbInputsBit14Change(Sender : TObject);
 begin
-  if cbInputsBit14.Checked then speInputsValue.Value := speInputsValue.Value or $4000
-   else speInputsValue.Value := speInputsValue.Value xor $4000;
-  edInputsValHex.Text := IntToHex(speInputsValue.Value,4);
+  UpdateInputBits;
 end;
 
 procedure TfrmDeviceView.cbInputsBit15Change(Sender : TObject);
 begin
-  if cbInputsBit15.Checked then speInputsValue.Value := speInputsValue.Value or $8000
-   else speInputsValue.Value := speInputsValue.Value xor $8000;
-  edInputsValHex.Text := IntToHex(speInputsValue.Value,4);
+  UpdateInputBits;
 end;
 
-procedure TfrmDeviceView.speInputsValueEditingDone(Sender : TObject);
+procedure TfrmDeviceView.speInputsValueKeyUp(Sender : TObject; var Key : Word; Shift : TShiftState);
 begin
-  try
-   edInputsValHex.Text := IntToHex(speInputsValue.Value,4);
-   if (speInputsValue.Value and $0001) = $0001 then cbInputsBit0.Checked := True
-    else cbInputsBit0.Checked := False;
-   if (speInputsValue.Value and $0002) = $0002 then cbInputsBit1.Checked := True
-    else cbInputsBit1.Checked := False;
-   if (speInputsValue.Value and $0004) = $0004 then cbInputsBit2.Checked := True
-    else cbInputsBit2.Checked := False;
-   if (speInputsValue.Value and $0008) = $0008 then cbInputsBit3.Checked := True
-    else cbInputsBit3.Checked := False;
-   if (speInputsValue.Value and $0010) = $0010 then cbInputsBit4.Checked := True
-    else cbInputsBit4.Checked := False;
-   if (speInputsValue.Value and $0020) = $0020 then cbInputsBit5.Checked := True
-    else cbInputsBit5.Checked := False;
-   if (speInputsValue.Value and $0040) = $0040 then cbInputsBit6.Checked := True
-    else cbInputsBit6.Checked := False;
-   if (speInputsValue.Value and $0080) = $0080 then cbInputsBit7.Checked := True
-    else cbInputsBit7.Checked := False;
-   if (speInputsValue.Value and $0100) = $0100 then cbInputsBit8.Checked := True
-    else cbInputsBit8.Checked := False;
-   if (speInputsValue.Value and $0200) = $0200 then cbInputsBit9.Checked := True
-    else cbInputsBit9.Checked := False;
-   if (speInputsValue.Value and $0400) = $0400 then cbInputsBit10.Checked := True
-    else cbInputsBit10.Checked := False;
-   if (speInputsValue.Value and $0800) = $0800 then cbInputsBit11.Checked := True
-    else cbInputsBit11.Checked := False;
-   if (speInputsValue.Value and $1000) = $1000 then cbInputsBit12.Checked := True
-    else cbInputsBit12.Checked := False;
-   if (speInputsValue.Value and $2000) = $2000 then cbInputsBit13.Checked := True
-    else cbInputsBit13.Checked := False;
-   if (speInputsValue.Value and $4000) = $4000 then cbInputsBit14.Checked := True
-    else cbInputsBit14.Checked := False;
-   if (speInputsValue.Value and $8000) = $8000 then cbInputsBit15.Checked := True
-    else cbInputsBit15.Checked := False;
-  except
-   edInputsValHex.Text   := '0000';
-   cbInputsBit0.Checked  := False;
-   cbInputsBit1.Checked  := False;
-   cbInputsBit2.Checked  := False;
-   cbInputsBit3.Checked  := False;
-   cbInputsBit4.Checked  := False;
-   cbInputsBit5.Checked  := False;
-   cbInputsBit6.Checked  := False;
-   cbInputsBit7.Checked  := False;
-   cbInputsBit8.Checked  := False;
-   cbInputsBit9.Checked  := False;
-   cbInputsBit10.Checked := False;
-   cbInputsBit11.Checked := False;
-   cbInputsBit12.Checked := False;
-   cbInputsBit13.Checked := False;
-   cbInputsBit14.Checked := False;
-   cbInputsBit15.Checked := False;
-  end;
+  UpdateInputHexAndBits;
 end;
 
-procedure TfrmDeviceView.edInputsValHexEditingDone(Sender : TObject);
+procedure TfrmDeviceView.speInputsValueMouseUp(Sender : TObject; Button : TMouseButton; Shift : TShiftState; X, Y : Integer);
 begin
-  try
-   speInputsValue.Value := StrToInt(Format('$%s',[edInputsValHex.Text]));
-   if (speInputsValue.Value and $0001) = $0001 then cbInputsBit0.Checked := True
-    else cbInputsBit0.Checked := False;
-   if (speInputsValue.Value and $0002) = $0002 then cbInputsBit1.Checked := True
-    else cbInputsBit1.Checked := False;
-   if (speInputsValue.Value and $0004) = $0004 then cbInputsBit2.Checked := True
-    else cbInputsBit2.Checked := False;
-   if (speInputsValue.Value and $0008) = $0008 then cbInputsBit3.Checked := True
-    else cbInputsBit3.Checked := False;
-   if (speInputsValue.Value and $0010) = $0010 then cbInputsBit4.Checked := True
-    else cbInputsBit4.Checked := False;
-   if (speInputsValue.Value and $0020) = $0020 then cbInputsBit5.Checked := True
-    else cbInputsBit5.Checked := False;
-   if (speInputsValue.Value and $0040) = $0040 then cbInputsBit6.Checked := True
-    else cbInputsBit6.Checked := False;
-   if (speInputsValue.Value and $0080) = $0080 then cbInputsBit7.Checked := True
-    else cbInputsBit7.Checked := False;
-   if (speInputsValue.Value and $0100) = $0100 then cbInputsBit8.Checked := True
-    else cbInputsBit8.Checked := False;
-   if (speInputsValue.Value and $0200) = $0200 then cbInputsBit9.Checked := True
-    else cbInputsBit9.Checked := False;
-   if (speInputsValue.Value and $0400) = $0400 then cbInputsBit10.Checked := True
-    else cbInputsBit10.Checked := False;
-   if (speInputsValue.Value and $0800) = $0800 then cbInputsBit11.Checked := True
-    else cbInputsBit11.Checked := False;
-   if (speInputsValue.Value and $1000) = $1000 then cbInputsBit12.Checked := True
-    else cbInputsBit12.Checked := False;
-   if (speInputsValue.Value and $2000) = $2000 then cbInputsBit13.Checked := True
-    else cbInputsBit13.Checked := False;
-   if (speInputsValue.Value and $4000) = $4000 then cbInputsBit14.Checked := True
-    else cbInputsBit14.Checked := False;
-   if (speInputsValue.Value and $8000) = $8000 then cbInputsBit15.Checked := True
-    else cbInputsBit15.Checked := False;
-  except
-   speInputsValue.Value  := 0;
-   cbInputsBit0.Checked  := False;
-   cbInputsBit1.Checked  := False;
-   cbInputsBit2.Checked  := False;
-   cbInputsBit3.Checked  := False;
-   cbInputsBit4.Checked  := False;
-   cbInputsBit5.Checked  := False;
-   cbInputsBit6.Checked  := False;
-   cbInputsBit7.Checked  := False;
-   cbInputsBit8.Checked  := False;
-   cbInputsBit9.Checked  := False;
-   cbInputsBit10.Checked := False;
-   cbInputsBit11.Checked := False;
-   cbInputsBit12.Checked := False;
-   cbInputsBit13.Checked := False;
-   cbInputsBit14.Checked := False;
-   cbInputsBit15.Checked := False;
-  end;
+  UpdateInputHexAndBits;
+end;
+
+procedure TfrmDeviceView.edInputsValHexKeyUp(Sender : TObject; var Key : Word; Shift : TShiftState);
+begin
+  UpdateInputNumAndBits;
+end;
+
+procedure TfrmDeviceView.speHoldingsValueMouseUp(Sender : TObject; Button : TMouseButton; Shift : TShiftState; X, Y : Integer);
+begin
+  UpdateHoldingHexAndBits;
+end;
+
+procedure TfrmDeviceView.speHoldingsValueKeyUp(Sender : TObject; var Key : Word; Shift : TShiftState);
+begin
+  UpdateHoldingHexAndBits;
 end;
 
 procedure TfrmDeviceView.btInputsAplyClick(Sender : TObject);
@@ -1226,6 +979,246 @@ end;
 procedure TfrmDeviceView.UnLock;
 begin
   if Assigned(FCSection) then FCSection.Leave;
+end;
+
+procedure TfrmDeviceView.UpdateHoldingBits;
+var TempValue : Word;
+begin
+  if FIsChange then Exit;
+
+  TempValue := 0;
+
+  if cbHoldingsBit0.Checked  then TempValue := (TempValue or $0001) else TempValue := (TempValue and $FFFE);
+  if cbHoldingsBit1.Checked  then TempValue := (TempValue or $0002) else TempValue := (TempValue and $FFFD);
+  if cbHoldingsBit2.Checked  then TempValue := (TempValue or $0004) else TempValue := (TempValue and $FFFB);
+  if cbHoldingsBit3.Checked  then TempValue := (TempValue or $0008) else TempValue := (TempValue and $FFF7);
+  if cbHoldingsBit4.Checked  then TempValue := (TempValue or $0010) else TempValue := (TempValue and $FFEF);
+  if cbHoldingsBit5.Checked  then TempValue := (TempValue or $0020) else TempValue := (TempValue and $FFDF);
+  if cbHoldingsBit6.Checked  then TempValue := (TempValue or $0040) else TempValue := (TempValue and $FFBF);
+  if cbHoldingsBit7.Checked  then TempValue := (TempValue or $0080) else TempValue := (TempValue and $FF7F);
+  if cbHoldingsBit8.Checked  then TempValue := (TempValue or $0100) else TempValue := (TempValue and $FEFF);
+  if cbHoldingsBit9.Checked  then TempValue := (TempValue or $0200) else TempValue := (TempValue and $FDFF);
+  if cbHoldingsBit10.Checked then TempValue := (TempValue or $0400) else TempValue := (TempValue and $FBFF);
+  if cbHoldingsBit11.Checked then TempValue := (TempValue or $0800) else TempValue := (TempValue and $F7FF);
+  if cbHoldingsBit12.Checked then TempValue := (TempValue or $1000) else TempValue := (TempValue and $EFFF);
+  if cbHoldingsBit13.Checked then TempValue := (TempValue or $2000) else TempValue := (TempValue and $DFFF);
+  if cbHoldingsBit14.Checked then TempValue := (TempValue or $4000) else TempValue := (TempValue and $BFFF);
+  if cbHoldingsBit15.Checked then TempValue := (TempValue or $8000) else TempValue := (TempValue and $7FFF);
+
+  speHoldingsValue.Value := TempValue;
+  edHoldingsValHex.Text  := IntToHex(TempValue,4);
+end;
+
+procedure TfrmDeviceView.UpdateHoldingHexAndBits;
+begin
+  try
+   edHoldingsValHex.Text := IntToHex(speHoldingsValue.Value,4);
+   FIsChange := True;
+   try
+    if (speHoldingsValue.Value and $0001) = $0001 then cbHoldingsBit0.Checked  := True else cbHoldingsBit0.Checked := False;
+    if (speHoldingsValue.Value and $0002) = $0002 then cbHoldingsBit1.Checked  := True else cbHoldingsBit1.Checked := False;
+    if (speHoldingsValue.Value and $0004) = $0004 then cbHoldingsBit2.Checked  := True else cbHoldingsBit2.Checked := False;
+    if (speHoldingsValue.Value and $0008) = $0008 then cbHoldingsBit3.Checked  := True else cbHoldingsBit3.Checked := False;
+    if (speHoldingsValue.Value and $0010) = $0010 then cbHoldingsBit4.Checked  := True else cbHoldingsBit4.Checked := False;
+    if (speHoldingsValue.Value and $0020) = $0020 then cbHoldingsBit5.Checked  := True else cbHoldingsBit5.Checked := False;
+    if (speHoldingsValue.Value and $0040) = $0040 then cbHoldingsBit6.Checked  := True else cbHoldingsBit6.Checked := False;
+    if (speHoldingsValue.Value and $0080) = $0080 then cbHoldingsBit7.Checked  := True else cbHoldingsBit7.Checked := False;
+    if (speHoldingsValue.Value and $0100) = $0100 then cbHoldingsBit8.Checked  := True else cbHoldingsBit8.Checked := False;
+    if (speHoldingsValue.Value and $0200) = $0200 then cbHoldingsBit9.Checked  := True else cbHoldingsBit9.Checked := False;
+    if (speHoldingsValue.Value and $0400) = $0400 then cbHoldingsBit10.Checked := True else cbHoldingsBit10.Checked := False;
+    if (speHoldingsValue.Value and $0800) = $0800 then cbHoldingsBit11.Checked := True else cbHoldingsBit11.Checked := False;
+    if (speHoldingsValue.Value and $1000) = $1000 then cbHoldingsBit12.Checked := True else cbHoldingsBit12.Checked := False;
+    if (speHoldingsValue.Value and $2000) = $2000 then cbHoldingsBit13.Checked := True else cbHoldingsBit13.Checked := False;
+    if (speHoldingsValue.Value and $4000) = $4000 then cbHoldingsBit14.Checked := True else cbHoldingsBit14.Checked := False;
+    if (speHoldingsValue.Value and $8000) = $8000 then cbHoldingsBit15.Checked := True else cbHoldingsBit15.Checked := False;
+   finally
+    FIsChange := False;
+	 end;
+	except
+   edHoldingsValHex.Text   := '0000';
+   cbHoldingsBit0.Checked  := False;
+   cbHoldingsBit1.Checked  := False;
+   cbHoldingsBit2.Checked  := False;
+   cbHoldingsBit3.Checked  := False;
+   cbHoldingsBit4.Checked  := False;
+   cbHoldingsBit5.Checked  := False;
+   cbHoldingsBit6.Checked  := False;
+   cbHoldingsBit7.Checked  := False;
+   cbHoldingsBit8.Checked  := False;
+   cbHoldingsBit9.Checked  := False;
+   cbHoldingsBit10.Checked := False;
+   cbHoldingsBit11.Checked := False;
+   cbHoldingsBit12.Checked := False;
+   cbHoldingsBit13.Checked := False;
+   cbHoldingsBit14.Checked := False;
+   cbHoldingsBit15.Checked := False;
+  end;
+end;
+
+procedure TfrmDeviceView.UpdateHoldingNumAndBits;
+begin
+  try
+   FIsChange := False;
+   try
+    speHoldingsValue.Value := StrToInt(Format('$%s',[edHoldingsValHex.Text]));
+    if (speHoldingsValue.Value and $0001) = $0001 then cbHoldingsBit0.Checked  := True else cbHoldingsBit0.Checked  := False;
+    if (speHoldingsValue.Value and $0002) = $0002 then cbHoldingsBit1.Checked  := True else cbHoldingsBit1.Checked  := False;
+    if (speHoldingsValue.Value and $0004) = $0004 then cbHoldingsBit2.Checked  := True else cbHoldingsBit2.Checked  := False;
+    if (speHoldingsValue.Value and $0008) = $0008 then cbHoldingsBit3.Checked  := True else cbHoldingsBit3.Checked  := False;
+    if (speHoldingsValue.Value and $0010) = $0010 then cbHoldingsBit4.Checked  := True else cbHoldingsBit4.Checked  := False;
+    if (speHoldingsValue.Value and $0020) = $0020 then cbHoldingsBit5.Checked  := True else cbHoldingsBit5.Checked  := False;
+    if (speHoldingsValue.Value and $0040) = $0040 then cbHoldingsBit6.Checked  := True else cbHoldingsBit6.Checked  := False;
+    if (speHoldingsValue.Value and $0080) = $0080 then cbHoldingsBit7.Checked  := True else cbHoldingsBit7.Checked  := False;
+    if (speHoldingsValue.Value and $0100) = $0100 then cbHoldingsBit8.Checked  := True else cbHoldingsBit8.Checked  := False;
+    if (speHoldingsValue.Value and $0200) = $0200 then cbHoldingsBit9.Checked  := True else cbHoldingsBit9.Checked  := False;
+    if (speHoldingsValue.Value and $0400) = $0400 then cbHoldingsBit10.Checked := True else cbHoldingsBit10.Checked := False;
+    if (speHoldingsValue.Value and $0800) = $0800 then cbHoldingsBit11.Checked := True else cbHoldingsBit11.Checked := False;
+    if (speHoldingsValue.Value and $1000) = $1000 then cbHoldingsBit12.Checked := True else cbHoldingsBit12.Checked := False;
+    if (speHoldingsValue.Value and $2000) = $2000 then cbHoldingsBit13.Checked := True else cbHoldingsBit13.Checked := False;
+    if (speHoldingsValue.Value and $4000) = $4000 then cbHoldingsBit14.Checked := True else cbHoldingsBit14.Checked := False;
+    if (speHoldingsValue.Value and $8000) = $8000 then cbHoldingsBit15.Checked := True else cbHoldingsBit15.Checked := False;
+   finally
+    FIsChange := False;
+	 end;
+  except
+   speHoldingsValue.Value  := 0;
+   cbHoldingsBit0.Checked  := False;
+   cbHoldingsBit1.Checked  := False;
+   cbHoldingsBit2.Checked  := False;
+   cbHoldingsBit3.Checked  := False;
+   cbHoldingsBit4.Checked  := False;
+   cbHoldingsBit5.Checked  := False;
+   cbHoldingsBit6.Checked  := False;
+   cbHoldingsBit7.Checked  := False;
+   cbHoldingsBit8.Checked  := False;
+   cbHoldingsBit9.Checked  := False;
+   cbHoldingsBit10.Checked := False;
+   cbHoldingsBit11.Checked := False;
+   cbHoldingsBit12.Checked := False;
+   cbHoldingsBit13.Checked := False;
+   cbHoldingsBit14.Checked := False;
+   cbHoldingsBit15.Checked := False;
+  end;
+end;
+
+procedure TfrmDeviceView.UpdateInputBits;
+var TempValue : Word;
+begin
+  if FIsChange then Exit;
+
+  TempValue := 0;
+
+  if cbInputsBit0.Checked  then TempValue := (TempValue or $0001) else TempValue := (TempValue and $FFFE);
+  if cbInputsBit1.Checked  then TempValue := (TempValue or $0002) else TempValue := (TempValue and $FFFD);
+  if cbInputsBit2.Checked  then TempValue := (TempValue or $0004) else TempValue := (TempValue and $FFFB);
+  if cbInputsBit3.Checked  then TempValue := (TempValue or $0008) else TempValue := (TempValue and $FFF7);
+  if cbInputsBit4.Checked  then TempValue := (TempValue or $0010) else TempValue := (TempValue and $FFEF);
+  if cbInputsBit5.Checked  then TempValue := (TempValue or $0020) else TempValue := (TempValue and $FFDF);
+  if cbInputsBit6.Checked  then TempValue := (TempValue or $0040) else TempValue := (TempValue and $FFBF);
+  if cbInputsBit7.Checked  then TempValue := (TempValue or $0080) else TempValue := (TempValue and $FF7F);
+  if cbInputsBit8.Checked  then TempValue := (TempValue or $0100) else TempValue := (TempValue and $FEFF);
+  if cbInputsBit9.Checked  then TempValue := (TempValue or $0200) else TempValue := (TempValue and $FDFF);
+  if cbInputsBit10.Checked then TempValue := (TempValue or $0400) else TempValue := (TempValue and $FBFF);
+  if cbInputsBit11.Checked then TempValue := (TempValue or $0800) else TempValue := (TempValue and $F7FF);
+  if cbInputsBit12.Checked then TempValue := (TempValue or $1000) else TempValue := (TempValue and $EFFF);
+  if cbInputsBit13.Checked then TempValue := (TempValue or $2000) else TempValue := (TempValue and $DFFF);
+  if cbInputsBit14.Checked then TempValue := (TempValue or $4000) else TempValue := (TempValue and $BFFF);
+  if cbInputsBit15.Checked then TempValue := (TempValue or $8000) else TempValue := (TempValue and $7FFF);
+
+  speInputsValue.Value := TempValue;
+  edInputsValHex.Text  := IntToHex(TempValue,4);
+end;
+
+procedure TfrmDeviceView.UpdateInputHexAndBits;
+begin
+  try
+   edInputsValHex.Text := IntToHex(speInputsValue.Value,4);
+   FIsChange := True;
+   try
+    if (speInputsValue.Value and $0001) = $0001 then cbInputsBit0.Checked  := True  else cbInputsBit0.Checked := False;
+    if (speInputsValue.Value and $0002) = $0002 then cbInputsBit1.Checked  := True  else cbInputsBit1.Checked := False;
+    if (speInputsValue.Value and $0004) = $0004 then cbInputsBit2.Checked  := True  else cbInputsBit2.Checked := False;
+    if (speInputsValue.Value and $0008) = $0008 then cbInputsBit3.Checked  := True  else cbInputsBit3.Checked := False;
+    if (speInputsValue.Value and $0010) = $0010 then cbInputsBit4.Checked  := True  else cbInputsBit4.Checked := False;
+    if (speInputsValue.Value and $0020) = $0020 then cbInputsBit5.Checked  := True  else cbInputsBit5.Checked := False;
+    if (speInputsValue.Value and $0040) = $0040 then cbInputsBit6.Checked  := True  else cbInputsBit6.Checked := False;
+    if (speInputsValue.Value and $0080) = $0080 then cbInputsBit7.Checked  := True  else cbInputsBit7.Checked := False;
+    if (speInputsValue.Value and $0100) = $0100 then cbInputsBit8.Checked  := True  else cbInputsBit8.Checked := False;
+    if (speInputsValue.Value and $0200) = $0200 then cbInputsBit9.Checked  := True  else cbInputsBit9.Checked := False;
+    if (speInputsValue.Value and $0400) = $0400 then cbInputsBit10.Checked := True else cbInputsBit10.Checked := False;
+    if (speInputsValue.Value and $0800) = $0800 then cbInputsBit11.Checked := True else cbInputsBit11.Checked := False;
+    if (speInputsValue.Value and $1000) = $1000 then cbInputsBit12.Checked := True else cbInputsBit12.Checked := False;
+    if (speInputsValue.Value and $2000) = $2000 then cbInputsBit13.Checked := True else cbInputsBit13.Checked := False;
+    if (speInputsValue.Value and $4000) = $4000 then cbInputsBit14.Checked := True else cbInputsBit14.Checked := False;
+    if (speInputsValue.Value and $8000) = $8000 then cbInputsBit15.Checked := True else cbInputsBit15.Checked := False;
+	 finally
+    FIsChange := False;
+	 end;
+  except
+   edInputsValHex.Text   := '0000';
+   cbInputsBit0.Checked  := False;
+   cbInputsBit1.Checked  := False;
+   cbInputsBit2.Checked  := False;
+   cbInputsBit3.Checked  := False;
+   cbInputsBit4.Checked  := False;
+   cbInputsBit5.Checked  := False;
+   cbInputsBit6.Checked  := False;
+   cbInputsBit7.Checked  := False;
+   cbInputsBit8.Checked  := False;
+   cbInputsBit9.Checked  := False;
+   cbInputsBit10.Checked := False;
+   cbInputsBit11.Checked := False;
+   cbInputsBit12.Checked := False;
+   cbInputsBit13.Checked := False;
+   cbInputsBit14.Checked := False;
+   cbInputsBit15.Checked := False;
+  end;
+end;
+
+procedure TfrmDeviceView.UpdateInputNumAndBits;
+begin
+  try
+   speInputsValue.Value := StrToInt(Format('$%s',[edInputsValHex.Text]));
+   FIsChange := True;
+   try
+    if (speInputsValue.Value and $0001) = $0001 then cbInputsBit0.Checked  := True else cbInputsBit0.Checked := False;
+    if (speInputsValue.Value and $0002) = $0002 then cbInputsBit1.Checked  := True else cbInputsBit1.Checked := False;
+    if (speInputsValue.Value and $0004) = $0004 then cbInputsBit2.Checked  := True else cbInputsBit2.Checked := False;
+    if (speInputsValue.Value and $0008) = $0008 then cbInputsBit3.Checked  := True else cbInputsBit3.Checked := False;
+    if (speInputsValue.Value and $0010) = $0010 then cbInputsBit4.Checked  := True else cbInputsBit4.Checked := False;
+    if (speInputsValue.Value and $0020) = $0020 then cbInputsBit5.Checked  := True else cbInputsBit5.Checked := False;
+    if (speInputsValue.Value and $0040) = $0040 then cbInputsBit6.Checked  := True else cbInputsBit6.Checked := False;
+    if (speInputsValue.Value and $0080) = $0080 then cbInputsBit7.Checked  := True else cbInputsBit7.Checked := False;
+    if (speInputsValue.Value and $0100) = $0100 then cbInputsBit8.Checked  := True else cbInputsBit8.Checked := False;
+    if (speInputsValue.Value and $0200) = $0200 then cbInputsBit9.Checked  := True else cbInputsBit9.Checked := False;
+    if (speInputsValue.Value and $0400) = $0400 then cbInputsBit10.Checked := True else cbInputsBit10.Checked := False;
+    if (speInputsValue.Value and $0800) = $0800 then cbInputsBit11.Checked := True else cbInputsBit11.Checked := False;
+    if (speInputsValue.Value and $1000) = $1000 then cbInputsBit12.Checked := True else cbInputsBit12.Checked := False;
+    if (speInputsValue.Value and $2000) = $2000 then cbInputsBit13.Checked := True else cbInputsBit13.Checked := False;
+    if (speInputsValue.Value and $4000) = $4000 then cbInputsBit14.Checked := True else cbInputsBit14.Checked := False;
+    if (speInputsValue.Value and $8000) = $8000 then cbInputsBit15.Checked := True else cbInputsBit15.Checked := False;
+	 finally
+    FIsChange := False;
+	 end;
+	except
+   speInputsValue.Value  := 0;
+   cbInputsBit0.Checked  := False;
+   cbInputsBit1.Checked  := False;
+   cbInputsBit2.Checked  := False;
+   cbInputsBit3.Checked  := False;
+   cbInputsBit4.Checked  := False;
+   cbInputsBit5.Checked  := False;
+   cbInputsBit6.Checked  := False;
+   cbInputsBit7.Checked  := False;
+   cbInputsBit8.Checked  := False;
+   cbInputsBit9.Checked  := False;
+   cbInputsBit10.Checked := False;
+   cbInputsBit11.Checked := False;
+   cbInputsBit12.Checked := False;
+   cbInputsBit13.Checked := False;
+   cbInputsBit14.Checked := False;
+   cbInputsBit15.Checked := False;
+  end;
 end;
 
 procedure TfrmDeviceView.OnDevChangeProc;
