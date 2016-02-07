@@ -1012,9 +1012,9 @@ end;
 procedure TfrmDeviceView.UpdateHoldingHexAndBits;
 begin
   try
-   edHoldingsValHex.Text := IntToHex(speHoldingsValue.Value,4);
    FIsChange := True;
    try
+    edHoldingsValHex.Text := IntToHex(speHoldingsValue.Value,4);
     if (speHoldingsValue.Value and $0001) = $0001 then cbHoldingsBit0.Checked  := True else cbHoldingsBit0.Checked := False;
     if (speHoldingsValue.Value and $0002) = $0002 then cbHoldingsBit1.Checked  := True else cbHoldingsBit1.Checked := False;
     if (speHoldingsValue.Value and $0004) = $0004 then cbHoldingsBit2.Checked  := True else cbHoldingsBit2.Checked := False;
@@ -1058,7 +1058,7 @@ end;
 procedure TfrmDeviceView.UpdateHoldingNumAndBits;
 begin
   try
-   FIsChange := False;
+   FIsChange := True;
    try
     speHoldingsValue.Value := StrToInt(Format('$%s',[edHoldingsValHex.Text]));
     if (speHoldingsValue.Value and $0001) = $0001 then cbHoldingsBit0.Checked  := True else cbHoldingsBit0.Checked  := False;
@@ -1132,9 +1132,9 @@ end;
 procedure TfrmDeviceView.UpdateInputHexAndBits;
 begin
   try
-   edInputsValHex.Text := IntToHex(speInputsValue.Value,4);
    FIsChange := True;
    try
+    edInputsValHex.Text := IntToHex(speInputsValue.Value,4);
     if (speInputsValue.Value and $0001) = $0001 then cbInputsBit0.Checked  := True  else cbInputsBit0.Checked := False;
     if (speInputsValue.Value and $0002) = $0002 then cbInputsBit1.Checked  := True  else cbInputsBit1.Checked := False;
     if (speInputsValue.Value and $0004) = $0004 then cbInputsBit2.Checked  := True  else cbInputsBit2.Checked := False;
@@ -1178,9 +1178,9 @@ end;
 procedure TfrmDeviceView.UpdateInputNumAndBits;
 begin
   try
-   speInputsValue.Value := StrToInt(Format('$%s',[edInputsValHex.Text]));
    FIsChange := True;
    try
+    speInputsValue.Value := StrToInt(Format('$%s',[edInputsValHex.Text]));
     if (speInputsValue.Value and $0001) = $0001 then cbInputsBit0.Checked  := True else cbInputsBit0.Checked := False;
     if (speInputsValue.Value and $0002) = $0002 then cbInputsBit1.Checked  := True else cbInputsBit1.Checked := False;
     if (speInputsValue.Value and $0004) = $0004 then cbInputsBit2.Checked  := True else cbInputsBit2.Checked := False;

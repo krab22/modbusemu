@@ -27,7 +27,6 @@
           <TopLine Value="243"/>
           <CursorPos X="22" Y="248"/>
         </ExtraEditor1>
-        <ComponentState Value="1"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -73,15 +72,14 @@
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="149"/>
-        <CursorPos X="3" Y="1009"/>
+        <TopLine Value="907"/>
+        <CursorPos X="75" Y="907"/>
         <ExtraEditorCount Value="1"/>
         <ExtraEditor1>
           <EditorIndex Value="-1"/>
           <TopLine Value="227"/>
           <CursorPos X="42" Y="243"/>
         </ExtraEditor1>
-        <ComponentState Value="1"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -165,12 +163,12 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="16" Y="15"/>
-        <UsageCount Value="171"/>
+        <UsageCount Value="172"/>
       </Unit12>
     </Units>
   </ProjectSession>
   <Debugging>
-    <BreakPoints Count="6">
+    <BreakPoints Count="7">
       <Item1>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
@@ -213,6 +211,13 @@
         <Source Value="files/lib/COMPort/COMCrossTypes.pas"/>
         <Line Value="909"/>
       </Item6>
+      <Item7>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="source/DeviceView.pas"/>
+        <Line Value="616"/>
+      </Item7>
     </BreakPoints>
   </Debugging>
 </CONFIG>
