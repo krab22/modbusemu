@@ -1,11 +1,13 @@
 object frmDeviceView: TfrmDeviceView
-  Left = 891
+  Left = 2114
   Height = 754
-  Top = 170
+  Top = 175
   Width = 681
   Caption = 'Просмотр устройства'
   ClientHeight = 754
   ClientWidth = 681
+  Constraints.MinHeight = 754
+  Constraints.MinWidth = 681
   OnClose = FormClose
   Position = poMainFormCenter
   LCLVersion = '1.5'
@@ -32,8 +34,9 @@ object frmDeviceView: TfrmDeviceView
     Height = 705
     Top = 40
     Width = 664
-    ActivePage = tsHoldings
-    TabIndex = 2
+    ActivePage = tsCoils
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    TabIndex = 0
     TabOrder = 0
     object tsCoils: TTabSheet
       Caption = 'Coils'
@@ -44,6 +47,7 @@ object frmDeviceView: TfrmDeviceView
         Height = 532
         Top = 136
         Width = 653
+        Anchors = [akTop, akLeft, akRight, akBottom]
         ColCount = 3
         DefaultRowHeight = 25
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowSelect, goSmoothScroll]
@@ -162,6 +166,7 @@ object frmDeviceView: TfrmDeviceView
           Height = 32
           Top = 63
           Width = 289
+          OnEditingDone = edCoilRegDescriptionEditingDone
           TabOrder = 2
         end
       end
@@ -175,7 +180,17 @@ object frmDeviceView: TfrmDeviceView
         Height = 532
         Top = 136
         Width = 653
+        Anchors = [akTop, akLeft, akRight, akBottom]
         ColCount = 3
+        Columns = <        
+          item
+            Title.Caption = 'Значение'
+            Width = 125
+          end        
+          item
+            Title.Caption = 'Коментарий'
+            Width = 464
+          end>
         DefaultRowHeight = 25
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowSelect, goSmoothScroll]
         RangeSelectMode = rsmMulti
@@ -185,20 +200,17 @@ object frmDeviceView: TfrmDeviceView
         OnSelectCell = sgDiscretsSelectCell
         ColWidths = (
           61
-          119
-          472
+          125
+          464
         )
         Cells = (
-          3
+          2
           0
           0
           'Адрес'
           1
           0
           'Значение'
-          2
-          0
-          'Коментарий'
         )
       end
       object gbDiscretsEditReg: TGroupBox
@@ -294,6 +306,7 @@ object frmDeviceView: TfrmDeviceView
           Height = 32
           Top = 63
           Width = 289
+          OnEditingDone = edDiscretsRegDescriptionEditingDone
           TabOrder = 2
         end
       end
@@ -307,6 +320,7 @@ object frmDeviceView: TfrmDeviceView
         Height = 456
         Top = 211
         Width = 653
+        Anchors = [akTop, akLeft, akRight, akBottom]
         ColCount = 4
         DefaultRowHeight = 25
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowSelect, goSmoothScroll]
@@ -402,6 +416,7 @@ object frmDeviceView: TfrmDeviceView
           Height = 32
           Top = 146
           Width = 392
+          OnEditingDone = edHoldingsRegDescriptionEditingDone
           TabOrder = 1
         end
         object gbHoldingsValue: TGroupBox
@@ -420,6 +435,7 @@ object frmDeviceView: TfrmDeviceView
             Top = 8
             Width = 96
             MaxValue = 65535
+            OnEditingDone = speHoldingsValueEditingDone
             OnKeyUp = speHoldingsValueKeyUp
             OnMouseUp = speHoldingsValueMouseUp
             ParentShowHint = False
@@ -587,6 +603,7 @@ object frmDeviceView: TfrmDeviceView
             Top = 46
             Width = 96
             MaxLength = 4
+            OnEditingDone = edHoldingsValHexEditingDone
             OnKeyPress = edHoldingsValHexKeyPress
             OnKeyUp = edHoldingsValHexKeyUp
             ParentShowHint = False
@@ -606,6 +623,7 @@ object frmDeviceView: TfrmDeviceView
         Height = 453
         Top = 211
         Width = 653
+        Anchors = [akTop, akLeft, akRight, akBottom]
         ColCount = 4
         DefaultRowHeight = 25
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowSelect, goSmoothScroll]
@@ -701,6 +719,7 @@ object frmDeviceView: TfrmDeviceView
           Height = 32
           Top = 146
           Width = 392
+          OnEditingDone = edInputsRegDescriptionEditingDone
           TabOrder = 1
         end
         object gbInputsValue: TGroupBox
@@ -719,6 +738,7 @@ object frmDeviceView: TfrmDeviceView
             Top = 8
             Width = 96
             MaxValue = 65535
+            OnEditingDone = speInputsValueEditingDone
             OnKeyUp = speInputsValueKeyUp
             OnMouseUp = speInputsValueMouseUp
             ParentShowHint = False
@@ -886,6 +906,7 @@ object frmDeviceView: TfrmDeviceView
             Top = 46
             Width = 96
             MaxLength = 4
+            OnEditingDone = edInputsValHexEditingDone
             OnKeyPress = edHoldingsValHexKeyPress
             OnKeyUp = edInputsValHexKeyUp
             ParentShowHint = False

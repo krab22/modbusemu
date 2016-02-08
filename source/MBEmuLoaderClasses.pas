@@ -652,7 +652,7 @@ begin
     NodeRegs := NodeDev.NodeNew(csNodeCoils);
     for i := 0 to Count do
      begin
-      if ADevice.Coils[i].Value = TempDefCoil then Continue;
+      if (ADevice.Coils[i].Value = TempDefCoil) and (ADevice.Coils[i].Description = '') then Continue;
       NodeReg := NodeRegs.NodeNew(csNodeReg);
       NodeReg.AttributeAdd(csAttrAddres, IntToStr(ADevice.Coils[i].RegNumber));
       NodeReg.AttributeAdd(csAttrValue, BoolToStr(ADevice.Coils[i].Value,True));
@@ -666,7 +666,7 @@ begin
     NodeRegs := NodeDev.NodeNew(csNodeDiscr);
     for i := 0 to Count do
      begin
-      if ADevice.Discrets[i].Value = TempDefDiscret then Continue;
+      if (ADevice.Discrets[i].Value = TempDefDiscret) and (ADevice.Discrets[i].Description = '') then Continue;
       NodeReg := NodeRegs.NodeNew(csNodeReg);
       NodeReg.AttributeAdd(csAttrAddres, IntToStr(ADevice.Discrets[i].RegNumber));
       NodeReg.AttributeAdd(csAttrValue, BoolToStr(ADevice.Discrets[i].Value,True));
@@ -680,7 +680,7 @@ begin
     NodeRegs := NodeDev.NodeNew(csNodeHold);
     for i := 0 to Count do
      begin
-      if ADevice.Holdings[i].Value = TempDefHolding then Continue;
+      if (ADevice.Holdings[i].Value = TempDefHolding) and (ADevice.Holdings[i].Description = '') then Continue;
       NodeReg := NodeRegs.NodeNew(csNodeReg);
       NodeReg.AttributeAdd(csAttrAddres, IntToStr(ADevice.Holdings[i].RegNumber));
       NodeReg.AttributeAdd(csAttrValue, IntToStr(ADevice.Holdings[i].Value));
@@ -694,7 +694,7 @@ begin
     NodeRegs := NodeDev.NodeNew(csNodeInp);
     for i := 0 to Count do
      begin
-      if ADevice.Inputs[i].Value = TempDefInput then Continue;
+      if (ADevice.Inputs[i].Value = TempDefInput) and (ADevice.Inputs[i].Description = '') then Continue;
       NodeReg := NodeRegs.NodeNew(csNodeReg);
       NodeReg.AttributeAdd(csAttrAddres, IntToStr(ADevice.Inputs[i].RegNumber));
       NodeReg.AttributeAdd(csAttrValue, IntToStr(ADevice.Inputs[i].Value));

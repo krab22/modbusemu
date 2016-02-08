@@ -167,6 +167,14 @@ type
     procedure sgDiscretsSelectCell(Sender : TObject; aCol, aRow : Integer; var CanSelect : Boolean);
     procedure sgHoldingsSelectCell(Sender : TObject; aCol, aRow : Integer; var CanSelect : Boolean);
     procedure sgInputsSelectCell(Sender : TObject; aCol, aRow : Integer; var CanSelect : Boolean);
+    procedure edHoldingsRegDescriptionEditingDone(Sender : TObject);
+    procedure edHoldingsValHexEditingDone(Sender : TObject);
+    procedure speHoldingsValueEditingDone(Sender : TObject);
+    procedure edInputsRegDescriptionEditingDone(Sender : TObject);
+    procedure edInputsValHexEditingDone(Sender : TObject);
+    procedure speInputsValueEditingDone(Sender : TObject);
+    procedure edDiscretsRegDescriptionEditingDone(Sender : TObject);
+    procedure edCoilRegDescriptionEditingDone(Sender : TObject);
    private
     FDevice       : TMBDevice;
     FCSection     : TCriticalSection;
@@ -256,6 +264,46 @@ begin
     speInputsValue.Value := StrToInt(sgInputs.Cells[1,aRow]);
    end;
   edInputsRegDescription.Text := sgInputs.Cells[3,aRow];
+end;
+
+procedure TfrmDeviceView.edHoldingsRegDescriptionEditingDone(Sender : TObject);
+begin
+  btHoldingsAplyClick(Self);
+end;
+
+procedure TfrmDeviceView.edHoldingsValHexEditingDone(Sender : TObject);
+begin
+  btHoldingsAplyClick(Self);
+end;
+
+procedure TfrmDeviceView.speHoldingsValueEditingDone(Sender : TObject);
+begin
+  btHoldingsAplyClick(Self);
+end;
+
+procedure TfrmDeviceView.edInputsRegDescriptionEditingDone(Sender : TObject);
+begin
+  btInputsAplyClick(Self);
+end;
+
+procedure TfrmDeviceView.edInputsValHexEditingDone(Sender : TObject);
+begin
+  btInputsAplyClick(Self);
+end;
+
+procedure TfrmDeviceView.speInputsValueEditingDone(Sender : TObject);
+begin
+  btInputsAplyClick(Self);
+end;
+
+procedure TfrmDeviceView.edDiscretsRegDescriptionEditingDone(Sender : TObject);
+begin
+  btDiscretsAplyClick(Self);
+end;
+
+procedure TfrmDeviceView.edCoilRegDescriptionEditingDone(Sender : TObject);
+begin
+  btCoilAplyClick(Self);
 end;
 
 procedure TfrmDeviceView.btCoilAplyClick(Sender : TObject);
