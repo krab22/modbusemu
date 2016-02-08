@@ -141,9 +141,9 @@ type
    procedure SetRNGEnable(AValue: Boolean);
    procedure SetRTSEnable(AValue: Boolean);
 
-   procedure SetHardFlowControl(AValue: Boolean);
    procedure SetIsMonitorStatusBit(AValue: Boolean);
 
+   procedure SetHardFlowControl(AValue: Boolean);
    procedure SetSoftFlowControl(AValue: Boolean);
 
    procedure SetParity(AValue: TComPortParity);
@@ -587,8 +587,8 @@ begin
   FDCDEnable := False;
   FRNGEnable := False;
 
-  FSoftFlowControl := False;
-  FHardFlowControl := False;
+  FSoftFlowControl    := False;
+  FHardFlowControl    := False;
 
   FIsRaiseException   := False;
   FIsServerSide       := False;
@@ -598,6 +598,9 @@ begin
   FLastErrorDesc     := '';
 
   FRecvBuffSize      := cCOMSizeRecvBuffer;
+
+  InitDCB;
+
   FPortNumber        := 1;
   {$IFDEF UNIX}
   FPortPrefix := pptLinux;
@@ -722,6 +725,8 @@ begin
     SetLastError(GetLastOSError,'TNPCCustomCOMPort.Open(2)');
     Exit;
    end;
+
+  SendLogMessage(llDebug,'Последовательный порт',Format('%d(0x%s)',[FPortDCB.flags,IntToHex(FPortDCB.flags,8)]));
 
   if not SetCommState(FHandle,FPortDCB) then
    begin
@@ -1382,16 +1387,30 @@ procedure TNPCCustomCOMPort.SetHardFlowControl(AValue: Boolean);
 begin
   if FHardFlowControl=AValue then Exit;
   FHardFlowControl:=AValue;
-  if FHardFlowControl then FPortDCB.Flags := FPortDCB.Flags or dcbFlag_OutxCtsFlow or dcbFlag_RtsControlHandshake
-   else FPortDCB.Flags := FPortDCB.Flags and (not (dcbFlag_OutxCtsFlow or dcbFlag_RtsControlHandshake)) or dcbFlag_RtsControlEnable;
+  if FHardFlowControl then
+   begin
+    SetSoftFlowControl(False);
+    FPortDCB.Flags := FPortDCB.Flags or dcbFlag_OutxCtsFlow or dcbFlag_RtsControlHandshake;
+   end
+  else
+   begin
+    FPortDCB.Flags := (FPortDCB.Flags and (not (dcbFlag_OutxCtsFlow or dcbFlag_RtsControlHandshake)));// or dcbFlag_RtsControlEnable;
+   end;
 end;
 
 procedure TNPCCustomCOMPort.SetSoftFlowControl(AValue: Boolean);
 begin
   if FSoftFlowControl = AValue then Exit;
   FSoftFlowControl := AValue;
-  if FSoftFlowControl then FPortDCB.Flags := FPortDCB.Flags or dcbFlag_OutX or dcbFlag_InX
-   else FPortDCB.Flags := FPortDCB.Flags and (not (dcbFlag_OutX or dcbFlag_InX));
+  if FSoftFlowControl then
+   begin
+    SetHardFlowControl(False);
+    FPortDCB.Flags := FPortDCB.Flags or dcbFlag_OutX or dcbFlag_InX;
+   end
+  else
+   begin
+    FPortDCB.Flags := (FPortDCB.Flags and (not (dcbFlag_OutX or dcbFlag_InX)));
+   end;
 end;
 
 function TNPCCustomCOMPort.GetParity: TComPortParity;
@@ -1436,9 +1455,7 @@ begin
    FPortDCB.EofChar    := cComDCBDefEofChar;
    FPortDCB.EvtChar    := cComDCBDefEvtChar;
    FPortDCB.wReserved1 := cComDCBDefwReserved1;
-   FPortDCB.Flags      := FPortDCB.Flags or
-                          dcbFlag_RtsControlEnable or
-                          dcbFlag_Binary;      // бинарный DCB
+   FPortDCB.Flags      := FPortDCB.Flags or dcbFlag_Binary;      // бинарный DCB
 end;
 
 procedure TNPCCustomCOMPort.SetRecvBuffSize(AValue: Integer);

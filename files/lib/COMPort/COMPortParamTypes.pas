@@ -144,17 +144,17 @@ const
   dcbFlag_ParityCheck         = $00000002;
   dcbFlag_OutxCtsFlow         = $00000004;
   dcbFlag_OutxDsrFlow         = $00000008;
-  dcbFlag_DtrControlMask      = $00000030;
   dcbFlag_DtrControlDisable   = $00000000;
   dcbFlag_DtrControlEnable    = $00000010;
   dcbFlag_DtrControlHandshake = $00000020;
+  dcbFlag_DtrControlMask      = $00000030;
   dcbFlag_DsrSensitvity       = $00000040;
   dcbFlag_TXContinueOnXoff    = $00000080;
   dcbFlag_OutX                = $00000100;
   dcbFlag_InX                 = $00000200;
   dcbFlag_ErrorChar           = $00000400;
   dcbFlag_NullStrip           = $00000800;
-  dcbFlag_RtsControlMask      = $00003000;
+//  dcbFlag_RtsControlMask      = $00003000;
   dcbFlag_RtsControlDisable   = $00000000;
   dcbFlag_RtsControlEnable    = $00001000;
   dcbFlag_RtsControlHandshake = $00002000;
@@ -162,6 +162,10 @@ const
   dcbFlag_AbortOnError        = $00004000;
   dcbFlag_Reserveds           = $FFFF8000;
 
+  // hard - flags = flars or dcbFlag_OutxCtsFlow or dcbFlag_RtsControlHandshake
+  // soft - flags = flags or dcbFlag_OutX or dcbFlag_InX
+  // none - flags = flags and not (dcbFlag_OutxCtsFlow or dcbFlag_RtsControlHandshake)
+  //        flags = flags and not (dcbFlag_OutX or dcbFlag_InX)
 
   cComDCBDefBaudRate   = br9600;
   cComDCBDefFlags      = dcbFlag_Binary+dcbFlag_ParityCheck;
