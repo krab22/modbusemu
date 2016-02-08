@@ -344,7 +344,7 @@ begin
       begin
        TempReg := FDevice.Coils[i];
        TempReg.Value       := TempVal;
-       TempReg.Description := TempDesc;
+//       TempReg.Description := TempDesc;
       end;
    finally
     FDevice.EndPacketUpdate;
@@ -387,7 +387,7 @@ begin
      begin
       TempReg := FDevice.Coils[i];
       TempReg.Value       := TempVal;
-      TempReg.Description := TempDesc;
+//      TempReg.Description := TempDesc;
      end;
    finally
     FDevice.EndPacketUpdate;
@@ -435,7 +435,7 @@ begin
       begin
        TempReg := FDevice.Discrets[i];
        TempReg.ServerSideSetValue(TempVal);
-       TempReg.Description := TempDesc;
+//       TempReg.Description := TempDesc;
       end;
    finally
     FDevice.EndPacketUpdate;
@@ -478,7 +478,7 @@ begin
      begin
       TempReg := FDevice.Discrets[i];
       TempReg.ServerSideSetValue(TempVal);
-      TempReg.Description := TempDesc;
+//      TempReg.Description := TempDesc;
      end;
    finally
     FDevice.EndPacketUpdate;
@@ -526,7 +526,7 @@ begin
       begin
        TempReg := FDevice.Holdings[i];
        TempReg.Value       := TempVal;
-       TempReg.Description := TempDesc;
+//       TempReg.Description := TempDesc;
       end;
    finally
     FDevice.EndPacketUpdate;
@@ -569,7 +569,7 @@ begin
      begin
       TempReg := FDevice.Holdings[i];
       TempReg.Value       := TempVal;
-      TempReg.Description := TempDesc;
+//      TempReg.Description := TempDesc;
      end;
    finally
     FDevice.EndPacketUpdate;
@@ -807,7 +807,7 @@ begin
       begin
        TempReg := FDevice.Inputs[i];
        TempReg.ServerSideSetValue(TempVal);
-       TempReg.Description := TempDesc;
+//       TempReg.Description := TempDesc;
       end;
    finally
     FDevice.EndPacketUpdate;
@@ -850,7 +850,7 @@ begin
      begin
       TempReg := FDevice.Inputs[i];
       TempReg.ServerSideSetValue(TempVal);
-      TempReg.Description := TempDesc;
+//      TempReg.Description := TempDesc;
      end;
    finally
     FDevice.EndPacketUpdate;

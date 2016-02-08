@@ -72,8 +72,8 @@
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="635"/>
-        <CursorPos Y="664"/>
+        <TopLine Value="100"/>
+        <CursorPos X="15" Y="120"/>
         <ExtraEditorCount Value="1"/>
         <ExtraEditor1>
           <EditorIndex Value="-1"/>
