@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=Emulator Modbus
+Name[ru]=Эмулятор Modbus
+Comment=Converting 32-bit, unsigned numbers in different views
+Comment[ru]=Утилита эмуляции Modbus-slave 
+GenericName=Emulators
+GenericName[ru]=Эмуляторы
+Categories=Utility;
+Icon=/usr/share/icons/modbusemu.ico
+Exec=sudo /usr/bin/modbusemu
+Type=Application
+Terminal=false
+Encoding=UTF-8
