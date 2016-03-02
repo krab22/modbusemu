@@ -88,8 +88,18 @@ begin
 end;
 
 function TReaderMBRTUPacket.CheckCRC(Buff : Pointer; BuffSize : Cardinal): Boolean;
+var TempByteArray : PByteArray;
+    TempPackLen : Integer;
 begin
- Result:= GetCRC16(Buff,BuffSize)=0;
+ TempByteArray := PByteArray(Buff);
+ case TempByteArray^[1] of
+  1,2,3,4 : begin
+             TempPackLen := TempByteArray^[2] + 5;
+             Result := GetCRC16(Buff,TempPackLen) = 0;
+            end
+ else
+  Result:= GetCRC16(Buff,BuffSize) = 0;
+ end;
  if not Result then FErrorCode:=ERR_MASTER_CRC;
 end;
 

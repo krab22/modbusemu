@@ -175,6 +175,10 @@ type
     procedure speInputsValueEditingDone(Sender : TObject);
     procedure edDiscretsRegDescriptionEditingDone(Sender : TObject);
     procedure edCoilRegDescriptionEditingDone(Sender : TObject);
+    procedure speInputsRegNumChange(Sender : TObject);
+    procedure speHoldingsRegNumChange(Sender : TObject);
+    procedure speDiscretsRegNumChange(Sender : TObject);
+    procedure speCoilRegNumChange(Sender : TObject);
    private
     FDevice       : TMBDevice;
     FCSection     : TCriticalSection;
@@ -262,6 +266,7 @@ begin
   if sgInputs.Cells[1,aRow] <> '' then
    begin
     speInputsValue.Value := StrToInt(sgInputs.Cells[1,aRow]);
+    UpdateInputHexAndBits;
    end;
   edInputsRegDescription.Text := sgInputs.Cells[3,aRow];
 end;
@@ -306,6 +311,26 @@ begin
   btCoilAplyClick(Self);
 end;
 
+procedure TfrmDeviceView.speInputsRegNumChange(Sender : TObject);
+begin
+  sgInputs.Row := speInputsRegNum.Value + 1;
+end;
+
+procedure TfrmDeviceView.speHoldingsRegNumChange(Sender : TObject);
+begin
+  sgHoldings.Row := speHoldingsRegNum.Value + 1;
+end;
+
+procedure TfrmDeviceView.speDiscretsRegNumChange(Sender : TObject);
+begin
+  sgDiscrets.Row := speDiscretsRegNum.Value + 1;
+end;
+
+procedure TfrmDeviceView.speCoilRegNumChange(Sender : TObject);
+begin
+  sgCoils.Row := speCoilRegNum.Value + 1;
+end;
+
 procedure TfrmDeviceView.btCoilAplyClick(Sender : TObject);
 var TempReg : TMBBitRegister;
 begin
@@ -328,14 +353,14 @@ procedure TfrmDeviceView.btCoilAplyAllClick(Sender : TObject);
 var TempReg  : TMBBitRegister;
     TempVal  : Boolean;
     i, Count : Integer;
-    TempDesc : String;
+//    TempDesc : String;
 begin
   Lock;
   try
    FDevice.BeginPacketUpdate;
    try
     if rbCoilTrue.Checked then TempVal := True else TempVal := False;
-    TempDesc := edCoilRegDescription.Text;
+//    TempDesc := edCoilRegDescription.Text;
     Count := FDevice.CoilCount-1;
 
     Logger.debug(rsDevView9,Format(rsDevView10,[Count+1]));
@@ -360,7 +385,7 @@ var TempReg  : TMBBitRegister;
     i, TempStart,
     TempStop : Integer;
     TempVal  : Boolean;
-    TempDesc : String;
+//    TempDesc : String;
 begin
   TempForm := TfrmRangeEdit.Create(Self);
   try
@@ -377,7 +402,7 @@ begin
   if TempStart > TempStop then raise Exception.Create(rsRageEdit1);
 
   if rbCoilTrue.Checked then TempVal := True else TempVal := False;
-  TempDesc := edCoilRegDescription.Text;
+//  TempDesc := edCoilRegDescription.Text;
 
   Lock;
   try
@@ -419,14 +444,14 @@ procedure TfrmDeviceView.btDiscretsAplyAllClick(Sender : TObject);
 var TempReg  : TMBBitRegister;
     TempVal  : Boolean;
     i, Count : Integer;
-    TempDesc : String;
+//    TempDesc : String;
 begin
   Lock;
   try
    FDevice.BeginPacketUpdate;
    try
     if rbDiscretsTrue.Checked then TempVal := True else TempVal := False;
-    TempDesc := edDiscretsRegDescription.Text;
+//    TempDesc := edDiscretsRegDescription.Text;
     Count := FDevice.DiscretCount-1;
 
     Logger.debug(rsDevView14,Format(rsDevView10,[Count+1]));
@@ -451,7 +476,7 @@ var TempReg  : TMBBitRegister;
     i, TempStart,
     TempStop : Integer;
     TempVal  : Boolean;
-    TempDesc : String;
+//    TempDesc : String;
 begin
   TempForm := TfrmRangeEdit.Create(Self);
   try
@@ -468,7 +493,7 @@ begin
   if TempStart > TempStop then raise Exception.Create(rsRageEdit1);
 
   if rbDiscretsTrue.Checked then TempVal := True else TempVal := False;
-  TempDesc := edDiscretsRegDescription.Text;
+//  TempDesc := edDiscretsRegDescription.Text;
 
   Lock;
   try
@@ -510,14 +535,14 @@ procedure TfrmDeviceView.btHoldingsAplyAllClick(Sender : TObject);
 var TempReg  : TMBWordRegister;
     TempVal  : Word;
     i, Count : Integer;
-    TempDesc : String;
+//    TempDesc : String;
 begin
   Lock;
   try
    FDevice.BeginPacketUpdate;
    try
     TempVal  := Word(speHoldingsValue.Value);
-    TempDesc := edHoldingsRegDescription.Text;
+//    TempDesc := edHoldingsRegDescription.Text;
     Count := FDevice.HoldingCount-1;
 
     Logger.debug(rsDevView12,Format(rsDevView10,[Count+1]));
@@ -542,7 +567,7 @@ var TempReg  : TMBWordRegister;
     i, TempStart,
     TempStop : Integer;
     TempVal  : Word;
-    TempDesc : String;
+//    TempDesc : String;
 begin
   TempForm := TfrmRangeEdit.Create(Self);
   try
@@ -559,7 +584,7 @@ begin
   if TempStart > TempStop then raise Exception.Create(rsRageEdit1);
 
   TempVal := Word(speHoldingsValue.Value);
-  TempDesc := edHoldingsRegDescription.Text;
+//  TempDesc := edHoldingsRegDescription.Text;
 
   Lock;
   try
@@ -791,14 +816,14 @@ procedure TfrmDeviceView.btInputsAplyAllClick(Sender : TObject);
 var TempReg  : TMBWordRegister;
     TempVal  : Word;
     i, Count : Integer;
-    TempDesc : String;
+//    TempDesc : String;
 begin
   Lock;
   try
    FDevice.BeginPacketUpdate;
    try
     TempVal  := Word(speInputsValue.Value);
-    TempDesc := edInputsRegDescription.Text;
+//    TempDesc := edInputsRegDescription.Text;
     Count := FDevice.InputCount-1;
 
     Logger.debug(rsDevView13,Format(rsDevView10,[Count+1]));
@@ -823,7 +848,7 @@ var TempReg  : TMBWordRegister;
     i, TempStart,
     TempStop : Integer;
     TempVal  : Word;
-    TempDesc : String;
+//    TempDesc : String;
 begin
   TempForm := TfrmRangeEdit.Create(Self);
   try
@@ -840,7 +865,7 @@ begin
   if TempStart > TempStop then raise Exception.Create(rsRageEdit1);
 
   TempVal := Word(speInputsValue.Value);
-  TempDesc := edInputsRegDescription.Text;
+//  TempDesc := edInputsRegDescription.Text;
 
   Lock;
   try

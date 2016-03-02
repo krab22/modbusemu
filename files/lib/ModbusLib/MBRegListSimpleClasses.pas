@@ -103,10 +103,12 @@ uses SysUtils,
 { TMBRegSimpleList }
 
 constructor TMBRegSimpleList.Create;
+var i : Integer;
 begin
   FRegListType := rgNone;
   FIsReadOnly  := True;
   FRegCount    := 0;
+  for i := 0 to 65535 do FRegArray[i] := nil;
 end;
 
 destructor TMBRegSimpleList.Destroy;
@@ -118,14 +120,14 @@ end;
 procedure TMBRegSimpleList.Clear;
 var i : Integer;
 begin
-  for i:=0 to MAXWORD do if FRegArray[i]<>nil then FreeAndNil(FRegArray[i]);
+  for i:=0 to MAXWORD do if FRegArray[i] <> nil then FreeAndNil(FRegArray[i]);
   SetLength(FRegRanges,0);
   FRegCount := 0;
 end;
 
 procedure TMBRegSimpleList.Delete(Address: Word);
 begin
-  if FRegArray[Address]= nil then Exit;
+  if FRegArray[Address] = nil then Exit;
   FreeAndNil(FRegArray[Address]);
   Dec(FRegCount);
 end;
@@ -167,7 +169,7 @@ begin
                          end;
   end;
   for i:=0 to MAXWORD do
-   if FRegArray[i]<>nil then FRegArray[i].MBRegType:=FRegListType;
+   if FRegArray[i] <> nil then FRegArray[i].MBRegType := FRegListType;
 end;
 
 function TMBRegSimpleList.IsRangeOnTheList(StartAddr, Count: Word; out Index : Integer): Boolean;
@@ -503,7 +505,7 @@ end;
 procedure TMBRegBitSimpleList.AddReg(Address: Word);
 var TempReg : TMBBitRegister;
 begin
-  if FRegArray[Address]<>nil then Exit;
+  if FRegArray[Address] <> nil then Exit;
   TempReg:=TMBBitRegister.Create;
   TempReg.RegNumber  := Address;
   TempReg.MBRegType  := FRegListType;
@@ -557,12 +559,15 @@ procedure TMBRegWordSimpleList.AddReg(Address: Word);
 var TempReg : TMBWordRegister;
 begin
   if FRegArray[Address]<>nil then Exit;
+
   TempReg:=nil;
-  case FRegDefType of
+ { case FRegDefType of
    rtSimpleWord : TempReg:=TMBWordRegister.Create;
    rtWord       : TempReg:=TMBWordBitRegister.Create;
    rtWordByte   : TempReg:=TMBByteMixedRegister.Create;
-  end;
+  end;}
+
+  TempReg:=TMBWordRegister.Create;
   TempReg.RegNumber  := Address;
   TempReg.MBRegType  := FRegListType;
   TempReg.OnChange   := FOnChange;
@@ -573,11 +578,11 @@ begin
 end;
 
 procedure TMBRegWordSimpleList.DoSetRegDefType(const Value: TRegTypes);
-var TempReg : TMBWordRegister;
-    i : Integer;
+//var TempReg : TMBWordRegister;
+//    i : Integer;
 begin
   if Value = FRegDefType then Exit;
-  if Value = rtBit then raise Exception.Create(rsWordToBitError);
+{  if Value = rtBit then raise Exception.Create(rsWordToBitError);
   for i := 0 to MAXWORD do
    begin
     if FRegArray[i]=nil then Continue;
@@ -596,18 +601,19 @@ begin
                      TMBByteMixedRegister(FRegArray[i]).Assigin(TempReg);
                     end;
     end;
-   end;
+   end;}
   FRegDefType := Value;
 end;
 
 function TMBRegWordSimpleList.GetRegisters(Address: Word): TMBWordRegister;
 begin
-  Result := FRegArray[Address] as TMBWordRegister;
+  Result := nil;
+  if Assigned(FRegArray[Address]) then Result := FRegArray[Address] as TMBWordRegister;
 end;
 
 function TMBRegWordSimpleList.GetValueRegs(Address: Word): Word;
 begin
-  if FRegArray[Address]<>nil then Result:=TMBWordRegister(FRegArray[Address]).Value
+  if FRegArray[Address]<>nil then Result := (FRegArray[Address] as TMBWordRegister).Value
    else raise Exception.Create(Format(rsReAddrNotAssign,[Address]));
 end;
 

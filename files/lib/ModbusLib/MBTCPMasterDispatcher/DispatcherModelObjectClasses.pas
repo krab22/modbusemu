@@ -252,7 +252,7 @@ begin
         TempDevice.PoolingTimeOut           := FPoolingTimeOut;
         TempDevice.LoadFromXML(TempIP,TempPort,TempNode3);
 
-        SendLogMessage(llDebug,rsDevDebug15, Format(rsDevDebug16,[TempDevice.Device.DeviceNum]));
+        SendLogMessage(llDebug,rsDispESSOM, Format(rsDevDebug16,[TempDevice.Device.DeviceNum]));
 
         FObjectDevices.Add(TempDevice);
        end;

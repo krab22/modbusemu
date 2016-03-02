@@ -8,8 +8,11 @@ uses SysUtils, Classes
      {$ENDIF}
      ;
 
-{$IFDEF UNIX}
 const
+  csLocalHostIP   = '127.0.0.1';
+  csBindAllIP     = '0.0.0.0';
+  csLocalHostName = 'localhost';
+{$IFDEF UNIX}
   INVALID_SOCKET = LongInt(-1);
 {$ENDIF}
 

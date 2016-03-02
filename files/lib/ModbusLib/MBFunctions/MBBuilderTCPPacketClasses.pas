@@ -13,7 +13,7 @@ interface
 
 uses Classes,
      MBBuilderPacketClasses,
-     MBInterfaces, MBRequestTypes, MBBuilderBase;
+     MBRequestTypes, MBBuilderBase;
 
 type
 

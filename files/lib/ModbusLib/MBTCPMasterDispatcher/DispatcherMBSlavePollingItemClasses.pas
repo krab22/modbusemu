@@ -37,14 +37,19 @@ type
 
    property Active           : Boolean read FActive write FActive default True;
    property ItemProp         : TMBTCPSlavePollingItem read FItemProp;
-   property Request          : Pointer read FRequest;  // ссылка на память содержащую запрос. Формируется при создании объекта. Разрушается(освобождается) при разрушении объекта. Содержимое зависит от запрашиваемой функции.
+   { Ссылка на память содержащую запрос. Формируется при создании объекта.
+     Разрушается(освобождается) при разрушении объекта. Содержимое зависит от запрашиваемой функции.}
+   property Request          : Pointer read FRequest;
    property RequestSize      : Cardinal read FRequestSize;
-   property ResponseReader   : TReaderMBTCPPacket read FResponseReader; // содержит объект-читатель соответствующий заданной функции
-   property LastResponse     : Pointer read FLastResponse;   // ссылка на память с предыдущим ответом. используется при определении изменений данных на опрашиваемом устройстве
+   // Содержит объект-читатель соответствующий заданной функции
+   property ResponseReader   : TReaderMBTCPPacket read FResponseReader;
+   // Ссылка на память с предыдущим ответом. используется при определении изменений данных на опрашиваемом устройстве
+   property LastResponse     : Pointer read FLastResponse;
    property LastResponseSize : Cardinal read FLastResponseSize;
    property LastError        : Cardinal read FLastError write FLastError;
    property CallBackItfCount : Integer read GetCallBackItfCount;
-   property CallBackItfs[Index : Integer] : IMBDispCallBackItf read GetCallBackItf; // список интерфейсов для пересылки изменений
+   // Список интерфейсов для пересылки изменений
+   property CallBackItfs[Index : Integer] : IMBDispCallBackItf read GetCallBackItf;
   end;
 
   TMBSlavePollingItemArray = array of TMBSlavePollingItem;

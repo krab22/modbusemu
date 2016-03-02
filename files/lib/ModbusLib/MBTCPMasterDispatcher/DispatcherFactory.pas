@@ -50,7 +50,6 @@ begin
   if not Assigned(ModbusDispatcher) then
    begin
     ModbusDispatcher        := TDispatcherModbusMaster.Create(nil);
-//    ModbusDispatcher.AddRef;
     ModbusDispatcher.Logger := LoggerItfVar;
    end;
   Result := ModbusDispatcher as IMBDispatcherItf;
@@ -73,8 +72,7 @@ begin
 
   if Assigned(ModbusDispatcher) then
    begin
-//    ModbusDispatcher.Release;
-    FreeAndNil(ModbusDispatcher); //ModbusDispatcher := nil;
+    FreeAndNil(ModbusDispatcher);
    end;
 
   LoggerItfVar := nil;

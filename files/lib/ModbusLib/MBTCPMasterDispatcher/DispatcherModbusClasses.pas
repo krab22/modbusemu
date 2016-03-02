@@ -131,8 +131,8 @@ end;
 function TDispatcherModbusMaster.SetInputValue(ADevItf: IMBDispDeviceTCPItf; ARegAddress: Word; ARegValue: Word): Boolean; stdcall;
 begin
   Result := False;
-  if not Assigned(ADevItf) then raise Exception.Create(rsSetInputValue11);
-  if not Assigned(FSetThread) then raise Exception.Create(rsSetInputValue12);
+  if not Assigned(ADevItf) then raise Exception.Create(rsSetCoilValue11);
+  if not Assigned(FSetThread) then raise Exception.Create(rsSetCoilValue12);
   FSetThread.AddInputMessage(ADevItf.GetDeviceIP,
                              ADevItf.GetDevicePort,
                              ADevItf.GetDeviceNum,

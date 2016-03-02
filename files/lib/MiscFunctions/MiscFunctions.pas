@@ -1,17 +1,25 @@
-{
-$Author: npcprom\fomin_k $
-$Date: 2013-01-17 16:26:17 +0600 (Thu, 17 Jan 2013) $
-$Rev: 345 $
-}
 unit MiscFunctions;
 
 interface
 
 function SerializeBuff(Buff : Pointer; BuffSize : Cardinal): AnsiString;
+function GetGUIDStr(AClearBraces : Boolean = True) : String;
 
 implementation
 
 uses SysUtils;
+
+function GetGUIDStr(AClearBraces : Boolean = True) : String;
+var TempGUID : TGuid;
+begin
+  CreateGUID(TempGUID);
+  Result := GUIDToString(TempGUID);
+  if AClearBraces then
+   begin
+    Result := StringReplace(Result,'{','',[rfIgnoreCase,rfReplaceAll]);
+    Result := StringReplace(Result,'}','',[rfIgnoreCase,rfReplaceAll]);
+   end;
+end;
 
 function SerializeBuff(Buff : Pointer; BuffSize : Cardinal): AnsiString;
 var TempByteBuff : PByteArray;

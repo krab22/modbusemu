@@ -88,6 +88,7 @@ object frmDeviceView: TfrmDeviceView
           Top = 4
           Width = 90
           MaxValue = 65534
+          OnChange = speCoilRegNumChange
           TabOrder = 0
         end
         object lbCoilRegNum: TLabel
@@ -228,6 +229,7 @@ object frmDeviceView: TfrmDeviceView
           Top = 4
           Width = 90
           MaxValue = 65534
+          OnChange = speDiscretsRegNumChange
           TabOrder = 0
         end
         object lbDiscretsRegNum: TLabel
@@ -366,6 +368,7 @@ object frmDeviceView: TfrmDeviceView
           Top = 4
           Width = 90
           MaxValue = 65534
+          OnChange = speHoldingsRegNumChange
           TabOrder = 0
         end
         object lbHoldingsRegNum: TLabel
@@ -669,6 +672,7 @@ object frmDeviceView: TfrmDeviceView
           Top = 4
           Width = 90
           MaxValue = 65534
+          OnChange = speInputsRegNumChange
           TabOrder = 0
         end
         object lbInputsRegNum: TLabel

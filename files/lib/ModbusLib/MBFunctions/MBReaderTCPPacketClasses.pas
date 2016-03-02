@@ -321,7 +321,7 @@ begin
    end;
   FRegCount:=TemRegValues^.ByteCount div 2;
 
-  for i := 0 to FRegCount-1 do FRegValues[i]:=TemRegValues^.RegValues[i];
+  for i := 0 to FRegCount-1 do FRegValues[i] := Swap(TemRegValues^.RegValues[i]);
 end;
 
 { TReaderMBTCPF5Packet }

@@ -11,9 +11,6 @@ uses Classes, SyncObjs,
      SocketMyTypes, SocketSimpleTypes,
      LoggerItf;
 
-const
-  cLocalHostAddr = '127.0.0.1';
-
 type
 
   TMBSlavePollingThread = class(TThreadLogged)
@@ -108,12 +105,12 @@ begin
        if not FSlaveConnection.Active then
         begin
          SetLastResponseNilToAllItem;
-         SendLogMessage(llInfo,rsDispThread,Format(rsEDispThread1,[FSlaveConnection.Address,TempReconnect/1000]));
+         SendLogMessage(llWarning,rsDispThread,Format(rsEDispThread1,[FSlaveConnection.Address,TempReconnect]));
          Sleep(TempReconnect);
          Reconnect;
          if not FSlaveConnection.Active then
           begin
-           //SendLogMessage(llError,rsDispThread,Format(rsEDispThread2,[FSlaveConnection.Address]));
+//           SendLogMessage(llError,rsDispThread,Format(rsEDispThread2,[FSlaveConnection.Address]));
            Continue;
           end;
         end;
@@ -241,7 +238,7 @@ var TempWordArray : array of Word;
     TempF6Reader : TReaderMBTCPF6Packet;
     i,Count : Integer;
 begin
-   if (RspBuff = nil) or (RespSize =0) or (Item = nil) then Exit;
+   if (RspBuff = nil) or (RespSize = 0) or (Item = nil) then Exit;
 
    // пришедший пакет не отличается от предыдущего
    if IsPackegesSame(Item,RspBuff,RespSize) then Exit;
@@ -289,9 +286,9 @@ begin
          SetLength(TempWordArray, Count+1);
          for i := 0 to Count do TempWordArray[i] :=TempF3Reader.RegValues[i];
 
-//         SendLogMessage(llWarning,'TMBSlavePollingThread.ReadResponse',Format('Устройство %d. Пришли данные.',[TempF3Reader.DeviceAddress]));
-
          SendWordPacket(Item,TempWordArray);
+
+//         SendLogMessage(llWarning,'TMBSlavePollingThread.ReadResponse',Format('Устройство %d. Пришли данные. RegCount: %d',[TempF3Reader.DeviceAddress,TempF3Reader.RegCount]));
         end;
      4: begin
          TempF4Reader := TReaderMBTCPF4Packet(Item.ResponseReader);
@@ -353,16 +350,11 @@ begin
   FSlaveConnection.OnConnect      := @OnConnectProc;
   FSlaveConnection.OnDisconnect   := @OnDisconnect;
   FSlaveConnection.Open;
-//  if FSlaveConnection.Active then
-//   begin
-//    SendErrorToAll(mdeeConnect,0);
-//    SendLogMessage(llInfo,rsDispESSOM,Format(rsDispESSOM1,[FSlaveConnection.Address,FSlaveConnection.Port]));
-//   end;
  except
   on E : Exception do
    begin
     FLastError := FSlaveConnection.LastWaitError;
-    if FLastError = 0 then FLastError := WSAETIMEDOUT;
+    if FLastError = 0 then FLastError := ER_SLAVE_ANSVER_TIMEOUT;
     SendErrorToAll(mdeeConnect,FLastError);
    end;
  end;
@@ -372,11 +364,10 @@ procedure TMBSlavePollingThread.CloseThread;
 begin
   if Assigned(FSlaveConnection) then
    begin
-//    SendLogMessage(llInfo,rsDispESSOM,Format(rsDispESSOM2,[FSlaveConnection.Address,FSlaveConnection.Port]));
+    if FSlaveConnection.Active then FSlaveConnection.Close;
     FreeAndNil(FSlaveConnection);
    end;
-//  SendErrorToAll(mdeeDisconnect,0);
-  FLastError := 0;//Cardinal(-1);
+  FLastError := 0;
 end;
 
 function TMBSlavePollingThread.IsPackegesSame(Item : TMBSlavePollingItem; const NewPackege : Pointer; const PackegeSize : Cardinal): Boolean;
@@ -464,18 +455,29 @@ end;
 procedure TMBSlavePollingThread.SendWordPacket(Item: TMBSlavePollingItem; Packet: array of Word);
 var i, Count : Integer;
 begin
+ try
   Count := Item.CallBackItfCount-1;
   for i := 0 to Count do Item.CallBackItfs[i].ProcessWordRegChangesPackage(Item.ItemProp,Packet);
+ except
+  on E : Exception do
+   begin
+    SendLogMessage(llError,rsDispESSOM,Format(rsEPWRCPack2,[E.Message]));
+end;
+ end;
 end;
 
 procedure TMBSlavePollingThread.SendBoolPacket(Item: TMBSlavePollingItem; Packet: array of Boolean);
 var i, Count : Integer;
 begin
+ try
   Count := Item.CallBackItfCount-1;
-  for i := 0 to Count do
+  for i := 0 to Count do Item.CallBackItfs[i].ProcessBitRegChangesPackage(Item.ItemProp,Packet);
+ except
+  on E : Exception do
    begin
-    Item.CallBackItfs[i].ProcessBitRegChangesPackage(Item.ItemProp,Packet);
+    SendLogMessage(llError,rsDispESSOM,Format(rsEPBRCPack7,[E.Message]));
    end;
+ end;
 end;
 
 procedure TMBSlavePollingThread.OnSocketErrorProc(Source : TObject; ErrorEvent : TErrorEvent; var ErrorCode : Integer);
@@ -493,7 +495,7 @@ end;
 procedure TMBSlavePollingThread.OnDisconnect(ASender : TObject);
 begin
   SendErrorToAll(mdeeDisconnect,0);
-  SendLogMessage(llInfo,rsDispESSOM,Format(rsDispESSOM2,[FSlaveConnection.Address,FSlaveConnection.Port]));
+  SendLogMessage(llWarning,rsDispESSOM,Format(rsDispESSOM2,[FSlaveConnection.Address,FSlaveConnection.Port]));
 end;
 
 procedure TMBSlavePollingThread.SetCSection(const Value: TCriticalSection);

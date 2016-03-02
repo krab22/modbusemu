@@ -34,6 +34,7 @@ var TZ: TTimeZoneInformation;
 {$ENDIF}
 begin
   {$IFDEF MSWINDOWS}
+   TZ.Bias := 0;
    GetTimeZoneInformation(TZ);
    Result := TZ.Bias * SecsPerMin * MSecsPerSec;
   {$ENDIF}
@@ -54,6 +55,7 @@ var  TempPlus : string;
 {$ENDIF}
 begin
   {$IFDEF MSWINDOWS}
+   TZ.Bias := 0;
    GetTimeZoneInformation(TZ);
    if TZ.Bias > 0 then TempPlus := '+'
     else TempPlus := '-';

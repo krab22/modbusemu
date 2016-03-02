@@ -458,7 +458,7 @@ end;
 
 function TMBDevice.GetHoldings(Address: Word): TMBWordRegister;
 begin
-  Result:=FHoldingList.Registers[Address];
+  Result := FHoldingList.Registers[Address];
 end;
 
 function TMBDevice.GetInputCount: Integer;

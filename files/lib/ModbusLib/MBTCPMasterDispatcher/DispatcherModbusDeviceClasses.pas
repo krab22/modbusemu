@@ -204,7 +204,7 @@ begin
    FTCPDevice.AddRegisters(ARangeType,ARegStart,ARegQuantity);
    if not Assigned(FDispatcherItf) then Exit;
 
-   SendLogMessage(llDebug,rsDevDebug1,Format(rsDevDebug2,[ARegStart,ARegQuantity]));
+   SendLogMessage(llDebug,rsDispESSOM,Format(rsDevDebug2,[ARegStart,ARegQuantity]));
 
    GeneretePollingItems;
    TempItf := FDispatcherItf;
@@ -445,32 +445,26 @@ begin
    case EvType of
     mdeeConnect     : begin
                        if Assigned(FOnPollingEvent) then FOnPollingEvent(ItemProp,EvType);
-                       SendLogMessage(llDebug,rsDevDebug3,Format(rsDevDebug4,[ItemProp.RangeID, ItemProp.Item.DevNumber,Code1,Code2]));
                       end;
     mdeeDisconnect  : begin
                        if Assigned(FOnPollingEvent) then FOnPollingEvent(ItemProp,EvType);
                        FTCPDevice.InitializeDevice;
-                       SendLogMessage(llDebug,rsDevDebug3,Format(rsDevDebug5,[ItemProp.RangeID, ItemProp.Item.DevNumber,Code1,Code2]));
                       end;
     mdeeReceive     : begin
                        if Assigned(FOnPollingEvent) then FOnPollingEvent(ItemProp,EvType);
-                       SendLogMessage(llDebug,rsDevDebug3,Format(rsDevDebug6,[ItemProp.RangeID, ItemProp.Item.DevNumber,Code1,Code2]));
                       end;
     mdeeSend        : begin
                        if Assigned(FOnPollingEvent) then FOnPollingEvent(ItemProp,EvType);
-                       SendLogMessage(llDebug,rsDevDebug3,Format(rsDevDebug7,[ItemProp.RangeID, ItemProp.Item.DevNumber,Code1,Code2]));
                       end;
     mdeeMBError     : begin
                        ItemProp.LastError := Code1;
                        FTCPDevice.InitializeDevice;
                        if Assigned(FOnPollingError) then FOnPollingError(ItemProp);
-                       SendLogMessage(llDebug,rsDevDebug3,Format(rsDevDebug8,[ItemProp.RangeID, ItemProp.Item.DevNumber,Code1,Code2]));
                       end;
     mdeeSocketError : begin
                        ItemProp.LastError := Code1;
                        FTCPDevice.InitializeDevice;
                        if Assigned(FOnPollingError) then FOnPollingError(ItemProp);
-                       SendLogMessage(llDebug,rsDevDebug3,Format(rsDevDebug9,[ItemProp.RangeID, ItemProp.Item.DevNumber,Code1,Code2]));
                       end;
    end;
   finally
@@ -592,10 +586,10 @@ begin
      except
       on E : Exception do
        begin
-        raise Exception.CreateFmt(rsSetInputValue1,[ARegNumber,E.Message]);
+        raise Exception.CreateFmt(rsSetCoilValue1,[ARegNumber,E.Message]);
        end;
      end;
-     if not Res then raise Exception.CreateFmt(rsSetInputValue2,[ARegNumber]);
+     if not Res then raise Exception.CreateFmt(rsSetCoilValue2,[ARegNumber]);
     end;
   finally
    UnLock;
@@ -858,7 +852,8 @@ begin
         FDevicePollItms[i+TempPos].SlaveParams.PoolingTimeParam.Interval          := FPoolingInterval;
         FDevicePollItms[i+TempPos].SlaveParams.PoolingTimeParam.ReconnectInterval := FPoolingReconnectInterval;
         FDevicePollItms[i+TempPos].SlaveParams.PoolingTimeParam.TimeOut           := FPoolingTimeOut;
-        SendLogMessage(llDebug,rsDevDebug11,Format(rsDevDebug10,
+
+        SendLogMessage(llDebug,rsDispESSOM,Format(rsDevDebug10,
                                                    [FDevicePollItms[i+TempPos].Item.DevNumber,
                                                     FDevicePollItms[i+TempPos].Item.StartAddr,
                                                     FDevicePollItms[i+TempPos].Item.Quantity]));
@@ -890,7 +885,8 @@ begin
         FDevicePollItms[i+TempPos].SlaveParams.PoolingTimeParam.Interval          := FPoolingInterval;
         FDevicePollItms[i+TempPos].SlaveParams.PoolingTimeParam.ReconnectInterval := FPoolingReconnectInterval;
         FDevicePollItms[i+TempPos].SlaveParams.PoolingTimeParam.TimeOut           := FPoolingTimeOut;
-        SendLogMessage(llDebug,rsDevDebug11,Format(rsDevDebug12,
+
+        SendLogMessage(llDebug,rsDispESSOM,Format(rsDevDebug12,
                                                    [FDevicePollItms[i+TempPos].Item.DevNumber,
                                                     FDevicePollItms[i+TempPos].Item.StartAddr,
                                                     FDevicePollItms[i+TempPos].Item.Quantity]));
@@ -922,7 +918,7 @@ begin
         FDevicePollItms[i+TempPos].SlaveParams.PoolingTimeParam.Interval          := FPoolingInterval;
         FDevicePollItms[i+TempPos].SlaveParams.PoolingTimeParam.ReconnectInterval := FPoolingReconnectInterval;
         FDevicePollItms[i+TempPos].SlaveParams.PoolingTimeParam.TimeOut           := FPoolingTimeOut;
-        SendLogMessage(llDebug,rsDevDebug11,Format(rsDevDebug13,
+        SendLogMessage(llDebug,rsDispESSOM,Format(rsDevDebug13,
                                                    [FDevicePollItms[i+TempPos].Item.DevNumber,
                                                     FDevicePollItms[i+TempPos].Item.StartAddr,
                                                     FDevicePollItms[i+TempPos].Item.Quantity]));
@@ -953,7 +949,7 @@ begin
         FDevicePollItms[i+TempPos].SlaveParams.PoolingTimeParam.Interval          := FPoolingInterval;
         FDevicePollItms[i+TempPos].SlaveParams.PoolingTimeParam.ReconnectInterval := FPoolingReconnectInterval;
         FDevicePollItms[i+TempPos].SlaveParams.PoolingTimeParam.TimeOut           := FPoolingTimeOut;
-        SendLogMessage(llDebug,rsDevDebug11,Format(rsDevDebug14,
+        SendLogMessage(llDebug,rsDispESSOM,Format(rsDevDebug14,
                                                    [FDevicePollItms[i+TempPos].Item.DevNumber,
                                                     FDevicePollItms[i+TempPos].Item.StartAddr,
                                                     FDevicePollItms[i+TempPos].Item.Quantity]));
