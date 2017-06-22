@@ -726,8 +726,6 @@ begin
     Exit;
    end;
 
-  SendLogMessage(llDebug,'Последовательный порт',Format('%d(0x%s)',[FPortDCB.flags,IntToHex(FPortDCB.flags,8)]));
-
   if not SetCommState(FHandle,FPortDCB) then
    begin
     SetLastError(GetLastOSError,'TNPCCustomCOMPort.Open(3)');
@@ -914,10 +912,6 @@ begin
    FillByte(TempOver,SizeOf(TempOver),0);
    TempOver.hEvent := CreateEvent(nil,False,False,'');
 
-   TempLastErr := 0;
-   FillByte(TempCommStat,sizeof(TCOMSTAT),0);
-   ClearCommError(FHandle,TempLastErr,@TempCommStat);
-
    try
     ReadCount := 0;
     ReadRes := ReadFile(FHandle,Buff,Count,ReadCount,@TempOver);
@@ -926,6 +920,7 @@ begin
       LastErr := GetLastOSError;
       if LastErr = ERROR_IO_PENDING then
        begin
+
         if not GetOverlappedResult(FHandle,TempOver,NumRead,True) then
          begin
           LastErr := GetLastError;
@@ -933,6 +928,11 @@ begin
           Result := -1;
           Exit;
          end;
+
+        FlushReadBuff;
+
+//        SendLogMessage(llDebug, 'COMM read overlaped', Format('Read %d bytes',[NumRead]));
+
         Result := NumRead;
         Exit;
        end
@@ -988,7 +988,6 @@ var WriteCount, LastErr,
     ByteToWrite  : DWORD;
     WriteRes     : Boolean;
     TempOver     : TOVERLAPPED;
-    TempEvent    : DWORD;
 {$ENDIF}
 begin
   Result := -1;
@@ -1028,33 +1027,36 @@ begin
    ByteToWrite := Count;
    WriteCount  := 0;
 
-   TempEvent := EV_TXEMPTY;
-   SetCommMask(FHandle,TempEvent);
-
    WriteRes := WriteFile(FHandle,Buff,ByteToWrite,WriteCount,@TempOver);
    if not WriteRes then
     begin  // запись не закончена (асинхронный режим или ошибка)
-     LastErr := GetLastOSError;
+     LastErr := GetLastError;
      if LastErr <> ERROR_IO_PENDING then
       begin
        SetLastError(LastErr,'TNPCCustomCOMPort.WriteData(4)');
        Exit;
       end;
-     if not WaitCommEvent(FHandle,TempEvent,@TempOver) then
-      begin
-       LastErr := GetLastOSError;
-       if LastErr <> ERROR_IO_PENDING then
-        begin
-         SetLastError(LastErr,'TNPCCustomCOMPort.WriteData(5)');
-         Exit;
-        end;
-      end;
-     if not GetOverlappedResult(FHandle,TempOver,WriteCount,True) then // возможна ошибка - запись не окончена - 996 - ERROR_IO_INCOMPLETE
-      begin
-       SetLastError(GetLastOSError,'TNPCCustomCOMPort.WriteData(6)');
+     LastErr := WaitForSingleObject(TempOver.hEvent,1000);
+     case LastErr of
+      WAIT_OBJECT_0 : begin
+                       if not GetOverlappedResult(TempOver.hEvent,TempOver,WriteCount,True) then
+                        begin
+                         SetLastError(GetLastError,'TNPCCustomCOMPort.WriteData(6)');
+                         Exit;
+                        end;
+                      end;
+      WAIT_TIMEOUT : begin
+                      Exit;
+                     end;
+      WAIT_FAILED : begin
+                     SetLastError(GetLastError,'TNPCCustomCOMPort.WriteData(7)');
+                     Exit;
+                    end;
+     else
+       SetLastError(GetLastError,'TNPCCustomCOMPort.WriteData(8)');
        Exit;
-      end;
-     FlushFileBuffers(FHandle);
+     end;
+
      Result := WriteCount;
     end
    else
@@ -1078,13 +1080,11 @@ var TempReadSet : TFDSet;
     TempTick    : Cardinal;
 {$ELSE}
 var TempOver     : TOVERLAPPED;
-    TempTick     : QWord;
     TempErr      : DWORD;
-    TempWaiteRes : DWORD;
     ByteTras     : DWORD;
     TempEvent    : DWORD;
     TempCommStat : TCOMSTAT;
-    TempLastErr  : Cardinal;
+    TempRes      : Boolean;
 {$ENDIF}
 begin
   Result := wrError;
@@ -1095,7 +1095,6 @@ begin
     Exit;
    end;
 
-  TempTick := GetTickCount64;
   Lock;
   try
   {$IFDEF UNIX}
@@ -1119,65 +1118,61 @@ begin
    Result := wrSignaled;
   end;
   {$ELSE}
+
   ByteTras := 0;
+  TempErr := 0;
+  TempEvent := EV_RXCHAR;
+
+  if not GetCommMask(FHandle,TempEvent)then Exit;
+  TempEvent := TempEvent or EV_RXCHAR;
+  if not SetCommMask(FHandle,TempEvent)then Exit;
 
   FillByte(TempOver,sizeof(TOVERLAPPED),0);
-  TempOver.hEvent := CreateEvent(nil,True,True,nil);
-  TempEvent := EV_RXCHAR;
-  SetCommMask(FHandle,TempEvent);
-
-  TempLastErr := 0;
-  FillByte(TempCommStat,sizeof(TCOMSTAT),0);
-  ClearCommError(FHandle,TempLastErr,@TempCommStat);
-
+  TempOver.hEvent := CreateEvent(nil,True,False,nil);
   try
-  if WaitCommEvent(FHandle,TempEvent,@TempOver) then
-   begin
-    if not GetOverlappedResult(FHandle,TempOver,ByteTras,True) then
+    TempEvent := 0;
+    TempRes := WaitCommEvent(FHandle,TempEvent,@TempOver);
+
+    if not TempRes then
      begin
-      SetLastError(GetLastOSError,'TNPCCustomCOMPort.WaitForData(2)');
-      Exit;
+      TempErr := GetLastError;
+      if TempErr <> ERROR_IO_PENDING then
+       begin
+         Result := wrError;
+         SetLastError(TempErr);
+         Exit;
+       end;
+
+      while WaitForSingleObject(TempOver.hEvent,1000) = WAIT_TIMEOUT do Sleep(10);
+      if (TempEvent and EV_RXCHAR) = EV_RXCHAR then
+       begin
+        Result := wrSignaled;
+       end
+      else
+       begin
+        Result := wrTimeout;
+        Exit;
+       end;
      end;
-
-    ClearCommError(FHandle,TempLastErr,@TempCommStat);
-    Result := wrSignaled;
-   end
-  else
-    begin
-     TempErr := GetLastOSError;
-     if TempErr<>ERROR_IO_PENDING then
-      begin
-       SetLastError(TempErr,'TNPCCustomCOMPort.WaitForData(3)');
-       Exit;
-      end;
-
-     TempWaiteRes := WaitForSingleObject(TempOver.hEvent,ATimeOut);
-     case TempWaiteRes of
-       WAIT_OBJECT_0 : begin
-                        if not GetOverlappedResult(FHandle,TempOver,ByteTras,True) then
-                         begin
-                          SetLastError(GetLastOSError,'TNPCCustomCOMPort.WaitForData(4)');
-                          Exit;
-                         end;
-                        ClearCommError(FHandle,TempLastErr,@TempCommStat);
-                        Result := wrSignaled;
-                       end;
-       WAIT_TIMEOUT : begin
-//                       SetLastError(GetLastOSError,'TNPCCustomCOMPort.WaitForData(5)');
-                       Result := wrTimeout;
-                      end;
-       WAIT_FAILED  : begin
-                       SetLastError(GetLastOSError,'TNPCCustomCOMPort.WaitForData(6)');
-                      end;
-      end;
-    end;
   finally
    CloseHandle(TempOver.hEvent);
   end;
+
+  // ждем прихода всех данных
+  TempErr := 0 ;
+  ByteTras := 1;
+  FillChar(TempCommStat,sizeof(TCOMSTAT),0);
+  while (ByteTras<>TempCommStat.cbInQue)do
+   begin
+    Sleep(5);
+    ByteTras := TempCommStat.cbInQue;
+    TempRes := ClearCommError(FHandle,TempErr,@TempCommStat);
+    if not TempRes then Break;
+   end;
+
   {$ENDIF}
 
   finally
-   ATimeOut := GetTickCount64 - TempTick;
    Unlock;
   end;
 end;

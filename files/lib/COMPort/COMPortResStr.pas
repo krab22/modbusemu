@@ -6,15 +6,22 @@ interface
 
 resourcestring
 
+  rsParityNone  = 'Нет';
+  rsParityOdd   = 'Нечетный';
+  rsParityEven  = 'Четный';
+  rsParityMark  = 'Маркер';
+  rsParitySpace = 'Не маркер';
+  rsParityError = 'Ошибка';
+
   rsStopBitError  = 'Недопустимое значение количества стоповых бит.';
   rsSpeedError    = 'Недопустимое значение скорости передачи данных.';
   rsBiteSizeError = 'Недопустимое значение размера байта данных.';
   rsErrPortUninspected  = 'Ошибка. Код ошибки: %d Сообщение: %s';
-  rsErrPortPathOther    = 'Нестандартны путь к порту не задан.';
+  rsErrPortPathOther    = 'Нестандартный путь к порту не задан.';
   rsErrPortAlreadyOpen  = 'Порт уже открыт.';
   rsErrPortNotOpen      = 'Порт не открыт.';
   rsErrPortBuff         = 'Не задан буфер.';
-  rsErrPortBuffSmoll    = 'Слишком маленьки буфер.';
+  rsErrPortBuffSmoll    = 'Слишком маленький буфер.';
   rsErrPortAlreadyClose = 'Порт уже закрыт.';
   rsOther = 'Другой';
 
@@ -38,7 +45,7 @@ resourcestring
   rsCOMErrString15  = 'Категория ошибки: %s. Ошибка : %s';
   rsCOMString1 = 'COM%d-не установлен';
   rsCOMString2 = 'доступен';
-  rsCOMString3 = 'не доступен';
+  rsCOMString3 = 'недоступен';
   rsCOMString4 = 'не установлен';
   rsCOMString5 = 'занят';
 

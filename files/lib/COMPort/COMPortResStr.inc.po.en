@@ -1,0 +1,223 @@
+#: comportresstr.rsbitesizeerror
+msgid "Недопустимое значение размера байта данных."
+msgstr "Invalid size bytes of data."
+
+#: comportresstr.rsclose1
+msgid "%s закрыт"
+msgstr "%s closed"
+
+#: comportresstr.rscomaccessible
+msgid "COM%d доступен."
+msgstr "COM%d available."
+
+#: comportresstr.rscomerrstring1
+msgid "Ошибка линии."
+msgstr "Line error."
+
+#: comportresstr.rscomerrstring10
+msgid "Переполнение входного буфера."
+msgstr "Input buffer overflow."
+
+#: comportresstr.rscomerrstring11
+msgid "Ошибка паритета."
+msgstr "Parity error."
+
+#: comportresstr.rscomerrstring12
+msgid "Переполнение выходного буфера."
+msgstr "Output buffer overflow."
+
+#: comportresstr.rscomerrstring13
+msgid "Неопознанная ошибка."
+msgstr "Undefined error."
+
+#: comportresstr.rscomerrstring14
+msgid "Неизвестная категория ошибки."
+msgstr "Unknown error category."
+
+#: comportresstr.rscomerrstring15
+msgid "Категория ошибки: %s. Ошибка : %s"
+msgstr "Error category: %s. Error: %s"
+
+#: comportresstr.rscomerrstring2
+msgid "Аппаратные средства обнаружили разрыв линии."
+msgstr "Hardware found the line break."
+
+#: comportresstr.rscomerrstring3
+msgid "Параллельное устройство не выбрано."
+msgstr "Parallel device is not selected."
+
+#: comportresstr.rscomerrstring4
+msgid "Аппаратные средства обнаружили ошибку кадровой синхронизации."
+msgstr "Hardware found the frame synchronization error."
+
+#: comportresstr.rscomerrstring5
+msgid "Произошла ошибка ввода/вывода."
+msgstr "I/O error."
+
+#: comportresstr.rscomerrstring6
+msgid "Требуемый режим не поддерживается, или hFile параметр недопустим."
+msgstr "The required mode is not supported, or hFile parameter is incorrect."
+
+#: comportresstr.rscomerrstring7
+msgid "В принтере отсутствует бумага."
+msgstr "Printer is out of paper."
+
+#: comportresstr.rscomerrstring8
+msgid "Произошло переполнение символьного буфера. Следующий символ потерян."
+msgstr "Character buffer overflow. Next character is lost."
+
+#: comportresstr.rscomerrstring9
+msgid "Таймаут на параллельном устройстве."
+msgstr "Parallel device timeout."
+
+#: comportresstr.rscomstring1
+msgid "COM%d-не установлен"
+msgstr "COM%d - is not set"
+
+#: comportresstr.rscomstring2
+msgid "доступен"
+msgstr "available"
+
+#: comportresstr.rscomstring3
+msgid "недоступен"
+msgstr "unavailable"
+
+#: comportresstr.rscomstring4
+msgid "не установлен"
+msgstr "not set"
+
+#: comportresstr.rscomstring5
+msgid "занят"
+msgstr "busy"
+
+#: comportresstr.rscomunaccessible
+msgid "COM%d недоступен."
+msgstr "COM%d is unavailable."
+
+#: comportresstr.rscomunknown
+msgid "COM%d отсутствует."
+msgstr "COM%d is missed."
+
+#: comportresstr.rserrportalreadyclose
+msgid "Порт уже закрыт."
+msgstr "Port is already closed."
+
+#: comportresstr.rserrportalreadyopen
+msgid "Порт уже открыт."
+msgstr "Port is already open."
+
+#: comportresstr.rserrportbuff
+msgid "Не задан буфер."
+msgstr "Buffer is not set."
+
+#: comportresstr.rserrportbuffsmoll
+msgid "Слишком маленьки буфер."
+msgstr "Too small buffer."
+
+#: comportresstr.rserrportnotopen
+msgid "Порт не открыт."
+msgstr "Port is not open."
+
+#: comportresstr.rserrportpathother
+msgid "Нестандартны путь к порту не задан."
+msgstr "Nonstandard path to port is not defined."
+
+#: comportresstr.rserrportuninspected
+msgid "Ошибка. Код ошибки: %d Сообщение: %s"
+msgstr "Error. Error code: %d Message: %s"
+
+#: comportresstr.rsopen1
+msgid "%s открыт"
+msgstr "%s is open"
+
+#: comportresstr.rsother
+msgid "Другой"
+msgstr "Other"
+
+#: comportresstr.rsparityerror
+msgid "Ошибка"
+msgstr "Error"
+
+#: comportresstr.rsparityeven
+msgid "Четный"
+msgstr "Even"
+
+#: comportresstr.rsparitymark
+msgid "Маркер"
+msgstr "Marker"
+
+#: comportresstr.rsparitynone
+msgid "Нет"
+msgstr "No"
+
+#: comportresstr.rsparityodd
+msgid "Нечетный"
+msgstr "Odd"
+
+#: comportresstr.rsparityspace
+msgid "Не маркер"
+msgstr "Space"
+
+#: comportresstr.rsportname
+msgid "Последовательный порт"
+msgstr "Serial port"
+
+#: comportresstr.rsreadbitsstate1
+msgid "Получение бит статуса. Ошибка: %d - %s"
+msgstr "Receiving the status bit. Error: %d - %s"
+
+#: comportresstr.rsreadbitsstate10
+msgid "WaitForData. Ошибка: %s"
+msgstr "WaitForData. Error: %s"
+
+#: comportresstr.rsreadbitsstate11
+msgid "Серверный порт. Ошибка: %d - %s"
+msgstr "Server port. Error: %d - %s"
+
+#: comportresstr.rsreadbitsstate12
+msgid "TNPCServerCOMPortThread.Execute. Ошибка: %s"
+msgstr "TNPCServerCOMPortThread.Execute. Error: %s"
+
+#: comportresstr.rsreadbitsstate2
+msgid "Получение бит статуса. Ошибка: %s"
+msgstr "Receiving the status bit. Error: %s"
+
+#: comportresstr.rsreadbitsstate3
+msgid "OnLEChange. Ошибка: %s"
+msgstr "OnLEChange. Error: %s"
+
+#: comportresstr.rsreadbitsstate4
+msgid "OnCTSChange. Ошибка: %s"
+msgstr "OnCTSChange. Error: %s"
+
+#: comportresstr.rsreadbitsstate5
+msgid "OnDCDChange. Ошибка: %s"
+msgstr "OnDCDChange. Error: %s"
+
+#: comportresstr.rsreadbitsstate6
+msgid "OnDSRChange. Ошибка: %s"
+msgstr "OnDSRChange. Error: %s"
+
+#: comportresstr.rsreadbitsstate7
+msgid "OnRNGChange. Ошибка: %s"
+msgstr "OnRNGChange. Error: %s"
+
+#: comportresstr.rsreadbitsstate8
+msgid "OnRTSChange. Ошибка: %s"
+msgstr "OnRTSChange. Error: %s"
+
+#: comportresstr.rsreadbitsstate9
+msgid "OnDTRChange. Ошибка: %s"
+msgstr "OnDTRChange. Error: %s"
+
+#: comportresstr.rsreaddata1
+msgid "Буфер: %d(%d)"
+msgstr "Buffer: %d(%d)"
+
+#: comportresstr.rsspeederror
+msgid "Недопустимое значение скорости передачи данных."
+msgstr "Incorrect value of data rate."
+
+#: comportresstr.rsstopbiterror
+msgid "Недопустимое значение количества стоповых бит."
+msgstr "Incorrect number of stop bits."

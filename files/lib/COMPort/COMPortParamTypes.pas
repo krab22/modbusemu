@@ -111,7 +111,8 @@ const
   INVALID_HANDLE_VALUE = THandle(-1);
   {$ENDIF}
 
-  ComPortParityNames   : TComPortParityNames =('Нет', 'Нечетный', 'Четный', 'Маркер', 'Не маркер', 'Ошибка');
+  ComPortParityNames   : TComPortParityNames =(rsParityNone, rsParityOdd, rsParityEven, rsParityMark,
+                                               rsParitySpace, rsParityError);
   ComPortParityEngNames: TComPortParityNames =('NONE', 'ODD', 'EVEN', 'MARK', 'SPACE', 'Error');
   {$IFDEF WINDOWS}
   ComPortBaudRateNames : TComPortBaudRateNames = ('75', '110', '150', '300', '600', '1200', '1800',

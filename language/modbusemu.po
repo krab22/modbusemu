@@ -2,645 +2,650 @@ msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
 #: exceptionsresstrings.erremptyparam
-msgid "ÐÐµ Ð·Ð°Ð´Ð°Ð½ Ð¾Ð±ÑÐµÐºÑ Ð´Ð»Ñ Ð¿Ð¾ÑÑÐ°Ð½Ð¾Ð²ÐºÐ¸ Ð² Ð¾ÑÐµÑÐµÐ´Ñ."
+msgid "Не задан объект для постановки в очередь."
 msgstr ""
 
 #: exceptionsresstrings.rschannelisnotactive
-msgid "ÐÐ°Ð½Ð°Ð» Ð½Ðµ Ð¾ÑÐºÑÑÑ."
+msgid "Канал не открыт."
 msgstr ""
 
 #: exceptionsresstrings.rschannellistnotassigned
-msgid "ÐÐµ Ð·Ð°Ð´Ð°Ð½ ÑÐ¿Ð¸ÑÐ¾Ðº ÐºÐ°Ð½Ð°Ð»Ð¾Ð² Ð´Ð»Ñ Ð¾ÑÑÑÐµÑÑÐ²Ð»ÐµÐ½Ð¸Ñ Ð¼Ð¾Ð½Ð¸ÑÐ¾ÑÐ¸Ð½Ð³Ð°."
+msgid "Не задан список каналов для осуществления мониторинга."
 msgstr ""
 
 #: exceptionsresstrings.rsclassnotimplemented
-msgid "ÐÐ»Ð°ÑÑ Ð½Ðµ ÑÐµÐ°Ð»Ð¸Ð·Ð¾Ð²Ð°Ð½"
+msgid "Класс не реализован"
 msgstr ""
 
 #: exceptionsresstrings.rscmsbadid
-msgid "ÐÐ´ÐµÐ½ÑÐ¸ÑÐ¸ÐºÐ°ÑÐ¾Ñ Ð²ÑÑÐ¾Ð´Ð¸Ñ Ð·Ð° Ð´Ð¾Ð¿ÑÑÑÐ¸Ð¼ÑÐ¹ Ð´Ð¸Ð°Ð¿Ð°Ð·Ð¾Ð½."
+msgid "Идентификатор выходит за допустимый диапазон."
 msgstr ""
 
 #: exceptionsresstrings.rscmsbadid1
-msgid "ÐÐ´ÐµÐ½ÑÐ¸ÑÐ¸ÐºÐ°ÑÐ¾Ñ ÑÐ¾ÑÑÐ°(%d) Ð´Ð¾Ð»Ð¶ÐµÐ½ Ð½Ð°ÑÐ¾Ð´Ð¸ÑÑÑÑ Ð² Ð´Ð¸Ð°Ð¿Ð°Ð·Ð¾Ð½Ðµ Ð¾Ñ %d Ð´Ð¾ %d"
+msgid "Идентификатор хоста(%d) должен находиться в диапазоне от %d до %d"
 msgstr ""
 
 #: exceptionsresstrings.rscmsfilenotfound
-msgid "Ð¤Ð°Ð¹Ð» %s Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½."
+msgid "Файл %s не найден."
 msgstr ""
 
 #: exceptionsresstrings.rscmsfilenotfound1
-msgid "Ð¤Ð°Ð¹Ð» Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½."
+msgid "Файл не найден."
 msgstr ""
 
 #: exceptionsresstrings.rscmsload
 msgctxt "exceptionsresstrings.rscmsload"
-msgid "ÐÐ°Ð³ÑÑÐ·ÐºÐ° ÐºÐ¾Ð½ÑÐ¸Ð³ÑÑÐ°ÑÐ¸Ð¸"
+msgid "Загрузка конфигурации"
 msgstr ""
 
 #: exceptionsresstrings.rscmsloaderrorchanlistnotfound
-msgid "ÐÑÑÑÑÑÑÐ²ÑÐµÑ ÑÐµÐ³ ÑÐ¿Ð¸ÑÐºÐ° ÐºÐ°Ð½Ð°Ð»Ð¾Ð²."
+msgid "Отсутствует тег списка каналов."
 msgstr ""
 
 #: exceptionsresstrings.rscmsloaderrorcodepage
-msgid "ÐÐ¾Ð´Ð¾Ð²Ð°Ñ ÑÑÑÐ°Ð½Ð¸ÑÐ° ÐºÐ¾Ð½ÑÐ¸Ð³ÑÑÐ°ÑÐ¸Ð¸ Ð½Ðµ ÑÐ¾Ð¾ÑÐ²ÐµÑÑÑÐ²ÑÐµÑ ÑÑÐµÐ±ÑÐµÐ¼Ð¾Ð¹."
+msgid "Кодовая страница конфигурации не соответствует требуемой."
 msgstr ""
 
 #: exceptionsresstrings.rscmsloaderrorcodepagef
-msgid "ÐÐ¾Ð´Ð¾Ð²Ð°Ñ ÑÑÑÐ°Ð½Ð¸ÑÐ° ÐºÐ¾Ð½ÑÐ¸Ð³ÑÑÐ°ÑÐ¸Ð¸ (%s) Ð½Ðµ ÑÐ¾Ð¾ÑÐ²ÐµÑÑÑÐ²ÑÐµÑ ÑÑÐµÐ±ÑÐµÐ¼Ð¾Ð¹ - %s"
+msgid "Кодовая страница конфигурации (%s) не соответствует требуемой - %s"
 msgstr ""
 
 #: exceptionsresstrings.rscmsloaderrorgetconfpath
-msgid "ÐÐµ ÑÐ´Ð°Ð»Ð¾ÑÑ Ð¿Ð¾Ð»ÑÑÐ¸ÑÑ Ð¿ÑÑÑ Ðº ÑÐ°Ð¹Ð»Ñ ÐºÐ¾Ð½ÑÐ¸Ð³ÑÑÐ°ÑÐ¸Ð¸ ÑÐ¸ÑÑÐµÐ¼Ñ."
+msgid "Не удалось получить путь к файлу конфигурации системы."
 msgstr ""
 
 #: exceptionsresstrings.rscmsloaderrorhostlistisempty
 msgctxt "exceptionsresstrings.rscmsloaderrorhostlistisempty"
-msgid "Ð¡Ð¿Ð¸ÑÐ¾Ðº ÑÑÑÐ¾Ð² Ð¿ÑÑÑ."
+msgid "Список хстов пуст."
 msgstr ""
 
 #: exceptionsresstrings.rscmsloaderrorhostlistnotfound
-msgid "ÐÐµ Ð½Ð°Ð¹Ð´ÐµÐ½ ÑÐµÐ³ ÑÐ¿Ð¸ÑÐºÐ° ÑÐ¾ÑÑÐ¾Ð²."
+msgid "Не найден тег списка хостов."
 msgstr ""
 
 #: exceptionsresstrings.rscmsloaderrorhosttegnotfound
-msgid "ÐÐµ Ð½Ð°Ð¹Ð´ÐµÐ½ ÑÐµÐ³ ÑÐ¾ÑÑÐ° Ð´Ð»Ñ Ð´Ð°Ð½Ð½Ð¾Ð³Ð¾ ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð°."
+msgid "Не найден тег хоста для данного устройства."
 msgstr ""
 
 #: exceptionsresstrings.rscmsloaderroridcstegnotfound
-msgid "Ð¢ÐµÐ³ Ð¿Ð¾Ð´ÑÐ¸ÑÑÐµÐ¼Ñ ÑÐ±Ð¾ÑÐ° Ð¿ÐµÑÐ²Ð¸ÑÐ½Ð¾Ð¹ Ð¸Ð½ÑÐ¾ÑÐ¼Ð°ÑÐ¸Ð¸(IDCS) Ð¾ÑÑÑÑÑÑÐ²ÑÐµÑ."
+msgid "Тег подсистемы сбора первичной информации(IDCS) отсутствует."
 msgstr ""
 
 #: exceptionsresstrings.rscmsloaderroriplistisempty
 msgctxt "exceptionsresstrings.rscmsloaderroriplistisempty"
-msgid "Ð¡Ð¿Ð¸ÑÐ¾Ðº ÑÑÑÐ¾Ð² Ð¿ÑÑÑ."
+msgid "Список хстов пуст."
 msgstr ""
 
 #: exceptionsresstrings.rscmsloaderrormodulelistnotfound
-msgid "ÐÑÑÑÑÑÑÐ²ÑÐµÑ ÑÐ¿Ð¸ÑÐ¾Ðº ModuleList."
+msgid "Отсутствует список ModuleList."
 msgstr ""
 
 #: exceptionsresstrings.rscmsloaderrorprotlistnotfound
-msgid "ÐÑÑÑÑÑÑÐ²ÑÐµÑ ÑÐµÐ³ ÑÐ¿Ð¸ÑÐºÐ° Ð¿ÑÐ¾ÑÐ¾ÐºÐ¾Ð»Ð¾Ð²."
+msgid "Отсутствует тег списка протоколов."
 msgstr ""
 
 #: exceptionsresstrings.rscmsloaderrorrmtchanlistnotfound
-msgid "ÐÑÑÑÑÑÑÐ²ÑÐµÑ ÑÐ¿Ð¸ÑÐ¾Ðº RemoteChannelList."
+msgid "Отсутствует список RemoteChannelList."
 msgstr ""
 
 #: exceptionsresstrings.rscmsloaderrorrmtdevlistnotfound
-msgid "ÐÑÑÑÑÑÑÐ²ÑÐµÑ ÑÐ¿Ð¸ÑÐ¾Ðº RemoteDeviceList."
+msgid "Отсутствует список RemoteDeviceList."
 msgstr ""
 
 #: exceptionsresstrings.rscmsloaderrorrmtprotlistnotfound
-msgid "ÐÑÑÑÑÑÑÐ²ÑÐµÑ ÑÐ¿Ð¸ÑÐ¾Ðº RemoteProtocolList."
+msgid "Отсутствует список RemoteProtocolList."
 msgstr ""
 
 #: exceptionsresstrings.rscmsloaderrorrootname
-msgid "ÐÐ¾ÑÐ½ÐµÐ²Ð¾Ð¹ ÑÐµÐ³ Ð½Ðµ ÑÐ¾Ð¾ÑÐ²ÐµÑÑÑÐ²ÑÐµÑ ÑÑÐµÐ±ÑÐµÐ¼Ð¾Ð¼Ñ."
+msgid "Корневой тег не соответствует требуемому."
 msgstr ""
 
 #: exceptionsresstrings.rscmsloaderrorrootnamef
 msgctxt "exceptionsresstrings.rscmsloaderrorrootnamef"
-msgid "ÐÐ¾ÑÐ½ÐµÐ²Ð¾Ð¹ ÑÐµÐ³ %s Ð½Ðµ ÑÐ¾Ð¾ÑÐ²ÐµÑÑÑÐ²ÑÐµÑ ÑÑÐµÐ±ÑÐµÐ¼Ð¾Ð¼Ñ %s"
+msgid "Корневой тег %s не соответствует требуемому %s"
 msgstr ""
 
 #: exceptionsresstrings.rscmsloaderrorrsmodbusrtunotfound
-msgid "ÐÑÑÑÑÑÑÐ²ÑÐµÑ ÐºÐ¾Ð½ÑÐ¸Ð³ÑÑÐ°ÑÐ¸Ñ Ð¼Ð¾Ð´ÑÐ»Ñ RSModbusRTU."
+msgid "Отсутствует конфигурация модуля RSModbusRTU."
 msgstr ""
 
 #: exceptionsresstrings.rscmsloaderrorsvrchanlistnotfound
-msgid "ÐÑÑÑÑÑÑÐ²ÑÐµÑ ÑÐ¿Ð¸ÑÐ¾Ðº ServerChannelList."
+msgid "Отсутствует список ServerChannelList."
 msgstr ""
 
 #: exceptionsresstrings.rscmsloaderrorsvrdevlistnotfound
-msgid "ÐÑÑÑÑÑÑÐ²ÑÐµÑ ÑÐ¿Ð¸ÑÐ¾Ðº ServerDeviceList."
+msgid "Отсутствует список ServerDeviceList."
 msgstr ""
 
 #: exceptionsresstrings.rscmsloaderrorsvrprotlistnotfound
-msgid "ÐÑÑÑÑÑÑÐ²ÑÐµÑ ÑÐ¿Ð¸ÑÐ¾Ðº ServerProtocolList."
+msgid "Отсутствует список ServerProtocolList."
 msgstr ""
 
 #: exceptionsresstrings.rscommandchannellistisempty
-msgid "Ð¡Ð¿Ð¸ÑÐ¾Ðº ÐºÐ°Ð½Ð°Ð»Ð¾Ð² Ð´Ð»Ñ Ð´Ð¾ÑÑÑÐ¿Ð° Ðº ÑÐ´Ð°Ð»ÐµÐ½Ð½Ð¾Ð¼Ñ ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ñ Ð¿ÑÑÑ."
+msgid "Список каналов для доступа к удаленному устройству пуст."
 msgstr ""
 
 #: exceptionsresstrings.rscommandchannellistnotset
-msgid "ÐÐµ Ð·Ð°Ð´Ð°Ð½ ÑÐ¿Ð¸ÑÐ¾Ðº ÐºÐ°Ð½Ð°Ð»Ð¾Ð² Ð´Ð¾ ÑÐ´Ð°Ð»ÐµÐ½Ð½ÑÑ ÑÑÑÑÐ¾Ð¹ÑÑÐ²."
+msgid "Не задан список каналов до удаленных устройств."
 msgstr ""
 
 #: exceptionsresstrings.rscommanddevitfnotinit
-msgid "ÐÐ¾Ð¼Ð°Ð½Ð´Ð° Ð½Ðµ Ð¸Ð½Ð¸ÑÐ¸Ð°Ð»Ð¸Ð·Ð¸ÑÐ¾Ð²Ð°Ð½Ð° Ð¸Ð½ÑÐµÑÑÐµÐ¹ÑÐ¾Ð¼ ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð°."
+msgid "Команда не инициализирована интерфейсом устройства."
 msgstr ""
 
 #: exceptionsresstrings.rscommandisanotherdevice
-msgid "ÐÐ¾Ð¼Ð°Ð½Ð´Ð° Ð¿ÑÐµÐ´Ð½Ð°Ð·Ð½Ð°ÑÐ°ÐµÑÑÑ Ð´ÑÑÐ³Ð¾Ð¼Ñ ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ñ."
+msgid "Команда предназначается другому устройству."
 msgstr ""
 
 #: exceptionsresstrings.rscommandmbdevnotset
-msgid "ÐÐµ Ð·Ð°Ð´Ð°Ð½ Ð¾Ð±ÑÐµÐºÑ Modbus ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð°."
+msgid "Не задан объект Modbus устройства."
 msgstr ""
 
 #: exceptionsresstrings.rscommandmbdevnumnotset
-msgid "ÐÐµ Ð·Ð°Ð´Ð°Ð½ Ð½Ð¾Ð¼ÐµÑ ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð° Ð´Ð»Ñ ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ."
+msgid "Не задан номер устройства для команды."
 msgstr ""
 
 #: exceptionsresstrings.rscommandsrvprotnotmbprot
-msgid "Ð£ÑÑÐ°Ð½Ð¾Ð²Ð»ÐµÐ½Ð½ÑÐ¹ Ð¿ÑÐ¾ÑÐ¾ÐºÐ¾Ð» Ð½Ðµ Ð¿Ð¾Ð´Ð´ÐµÑÐ¶Ð¸ÑÐ°ÐµÑ ÑÐµÑÐ²ÐµÑÐ½ÑÐ¹ Modbus Ð¿ÑÐ¾ÑÐ¾ÐºÐ¾Ð»."
+msgid "Установленный протокол не поддержифает серверный Modbus протокол."
 msgstr ""
 
 #: exceptionsresstrings.rsdeverrorcommand
-msgid "ÐÑÐ¸Ð±ÐºÐ° Ð²ÑÐ¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ñ ÐºÐ¾Ð¼Ð¼Ð°Ð½Ð´Ñ. %s"
+msgid "Ошибка выполнения комманды. %s"
 msgstr ""
 
 #: exceptionsresstrings.rsdeverrorcommandnotassigned
-msgid "ÐÐ¾Ð¼Ð¼Ð°Ð½Ð´Ð° Ð½Ðµ Ð·Ð°Ð´Ð°Ð½Ð°."
+msgid "Комманда не задана."
 msgstr ""
 
 #: exceptionsresstrings.rsdevicenotassigned
-msgid "ÐÐµ Ð·Ð°Ð´Ð°Ð½Ð¾ ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð¾ Ð´Ð»Ñ Ð¼Ð¾Ð½Ð¸ÑÐ¾ÑÐ¸Ð½Ð³Ð°."
+msgid "Не задано устройство для мониторинга."
 msgstr ""
 
 #: exceptionsresstrings.rsdevloadparamxmlnotassign
-msgid "ÐÐµ Ð·Ð°Ð´Ð°Ð½ ÑÐ·ÐµÐ» XML Ð´Ð»Ñ Ð·Ð°Ð³ÑÑÐ·ÐºÐ¸ Ð¿Ð°ÑÐ°Ð¼ÐµÑÑÐ¾Ð² ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð°."
+msgid "Не задан узел XML для загрузки параметров устройства."
 msgstr ""
 
 #: exceptionsresstrings.rsdevsaveparamxmlnotassign
-msgid "ÐÐµ Ð·Ð°Ð´Ð°Ð½ ÑÐ·ÐµÐ» XML Ð´Ð»Ñ ÑÐ¾ÑÑÐ°Ð½ÐµÐ½Ð¸Ñ Ð¿Ð°ÑÐ°Ð¼ÐµÑÑÐ¾Ð² ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð°."
+msgid "Не задан узел XML для сохранения параметров устройства."
 msgstr ""
 
 #: exceptionsresstrings.rserrchannelisntfound
-msgid "ÐÐ°Ð¿ÑÐ°ÑÐ¸Ð²Ð°ÐµÐ¼ÑÐ¹ ÐºÐ°Ð½Ð°Ð» Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½"
+msgid "Запрашиваемый канал не найден"
 msgstr ""
 
 #: exceptionsresstrings.rserrchannelparaminvalid
-msgid "ÐÑÐ¸Ð±ÐºÐ° Ð² Ð¿Ð°ÑÐ°Ð¼ÐµÑÑÐ°Ñ ÐºÐ°Ð½Ð°Ð»Ð°."
+msgid "Ошибка в параметрах канала."
 msgstr ""
 
 #: exceptionsresstrings.rserrchannelparamnotassiged
-msgid "ÐÐ°ÑÐ°Ð¼ÐµÑÑÑ ÐºÐ°Ð½Ð°Ð»Ð° Ð½Ðµ Ð·Ð°Ð´Ð°Ð½Ñ."
+msgid "Параметры канала не заданы."
 msgstr ""
 
 #: exceptionsresstrings.rserrdeviceparaminvalid
-msgid "ÐÑÐ¸Ð±ÐºÐ° Ð² Ð¿Ð°ÑÐ°Ð¼ÐµÑÑÐ°Ñ ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð°."
+msgid "Ошибка в параметрах устройства."
 msgstr ""
 
 #: exceptionsresstrings.rserritfportparaminvalid
-msgid "ÐÑÐ¸Ð±ÐºÐ° Ð² Ð¿Ð°ÑÐ°Ð¼ÐµÑÑÐ°Ñ Ð¸Ð½ÑÐµÑÑÐµÐ¹ÑÐ½Ð¾Ð³Ð¾ Ð¿Ð¾ÑÑÐ°."
+msgid "Ошибка в параметрах интерфейсного порта."
 msgstr ""
 
 #: exceptionsresstrings.rserritfportparamnotassigned
-msgid "ÐÐµ Ð·Ð°Ð´Ð°Ð½Ñ Ð¿Ð°ÑÐ°Ð¼ÐµÑÑÑ Ð¸Ð½ÑÐµÑÑÐµÐ¹ÑÐ½Ð¾Ð³Ð¾ Ð¿Ð¾ÑÑÐ°."
+msgid "Не заданы параметры интерфейсного порта."
 msgstr ""
 
 #: exceptionsresstrings.rserritfportparamtype
-msgid "ÐÐ»Ð°ÑÑ Ð¿Ð°ÑÐ°Ð¼ÐµÑÑÐ¾Ð² Ð¿Ð¾ÑÑÐ° Ð½Ðµ ÑÐ¾Ð¾ÑÐ²ÐµÑÑÑÐ²ÑÐµÑ ÑÑÐµÐ±ÑÐµÐ¼Ð¾Ð¼Ñ"
+msgid "Класс параметров порта не соответствует требуемому"
 msgstr ""
 
 #: exceptionsresstrings.rserrobjectlistparaminvalid
-msgid "ÐÑÐ¸Ð±ÐºÐ° Ð² Ð¿Ð°ÑÐ°Ð¼ÐµÑÑÐ°Ñ ÑÐ¿Ð¸ÑÐºÐ° Ð¾Ð±ÑÐµÐºÑÐ¾Ð² Ð½Ð°Ð±Ð»ÑÐ´ÐµÐ½Ð¸Ñ"
+msgid "Ошибка в параметрах списка объектов наблюдения"
 msgstr ""
 
 #: exceptionsresstrings.rserrobjectparaminvalid
-msgid "ÐÑÐ¸Ð±ÐºÐ° Ð² Ð¿Ð°ÑÐ°Ð¼ÐµÑÑÐ°Ñ Ð¾Ð±ÑÐµÐºÑÐ° Ð½Ð°Ð±Ð»ÑÐ´ÐµÐ½Ð¸Ñ"
+msgid "Ошибка в параметрах объекта наблюдения"
 msgstr ""
 
 #: exceptionsresstrings.rserrportcustom
-msgid "ÐÑÐ¸Ð±ÐºÐ° Ð¿Ð¾ÑÑÐ°"
+msgid "Ошибка порта"
 msgstr ""
 
 #: exceptionsresstrings.rserrportdataread
-msgid "ÐÑÐ¸Ð±ÐºÐ° ÑÑÐµÐ½Ð¸Ñ Ð´Ð°Ð½Ð½ÑÑ"
+msgid "Ошибка чтения данных"
 msgstr ""
 
 #: exceptionsresstrings.rserrportdatawait
-msgid "ÐÑÐ¸Ð±ÐºÐ° Ð¾Ð¶Ð¸Ð´Ð°Ð½Ð¸Ñ Ð´Ð°Ð½Ð½ÑÑ"
+msgid "Ошибка ожидания данных"
 msgstr ""
 
 #: exceptionsresstrings.rserrportdatawrite
-msgid "ÐÑÐ¸Ð±ÐºÐ° Ð·Ð°Ð¿Ð¸ÑÐ¸ Ð´Ð°Ð½Ð½ÑÑ Ð² Ð¿Ð¾ÑÑ"
+msgid "Ошибка записи данных в порт"
 msgstr ""
 
 #: exceptionsresstrings.rserrportdatawritetimeout
-msgid "ÐÐµ ÑÐ´Ð°Ð»Ð¾ÑÑ Ð·Ð°Ð¿Ð¸ÑÐ°ÑÑ Ð´Ð°Ð½Ð½ÑÐµ Ð² Ð¿Ð¾ÑÑ."
+msgid "Не удалось записать данные в порт."
 msgstr ""
 
 #: exceptionsresstrings.rserrportnotactive
-msgid "ÐÐ¾ÑÑ Ð½Ðµ Ð¾ÑÐºÑÑÑ."
+msgid "Порт не открыт."
 msgstr ""
 
 #: exceptionsresstrings.rserrportnotassigned
-msgid "ÐÐ½ÑÐµÑÑÐµÐ¹ÑÐ½ÑÐ¹ Ð¿Ð¾ÑÑ Ð½Ðµ Ð¾Ð¿ÑÐµÐ´ÐµÐ»ÐµÐ½."
+msgid "Интерфейсный порт не определен."
 msgstr ""
 
 #: exceptionsresstrings.rserrportparinvalid
-msgid "ÐÑÐ¸Ð±ÐºÐ° Ð² Ð¿Ð°ÑÐ°Ð¼ÐµÑÑÐ°Ñ Ð¿Ð¾ÑÑÐ°."
+msgid "Ошибка в параметрах порта."
 msgstr ""
 
 #: exceptionsresstrings.rserrportparityerror
-msgid "ÐÑÐ¸Ð±ÐºÐ° Ð¿Ð°ÑÐ¸ÑÐµÑÐ°."
+msgid "Ошибка паритета."
 msgstr ""
 
 #: exceptionsresstrings.rserrportparnotassigned
-msgid "ÐÐ°ÑÐ°Ð¼ÐµÑÑÑ Ð¿Ð¾ÑÑÐ° Ð½Ðµ Ð·Ð°Ð´Ð°Ð½Ñ."
+msgid "Параметры порта не заданы."
 msgstr ""
 
 #: exceptionsresstrings.rserrrequestdatanotassigned
-msgid "ÐÐµ ÑÐ´Ð°Ð»Ð¾ÑÑ Ð¿Ð¾Ð»ÑÑÐ¸ÑÑ Ð´Ð°Ð½Ð½ÑÐµ Ð¸Ð· Ð·Ð°Ð¿ÑÐ¾ÑÐ°."
+msgid "Не удалось получить данные из запроса."
 msgstr ""
 
 #: exceptionsresstrings.rserrrequestnotassigned
-msgid "ÐÐ°Ð¿ÑÐ¾Ñ Ð½Ðµ Ð¾Ð¿ÑÐµÐ´ÐµÐ»ÐµÐ½."
+msgid "Запрос не определен."
 msgstr ""
 
 #: exceptionsresstrings.rserrresivedatanull
-msgid "ÐÑÐ¸ÑÐµÐ» Ð¾ÑÐ²ÐµÑ Ð½ÑÐ»ÐµÐ²Ð¾Ð¹ Ð´Ð»Ð¸Ð½Ð½Ñ."
+msgid "Пришел ответ нулевой длинны."
 msgstr ""
 
 #: exceptionsresstrings.rserrresivedatatimeout
-msgid "Ð¢Ð°Ð¹Ð¼Ð°ÑÑ Ð¾Ð¶Ð¸Ð´Ð°Ð½Ð¸Ñ Ð¾ÑÐ²ÐµÑÐ° ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð°."
+msgid "Таймаут ожидания ответа устройства."
 msgstr ""
 
 #: exceptionsresstrings.rserrresiveprocnotassigned
-msgid "ÐÐµ ÑÑÑÐ°Ð½Ð¾Ð²Ð»ÐµÐ½Ð° Ð¿ÑÐ¾ÑÐµÐ´ÑÑÐ° Ð²Ð¾Ð·Ð²ÑÐ°ÑÐ° Ð´Ð°Ð½Ð½ÑÑ Ð² Ð¸Ð½ÑÐµÑÑÐµÐ¹ÑÐ½Ð¾Ð¼ Ð¿Ð¾ÑÑÑ."
+msgid "Не установлена процедура возврата данных в интерфейсном порту."
 msgstr ""
 
 #: exceptionsresstrings.rserrunknown
-msgid "ÐÐµÐ¸Ð·Ð²ÐµÑÑÐ½Ð°Ñ Ð¾ÑÐ¸Ð±ÐºÐ°"
+msgid "Неизвестная ошибка"
 msgstr ""
 
 #: exceptionsresstrings.rsexceptadddevalreadyexists
-msgid "Ð£ÑÑÑÐ¾Ð¹ÑÑÐ²Ð¾ Ñ Ð°Ð´ÑÐµÑÐ¾Ð¼ %d ÑÐ¶Ðµ ÑÑÑÐµÑÑÐ²ÑÐµÑ."
+msgid "Устройство с адресом %d уже существует."
 msgstr ""
 
 #: exceptionsresstrings.rsexceptneitherfunctioisnotset
-msgid "ÐÐ¸ Ð¾Ð´Ð½Ð° ÑÑÐ½ÐºÑÐ¸Ñ Ð½Ðµ ÑÑÑÐ°Ð½Ð¾Ð²Ð»ÐµÐ½Ð°"
+msgid "Ни одна функция не установлена"
 msgstr ""
 
 #: exceptionsresstrings.rsexceptsessionid
-msgid "ÐÐ´ÐµÐ½ÑÐ¸ÑÐ¸ÐºÐ°ÑÐ¾Ñ ÑÐµÑÑÐ¸Ð¸ Ð½Ðµ Ð·Ð°Ð´Ð°Ð½"
+msgid "Идентификатор сессии не задан"
 msgstr ""
 
 #: exceptionsresstrings.rsexceptsyetemtype
-msgid "%s ÐÐ°Ð½Ð½ÑÐ¹ ÐºÐ¾Ð¼Ð¿Ð¸Ð»ÑÑÐ¾Ñ ÑÐ°ÑÑÐ¸ÑÐ°Ð½ Ð½Ð° ÑÐ¸Ð¿ ÑÐ¸ÑÑÐµÐ¼Ñ %s. Ð ÐºÐ¾Ð½ÑÐ¸Ð³ÑÑÐ°ÑÐ¸Ð¾Ð½Ð½Ð¾Ð¼ ÑÐ°Ð¹Ð»Ðµ ÑÐ¾Ð´ÐµÑÐ¶Ð¸ÑÑÑ Ð¸Ð½Ð¾Ð¹ ÑÐ¸Ð¿ - %s"
+msgid "%s Данный компилятор расчитан на тип системы %s. В конфигурационном файле содержится иной тип - %s"
 msgstr ""
 
 #: exceptionsresstrings.rsexceptxlmnoattr
-msgid "%s Ð¢ÐµÐ³ %s. ÐÑÑÑÑÑÑÐ²ÑÐµÑ Ð¾Ð±ÑÐ·Ð°ÑÐµÐ»ÑÐ½ÑÐ¹ Ð°ÑÑÐ¸Ð±ÑÑ %s"
+msgid "%s Тег %s. Отсутствует обязательный атрибут %s"
 msgstr ""
 
 #: exceptionsresstrings.rsexceptxlmnonode
-msgid "%s Ð¢ÐµÐ³ %s Ð¾ÑÑÑÑÑÑÐ²ÑÐµÑ Ð² Ð´Ð¾ÐºÑÐ¼ÐµÐ½ÑÐµ"
+msgid "%s Тег %s отсутствует в документе"
 msgstr ""
 
 #: exceptionsresstrings.rsexceptxmlattrval
-msgid "%s Ð¢ÐµÐ³ %s. ÐÑÑÐ¸Ð±ÑÑ %s Ð¸Ð¼ÐµÐµÑ Ð½ÐµÐ´Ð¾Ð¿ÑÑÑÐ¸Ð¼Ð¾Ðµ Ð·Ð½Ð°ÑÐµÐ½Ð¸Ðµ %s"
+msgid "%s Тег %s. Атрибут %s имеет недопустимое значение %s"
 msgstr ""
 
 #: exceptionsresstrings.rsexceptxmlnotassigned
-msgid "ÐÐ±ÑÐµÐºÑ XML Ð´Ð¾ÐºÑÐ¼ÐµÐ½ÑÐ° Ð½Ðµ Ð·Ð°Ð´Ð°Ð½."
+msgid "Объект XML документа не задан."
 msgstr ""
 
 #: exceptionsresstrings.rsmodbuserror
-msgid "ÐÑÐ¸Ð±ÐºÐ° Modbus"
+msgid "Ошибка Modbus"
 msgstr ""
 
 #: exceptionsresstrings.rsnoerror
-msgid "ÐÐµÑ Ð¾ÑÐ¸Ð±ÐºÐ¸."
+msgid "Нет ошибки."
 msgstr ""
 
 #: exceptionsresstrings.rsobjectlistnotassigned
-msgid "ÐÐµ Ð·Ð°Ð´Ð°Ð½ ÑÐ·ÐµÐ» XML Ð´Ð»Ñ Ð·Ð°Ð³ÑÑÐ·ÐºÐ¸ Ð¿Ð°ÑÐ°Ð¼ÐµÑÑÐ¾Ð² ÑÐ¿Ð¸ÑÐºÐ° Ð¾Ð±ÑÐµÐºÑÐ¾Ð² Ð½Ð°Ð±Ð»ÑÐ´ÐµÐ½Ð¸Ñ"
+msgid "Не задан узел XML для загрузки параметров списка объектов наблюдения"
 msgstr ""
 
 #: exceptionsresstrings.rsobjectnotassigned
-msgid "ÐÐµ Ð·Ð°Ð´Ð°Ð½ ÑÐ·ÐµÐ» XML Ð´Ð»Ñ Ð·Ð°Ð³ÑÑÐ·ÐºÐ¸ Ð¿Ð°ÑÐ°Ð¼ÐµÑÑÐ¾Ð² Ð¾Ð±ÑÐµÐºÑÐ° Ð½Ð°Ð±Ð»ÑÐ´ÐµÐ½Ð¸Ñ"
+msgid "Не задан узел XML для загрузки параметров объекта наблюдения"
 msgstr ""
 
 #: exceptionsresstrings.rsportoperationaborted
-msgid "ÐÐ¿ÐµÑÐ°ÑÐ¸Ñ Ð²Ð²Ð¾Ð´Ð°/Ð²ÑÐ²Ð¾Ð´Ð° Ð±ÑÐ»Ð° Ð¿ÑÐµÑÐ²Ð°Ð½Ð° Ð¸Ð·-Ð·Ð° Ð·Ð°Ð²ÐµÑÑÐµÐ½Ð¸Ñ Ð¿Ð¾ÑÐ¾ÐºÐ° ÐºÐ¾Ð¼Ð°Ð½Ð´ Ð¸Ð»Ð¸ Ð¿Ð¾ Ð·Ð°Ð¿ÑÐ¾ÑÑ Ð¿ÑÐ¸Ð»Ð¾Ð¶ÐµÐ½Ð¸Ñ."
+msgid "Операция ввода/вывода была прервана из-за завершения потока команд или по запросу приложения."
 msgstr ""
 
 #: exceptionsresstrings.rsprotdoesnotsupportthiscmd
-msgid "ÐÑÐ¾ÑÐ¾ÐºÐ¾Ð» Ð½Ðµ Ð¿Ð¾Ð´Ð´ÐµÑÐ¶Ð¸Ð²Ð°ÐµÑ Ð´Ð°ÑÑÑÐ¹ ÑÐ¸Ð¿ ÐºÐ¾Ð¼Ð°Ð½Ð´."
+msgid "Протокол не поддерживает даттый тип команд."
 msgstr ""
 
 #: exceptionsresstrings.rsprotidmissing
-msgid "Ð Ð¿Ð°ÑÐ°Ð¼ÐµÑÑÐ°Ñ Ð¾ÑÑÑÑÑÑÐ²ÑÐµÑ Ð¸Ð´ÐµÐ½ÑÐ¸ÑÐ¸ÐºÐ°ÑÐ¾Ñ Ð¿ÑÐ¾ÑÐ¾ÐºÐ¾Ð»Ð°."
+msgid "В параметрах отсутствует идентификатор протокола."
 msgstr ""
 
 #: exceptionsresstrings.rsprotidrefersanotherprotocol
-msgid "ÐÐ´ÐµÐ½ÑÐ¸ÑÐ¸ÐºÐ°ÑÐ¾Ñ Ð¾ÑÐ½Ð¾ÑÐ¸ÑÑÑ Ðº Ð´ÑÑÐ³Ð¾Ð¼Ñ Ð¿ÑÐ¾ÑÐ¾ÐºÐ¾Ð»Ñ."
+msgid "Идентификатор относится к другому протоколу."
 msgstr ""
 
 #: exceptionsresstrings.rsprotloadparamxmlnotassign
-msgid "ÐÐµ Ð·Ð°Ð´Ð°Ð½ ÑÐ·ÐµÐ» XML Ð´Ð»Ñ Ð·Ð°Ð³ÑÑÐ·ÐºÐ¸ Ð¿Ð°ÑÐ°Ð¼ÐµÑÑÐ¾Ð² Ð¿ÑÐ¾ÑÐ¾ÐºÐ¾Ð»Ð°."
+msgid "Не задан узел XML для загрузки параметров протокола."
 msgstr ""
 
 #: exceptionsresstrings.rsprotnotsupport
-msgid "ÐÑÐ¾ÑÐ¾ÐºÐ¾Ð» Ð½Ðµ Ð¿Ð¾Ð´Ð´ÐµÑÐ¶Ð¸Ð²Ð°ÐµÑÑÑ."
+msgid "Протокол не поддерживается."
 msgstr ""
 
 #: exceptionsresstrings.rsprottypeisincorrect
-msgid "Ð¢Ð¸Ð¿ Ð¿ÑÐ¾ÑÐ¾ÐºÐ¾Ð»Ð° Ð·Ð°Ð´Ð°Ð½ Ð½Ðµ Ð²ÐµÑÐ½Ð¾."
+msgid "Тип протокола задан не верно."
 msgstr ""
 
 #: exceptionsresstrings.rssysgetmem
-msgid "ÐÑÐ¸Ð±ÐºÐ° Ð²ÑÐ´ÐµÐ»ÐµÐ½Ð¸Ñ Ð¿Ð°Ð¼ÑÑÐ¸"
+msgid "Ошибка выделения памяти"
 msgstr ""
 
 #: exceptionsresstrings.rsxmlloaddevfuncnotassign
-msgid "Ð ÐºÐ¾Ð½ÑÐ¸Ð³ÑÑÐ°ÑÐ¸Ð¸ Ð½Ðµ Ð·Ð°Ð´Ð°Ð½Ñ ÑÑÐ½ÐºÑÐ¸Ð¸ Ð¿Ð¾Ð´Ð´ÐµÑÐ¶Ð¸Ð²Ð°ÐµÐ¼ÑÐµ ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð¾Ð¼."
+msgid "В конфигурации не заданы функции поддерживаемые устройством."
 msgstr ""
 
 #: exceptionsresstrings.rsxmlloaddevtypeerror
-msgid "Ð¢Ð¸Ð¿ ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð° Ð½Ðµ ÑÐ¾Ð¾ÑÐ²ÐµÑÑÑÐ²ÑÐµÑ ÑÐ¸Ð¿Ñ ÑÐºÐ°Ð·Ð°Ð½Ð½Ð¾Ð¼Ñ Ð² Ð¿Ð°ÑÐ°Ð¼ÐµÑÑÐ°Ñ."
+msgid "Тип устройства не соответствует типу указанному в параметрах."
 msgstr ""
 
 #: exceptionsresstrings.rsxmlloaderror
-msgid "ÐÑÐ¸Ð±ÐºÐ° Ð·Ð°Ð³ÑÑÐ·ÐºÐ¸ ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð°"
+msgid "Ошибка загрузки устройства"
 msgstr ""
 
 #: exceptionsresstrings.rsxmlloadoutofrangeid
-msgid "ÐÐµ Ð·Ð°Ð´Ð°Ð½ Ð¸Ð´ÐµÐ½ÑÐ¸ÑÐ¸ÐºÐ°ÑÐ¾Ñ Ð´Ð¸Ð°Ð¿Ð°Ð·Ð¾Ð½Ð° Ð°Ð´ÑÐµÑÐ¾Ð²."
+msgid "Не задан идентификатор диапазона адресов."
 msgstr ""
 
 #: exceptionsresstrings.rsxmlloadoutofrangeofaddr
-msgid "ÐÑÑÐ¾Ð´ Ð·Ð° Ð¿ÑÐµÐ´ÐµÐ»Ñ Ð´Ð¾Ð¿ÑÑÑÐ¸Ð¼Ð¾Ð³Ð¾ Ð´Ð¸Ð°Ð¿Ð°Ð·Ð¾Ð½Ð° Ð°Ð´ÑÐµÑÐ¾Ð²."
+msgid "Выход за пределы допустимого диапазона адресов."
 msgstr ""
 
 #: exceptionsresstrings.rsxmlloadoutofrangeofreg
-msgid "ÐÑÑÐ¾Ð´ Ð·Ð° Ð¿ÑÐµÐ´ÐµÐ»Ñ Ð´Ð¾Ð¿ÑÑÑÐ¸Ð¼Ð¾Ð³Ð¾ Ð´Ð¸Ð°Ð¿Ð°Ð·Ð¾Ð½Ð° ÐºÐ¾Ð»Ð¸ÑÐµÑÑÐ²Ð° ÑÐµÐ³Ð¸ÑÑÑÐ¾Ð²."
+msgid "Выход за пределы допустимого диапазона количества регистров."
 msgstr ""
 
 #: exceptionsresstrings.rs_master_buff_not_assignet
-msgid "ÐÐµÑÐµÐ´Ð°Ð½ Ð¿ÑÑÑÐ¾Ð¹ Ð±ÑÑÐµÑ."
+msgid "Передан пустой буфер."
 msgstr ""
 
 #: exceptionsresstrings.rs_master_crc
-msgid "ÐÑÐ¸Ð±ÐºÐ° ÑÐ°ÑÑÐµÑÐ° CRC16 Ð¿Ð¾Ð»ÑÑÐµÐ½Ð½Ð¾Ð³Ð¾ Ð¿Ð°ÐºÐµÑÐ°."
+msgid "Ошибка расчета CRC16 полученного пакета."
 msgstr ""
 
 #: exceptionsresstrings.rs_master_device_address
-msgid "ÐÐ°ÐºÐµÑ Ð¿ÑÐµÐ´Ð½Ð°Ð·Ð½Ð°ÑÐµÐ½ Ð´ÑÑÐ³Ð¾Ð¼Ñ ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ñ."
+msgid "Пакет предназначен другому устройству."
 msgstr ""
 
 #: exceptionsresstrings.rs_master_f3_len
-msgid "ÐÐµÐ²ÐµÑÐ½Ð°Ñ Ð´Ð»Ð¸Ð½Ð° Ð¿Ð°ÐºÐµÑÐ°."
+msgid "Неверная длина пакета."
 msgstr ""
 
 #: exceptionsresstrings.rs_master_f72_chkrkey
-msgid "ÐÐ»ÑÑÑ Ð¿ÐµÑÐµÐ´Ð°Ð½Ð½ÑÐ¹ Ð² Ð¾ÑÐ²ÐµÑÐµ Ð½Ðµ ÑÐ¾Ð¾ÑÐ²ÐµÑÑÑÐ²ÑÐµÑ Ð¾Ð¶Ð¸Ð´Ð°ÐµÐ¼Ð¾Ð¼Ñ."
+msgid "Ключь переданный в ответе не соответствует ожидаемому."
 msgstr ""
 
 #: exceptionsresstrings.rs_master_f72_crc
-msgid "ÐÑÐ¸Ð±ÐºÐ° CRC Ð±Ð»Ð¾ÐºÐ° Ð´Ð°Ð½Ð½ÑÑ."
+msgid "Ошибка CRC блока данных."
 msgstr ""
 
 #: exceptionsresstrings.rs_master_f72_quantity
-msgid "ÐÐ¾Ð»Ð¸ÑÐµÑÑÐ²Ð¾ ÑÐµÐ³Ð¸ÑÑÑÐ¾Ð² Ð² Ð¾ÑÐ²ÐµÑÐµ Ð²ÑÑÐ¾Ð´Ð¸Ñ Ð·Ð° Ð´Ð¾Ð¿ÑÑÑÐ¸Ð¼ÑÐ¹ Ð´Ð°Ð¿Ð°Ð·Ð¾Ð½."
+msgid "Количество регистров в ответе выходит за допустимый дапазон."
 msgstr ""
 
 #: exceptionsresstrings.rs_master_fifo_count
-msgid "ÐÐ¾Ð»Ð¸ÑÐµÑÑÐ²Ð¾ FIFO ÑÐµÐ³Ð¸ÑÑÑÐ¾Ð² Ð¿ÑÐµÐ²ÑÑÐ°ÐµÑ Ð´Ð¾Ð¿ÑÑÑÐ¸Ð¼Ð¾Ðµ."
+msgid "Количество FIFO регистров превышает допустимое."
 msgstr ""
 
 #: exceptionsresstrings.rs_master_function_code
-msgid "ÐÐµÐ²ÐµÑÐ½ÑÐ¹ ÐºÐ¾Ð´ ÑÑÐ½ÐºÑÐ¸Ð¸ Ð² Ð¾ÑÐ²ÐµÑÐ½Ð¾Ð¼ ÑÐ¾Ð¾Ð±ÑÐµÐ½Ð¸Ð¸."
+msgid "Неверный код функции в ответном сообщении."
 msgstr ""
 
 #: exceptionsresstrings.rs_master_get_memory
-msgid "Ð¡Ð¸ÑÑÐµÐ¼Ð½Ð°Ñ Ð¾ÑÐ¸Ð±ÐºÐ°.  ÐÐ¾Ð´ Ð¾ÑÐ¸Ð±ÐºÐ¸: %d. - %s"
+msgid "Системная ошибка.  Код ошибки: %d. - %s"
 msgstr ""
 
 #: exceptionsresstrings.rs_master_mei
-msgid "Ð¤ÑÐ½ÐºÑÐ¸Ñ 43. ÐÐ°Ð½Ð½ÑÐ¹ MEI Ð½Ðµ Ð¿Ð¾Ð´Ð´ÐµÑÐ¶Ð¸Ð²Ð°ÐµÑÑÑ."
+msgid "Функция 43. Данный MEI не поддерживается."
 msgstr ""
 
 #: exceptionsresstrings.rs_master_morefollows
-msgid "ÐÐµÐ´Ð¾Ð¿ÑÑÑÐ¸Ð¼Ð¾Ðµ Ð·Ð½Ð°ÑÐµÐ½Ð¸Ðµ MoreFollows."
+msgid "Недопустимое значение MoreFollows."
 msgstr ""
 
 #: exceptionsresstrings.rs_master_quantity
-msgid "ÐÐ¾Ð»Ð¸ÑÐµÑÑÐ²Ð¾ Ð·Ð°Ð¿Ð¸ÑÐ°Ð½Ð½ÑÑ ÑÐµÐ³Ð¸ÑÑÑÐ¾Ð² Ð¿ÑÐµÐ²ÑÑÐ°ÐµÑ Ð´Ð¾Ð¿ÑÑÑÐ¸Ð¼Ð¾Ðµ."
+msgid "Количество записанных регистров превышает допустимое."
 msgstr ""
 
 #: exceptionsresstrings.rs_master_rdic
-msgid "ÐÐ°Ð½Ð½ÑÐ¹ ÐºÐ¾Ð´ ÑÑÐµÐ½Ð¸Ñ ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð° Ð½Ðµ ÑÐµÐ°Ð»Ð¸Ð·Ð¾Ð²Ð°Ð½."
+msgid "Данный код чтения устройства не реализован."
 msgstr ""
 
 #: exceptionsresstrings.rs_master_word_read
-msgid "ÐÐµÑÐµÐ´Ð°Ð½Ð¾ Ð½Ðµ ÑÐµÑÐ½Ð¾Ðµ ÐºÐ¾Ð»Ð¸ÑÐµÑÑÐ²Ð¾ Ð±Ð°Ð¹Ñ."
+msgid "Передано не четное количество байт."
 msgstr ""
 
 #: exceptionsresstrings.rs_mb_acknowledge
-msgid "ÐÐ°Ð¿ÑÐ¾Ñ Ð¿ÑÐ¸Ð½ÑÑ. ÐÑÐ¿Ð¾Ð»Ð½ÑÐµÑÑÑ Ð´Ð»Ð¸ÑÐµÐ»ÑÐ½Ð°Ñ Ð¾Ð¿ÐµÑÐ°ÑÐ¸Ñ."
+msgid "Запрос принят. Выполняется длительная операция."
 msgstr ""
 
 #: exceptionsresstrings.rs_mb_err_custom
-msgid "ÐÑÐ¸Ð±ÐºÐ° Modbus: %s"
+msgid "Ошибка Modbus: %s"
 msgstr ""
 
 #: exceptionsresstrings.rs_mb_gatway_path_unavailable
-msgid "ÐÑÐ¸Ð±ÐºÐ° Ð¼Ð°ÑÑÑÑÑÐ¸Ð·Ð°ÑÐ¸Ð¸."
+msgid "Ошибка маршрутизации."
 msgstr ""
 
 #: exceptionsresstrings.rs_mb_gatway_target_device_failed_respond
-msgid "ÐÐ°Ð¿ÑÐ°ÑÐ¸Ð²Ð°ÐµÐ¼Ð¾Ðµ ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð¾ Ð½Ðµ Ð¾ÑÐ²ÐµÑÐ¸Ð»Ð¾."
+msgid "Запрашиваемое устройство не ответило."
 msgstr ""
 
 #: exceptionsresstrings.rs_mb_illegal_data_address
-msgid "ÐÐµÐ´Ð¾Ð¿ÑÑÑÐ¸Ð¼ÑÐ¹ Ð°Ð´ÑÐµÑ Ð´Ð°Ð½Ð½ÑÑ, Ð¿Ð¾Ð»ÑÑÐµÐ½Ð½ÑÐ¹ Ð² Ð·Ð°Ð¿ÑÐ¾ÑÐµ."
+msgid "Недопустимый адрес данных, полученный в запросе."
 msgstr ""
 
 #: exceptionsresstrings.rs_mb_illegal_data_value
-msgid "ÐÐµÐ´Ð¾Ð¿ÑÑÑÐ¸Ð¼ÑÐµ Ð·Ð½Ð°ÑÐµÐ½Ð¸Ñ, Ð¿Ð¾Ð»ÑÑÐµÐ½Ð½ÑÐµ Ð² Ð¿Ð¾Ð»Ðµ Ð´Ð°Ð½Ð½ÑÑ Ð·Ð°Ð¿ÑÐ¾ÑÐ°."
+msgid "Недопустимые значения, полученные в поле данных запроса."
 msgstr ""
 
 #: exceptionsresstrings.rs_mb_illegal_function
-msgid "ÐÐµÐ´Ð¾Ð¿ÑÑÑÐ¸Ð¼ÑÐ¹ ÑÐ¸Ð¿ ÑÑÐ½ÐºÑÐ¸Ð¸, Ð¿Ð¾Ð»ÑÑÐµÐ½Ð½ÑÐ¹ Ð² Ð·Ð°Ð¿ÑÐ¾ÑÐµ."
+msgid "Недопустимый тип функции, полученный в запросе."
 msgstr ""
 
 #: exceptionsresstrings.rs_mb_memory_parity_error
-msgid "ÐÑÐ¸ ÑÑÐµÐ½Ð¸Ð¸ ÑÐ°Ð¹Ð»Ð° Ð¾Ð±Ð½Ð°ÑÑÐ¶ÐµÐ½Ð° Ð¾ÑÐ¸Ð±ÐºÐ° ÑÐµÑÐ½Ð¾ÑÑÐ¸ Ð¿Ð°Ð¼ÑÑÐ¸."
+msgid "При чтении файла обнаружена ошибка четности памяти."
 msgstr ""
 
 #: exceptionsresstrings.rs_mb_slave_device_busy
-msgid "Ð£ÑÑÑÐ¾Ð¹ÑÑÐ²Ð¾ Ð·Ð°Ð½ÑÑÐ¾. ÐÐ¾Ð²ÑÐ¾ÑÐ¸ÑÐµ Ð·Ð°Ð¿ÑÐ¾Ñ Ð¿Ð¾Ð·Ð¶Ðµ."
+msgid "Устройство занято. Повторите запрос позже."
 msgstr ""
 
 #: exceptionsresstrings.rs_mb_slave_device_failure
-msgid "ÐÐµÑÑÑÑÐ°Ð½Ð¸Ð¼Ð°Ñ Ð¾ÑÐ¸Ð±ÐºÐ° Ð¿ÑÐ¸ Ð¾Ð±ÑÐ°Ð±Ð¾ÑÐºÐµ ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð¾Ð¼ Ð¿Ð¾Ð»ÑÑÐµÐ½Ð½Ð¾Ð³Ð¾ Ð·Ð°Ð¿ÑÐ¾ÑÐ°."
+msgid "Неустранимая ошибка при обработке устройством полученного запроса."
 msgstr ""
 
 #: exceptionsresstrings.rs_mb_uninspacted
-msgid "ÐÐµÑÐ°ÑÐ¿Ð¾Ð·Ð½Ð°Ð½Ð½Ð°Ñ Ð¾ÑÐ¸Ð±ÐºÐ°."
+msgid "Нераспознанная ошибка."
 msgstr ""
 
 #: modbusemuresstr.rsaddchennel
-msgid "ÐÐ¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ ÐºÐ°Ð½Ð°Ð»Ð°"
+msgid "Добавление канала"
 msgstr ""
 
 #: modbusemuresstr.rsaddchennel1
-msgid "ÐÐ¾Ð±Ð°Ð²Ð»ÐµÐ½ ÐºÐ°Ð½Ð°Ð»: %s"
+msgid "Добавлен канал: %s"
 msgstr ""
 
 #: modbusemuresstr.rsaddchennel2
-msgid "ÐÐ¾Ð±Ð°Ð²Ð¸ÑÑ ÑÐµÑÐµÐ²Ð¾Ð¹ ÐºÐ°Ð½Ð°Ð»"
+msgctxt "modbusemuresstr.rsaddchennel2"
+msgid "Добавить сетевой канал"
 msgstr ""
 
 #: modbusemuresstr.rsaddchennel3
-msgid "ÐÐ¾Ð±Ð°Ð²Ð¸ÑÑ"
+msgctxt "modbusemuresstr.rsaddchennel3"
+msgid "Добавить"
 msgstr ""
 
 #: modbusemuresstr.rsaddchennel4
-msgid "ÐÐ¾Ð±Ð°Ð²Ð¸ÑÑ Ð¿Ð¾ÑÐ»ÐµÐ´Ð¾Ð²Ð°ÑÐµÐ»ÑÐ½ÑÐ¹ ÐºÐ°Ð½Ð°Ð»"
+msgctxt "modbusemuresstr.rsaddchennel4"
+msgid "Добавить последовательный канал"
 msgstr ""
 
 #: modbusemuresstr.rschanrs1
-msgid "ÐÐ¾ÑÐ¾Ðº RS ÐºÐ°Ð½Ð°Ð»Ð°"
+msgid "Поток RS канала"
 msgstr ""
 
 #: modbusemuresstr.rschantcp1
-msgid "ÐÐ¾ÑÐ¾Ðº TCP ÐºÐ°Ð½Ð°Ð»Ð°"
+msgid "Поток TCP канала"
 msgstr ""
 
 #: modbusemuresstr.rschanthreadclose
-msgid "Ð¤Ð¸Ð½Ð°Ð»Ð¸Ð·Ð°ÑÐ¸Ñ. ÐÑÐ¸Ð±ÐºÐ°: %s"
+msgid "Финализация. Ошибка: %s"
 msgstr ""
 
 #: modbusemuresstr.rschanthreadini
-msgid "ÐÐ½Ð¸ÑÐ¸Ð°Ð»Ð¸Ð·Ð°ÑÐ¸Ñ. ÐÑÐ¸Ð±ÐºÐ°: %s"
+msgid "Инициализация. Ошибка: %s"
 msgstr ""
 
 #: modbusemuresstr.rsclientconnect1
-msgid "ÐÐ°Ð½Ð°Ð»: %s:%d. ÐÑÐ¸ÑÐ¾ÐµÐ´ÐµÐ½Ð¸Ð»ÑÑ ÐºÐ»Ð¸ÐµÐ½Ñ: %s:%d"
+msgid "Канал: %s:%d. Присоеденился клиент: %s:%d"
 msgstr ""
 
 #: modbusemuresstr.rsclientdisconnect1
-msgid "ÐÐ°Ð½Ð°Ð»: %s:%d. ÐÑÑÐ¾ÐµÐ´ÐµÐ½Ð¸Ð»ÑÑ ÐºÐ»Ð¸ÐµÐ½Ñ: %s:%d"
+msgid "Канал: %s:%d. Отсоеденился клиент: %s:%d"
 msgstr ""
 
 #: modbusemuresstr.rsclosechennel1
-msgid "ÐÐ°ÐºÑÑÑÐ¸Ðµ ÐºÐ°Ð½Ð°Ð»Ð°. ÐÐµ Ð²ÑÐ±ÑÐ°Ð½ ÐºÐ°Ð½Ð°Ð» Ð´Ð»Ñ Ð·Ð°ÐºÑÑÑÐ¸Ñ."
+msgid "Закрытие канала. Не выбран канал для закрытия."
 msgstr ""
 
 #: modbusemuresstr.rsclosechennel2
-msgid "ÐÐ°ÐºÑÑÑÐ¸Ðµ ÐºÐ°Ð½Ð°Ð»Ð°"
+msgid "Закрытие канала"
 msgstr ""
 
 #: modbusemuresstr.rsclosechennel3
-msgid "ÐÐµ ÑÐ´Ð°Ð»Ð¾ÑÑ Ð·Ð°ÐºÑÑÑÑ ÐºÐ°Ð½Ð°Ð»: %s"
+msgid "Не удалось закрыть канал: %s"
 msgstr ""
 
 #: modbusemuresstr.rsclosechennel4
-msgid "ÐÐ°ÐºÑÑÐ»Ð¸ ÐºÐ°Ð½Ð°Ð» ÐºÐ°Ð½Ð°Ð»: %s"
+msgid "Закрыли канал канал: %s"
 msgstr ""
 
 #: modbusemuresstr.rsclosechennel5
-msgid "Ð¡ÐµÑÐ²ÐµÑÐ½ÑÐ¹ ÑÐ¾ÐºÐµÑ %s:%d Ð·Ð°ÐºÑÑÑ"
+msgid "Серверный сокет %s:%d закрыт"
 msgstr ""
 
 #: modbusemuresstr.rsclosechennelall1
-msgid "ÐÐ°ÐºÑÑÑÐ¸Ðµ Ð²ÑÐµÑ ÐºÐ°Ð½Ð°Ð»Ð¾Ð²"
+msgid "Закрытие всех каналов"
 msgstr ""
 
 #: modbusemuresstr.rsclosechennelall2
-msgid "ÐÑÐµ ÐºÐ°Ð½Ð°Ð»Ñ Ð·Ð°ÐºÑÑÑÑ"
+msgid "Все каналы закрыты"
 msgstr ""
 
 #: modbusemuresstr.rsdefchannelrsname
-msgid "ÐÐ¾ÑÐ»ÐµÐ´Ð¾Ð²Ð°ÑÐµÐ»ÑÐ½ÑÐ¹ ÐºÐ°Ð½Ð°Ð»"
+msgctxt "modbusemuresstr.rsdefchannelrsname"
+msgid "Последовательный канал"
 msgstr ""
 
 #: modbusemuresstr.rsdefchanneltcpname
-msgid "TCP ÐºÐ°Ð½Ð°Ð»"
+msgctxt "modbusemuresstr.rsdefchanneltcpname"
+msgid "TCP канал"
 msgstr ""
 
 #: modbusemuresstr.rsdelchannel1
-msgid "Ð£Ð´Ð°Ð»ÐµÐ½Ð¸Ðµ ÐºÐ°Ð½Ð°Ð»Ð°. ÐÐµ Ð²ÑÐ±ÑÐ°Ð½ ÐºÐ°Ð½Ð°Ð» Ð´Ð»Ñ ÑÐ´Ð°Ð»ÐµÐ½Ð¸Ñ."
+msgid "Удаление канала. Не выбран канал для удаления."
 msgstr ""
 
 #: modbusemuresstr.rsdelchannel2
-msgid "Ð£Ð´Ð°Ð»ÐµÐ½Ð¸Ðµ ÐºÐ°Ð½Ð°Ð»Ð°"
+msgid "Удаление канала"
 msgstr ""
 
 #: modbusemuresstr.rsdelchannel3
-msgid "Ð£Ð´Ð°Ð»ÐµÐ½ ÐºÐ°Ð½Ð°Ð»: %s"
+msgid "Удален канал: %s"
 msgstr ""
 
 #: modbusemuresstr.rsdelchennelall1
-msgid "Ð£Ð´Ð°Ð»ÐµÐ½Ð¸Ðµ Ð²ÑÐµÑ ÐºÐ°Ð½Ð°Ð»Ð¾Ð²"
+msgid "Удаление всех каналов"
 msgstr ""
 
 #: modbusemuresstr.rsdelchennelall2
-msgid "ÐÑÐµ ÐºÐ°Ð½Ð°Ð»Ñ ÑÐ´Ð°Ð»ÐµÐ½Ñ"
+msgid "Все каналы удалены"
 msgstr ""
 
 #: modbusemuresstr.rsdevadd1
 msgid ""
-"ÐÑÐ¸Ð±ÐºÐ° Ð²Ð²Ð¾Ð´Ð° Ð½Ð¾Ð¼ÐµÑÐ° ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð°. ÐÐ°Ð¼Ð¸ Ð²Ð²ÐµÐ´ÐµÐ½ Ð½ÐµÐºÐ¾ÑÑÐµÐºÑÐ½ÑÐ¹ Ð½Ð¾Ð¼ÐµÑ ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð° - %s\n"
-"ÐÐ¾Ð¼ÐµÑ Ð´Ð¾Ð»Ð¶ÐµÐ½ Ð±ÑÑÑ ÑÐ¸ÑÐ»Ð¾Ð¼ Ð¾Ñ 1 Ð´Ð¾ 255\n"
+"Ошибка ввода номера устройства. Вами введен некорректный номер устройства - %s\n"
+"Номер должен быть числом от 1 до 255\n"
 msgstr ""
 
 #: modbusemuresstr.rsdevadd10
-msgid "%s Ð¤ÑÐ½ÐºÑÐ¸Ñ 23;"
+msgid "%s Функция 23;"
 msgstr ""
 
 #: modbusemuresstr.rsdevadd11
-msgid "Ð¡Ð¾Ð·Ð´Ð°Ð½Ð¸Ðµ ÑÑÑÑÐ¾ÑÑÐ²"
+msgid "Создание устроств"
 msgstr ""
 
 #: modbusemuresstr.rsdevadd12
-msgid "ÐÐ¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¾: %s"
+msgid "Добавлено: %s"
 msgstr ""
 
 #: modbusemuresstr.rsdevadd13
-msgid "Ð£ÑÑÑÐ¾Ð¹ÑÑÐ²Ð¾: %d;"
+msgid "Устройство: %d;"
 msgstr ""
 
 #: modbusemuresstr.rsdevadd14
-msgid "%s Ð¤ÑÐ½ÐºÑÐ¸Ñ 1;"
+msgid "%s Функция 1;"
 msgstr ""
 
 #: modbusemuresstr.rsdevadd2
-msgid "Ð£ÑÑÑÐ¾Ð¹ÑÑÐ²Ð¾: %d"
+msgid "Устройство: %d"
 msgstr ""
 
 #: modbusemuresstr.rsdevadd3
-msgid "%s Ð¤ÑÐ½ÐºÑÐ¸Ñ 2;"
+msgid "%s Функция 2;"
 msgstr ""
 
 #: modbusemuresstr.rsdevadd4
-msgid "%s Ð¤ÑÐ½ÐºÑÐ¸Ñ 3;"
+msgid "%s Функция 3;"
 msgstr ""
 
 #: modbusemuresstr.rsdevadd5
-msgid "%s Ð¤ÑÐ½ÐºÑÐ¸Ñ 4;"
+msgid "%s Функция 4;"
 msgstr ""
 
 #: modbusemuresstr.rsdevadd6
-msgid "%s Ð¤ÑÐ½ÐºÑÐ¸Ñ 5;"
+msgid "%s Функция 5;"
 msgstr ""
 
 #: modbusemuresstr.rsdevadd7
-msgid "%s Ð¤ÑÐ½ÐºÑÐ¸Ñ 6;"
+msgid "%s Функция 6;"
 msgstr ""
 
 #: modbusemuresstr.rsdevadd8
-msgid "%s Ð¤ÑÐ½ÐºÑÐ¸Ñ 15;"
+msgid "%s Функция 15;"
 msgstr ""
 
 #: modbusemuresstr.rsdevadd9
-msgid "%s Ð¤ÑÐ½ÐºÑÐ¸Ñ 16;"
+msgid "%s Функция 16;"
 msgstr ""
 
 #: modbusemuresstr.rsdevedit1
-msgid "Ð£ÑÑÑÐ¾Ð¹ÑÑÐ²Ð¾(%s) ÑÑÐ¿ÐµÑÐ½Ð¾ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¾"
+msgid "Устройство(%s) успешно изменено"
 msgstr ""
 
 #: modbusemuresstr.rsdevedit2
-msgid "Ð ÐµÐ´Ð°ÐºÑÐ¸ÑÐ¾Ð²Ð°Ð½Ð¸Ðµ Ð¿Ð°ÑÐ°Ð¼ÐµÑÑÐ¾Ð² ÑÑÑÑÐ¾Ð¹ÑÑÐ²"
+msgid "Редактирование параметров устройств"
 msgstr ""
 
 #: modbusemuresstr.rsdevview1
@@ -648,7 +653,7 @@ msgid "OnInputsChangeProc"
 msgstr ""
 
 #: modbusemuresstr.rsdevview10
-msgid "ÐÐµÐ½ÑÐµÐ¼ %d Ð·Ð°Ð½ÑÐµÐ½Ð¸Ð¹"
+msgid "Меняем %d занчений"
 msgstr ""
 
 #: modbusemuresstr.rsdevview11
@@ -669,7 +674,7 @@ msgid "btDiscretsAplyAllClick"
 msgstr ""
 
 #: modbusemuresstr.rsdevview2
-msgid "Inputs. ÐÑÐ¸ÑÐ»Ð¾ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ðµ %d Ð·Ð½Ð°ÑÐµÐ½Ð¸Ð¹"
+msgid "Inputs. Пришло изменение %d значений"
 msgstr ""
 
 #: modbusemuresstr.rsdevview3
@@ -677,7 +682,7 @@ msgid "OnHoldingsChangeProc"
 msgstr ""
 
 #: modbusemuresstr.rsdevview4
-msgid "Holdings. ÐÑÐ¸ÑÐ»Ð¾ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ðµ %d Ð·Ð½Ð°ÑÐµÐ½Ð¸Ð¹"
+msgid "Holdings. Пришло изменение %d значений"
 msgstr ""
 
 #: modbusemuresstr.rsdevview5
@@ -685,7 +690,7 @@ msgid "OnDiscretsChangeProc"
 msgstr ""
 
 #: modbusemuresstr.rsdevview6
-msgid "Discrets. ÐÑÐ¸ÑÐ»Ð¾ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ðµ %d Ð·Ð½Ð°ÑÐµÐ½Ð¸Ð¹"
+msgid "Discrets. Пришло изменение %d значений"
 msgstr ""
 
 #: modbusemuresstr.rsdevview7
@@ -693,7 +698,7 @@ msgid "OnCoilsChangeProc"
 msgstr ""
 
 #: modbusemuresstr.rsdevview8
-msgid "Coils. ÐÑÐ¸ÑÐ»Ð¾ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ðµ %d Ð·Ð½Ð°ÑÐµÐ½Ð¸Ð¹"
+msgid "Coils. Пришло изменение %d значений"
 msgstr ""
 
 #: modbusemuresstr.rsdevview9
@@ -702,144 +707,145 @@ msgid "btCoilAplyAllClick"
 msgstr ""
 
 #: modbusemuresstr.rseditchennel
-msgid "ÐÐ·Ð¼ÐµÐ½ÐµÐ½Ð¸Ðµ ÐºÐ°Ð½Ð°Ð»Ð°. ÐÐµ Ð²ÑÐ±ÑÐ°Ð½ ÐºÐ°Ð½Ð°Ð» Ð´Ð»Ñ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ñ."
+msgid "Изменение канала. Не выбран канал для изменения."
 msgstr ""
 
 #: modbusemuresstr.rseditchennel1
 msgctxt "modbusemuresstr.rseditchennel1"
-msgid "ÐÐ·Ð¼ÐµÐ½ÐµÐ½Ð¸Ðµ ÑÐµÑÐµÐ²Ð¾Ð³Ð¾ ÐºÐ°Ð½Ð°Ð»Ð°"
+msgid "Изменение сетевого канала"
 msgstr ""
 
 #: modbusemuresstr.rseditchennel2
-msgid "Ð¡Ð¾ÑÑÐ°Ð½Ð¸ÑÑ"
+msgctxt "modbusemuresstr.rseditchennel2"
+msgid "Сохранить"
 msgstr ""
 
 #: modbusemuresstr.rseditchennel3
-msgid "ÐÐ°Ð½Ð°Ð» %s Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½"
+msgid "Канал %s изменен"
 msgstr ""
 
 #: modbusemuresstr.rseditchennel4
 msgctxt "modbusemuresstr.rseditchennel4"
-msgid "ÐÐ·Ð¼ÐµÐ½ÐµÐ½Ð¸Ðµ Ð¿Ð¾ÑÐ»ÐµÐ´Ð¾Ð²Ð°ÑÐµÐ»ÑÐ½Ð¾Ð³Ð¾ ÐºÐ°Ð½Ð°Ð»Ð°"
+msgid "Изменение последовательного канала"
 msgstr ""
 
 #: modbusemuresstr.rsfrmaddtcpchannel1
-msgid "ÐÐ¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ ÑÐµÑÐµÐ²Ð¾Ð³Ð¾ ÐºÐ°Ð½Ð°Ð»Ð°"
+msgid "Добавление сетевого канала"
 msgstr ""
 
 #: modbusemuresstr.rsfrmaddtcpchannel2
-msgid "ÐÑÐµ Ð¿Ð¾Ð»Ñ Ð´Ð¾Ð»Ð¶Ð½Ñ Ð±ÑÑÑ Ð·Ð°Ð¿Ð¾Ð»Ð½ÐµÐ½Ñ."
+msgid "Все поля должны быть заполнены."
 msgstr ""
 
 #: modbusemuresstr.rsfrmaddtcpchannel3
-msgid "ÐÑÐ¸Ð±ÐºÐ° Ð²Ð¾ Ð²Ð²ÐµÐ´ÐµÐ½Ð½Ð¾Ð¼ Ð°Ð´ÑÐµÑÐµ: %s"
+msgid "Ошибка во введенном адресе: %s"
 msgstr ""
 
 #: modbusemuresstr.rsfrmaddtcpchannel4
-msgid "ÐÑ ÑÐ¾Ð²ÐµÑÑÐ¸Ð»Ð¸ Ð¾ÑÐ¸Ð±ÐºÑ Ð¿ÑÐ¸ Ð²Ð²Ð¾Ð´Ðµ Ð°Ð´ÑÐµÑÐ° ÐºÐ°Ð½Ð°Ð»Ð°: %s. ÐÐ¾Ð»Ð¶ÐµÐ½ Ð±ÑÑÑ Ð²Ð²ÐµÐ´ÐµÐ½ ÐºÐ¾ÑÑÐµÐºÑÐ½ÑÐ¹ IP-Ð°Ð´ÑÐµÑ."
+msgid "Вы совершили ошибку при вводе адреса канала: %s. Должен быть введен корректный IP-адрес."
 msgstr ""
 
 #: modbusemuresstr.rsfrmaddtcpchannel5
-msgid "ÐÑÐ¸Ð±ÐºÐ° Ð²Ð¾ Ð²Ð²ÐµÐ´ÐµÐ½Ð½Ð¾Ð¼ Ð½Ð¾Ð¼ÐµÑÐµ Ð¿Ð¾ÑÑÐ°: %s"
+msgid "Ошибка во введенном номере порта: %s"
 msgstr ""
 
 #: modbusemuresstr.rsfrmaddtcpchannel6
-msgid "ÐÑ ÑÐ¾Ð²ÐµÑÑÐ¸Ð»Ð¸ Ð¾ÑÐ¸Ð±ÐºÑ Ð¿ÑÐ¸ Ð²Ð²Ð¾Ð´Ðµ Ð½Ð¾Ð¼ÐµÑÐµ Ð¿Ð¾ÑÑÐ° ÐºÐ°Ð½Ð°Ð»Ð°: %s. ÐÐ¾Ð»Ð¶ÐµÐ½ Ð±ÑÑÑ Ð²Ð²ÐµÐ´ÐµÐ½ ÐºÐ¾ÑÑÐµÐºÑÐ½ÑÐ¹ Ð½Ð¾Ð¼ÐµÑ Ð¿Ð¾ÑÑÐ° Ð² Ð´Ð¸Ð°Ð¿Ð°Ð·Ð¾Ð½Ðµ Ð¾Ñ 1 Ð´Ð¾ 65535."
+msgid "Вы совершили ошибку при вводе номере порта канала: %s. Должен быть введен корректный номер порта в диапазоне от 1 до 65535."
 msgstr ""
 
 #: modbusemuresstr.rsfrmaddtcpchannel7
-msgid "ÐÐ°Ð½Ð°Ð» Ñ ÑÐºÐ°Ð·Ð°Ð½Ð½ÑÐ¼Ð¸ Ð¿Ð°ÑÐ°Ð¼ÐµÑÑÐ°Ð¼Ð¸ (%s:%s:%s) ÑÐ¶Ðµ ÑÑÑÐµÑÑÐ²ÑÐµÑ."
+msgid "Канал с указанными параметрами (%s:%s:%s) уже существует."
 msgstr ""
 
 #: modbusemuresstr.rsfrmaddtcpchannel8
-msgid "ÐÐ¾Ð±Ð°Ð²Ð¸Ð»Ð¸ ÑÐµÑÐµÐ²Ð¾Ð¹ ÐºÐ°Ð½Ð°Ð»: %s:%s:%d"
+msgid "Добавили сетевой канал: %s:%s:%d"
 msgstr ""
 
 #: modbusemuresstr.rsfrmaddtcpchannel9
-msgid "ÐÑÐ¸ Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ð¸ ÐºÐ°Ð½Ð°Ð»Ð° Ð¿ÑÐ¾Ð¸Ð·Ð¾ÑÐ»Ð° Ð¾ÑÐ¸Ð±ÐºÐ°: %s"
+msgid "При добавлении канала произошла ошибка: %s"
 msgstr ""
 
 #: modbusemuresstr.rsloadconf1
 msgctxt "modbusemuresstr.rsloadconf1"
-msgid "ÐÐ°Ð³ÑÑÐ·ÐºÐ° ÐºÐ¾Ð½ÑÐ¸Ð³ÑÑÐ°ÑÐ¸Ð¸"
+msgid "Загрузка конфигурации"
 msgstr ""
 
 #: modbusemuresstr.rsloadconf2
-msgid "ÐÑÐ¸Ð±ÐºÐ° Ð·Ð°Ð³ÑÑÐ·ÐºÐ¸: %s (%s)"
+msgid "Ошибка загрузки: %s (%s)"
 msgstr ""
 
 #: modbusemuresstr.rsloadconf3
-msgid "ÐÐ°Ð³ÑÑÐ·ÐºÐ° ÐºÐ¾Ð½ÑÐ¸Ð³ÑÑÐ°ÑÐ¸Ð¾Ð½Ð½Ð¾Ð³Ð¾ ÑÐ°Ð¹Ð»Ð° %s Ð¿ÑÐ¾Ð¸Ð·Ð²ÐµÐ´ÐµÐ½Ð° ÑÑÐ¿ÐµÑÐ½Ð¾"
+msgid "Загрузка конфигурационного файла %s произведена успешно"
 msgstr ""
 
 #: modbusemuresstr.rsloader1
-msgid "ÐÐµ Ð·Ð°Ð´Ð°Ð½Ð¾ Ð¸Ð¼Ñ ÑÐ°Ð¹Ð»Ð° Ð´Ð»Ñ ÑÐ¾ÑÑÐ°Ð½ÐµÐ½Ð¸Ñ"
+msgid "Не задано имя файла для сохранения"
 msgstr ""
 
 #: modbusemuresstr.rsloader2
-msgid "Ð£ ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð° %d Ð½Ðµ Ð¾Ð¿ÑÐµÐ´ÐµÐ»ÐµÐ½ Ð½Ð°Ð±Ð¾Ñ ÑÑÐ½ÐºÑÐ¸Ð¹"
+msgid "У устройства %d не определен набор функций"
 msgstr ""
 
 #: modbusemuresstr.rsloader3
-msgid "ÐÐµ Ð·Ð°Ð´Ð°Ð½Ð¾ Ð¸Ð¼Ñ ÑÐ°Ð¹Ð»Ð° Ð´Ð»Ñ Ð·Ð°Ð³ÑÑÐ·ÐºÐ¸"
+msgid "Не задано имя файла для загрузки"
 msgstr ""
 
 #: modbusemuresstr.rsloader4
-msgid "Ð¤Ð°Ð¹Ð» ÐºÐ¾Ð½ÑÐ¸Ð³ÑÑÐ°ÑÐ¸Ð¸ %s Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½"
+msgid "Файл конфигурации %s не найден"
 msgstr ""
 
 #: modbusemuresstr.rsloader5
 msgctxt "modbusemuresstr.rsloader5"
-msgid "ÐÐ¾ÑÐ½ÐµÐ²Ð¾Ð¹ ÑÐµÐ³ %s Ð½Ðµ ÑÐ¾Ð¾ÑÐ²ÐµÑÑÑÐ²ÑÐµÑ ÑÑÐµÐ±ÑÐµÐ¼Ð¾Ð¼Ñ %s"
+msgid "Корневой тег %s не соответствует требуемому %s"
 msgstr ""
 
 #: modbusemuresstr.rsloader6
 msgctxt "modbusemuresstr.rsloader6"
-msgid "ÐÐ°Ð³ÑÑÐ·ÐºÐ° ÐºÐ¾Ð½ÑÐ¸Ð³ÑÑÐ°ÑÐ¸Ð¸"
+msgid "Загрузка конфигурации"
 msgstr ""
 
 #: modbusemuresstr.rsloader7
-msgid "Ð Ð°Ð·Ð´ÐµÐ» %s Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½ Ð² ÐºÐ¾Ð½ÑÐ¸Ð³ÑÑÐ°ÑÐ¸Ð¾Ð½Ð½Ð¾Ð¼ ÑÐ°Ð¹Ð»Ðµ %s"
+msgid "Раздел %s не найден в конфигурационном файле %s"
 msgstr ""
 
 #: modbusemuresstr.rsloader8
-msgid "ÐÐ¾Ð½ÑÐ¸Ð³ÑÑÐ°ÑÐ¸Ð¾Ð½Ð½ÑÐ¹ ÑÐ°Ð¹Ð» %s ÑÑÐ¿ÐµÑÐ½Ð¾ Ð·Ð°Ð³ÑÑÐ¶ÐµÐ½"
+msgid "Конфигурационный файл %s успешно загружен"
 msgstr ""
 
 #: modbusemuresstr.rsloader9
-msgid "ÐÐ¾Ð½ÑÐ¸Ð³ÑÑÐ°ÑÐ¸Ñ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð°. Ð¡Ð¾ÑÑÐ°Ð½Ð¸ÑÑ?"
+msgid "Конфигурация изменена. Сохранить?"
 msgstr ""
 
 #: modbusemuresstr.rsmberror1
-msgid "ÐÐ¾ÑÑ %d. ÐÑÐ¸Ð±ÐºÐ° Ð¿Ð¾Ð»ÑÑÐµÐ½Ð¸Ñ Ð·Ð½Ð°ÑÐµÐ½Ð¸Ð¹ Coil ÑÐµÐ³Ð¸ÑÑÑÐ¾Ð²(%d:%d:%d): %s"
+msgid "Порт %d. Ошибка получения значений Coil регистров(%d:%d:%d): %s"
 msgstr ""
 
 #: modbusemuresstr.rsmberror2
-msgid "ÐÑÐ¸Ð±ÐºÐ° Ð¾ÑÐ¿ÑÐ°Ð²ÐºÐ¸ Ð¾ÑÐ²ÐµÑÐ°"
+msgid "Ошибка отправки ответа"
 msgstr ""
 
 #: modbusemuresstr.rsmberror3
-msgid "ÐÐ¾ÑÑ %d. ÐÑÐ¸Ð±ÐºÐ° Ð¿Ð¾Ð»ÑÑÐµÐ½Ð¸Ñ Ð·Ð½Ð°ÑÐµÐ½Ð¸Ð¹ Discret ÑÐµÐ³Ð¸ÑÑÑÐ¾Ð²(%d:%d:%d): %s"
+msgid "Порт %d. Ошибка получения значений Discret регистров(%d:%d:%d): %s"
 msgstr ""
 
 #: modbusemuresstr.rsmberror4
-msgid "ÐÑÐ¸Ð±ÐºÐ° Ð·Ð°Ð¿Ð¸ÑÐ¸ Ð¿Ð°ÐºÐµÑÐ° Ð² Ð¿Ð¾ÑÑ."
+msgid "Ошибка записи пакета в порт."
 msgstr ""
 
 #: modbusemuresstr.rsmberror5
-msgid "ÐÑÐ¸Ð·Ð½Ð°Ðº Ð½ÐµÑÑÐ°Ð½Ð´Ð°ÑÑÐ½Ð¾Ð³Ð¾ Ð¿ÑÐµÑÐ¸ÐºÑÐ° ÑÑÑÐ°Ð½Ð¾Ð²Ð»ÐµÐ½, Ð° ÑÐ°Ð¼ Ð¿ÑÐµÑÐ¸ÐºÑ Ð½Ðµ Ð·Ð°Ð´Ð°Ð½."
+msgid "Признак нестандартного префикса установлен, а сам префикс не задан."
 msgstr ""
 
 #: modbusemuresstr.rsmberror6
-msgid "ÐÐ¾ÑÑ %d. ÐÑÐ¸Ð±ÐºÐ° Ð¿Ð¾Ð»ÑÑÐµÐ½Ð¸Ñ Ð·Ð½Ð°ÑÐµÐ½Ð¸Ð¹ Holding ÑÐµÐ³Ð¸ÑÑÑÐ¾Ð²(%d:%d:%d): %s"
+msgid "Порт %d. Ошибка получения значений Holding регистров(%d:%d:%d): %s"
 msgstr ""
 
 #: modbusemuresstr.rsmberror7
-msgid "ÐÐ¾ÑÑ %d. ÐÑÐ¸Ð±ÐºÐ° Ð¿Ð¾Ð»ÑÑÐµÐ½Ð¸Ñ Ð·Ð½Ð°ÑÐµÐ½Ð¸Ð¹ Input ÑÐµÐ³Ð¸ÑÑÑÐ¾Ð²(%d:%d:%d): %s"
+msgid "Порт %d. Ошибка получения значений Input регистров(%d:%d:%d): %s"
 msgstr ""
 
 #: modbusemuresstr.rsmberror8
-msgid "Ð¤ÑÐ½ÐºÑÐ¸Ñ %d Ð½Ðµ ÑÐµÐ°Ð»Ð¸Ð·Ð¾Ð²Ð°Ð½Ð°"
+msgid "Функция %d не реализована"
 msgstr ""
 
 #: modbusemuresstr.rsmbobj
@@ -855,187 +861,187 @@ msgid "SendErrorMsg"
 msgstr ""
 
 #: modbusemuresstr.rsonclientreceivedataproc1
-msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. ÐÑÐ¸Ð±ÐºÐ° ÑÐ°Ð·Ð±Ð¾ÑÐ° Ð¿Ð°ÐºÐµÑÐ°: %s"
+msgid "Клиент: %s:%d. Ошибка разбора пакета: %s"
 msgstr ""
 
 #: modbusemuresstr.rsonclientreceivedataproc2
-msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. ÐÑÐ¸Ð±ÐºÐ° Ð¿Ð¾Ð»ÑÑÐµÐ½Ð¸Ñ ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð°: %s"
+msgid "Клиент: %s:%d. Ошибка получения устройства: %s"
 msgstr ""
 
 #: modbusemuresstr.rsonclientreceivedataproc3
-msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. ÐÐ°Ð¿ÑÐ°ÑÐ¸Ð²Ð°ÐµÑÑÑ Ð½ÐµÑÑÑÐµÑÑÐ²ÑÑÑÐµÐµ ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð¾ - %d"
+msgid "Клиент: %s:%d. Запрашивается несуществующее устройство - %d"
 msgstr ""
 
 #: modbusemuresstr.rsonclientreceivedataproc4
-msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. ÐÐ°Ð¿ÑÐ°ÑÐ¸Ð²Ð°ÐµÐ¼Ð°Ñ ÑÑÐ½ÐºÑÐ¸Ñ(%d) Ð½Ðµ Ð¿Ð¾Ð´Ð´ÐµÑÐ¶Ð¸Ð²Ð°ÐµÑÑÑ ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð¾Ð¼ %d"
+msgid "Клиент: %s:%d. Запрашиваемая функция(%d) не поддерживается устройством %d"
 msgstr ""
 
 #: modbusemuresstr.rsonserverreadproc1
-msgid "ÐÑÐ¸Ð±ÐºÐ° ÑÑÐµÐ½Ð¸Ñ Ð¸Ð· Ð¿Ð¾ÑÑÐ°: %d - %s"
+msgid "Ошибка чтения из порта: %d - %s"
 msgstr ""
 
 #: modbusemuresstr.rsonserverreadproc2
-msgid "ÐÑÐ¸Ð±ÐºÐ° ÑÐ°Ð·Ð±Ð¾ÑÐ° Ð¿Ð°ÐºÐµÑÐ°: %s"
+msgid "Ошибка разбора пакета: %s"
 msgstr ""
 
 #: modbusemuresstr.rsonserverreadproc3
-msgid "ÐÐ¾ÑÑ â%d. ÐÑÐ¸Ð±ÐºÐ° Ð¿Ð¾Ð»ÑÑÐµÐ½Ð¸Ñ ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð°: %s"
+msgid "Порт №%d. Ошибка получения устройства: %s"
 msgstr ""
 
 #: modbusemuresstr.rsonserverreadproc4
-msgid "ÐÐ¾ÑÑ â%d. ÐÐ°Ð¿ÑÐ°ÑÐ¸Ð²Ð°ÐµÑÑÑ Ð½ÐµÑÑÑÐµÑÑÐ²ÑÑÑÐµÐµ ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð¾ - %d"
+msgid "Порт №%d. Запрашивается несуществующее устройство - %d"
 msgstr ""
 
 #: modbusemuresstr.rsonserverreadproc5
-msgid "ÐÐ¾ÑÑ %d. ÐÐ°Ð¿ÑÐ°ÑÐ¸Ð²Ð°ÐµÐ¼Ð°Ñ ÑÑÐ½ÐºÑÐ¸Ñ(%d) Ð½Ðµ Ð¿Ð¾Ð´Ð´ÐµÑÐ¶Ð¸Ð²Ð°ÐµÑÑÑ ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð¾Ð¼ %d"
+msgid "Порт %d. Запрашиваемая функция(%d) не поддерживается устройством %d"
 msgstr ""
 
 #: modbusemuresstr.rsonserverreadproc6
-msgid "ÐÑÐ¸Ð±ÐºÐ° Ð¿Ð¾Ð»ÑÑÐµÐ½Ð¸Ñ Ð°Ð´ÑÐµÑÐ° ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð°: %s"
+msgid "Ошибка получения адреса устройства: %s"
 msgstr ""
 
 #: modbusemuresstr.rsonserverreadproc7
-msgid "ÐÑÐ¸Ð±ÐºÐ° ÑÐ°Ð·Ð±Ð¾ÑÐ° Ð¿Ð°ÐºÐµÑÐ°: %d - %s"
+msgid "Ошибка разбора пакета: %d - %s"
 msgstr ""
 
 #: modbusemuresstr.rsopenchennel1
-msgid "ÐÑÐºÑÑÑÐ¸Ðµ ÐºÐ°Ð½Ð°Ð»Ð°. ÐÐµ Ð²ÑÐ±ÑÐ°Ð½ ÐºÐ°Ð½Ð°Ð» Ð´Ð»Ñ Ð¾ÑÐºÑÑÑÐ¸Ñ."
+msgid "Открытие канала. Не выбран канал для открытия."
 msgstr ""
 
 #: modbusemuresstr.rsopenchennel2
-msgid "ÐÑÐºÑÑÑÐ¸Ðµ ÐºÐ°Ð½Ð°Ð»Ð°"
+msgid "Открытие канала"
 msgstr ""
 
 #: modbusemuresstr.rsopenchennel3
-msgid "ÐÑÐºÑÑÑ ÐºÐ°Ð½Ð°Ð»: %s"
+msgid "Открыт канал: %s"
 msgstr ""
 
 #: modbusemuresstr.rsopenchennel4
-msgid "ÐÐµ ÑÐ´Ð°Ð»Ð¾ÑÑ Ð¾ÑÐºÑÑÑÑ ÐºÐ°Ð½Ð°Ð»: %s"
+msgid "Не удалось открыть канал: %s"
 msgstr ""
 
 #: modbusemuresstr.rsopenchennel5
-msgid "ÐÑÐ¸Ð±ÐºÐ° ÑÐ¾ÐºÐµÑÐ°: %d - %s"
+msgid "Ошибка сокета: %d - %s"
 msgstr ""
 
 #: modbusemuresstr.rsopenchennel6
-msgid "ÐÑÐ¸Ð±ÐºÐ° ÐºÐ»Ð¸ÐµÐ½ÑÐ°(%s:%d): %d"
+msgid "Ошибка клиента(%s:%d): %d"
 msgstr ""
 
 #: modbusemuresstr.rsopenchennel7
-msgid "Ð¡ÐµÑÐ²ÐµÑÐ½ÑÐ¹ ÑÐ¾ÐºÐµÑ %s:%d Ð¾ÑÐºÑÑÑ"
+msgid "Серверный сокет %s:%d открыт"
 msgstr ""
 
 #: modbusemuresstr.rsopenchennelall1
-msgid "ÐÑÐºÑÑÑÐ¸Ðµ Ð²ÑÐµÑ ÐºÐ°Ð½Ð°Ð»Ð¾Ð²"
+msgid "Открытие всех каналов"
 msgstr ""
 
 #: modbusemuresstr.rsopenchennelall2
-msgid "ÐÑÐµ ÐºÐ°Ð½Ð°Ð»Ñ Ð¾ÑÐºÑÑÑÑ"
+msgid "Все каналы открыты"
 msgstr ""
 
 #: modbusemuresstr.rsrageedit1
-msgid "ÐÐ´ÑÐµÑ Ð½Ð°ÑÐ°Ð»ÑÐ½Ð¾Ð³Ð¾ ÑÐµÐ³Ð¸ÑÑÑÐ° Ð½Ðµ Ð¼Ð¾Ð¶ÐµÑ Ð±ÑÑÑ Ð¼ÐµÐ½ÑÑÐµ Ð°Ð´ÑÐµÑÐ° ÐºÐ¾Ð½ÐµÑÐ½Ð¾Ð³Ð¾ ÑÐµÐ³Ð¸ÑÑÑÐ°!"
+msgid "Адрес начального регистра не может быть меньше адреса конечного регистра!"
 msgstr ""
 
 #: modbusemuresstr.rsresponsef15_1
-msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. ÐÐ¾Ð¿ÑÑÐºÐ° Ð²ÑÐ·Ð¾Ð²Ð° Ð½ÐµÑÐµÐ°Ð»Ð¸Ð·Ð¾Ð²Ð°Ð½Ð½Ð¾Ð¹ ÑÑÐ½ÐºÑÐ¸Ð¸ 15"
+msgid "Клиент: %s:%d. Попытка вызова нереализованной функции 15"
 msgstr ""
 
 #: modbusemuresstr.rsresponsef16_1
-msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. ÐÐ¾Ð¿ÑÑÐºÐ° Ð²ÑÐ·Ð¾Ð²Ð° Ð½ÐµÑÐµÐ°Ð»Ð¸Ð·Ð¾Ð²Ð°Ð½Ð½Ð¾Ð¹ ÑÑÐ½ÐºÑÐ¸Ð¸ 16"
+msgid "Клиент: %s:%d. Попытка вызова нереализованной функции 16"
 msgstr ""
 
 #: modbusemuresstr.rsresponsef17_1
-msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. ÐÐ¾Ð¿ÑÑÐºÐ° Ð²ÑÐ·Ð¾Ð²Ð° Ð½ÐµÑÐµÐ°Ð»Ð¸Ð·Ð¾Ð²Ð°Ð½Ð½Ð¾Ð¹ ÑÑÐ½ÐºÑÐ¸Ð¸ 23"
+msgid "Клиент: %s:%d. Попытка вызова нереализованной функции 23"
 msgstr ""
 
 #: modbusemuresstr.rsresponsef1_1
-msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. ÐÑÐ¸Ð±ÐºÐ° Ð¿Ð¾Ð»ÑÑÐµÐ½Ð¸Ñ Ð·Ð½Ð°ÑÐµÐ½Ð¸Ð¹ Coil ÑÐµÐ³Ð¸ÑÑÑÐ¾Ð²(%d:%d:%d): %s"
+msgid "Клиент: %s:%d. Ошибка получения значений Coil регистров(%d:%d:%d): %s"
 msgstr ""
 
 #: modbusemuresstr.rsresponsef1_2
-msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. Read Coils. ÐÐµ ÑÐ´Ð°Ð»Ð¾ÑÑ Ð¾ÑÐ¿ÑÐ°Ð²Ð¸ÑÑ Ð¾ÑÐ²ÐµÑ Ð½Ð° Ð·Ð°Ð¿ÑÐ¾Ñ."
+msgid "Клиент: %s:%d. Read Coils. Не удалось отправить ответ на запрос."
 msgstr ""
 
 #: modbusemuresstr.rsresponsef1_3
-msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. Read Coils. ÐÑÐ¿ÑÐ°Ð²Ð¸Ð»Ð¸ Ð¾ÑÐ²ÐµÑ Ð½Ð° Ð·Ð°Ð¿ÑÐ¾Ñ ÐºÐ»Ð¸ÐµÐ½ÑÐ°."
+msgid "Клиент: %s:%d. Read Coils. Отправили ответ на запрос клиента."
 msgstr ""
 
 #: modbusemuresstr.rsresponsef2_1
-msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. ÐÑÐ¸Ð±ÐºÐ° Ð¿Ð¾Ð»ÑÑÐµÐ½Ð¸Ñ Ð·Ð½Ð°ÑÐµÐ½Ð¸Ð¹ Discrete ÑÐµÐ³Ð¸ÑÑÑÐ¾Ð²(%d:%d:%d): %s"
+msgid "Клиент: %s:%d. Ошибка получения значений Discrete регистров(%d:%d:%d): %s"
 msgstr ""
 
 #: modbusemuresstr.rsresponsef2_2
-msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. Read Discrete. ÐÐµ ÑÐ´Ð°Ð»Ð¾ÑÑ Ð¾ÑÐ¿ÑÐ°Ð²Ð¸ÑÑ Ð¾ÑÐ²ÐµÑ Ð½Ð° Ð·Ð°Ð¿ÑÐ¾Ñ."
+msgid "Клиент: %s:%d. Read Discrete. Не удалось отправить ответ на запрос."
 msgstr ""
 
 #: modbusemuresstr.rsresponsef2_3
-msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. Read Discrete. ÐÑÐ¿ÑÐ°Ð²Ð¸Ð»Ð¸ Ð¾ÑÐ²ÐµÑ Ð½Ð° Ð·Ð°Ð¿ÑÐ¾Ñ ÐºÐ»Ð¸ÐµÐ½ÑÐ°."
+msgid "Клиент: %s:%d. Read Discrete. Отправили ответ на запрос клиента."
 msgstr ""
 
 #: modbusemuresstr.rsresponsef3_1
-msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. ÐÑÐ¸Ð±ÐºÐ° Ð¿Ð¾Ð»ÑÑÐµÐ½Ð¸Ñ Ð·Ð½Ð°ÑÐµÐ½Ð¸Ð¹ Holding ÑÐµÐ³Ð¸ÑÑÑÐ¾Ð²(%d:%d:%d): %s"
+msgid "Клиент: %s:%d. Ошибка получения значений Holding регистров(%d:%d:%d): %s"
 msgstr ""
 
 #: modbusemuresstr.rsresponsef3_2
-msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. Read Holding. ÐÐµ ÑÐ´Ð°Ð»Ð¾ÑÑ Ð¾ÑÐ¿ÑÐ°Ð²Ð¸ÑÑ Ð¾ÑÐ²ÐµÑ Ð½Ð° Ð·Ð°Ð¿ÑÐ¾Ñ."
+msgid "Клиент: %s:%d. Read Holding. Не удалось отправить ответ на запрос."
 msgstr ""
 
 #: modbusemuresstr.rsresponsef3_3
-msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. Read Holding. ÐÑÐ¿ÑÐ°Ð²Ð¸Ð»Ð¸ Ð¾ÑÐ²ÐµÑ Ð½Ð° Ð·Ð°Ð¿ÑÐ¾Ñ ÐºÐ»Ð¸ÐµÐ½ÑÐ°."
+msgid "Клиент: %s:%d. Read Holding. Отправили ответ на запрос клиента."
 msgstr ""
 
 #: modbusemuresstr.rsresponsef4_1
-msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. ÐÑÐ¸Ð±ÐºÐ° Ð¿Ð¾Ð»ÑÑÐµÐ½Ð¸Ñ Ð·Ð½Ð°ÑÐµÐ½Ð¸Ð¹ Input ÑÐµÐ³Ð¸ÑÑÑÐ¾Ð²(%d:%d:%d): %s"
+msgid "Клиент: %s:%d. Ошибка получения значений Input регистров(%d:%d:%d): %s"
 msgstr ""
 
 #: modbusemuresstr.rsresponsef4_2
-msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. Read Input. ÐÐµ ÑÐ´Ð°Ð»Ð¾ÑÑ Ð¾ÑÐ¿ÑÐ°Ð²Ð¸ÑÑ Ð¾ÑÐ²ÐµÑ Ð½Ð° Ð·Ð°Ð¿ÑÐ¾Ñ."
+msgid "Клиент: %s:%d. Read Input. Не удалось отправить ответ на запрос."
 msgstr ""
 
 #: modbusemuresstr.rsresponsef4_3
-msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. Read Input. ÐÑÐ¿ÑÐ°Ð²Ð¸Ð»Ð¸ Ð¾ÑÐ²ÐµÑ Ð½Ð° Ð·Ð°Ð¿ÑÐ¾Ñ ÐºÐ»Ð¸ÐµÐ½ÑÐ°."
+msgid "Клиент: %s:%d. Read Input. Отправили ответ на запрос клиента."
 msgstr ""
 
 #: modbusemuresstr.rsresponsef5_1
-msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. ÐÑÐ¸Ð±ÐºÐ° Ð·Ð°Ð¿Ð¸ÑÐ¸ Ð·Ð½Ð°ÑÐµÐ½Ð¸Ð¹ Coil ÑÐµÐ³Ð¸ÑÑÑÐ¾Ð²(%d:%d:%d): %s"
+msgid "Клиент: %s:%d. Ошибка записи значений Coil регистров(%d:%d:%d): %s"
 msgstr ""
 
 #: modbusemuresstr.rsresponsef5_2
-msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. Write Coils. ÐÐµ ÑÐ´Ð°Ð»Ð¾ÑÑ Ð¾ÑÐ¿ÑÐ°Ð²Ð¸ÑÑ Ð¾ÑÐ²ÐµÑ Ð½Ð° Ð·Ð°Ð¿ÑÐ¾Ñ."
+msgid "Клиент: %s:%d. Write Coils. Не удалось отправить ответ на запрос."
 msgstr ""
 
 #: modbusemuresstr.rsresponsef5_3
-msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. Write Coils. ÐÑÐ¿ÑÐ°Ð²Ð¸Ð»Ð¸ Ð¾ÑÐ²ÐµÑ Ð½Ð° Ð·Ð°Ð¿ÑÐ¾Ñ ÐºÐ»Ð¸ÐµÐ½ÑÐ°."
+msgid "Клиент: %s:%d. Write Coils. Отправили ответ на запрос клиента."
 msgstr ""
 
 #: modbusemuresstr.rsresponsef6_1
-msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. ÐÑÐ¸Ð±ÐºÐ° Ð·Ð°Ð¿Ð¸ÑÐ¸ Ð·Ð½Ð°ÑÐµÐ½Ð¸Ð¹ Input ÑÐµÐ³Ð¸ÑÑÑÐ¾Ð²(%d:%d:%d): %s"
+msgid "Клиент: %s:%d. Ошибка записи значений Input регистров(%d:%d:%d): %s"
 msgstr ""
 
 #: modbusemuresstr.rsresponsef6_2
-msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. Write Input. ÐÐµ ÑÐ´Ð°Ð»Ð¾ÑÑ Ð¾ÑÐ¿ÑÐ°Ð²Ð¸ÑÑ Ð¾ÑÐ²ÐµÑ Ð½Ð° Ð·Ð°Ð¿ÑÐ¾Ñ."
+msgid "Клиент: %s:%d. Write Input. Не удалось отправить ответ на запрос."
 msgstr ""
 
 #: modbusemuresstr.rsresponsef6_3
-msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. Write Input. ÐÑÐ¿ÑÐ°Ð²Ð¸Ð»Ð¸ Ð¾ÑÐ²ÐµÑ Ð½Ð° Ð·Ð°Ð¿ÑÐ¾Ñ ÐºÐ»Ð¸ÐµÐ½ÑÐ°."
+msgid "Клиент: %s:%d. Write Input. Отправили ответ на запрос клиента."
 msgstr ""
 
 #: modbusemuresstr.rssaveconf1
-msgid "Ð¡Ð¾ÑÑÐ°Ð½ÐµÐ½Ð¸Ðµ ÐºÐ¾Ð½ÑÐ¸Ð³ÑÑÐ°ÑÐ¸Ð¸"
+msgid "Сохранение конфигурации"
 msgstr ""
 
 #: modbusemuresstr.rssaveconf2
-msgid "ÐÑÐ¸Ð±ÐºÐ° ÑÐ¾ÑÑÐ°Ð½ÐµÐ½Ð¸Ñ: %s (%s)"
+msgid "Ошибка сохранения: %s (%s)"
 msgstr ""
 
 #: modbusemuresstr.rssaveconf3
-msgid "Ð¡Ð¾ÑÑÐ°Ð½ÐµÐ½Ð¸Ðµ ÐºÐ¾Ð½ÑÐ¸Ð³ÑÑÐ°ÑÐ¸Ð¾Ð½Ð½Ð¾Ð³Ð¾ ÑÐ°Ð¹Ð»Ð° %s Ð¿ÑÐ¾Ð¸Ð·Ð²ÐµÐ´ÐµÐ½Ð¾ ÑÑÐ¿ÐµÑÐ½Ð¾"
+msgid "Сохранение конфигурационного файла %s произведено успешно"
 msgstr ""
 
 #: modbusemuresstr.rssenderrormsg1
-msgid "ÐÐ»Ð¸ÐµÐ½Ñ: %s:%d. ÐÑÐ¸Ð±ÐºÐ° Ð¾ÑÐ¿ÑÐ°Ð²ÐºÐ¸ Ð¿Ð¾ÑÐ²ÐµÑÐ°: %d"
+msgid "Клиент: %s:%d. Ошибка отправки пответа: %d"
 msgstr ""
 
 #: tformchenadd.btaddrschennel.caption
@@ -1448,6 +1454,7 @@ msgid "127.0.0.1"
 msgstr ""
 
 #: tfrmchenneltcpadd.edname.text
+msgctxt "tfrmchenneltcpadd.edname.text"
 msgid "TCP канал"
 msgstr ""
 
@@ -2015,6 +2022,7 @@ msgid "Очитсить протокол"
 msgstr ""
 
 #: tfrmmain.actlogsave.caption
+msgctxt "tfrmmain.actlogsave.caption"
 msgid "Сохранить"
 msgstr ""
 
