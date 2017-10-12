@@ -1,0 +1,519 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: dispatcherresstrings.rsdevdebug10
+msgid "Discret. Добавлена еденица опроса: %d::%d::%d"
+msgstr "Discret. Added unit of the survey: %d::%d::%d"
+
+#: dispatcherresstrings.rsdevdebug12
+msgid "Coil. Добавлена еденица опроса: %d::%d::%d"
+msgstr "Coil. Added unit of the survey: %d::%d::%d"
+
+#: dispatcherresstrings.rsdevdebug13
+msgid "Holding. Добавлена еденица опроса: %d::%d::%d"
+msgstr "Holding. Added unit of the survey: %d::%d::%d"
+
+#: dispatcherresstrings.rsdevdebug14
+msgid "Input. Добавлена еденица опроса: %d::%d::%d"
+msgstr "Input. Added unit of the survey: %d::%d::%d"
+
+#: dispatcherresstrings.rsdevdebug16
+msgid "Добавлено устройство: %d"
+msgstr "Added device: %d"
+
+#: dispatcherresstrings.rsdevdebug2
+msgid "ARegStart: %d ARegQuantity: %d"
+msgstr "ARegStart: %d ARegQuantity: %d"
+
+#: dispatcherresstrings.rsdevdebug3
+msgid "SendEvent"
+msgstr "SendEvent"
+
+#: dispatcherresstrings.rsdevdebug4
+msgid "ID: %s. Устройство: %d. Code1: %d. Code2: %d Connect."
+msgstr "ID: %s. Device: %d. Code1: %d. Code2: %d Connect."
+
+#: dispatcherresstrings.rsdevdebug5
+msgid "ID: %s. Device: %d. Code1: %d. Code2: %d Disconnect."
+msgstr "ID: %s. Device: %d. Code1: %d. Code2: %d Disconnect."
+
+#: dispatcherresstrings.rsdevdebug6
+msgid "ID: %s. Device: %d. Code1: %d. Code2: %d Receive."
+msgstr "ID: %s. Device: %d. Code1: %d. Code2: %d Receive."
+
+#: dispatcherresstrings.rsdevdebug7
+msgid "ID: %s. Device: %d. Code1: %d. Code2: %d Send."
+msgstr "ID: %s. Device: %d. Code1: %d. Code2: %d Send."
+
+#: dispatcherresstrings.rsdevdebug8
+msgid "ID: %s. Device: %d. Code1: %d. Code2: %d MBError."
+msgstr "ID: %s. Device: %d. Code1: %d. Code2: %d MBError."
+
+#: dispatcherresstrings.rsdevdebug9
+msgid "ID: %s. Device: %d. Code1: %d. Code2: %d SocketError."
+msgstr "ID: %s. Device: %d. Code1: %d. Code2: %d SocketError."
+
+#: dispatcherresstrings.rsdevexcept1
+msgctxt "dispatcherresstrings.rsdevexcept1"
+msgid "%s"
+msgstr "%s"
+
+#: dispatcherresstrings.rsdevexcept2
+msgctxt "dispatcherresstrings.rsdevexcept2"
+msgid "%s"
+msgstr "%s"
+
+#: dispatcherresstrings.rsdevice1
+msgid "Discret registers - StartAddress."
+msgstr "Discret registers - StartAddress."
+
+#: dispatcherresstrings.rsdevice2
+msgctxt "dispatcherresstrings.rsdevice2"
+msgid "Discret registers."
+msgstr "Discret registers."
+
+#: dispatcherresstrings.rsdevice3
+msgid "Discret registers - Quantity."
+msgstr "Discret registers - Quantity."
+
+#: dispatcherresstrings.rsdevice4
+msgctxt "dispatcherresstrings.rsdevice4"
+msgid "Discret registers."
+msgstr "Discret registers."
+
+#: dispatcherresstrings.rsdevice5
+msgid "Coil registers."
+msgstr "Coil registers."
+
+#: dispatcherresstrings.rsdevice6
+msgid "Input registers."
+msgstr "Input registers."
+
+#: dispatcherresstrings.rsdevice7
+msgid "Holding registers."
+msgstr "Holding registers."
+
+#: dispatcherresstrings.rsdispessom
+msgid "Диспетчер соединений"
+msgstr "Connection Manager"
+
+#: dispatcherresstrings.rsdispessom1
+msgid "Соединение с сервером %s:%d установлено."
+msgstr "The connection to the server (%s:%d) is established."
+
+#: dispatcherresstrings.rsdispessom2
+msgid "Соединение с сервером %s:%d разорвано"
+msgstr "The connection to the server (%s:%d) is broken."
+
+#: dispatcherresstrings.rsdispessom3
+msgctxt "dispatcherresstrings.rsdispessom3"
+msgid "Сокет: %s:%d Ошибка: %d - %s"
+msgstr "Socket: %s:%d Error: %d - %s"
+
+#: dispatcherresstrings.rsdispthread
+msgid "Поток диспетчера соединений"
+msgstr "Thread Connection Manager"
+
+#: dispatcherresstrings.rseallocpackage
+msgctxt "dispatcherresstrings.rseallocpackage"
+msgid "Функция %d не поддерживается в данный момент."
+msgstr "Function %d is not supported currently."
+
+#: dispatcherresstrings.rsecreatereader
+msgctxt "dispatcherresstrings.rsecreatereader"
+msgid "Функция %d не поддерживается в данный момент."
+msgstr "Function %d is not supported currently."
+
+#: dispatcherresstrings.rsedestroy1
+msgid "TDispatcherModbusDevice.Destroy"
+msgstr "TDispatcherModbusDevice.Destroy"
+
+#: dispatcherresstrings.rsedestroy2
+msgid "Ошибка отказа от подписки: %s"
+msgstr "Failed to unsubscribe: %s"
+
+#: dispatcherresstrings.rsedispthread1
+msgid "Соединение с сервером %s разорвано. Пауза до попытки восстановления %d ms."
+msgstr "The connection to the server %s is broken. Pause before restoration attempts in %d ms."
+
+#: dispatcherresstrings.rsedispthread2
+msgid "Не удалось восстановить соединение с сервером %s"
+msgstr "Failed to restore the connection to the server %s"
+
+#: dispatcherresstrings.rsedispthread3
+msgid "Ошибка отправки запроса: %u"
+msgstr "Error sending request: %u"
+
+#: dispatcherresstrings.rsedispthread4
+msgid "Не пришел ответ на запрос: %d::%d::%d"
+msgstr "I do not come response to a request: %d::%d::%d"
+
+#: dispatcherresstrings.rsedispthread5
+msgid "Ответ нулевой длины"
+msgstr "Zero length response"
+
+#: dispatcherresstrings.rsedispthread6
+msgid "Разбор сообщения. Исключение: %s"
+msgstr "Posts Analysis. An exception: %s"
+
+#: dispatcherresstrings.rsedispthread7
+msgid "Исключение: %s"
+msgstr "Exception: %s"
+
+#: dispatcherresstrings.rseitfdisp
+msgid "Нет интерфейса диспетчера. Значение изменено в модели."
+msgstr "No Manager interface. Value is changed in the model."
+
+#: dispatcherresstrings.rseitfdisp1
+msgid "Не задан интерфейс диспетчера"
+msgstr "Manager interface does not set"
+
+#: dispatcherresstrings.rsepbrcpack1
+msgid "ProcessBitRegChangesPackage"
+msgstr "ProcessBitRegChangesPackage"
+
+#: dispatcherresstrings.rsepbrcpack2
+msgid "Не совпадает номер устройства в пакете обновления. Устройство: %d. Пакет: %d"
+msgstr "Not the same as the device number in the update package. Device: %d. Package: %d"
+
+#: dispatcherresstrings.rsepbrcpack3
+msgid "Количество переменных в воновлении и запросе не совпадает. Запрос: %d. Пакет: %d"
+msgstr "The number of variables in the update and query does not match. Request: %d. Package: %d"
+
+#: dispatcherresstrings.rsepbrcpack4
+msgid "Установка значения регистров: %s"
+msgstr "Setting registers: %s"
+
+#: dispatcherresstrings.rsepbrcpack6
+msgid "Номер функции не соответствует типу пакета. Функция: %d"
+msgstr "Function number does not match the type of package. Function: %d"
+
+#: dispatcherresstrings.rsepbrcpack7
+msgid "Ошибка отсылки данных типа Boolean: %s"
+msgstr "Error sending data type Boolean: %s"
+
+#: dispatcherresstrings.rsepwrcpack1
+msgid "ProcessWordRegChangesPackage"
+msgstr "ProcessWordRegChangesPackage"
+
+#: dispatcherresstrings.rsepwrcpack2
+msgid "Ошибка отсылки данных типа Word: %s"
+msgstr "Error sending data type Word: %s"
+
+#: dispatcherresstrings.rsesetcoilvalue
+msgid "SetCoilValue"
+msgstr "SetCoilValue"
+
+#: dispatcherresstrings.rsesetdiscretvalue
+msgid "SetDiscretValue"
+msgstr "SetDiscretValue"
+
+#: dispatcherresstrings.rsesetholdingvalue
+msgid "SetHoldingValue"
+msgstr "SetHoldingValue"
+
+#: dispatcherresstrings.rsesetinputvalue
+msgid "SetInputValue"
+msgstr "SetInputValue"
+
+#: dispatcherresstrings.rsesetthread1
+msgid "Отправлены не все данные."
+msgstr "Sent to all data."
+
+#: dispatcherresstrings.rsesetthread2
+msgid "Получение ответа. Ошибка получения данных: %u"
+msgstr "Getting an answer. Error retrieving data: %u"
+
+#: dispatcherresstrings.rsesetthread3
+msgid "Получение ответа. Ошибка выделения памяти"
+msgstr "Getting an answer. A memory allocation error"
+
+#: dispatcherresstrings.rsesetthread4
+msgid "Разбор ответа. Пришел пакет с идентификатором другой транзакции."
+msgstr "Analysis of the response. Package came with another transaction ID."
+
+#: dispatcherresstrings.rsesetthread5
+msgid "Разбор ответа. Ошибка записи регистра"
+msgstr "Analysis of the response. Register write error"
+
+#: dispatcherresstrings.rsesetthread6
+msgid "Execute error: %s"
+msgstr "Execute error: %s"
+
+#: dispatcherresstrings.rsesetthread7
+msgid "InitThread error: %s"
+msgstr "InitThread error: %s"
+
+#: dispatcherresstrings.rsesetthread8
+msgid "CloseThread error: %s"
+msgstr "CloseThread error: %s"
+
+#: dispatcherresstrings.rsesetthread9
+msgctxt "dispatcherresstrings.rsesetthread9"
+msgid "Сокет: %s:%d Ошибка: %d - %s"
+msgstr "Socket: %s:%d Error: %d - %s"
+
+#: dispatcherresstrings.rssetcoilvalue1
+msgid "При записи значения регистра %d возникло исключение: %s"
+msgstr "When the values of the register %d records exception occurred: %s"
+
+#: dispatcherresstrings.rssetcoilvalue11
+msgid "Интерфейс устройства не задан."
+msgstr "The interface device is not set."
+
+#: dispatcherresstrings.rssetcoilvalue12
+msgid "Пток отправки данных не активен."
+msgstr "Send data thread is not active."
+
+#: dispatcherresstrings.rssetcoilvalue2
+msgid "Не удалось записать значение регистра %d"
+msgstr "Failed to write the value of register %d"
+
+#: dispatcherresstrings.rssetdiskretvalue1
+msgid "Modbus Discret-регистры являются регистрами только для чтения."
+msgstr "Modbus Discrete-registers are registers for read-only."
+
+#: dispatcherresstrings.rssetholdingvalue1
+msgid "Modbus Holding-регистры являются регистрами только для чтения."
+msgstr "Modbus Holding-Registers are registers for read-only."
+
+#: dispatcherresstrings.rssetthread
+msgid "Поток записи значений Modbus"
+msgstr "Modbus values recording thread"
+
+#: mbresourcestring.ermbdeviceaddress
+msgid ""
+"Неверно задан адрес устройства.\n"
+"Адрес должен находиться в диапазоне от 1 до 247\n"
+msgstr ""
+"Invalid specified address.\n"
+"The address must be in the range from 1 to 247\n"
+
+#: mbresourcestring.ermbf110packetbuild
+msgctxt "mbresourcestring.ermbf110packetbuild"
+msgid ""
+"Неверно задано количество регистров.\n"
+"Количество запрашиваемых регистров должно находиться в диапазоне от 1 до 8.\n"
+msgstr ""
+"Invalid specified number of registers.\n"
+"The number of registers requested must be in the range from 1 to 8.\n"
+
+#: mbresourcestring.ermbf110packetbuild1
+msgctxt "mbresourcestring.ermbf110packetbuild1"
+msgid ""
+"Неверно задан контрольный ключ.\n"
+"Ключ должен принимать значение 0х55 либо 0хAA.\n"
+msgstr ""
+"Invalid set control key.\n"
+"The key is to take the value 0x55 or 0xAA.\n"
+
+#: mbresourcestring.ermbf16packetbuild
+msgid ""
+"Неверно задано количество регистров.\n"
+"Количество запрашиваемых регистров должно находиться в диапазоне от 1 до 125.\n"
+msgstr ""
+"Invalid specified number of registers.\n"
+"The number of registers requested must be in the range from 1 to 125.\n"
+
+#: mbresourcestring.ermbf1packetbuild
+msgid ""
+"Неверно задано количество регистров.\n"
+"Количество запрашиваемых регистров должно находиться в диапазоне от 1 до 2000.\n"
+msgstr ""
+"Invalid specified number of registers.\n"
+"The number of registers requested must be in the range from 1 to 2000.\n"
+
+#: mbresourcestring.ermbf23packetbuild
+msgid "Запрошено значение расположенное за границами массива значений."
+msgstr "Requested value located beyond the boundaries of the array of values."
+
+#: mbresourcestring.ermbf23packetbuild1
+msgid ""
+"Неверно задано количество регистров.\n"
+"Количество запрашиваемых регистров должно находиться в диапазоне от 1 до 125.\n"
+msgstr ""
+"Invalid specified number of registers.\n"
+"The number of registers requested must be in the range from 1 to 125.\n"
+
+#: mbresourcestring.ermbf3packetbuild
+msgid ""
+"Неверно задано количество регистров.\n"
+"Количество запрашиваемых регистров должно находиться в диапазоне от 1 до 125.\n"
+msgstr ""
+"Invalid specified number of registers.\n"
+"The number of registers requested must be in the range from 1 to 125.\n"
+
+#: mbresourcestring.ermbf43packetbuild
+msgid "Подфункция не реализована"
+msgstr "Sub-function is not implemented"
+
+#: mbresourcestring.ermbf72packetbuild
+msgctxt "mbresourcestring.ermbf72packetbuild"
+msgid ""
+"Неверно задано количество регистров.\n"
+"Количество запрашиваемых регистров должно находиться в диапазоне от 1 до 8.\n"
+msgstr ""
+"Invalid specified number of registers.\n"
+"The number of registers requested must be in the range from 1 to 8.\n"
+
+#: mbresourcestring.ermbf72packetbuild1
+msgctxt "mbresourcestring.ermbf72packetbuild1"
+msgid ""
+"Неверно задан контрольный ключ.\n"
+"Ключ должен принимать значение 0х55 либо 0хAA.\n"
+msgstr ""
+"Invalid set control key.\n"
+"The key is to take the value 0x55 or 0xAA.\n"
+
+#: mbresourcestring.ermbfoutofmemory
+msgid "Ошибка выделения памяти."
+msgstr "Memory allocation error."
+
+#: mbresourcestring.errcs
+msgid "Ошибка контрольной суммы."
+msgstr "Checksum error."
+
+#: mbresourcestring.errdata
+msgid "Ошибка инициализации данных."
+msgstr "Data initialization error."
+
+#: mbresourcestring.errincompatibletype
+msgid "Несовместимый тип данных."
+msgstr "Incompatible data type."
+
+#: mbresourcestring.errinternotinit
+msgid "Интерпретатор не инициализирован данными."
+msgstr "The interpreter is not initialized data."
+
+#: mbresourcestring.errinternotvalue
+msgid "Не задано одно из значений для инициализации интерпретатора."
+msgstr "Not one of the meanings given for initializing an interpreter."
+
+#: mbresourcestring.erroutofchar
+msgid "Недопустимый символ в строке."
+msgstr "Invalid character in the string."
+
+#: mbresourcestring.erroutofrange
+msgid "Выход за диапазон допустимых адресов."
+msgstr "Out of the range of valid addresses."
+
+#: mbresourcestring.errreadonly
+msgid "Регистр предназначен только для чтения."
+msgstr "Register is read-only."
+
+#: mbresourcestring.err_trans_init
+msgid "Не задан конструктор данных для транзакции."
+msgstr "Do not set the data constructor for the transaction."
+
+#: mbresourcestring.rsbittowordtransformationerror
+msgid "Не возможно преобразовать список битовых регистров в список регистров типа Word"
+msgstr "Unable to convert a list of bit-mapped registers in the register list type Word"
+
+#: mbresourcestring.rsdataarrayisempty
+msgid "Масив данных предназначенных для записи пуст."
+msgstr "The data set to be recorded is empty."
+
+#: mbresourcestring.rsdigitalvalue
+msgid "значение : %d."
+msgstr "Value: %d."
+
+#: mbresourcestring.rsillegalfunctionnumber
+msgid "Не допустимый номер функции."
+msgstr "Invalid function number."
+
+#: mbresourcestring.rslisttypeerror
+msgid "Не задан тип списка."
+msgstr "Do not set the type of list."
+
+#: mbresourcestring.rsmbtcppacketlenerror
+msgid "Длинна пакета не соответствует заявленной"
+msgstr "The packet length does not correspond to the declared"
+
+#: mbresourcestring.rsmbtcppackettraserror
+msgid "Пакет не принадлежит текущей транзакции."
+msgstr "The package does not belong to the current transaction."
+
+#: mbresourcestring.rsnonameflag
+msgid "Неопределенный флаг."
+msgstr "Uncertain flag."
+
+#: mbresourcestring.rsnonameflagvalue
+msgid "%s. Значение : %d"
+msgstr "%s. Value : %d"
+
+#: mbresourcestring.rsnonamestrflagvalue
+msgid "%s значение : %s"
+msgstr "%s value : %s"
+
+#: mbresourcestring.rsregisreadonly
+msgid "Регистры предназначены только для чтения."
+msgstr "Registers are read-only."
+
+#: mbresourcestring.rsregnotexist1
+msgid "Регистр с номером %d не существует."
+msgstr "Register number %d exists."
+
+#: mbresourcestring.rsregnotexists
+msgid "Регистр %d, заданный в параметрах, не найден. Создание массива значений прекращено."
+msgstr "%d register specified in the parameters can not be found. Create an array of values dropped."
+
+#: mbresourcestring.rsspcounter
+msgid "Изменен счетчик осей. Значение : "
+msgstr "Changed counter axes. Meaning : "
+
+#: mbresourcestring.rssperrorstring
+msgid ""
+"0 = Ошибка теста памяти.\n"
+"1 = Съем датчика.\n"
+"2 = Обрыв датчика.\n"
+msgstr ""
+"0 = Failed memory test.\n"
+"1 = Removing the sensor.\n"
+"2 = Broken sensor.\n"
+
+#: mbresourcestring.rsspinfostring
+msgid ""
+"Нет диагностики\n"
+"Диагностика\n"
+"Температура\n"
+msgstr ""
+"No diagnostics\n"
+"Diagnostics\n"
+"Temperature\n"
+
+#: mbresourcestring.rsspmasterslave
+msgid ""
+"Основной\n"
+"Дублирующий\n"
+msgstr ""
+"Main\n"
+"Duplicate\n"
+
+#: mbresourcestring.rsspmzd
+msgid "Металл в зоне датчика."
+msgstr "The metal in the zone of the sensor."
+
+#: mbresourcestring.rsspnonestate
+msgid "Неопределенное состояние."
+msgstr "Uncertain state."
+
+#: mbresourcestring.rssptemperature
+msgid "Температура : "
+msgstr "Temperature : "
+
+#: mbresourcestring.rswordtobittransformationerror
+msgid "Не возможно преобразовать список регистров типа Word в список битовых регистров"
+msgstr "Can not convert type Word registers the list in the list of bit registers"
+
+#: mbresourcestring.rs_out_of_range
+msgid "Выход за пределы массива данных"
+msgstr "Going beyond the data set"
+
+#: translateresstr.rsresstr1
+msgid "Тест"
+msgstr "Test"
+
+#: translateresstr.rsresstr2
+msgid "Тест1"
+msgstr "Test1"
+

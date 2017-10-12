@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <Version Value="9"/>
+    <BuildModes Active="Default"/>
+    <Units Count="20">
+      <Unit0>
+        <Filename Value="translate_cmd.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="67"/>
+        <CursorPos X="52" Y="87"/>
+        <UsageCount Value="25"/>
+        <Loaded Value="True"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="TranslateResStr.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="1"/>
+        <CursorPos X="21" Y="9"/>
+        <UsageCount Value="25"/>
+        <Loaded Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="translate.lpi"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="2"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="XML"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="../../LCL/demo1/translate.lpi"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="XML"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="/usr/lib/codetyphon/fpcsrc/packages/fcl-base/src/gettext.pp"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="215"/>
+        <CursorPos X="3" Y="219"/>
+        <UsageCount Value="10"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="../../LCL/demo1/localizedforms.pas"/>
+        <UnitName Value="LocalizedForms"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="14"/>
+        <CursorPos X="36" Y="215"/>
+        <UsageCount Value="10"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="/usr/lib/codetyphon/typhon/lcl/translations.pas"/>
+        <UnitName Value="Translations"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="40"/>
+        <CursorPos X="28" Y="84"/>
+        <ExtraEditorCount Value="1"/>
+        <ExtraEditor1>
+          <EditorIndex Value="-1"/>
+          <TopLine Value="580"/>
+          <CursorPos X="3" Y="582"/>
+        </ExtraEditor1>
+        <UsageCount Value="12"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="/usr/lib/codetyphon/fpcsrc/rtl/objpas/objpas.pp"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="373"/>
+        <CursorPos X="3" Y="379"/>
+        <UsageCount Value="10"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="/usr/lib/codetyphon/typhon/lcl/include/lcl_defines.inc"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <UsageCount Value="10"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="/usr/lib/codetyphon/typhon/components/BaseUtils/lazutf8.pas"/>
+        <UnitName Value="LazUTF8"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="130"/>
+        <CursorPos X="28" Y="169"/>
+        <UsageCount Value="10"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="/usr/local/codetyphon/typhon/lcl/translations.pas"/>
+        <UnitName Value="Translations"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="635"/>
+        <CursorPos X="20" Y="645"/>
+        <UsageCount Value="10"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="/usr/local/codetyphon/fpcsrc/rtl/objpas/objpas.pp"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="362"/>
+        <CursorPos X="3" Y="368"/>
+        <UsageCount Value="10"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="/usr/local/codetyphon/typhon/lcl/lclproc.pas"/>
+        <UnitName Value="LCLProc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="124"/>
+        <CursorPos X="3" Y="1491"/>
+        <UsageCount Value="10"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="/usr/local/codetyphon/typhon/components/BaseUtils/lazlogger.pas"/>
+        <UnitName Value="LazLogger"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="101"/>
+        <CursorPos X="3" Y="61"/>
+        <UsageCount Value="10"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="/usr/local/codetyphon/typhon/components/BaseUtils/lazutf8.pas"/>
+        <UnitName Value="LazUTF8"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="3553"/>
+        <CursorPos X="33" Y="3506"/>
+        <UsageCount Value="10"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="/usr/local/codetyphon/fpcsrc/packages/fcl-base/src/gettext.pp"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="307"/>
+        <CursorPos X="3" Y="315"/>
+        <UsageCount Value="10"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="../../../ModbusLib/MBResourceString.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="14"/>
+        <CursorPos X="56" Y="17"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="../../../ModbusLib/MBTCPMasterDispatcher/DispatcherResStrings.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="3"/>
+        <CursorPos X="3" Y="16"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="../../../ModbusLib/MBFunctions/MBBuilderStrings.pas"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="20"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="../../../ModbusLib/MBFunctions/MBReaderStrings.pas"/>
+        <UnitName Value="MbReaderStrings"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="20"/>
+      </Unit19>
+    </Units>
+    <JumpHistory Count="7" HistoryIndex="6">
+      <Position1>
+        <Filename Value="TranslateResStr.pas"/>
+        <Caret Line="8" Column="3"/>
+      </Position1>
+      <Position2>
+        <Filename Value="translate_cmd.lpr"/>
+        <Caret Line="10" Column="17"/>
+      </Position2>
+      <Position3>
+        <Filename Value="translate_cmd.lpr"/>
+        <Caret Line="13" Column="14"/>
+      </Position3>
+      <Position4>
+        <Filename Value="translate_cmd.lpr"/>
+        <Caret Line="3" Column="25"/>
+      </Position4>
+      <Position5>
+        <Filename Value="translate_cmd.lpr"/>
+        <Caret Line="5" Column="63"/>
+      </Position5>
+      <Position6>
+        <Filename Value="translate_cmd.lpr"/>
+        <Caret Line="62" Column="3" TopLine="8"/>
+      </Position6>
+      <Position7>
+        <Filename Value="translate_cmd.lpr"/>
+        <Caret Line="12" Column="3" TopLine="67"/>
+      </Position7>
+    </JumpHistory>
+  </ProjectSession>
+</CONFIG>

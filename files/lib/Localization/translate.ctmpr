@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <MultiProject FileVersion="1">
+    <Elements Count="3">
+      <Element0 FileName="LCL/demo1/translate.lpi">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element0>
+      <Element1 FileName="LCL/demo/translation_demo.lpi">
+        <BuildModes Count="2"/>
+        <Mode1 Name="Debug" Compile="True"/>
+        <Mode2 Name="Release"/>
+      </Element1>
+      <Element2 FileName="NotLCL/demo/translate_cmd.lpi">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element2>
+    </Elements>
+  </MultiProject>
+</CONFIG>

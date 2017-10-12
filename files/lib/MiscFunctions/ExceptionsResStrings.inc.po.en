@@ -1,0 +1,475 @@
+#: exceptionsresstrings.erremptyparam
+msgid "Не задан объект для постановки в очередь."
+msgstr "No object specified for queuing."
+
+#: exceptionsresstrings.rschannelisnotactive
+msgid "Канал не открыт."
+msgstr "Channel is not open."
+
+#: exceptionsresstrings.rschannellistnotassigned
+msgid "Не задан список каналов для осуществления мониторинга."
+msgstr "No specified list of channels to monitor."
+
+#: exceptionsresstrings.rsclassnotimplemented
+msgid "Класс не реализован"
+msgstr "Class is not implemented"
+
+#: exceptionsresstrings.rscmsbadid
+msgid "Идентификатор выходит за допустимый диапазон."
+msgstr "ID is out of range."
+
+#: exceptionsresstrings.rscmsbadid1
+msgid "Идентификатор хоста(%d) должен находиться в диапазоне от %d до %d"
+msgstr "Host ID (%d) should be in the range from %d to %d"
+
+#: exceptionsresstrings.rscmsfilenotfound
+msgid "Файл %s не найден."
+msgstr "File %s is not found"
+
+#: exceptionsresstrings.rscmsfilenotfound1
+msgid "Файл не найден."
+msgstr "File is not found"
+
+#: exceptionsresstrings.rscmsload
+msgid "Загрузка конфигурации"
+msgstr "Load configuration"
+
+#: exceptionsresstrings.rscmsloaderrorchanlistnotfound
+msgid "Отсутствует тег списка каналов."
+msgstr "No tag for channel list."
+
+#: exceptionsresstrings.rscmsloaderrorcodepage
+msgid "Кодовая страница конфигурации не соответствует требуемой."
+msgstr "Configuration code page does not correspond the required one."
+
+#: exceptionsresstrings.rscmsloaderrorcodepagef
+msgid "Кодовая страница конфигурации (%s) не соответствует требуемой - %s"
+msgstr "Configuration code page (%s) does not correspond to the required one - %s"
+
+#: exceptionsresstrings.rscmsloaderrorgetconfpath
+msgid "Не удалось получить путь к файлу конфигурации системы."
+msgstr "Failed to receive the path to the system configuration file."
+
+#: exceptionsresstrings.rscmsloaderrorhostlistisempty
+msgctxt "exceptionsresstrings.rscmsloaderrorhostlistisempty"
+msgid "Список хстов пуст."
+msgstr "List of hosts is empty."
+
+#: exceptionsresstrings.rscmsloaderrorhostlistnotfound
+msgid "Не найден тег списка хостов."
+msgstr "Tag for list of hosts is not found."
+
+#: exceptionsresstrings.rscmsloaderrorhosttegnotfound
+msgid "Не найден тег хоста для данного устройства."
+msgstr "Host tag for this device is not found."
+
+#: exceptionsresstrings.rscmsloaderroridcstegnotfound
+msgid "Тег подсистемы сбора первичной информации(IDCS) отсутствует."
+msgstr "No tag for the primary information collecting subsystem (IDCS)."
+
+#: exceptionsresstrings.rscmsloaderroriplistisempty
+msgctxt "exceptionsresstrings.rscmsloaderroriplistisempty"
+msgid "Список хстов пуст."
+msgstr "The list of hosts is empty."
+
+#: exceptionsresstrings.rscmsloaderrormodulelistnotfound
+msgid "Отсутствует список ModuleList."
+msgstr "No ModuleList."
+
+#: exceptionsresstrings.rscmsloaderrorprotlistnotfound
+msgid "Отсутствует тег списка протоколов."
+msgstr "No tag for protocol list."
+
+#: exceptionsresstrings.rscmsloaderrorrmtchanlistnotfound
+msgid "Отсутствует список RemoteChannelList."
+msgstr "No RemoteChannelList."
+
+#: exceptionsresstrings.rscmsloaderrorrmtdevlistnotfound
+msgid "Отсутствует список RemoteDeviceList."
+msgstr "No RemoteDeviceList"
+
+#: exceptionsresstrings.rscmsloaderrorrmtprotlistnotfound
+msgid "Отсутствует список RemoteProtocolList."
+msgstr "No RemoteProtocolList."
+
+#: exceptionsresstrings.rscmsloaderrorrootname
+msgid "Корневой тег не соответствует требуемому."
+msgstr "Root tag does not correspond the required one."
+
+#: exceptionsresstrings.rscmsloaderrorrootnamef
+msgid "Корневой тег %s не соответствует требуемому %s"
+msgstr "Root tag %s does not correspond the required %s."
+
+#: exceptionsresstrings.rscmsloaderrorrsmodbusrtunotfound
+msgid "Отсутствует конфигурация модуля RSModbusRTU."
+msgstr "No configuration of RSModbusRTU module."
+
+#: exceptionsresstrings.rscmsloaderrorsvrchanlistnotfound
+msgid "Отсутствует список ServerChannelList."
+msgstr "No ServerChannelList"
+
+#: exceptionsresstrings.rscmsloaderrorsvrdevlistnotfound
+msgid "Отсутствует список ServerDeviceList."
+msgstr "No ServerDeviceList"
+
+#: exceptionsresstrings.rscmsloaderrorsvrprotlistnotfound
+msgid "Отсутствует список ServerProtocolList."
+msgstr "No ServerProtocolList"
+
+#: exceptionsresstrings.rscommandchannellistisempty
+msgid "Список каналов для доступа к удаленному устройству пуст."
+msgstr "Remote device access channel list is empty."
+
+#: exceptionsresstrings.rscommandchannellistnotset
+msgid "Не задан список каналов до удаленных устройств."
+msgstr "Not specified the list of channels to remote devices."
+
+#: exceptionsresstrings.rscommanddevitfnotinit
+msgid "Команда не инициализирована интерфейсом устройства."
+msgstr "Command is not initialize by the device interface."
+
+#: exceptionsresstrings.rscommandisanotherdevice
+msgid "Команда предназначается другому устройству."
+msgstr "Command is assigned to another device."
+
+#: exceptionsresstrings.rscommandmbdevnotset
+msgid "Не задан объект Modbus устройства."
+msgstr "Not specified Modbus object of device."
+
+#: exceptionsresstrings.rscommandmbdevnumnotset
+msgid "Не задан номер устройства для команды."
+msgstr "Nor specified a device number for command."
+
+#: exceptionsresstrings.rscommandsrvprotnotmbprot
+msgid "Установленный протокол не поддерживает серверный Modbus протокол."
+msgstr "Set protocol does not support the Modbus server protocol."
+
+#: exceptionsresstrings.rsdeverrorcommand
+msgid "Ошибка выполнения команды. %s"
+msgstr "Command execution error. %s"
+
+#: exceptionsresstrings.rsdeverrorcommandnotassigned
+msgid "Команда не задана."
+msgstr "Command is not set."
+
+#: exceptionsresstrings.rsdevicenotassigned
+msgid "Не задано устройство для мониторинга."
+msgstr "Monitoring device is not specified."
+
+#: exceptionsresstrings.rsdevloadparamxmlnotassign
+msgid "Не задан узел XML для загрузки параметров устройства."
+msgstr "Not specified XML node to load the device settings."
+
+#: exceptionsresstrings.rsdevsaveparamxmlnotassign
+msgid "Не задан узел XML для сохранения параметров устройства."
+msgstr "Not specified XML node for storing the device parameters."
+
+#: exceptionsresstrings.rserrchannelisntfound
+msgid "Запрашиваемый канал не найден"
+msgstr "The requested channel is not found"
+
+#: exceptionsresstrings.rserrchannelparaminvalid
+msgid "Ошибка в параметрах канала."
+msgstr "Error in channel settings."
+
+#: exceptionsresstrings.rserrchannelparamnotassiged
+msgid "Параметры канала не заданы."
+msgstr "Channel parameters are not set."
+
+#: exceptionsresstrings.rserrdeviceparaminvalid
+msgid "Ошибка в параметрах устройства."
+msgstr "Error in device parameters."
+
+#: exceptionsresstrings.rserritfportparaminvalid
+msgid "Ошибка в параметрах интерфейсного порта."
+msgstr "Error in the interface port parameters."
+
+#: exceptionsresstrings.rserritfportparamnotassigned
+msgid "Не заданы параметры интерфейсного порта."
+msgstr "Interface port parameters are not set."
+
+#: exceptionsresstrings.rserritfportparamtype
+msgid "Класс параметров порта не соответствует требуемому"
+msgstr "Port parameters class does not correspond the required one"
+
+#: exceptionsresstrings.rserrobjectlistparaminvalid
+msgid "Ошибка в параметрах списка объектов наблюдения"
+msgstr "Error in the parameters of the observation objects list"
+
+#: exceptionsresstrings.rserrobjectparaminvalid
+msgid "Ошибка в параметрах объекта наблюдения"
+msgstr "Error in the observation object parameters"
+
+#: exceptionsresstrings.rserrportcustom
+msgid "Ошибка порта"
+msgstr "Port error"
+
+#: exceptionsresstrings.rserrportdataread
+msgctxt "exceptionsresstrings.rserrportdataread"
+msgid "Ошибка чтения данных"
+msgstr "Data read error"
+
+#: exceptionsresstrings.rserrportdatawait
+msgid "Ошибка ожидания данных"
+msgstr "Data wait error"
+
+#: exceptionsresstrings.rserrportdatawrite
+msgid "Ошибка записи данных в порт"
+msgstr "Data writing to port error"
+
+#: exceptionsresstrings.rserrportdatawritetimeout
+msgid "Не удалось записать данные в порт."
+msgstr "Failed to write data to port."
+
+#: exceptionsresstrings.rserrportnotactive
+msgid "Порт не открыт."
+msgstr "Port is not open."
+
+#: exceptionsresstrings.rserrportnotassigned
+msgid "Интерфейсный порт не определен."
+msgstr "Interface port is not defined."
+
+#: exceptionsresstrings.rserrportparinvalid
+msgid "Ошибка в параметрах порта."
+msgstr "Port parameters error."
+
+#: exceptionsresstrings.rserrportparityerror
+msgid "Ошибка паритета."
+msgstr "Parity error."
+
+#: exceptionsresstrings.rserrportparnotassigned
+msgid "Параметры порта не заданы."
+msgstr "Port parameters are not set."
+
+#: exceptionsresstrings.rserrrequestdatanotassigned
+msgid "Не удалось получить данные из запроса."
+msgstr "Failed to receive data from the request."
+
+#: exceptionsresstrings.rserrrequestnotassigned
+msgid "Запрос не определен."
+msgstr "Request is not defined."
+
+#: exceptionsresstrings.rserrresivedatanull
+msgid "Пришел ответ нулевой длины."
+msgstr "Received the reply of zero length."
+
+#: exceptionsresstrings.rserrresivedatatimeout
+msgid "Таймаут ожидания ответа устройства."
+msgstr "Device response waiting timeout."
+
+#: exceptionsresstrings.rserrresiveprocnotassigned
+msgid "Не установлена процедура возврата данных в интерфейсном порту."
+msgstr "Not specified data return procedure in the interface port."
+
+#: exceptionsresstrings.rserrunknown
+msgid "Неизвестная ошибка"
+msgstr "Unknown error"
+
+#: exceptionsresstrings.rsexceptadddevalreadyexists
+msgid "Устройство с адресом %d уже существует."
+msgstr "Device with address %d already exists."
+
+#: exceptionsresstrings.rsexceptneitherfunctioisnotset
+msgid "Ни одна функция не установлена"
+msgstr "No function is set"
+
+#: exceptionsresstrings.rsexceptsessionid
+msgid "Идентификатор сессии не задан"
+msgstr "Session ID is not specified"
+
+#: exceptionsresstrings.rsexceptsyetemtype
+msgid "%s Данный компилятор раcсчитан на тип системы %s. В конфигурационном файле содержится иной тип - %s"
+msgstr "%s This compiler is designed for the system type %s. The configuration file contains another type - %s"
+
+#: exceptionsresstrings.rsexceptxlmnoattr
+msgid "%s Тег %s. Отсутствует обязательный атрибут %s"
+msgstr "%s Teg %s. No required attribute %s"
+
+#: exceptionsresstrings.rsexceptxlmnonode
+msgid "%s Тег %s отсутствует в документе"
+msgstr "%s No tag %s in the document"
+
+#: exceptionsresstrings.rsexceptxmlattrval
+msgid "%s Тег %s. Атрибут %s имеет недопустимое значение %s"
+msgstr "%s Tag %s. Invalid value %s of attribute %s"
+
+#: exceptionsresstrings.rsexceptxmlnotassigned
+msgid "Объект XML документа не задан."
+msgstr "XML document object is not specified."
+
+#: exceptionsresstrings.rsmodbuserror
+msgid "Ошибка Modbus"
+msgstr "Modbus error"
+
+#: exceptionsresstrings.rsnoerror
+msgctxt "exceptionsresstrings.rsnoerror"
+msgid "Нет ошибки."
+msgstr "No error."
+
+#: exceptionsresstrings.rsobjectlistnotassigned
+msgid "Не задан узел XML для загрузки параметров списка объектов наблюдения"
+msgstr "Not specified XML node to load the observation objects list parameters"
+
+#: exceptionsresstrings.rsobjectnotassigned
+msgid "Не задан узел XML для загрузки параметров объекта наблюдения"
+msgstr "Not specified XML node to load the observation object parameters"
+
+#: exceptionsresstrings.rsportoperationaborted
+msgid "Операция ввода/вывода была прервана из-за завершения потока команд или по запросу приложения."
+msgstr "I/O operation has been aborted because of commands thread termination or by application request."
+
+#: exceptionsresstrings.rsprotdoesnotsupportthiscmd
+msgid "Протокол не поддерживает данный тип команд."
+msgstr "Protocol does not support this type of commands."
+
+#: exceptionsresstrings.rsprotidmissing
+msgid "В параметрах отсутствует идентификатор протокола."
+msgstr "No protocol identifier in parameters."
+
+#: exceptionsresstrings.rsprotidrefersanotherprotocol
+msgid "Идентификатор относится к другому протоколу."
+msgstr "ID is assigned to another  protocol."
+
+#: exceptionsresstrings.rsprotloadparamxmlnotassign
+msgid "Не задан узел XML для загрузки параметров протокола."
+msgstr "Not specified XML node to load the protocol parameters."
+
+#: exceptionsresstrings.rsprotnotsupport
+msgid "Протокол не поддерживается."
+msgstr "Protocol is not supported."
+
+#: exceptionsresstrings.rsprottypeisincorrect
+msgid "Тип протокола задан неверно."
+msgstr "Protocol type is incorrect."
+
+#: exceptionsresstrings.rssysgetmem
+msgid "Ошибка выделения памяти"
+msgstr "Memory allocation error"
+
+#: exceptionsresstrings.rsxmlloaddevfuncnotassign
+msgid "В конфигурации не заданы функции поддерживаемые устройством."
+msgstr "Configuration does not contain the functions supported by the device."
+
+#: exceptionsresstrings.rsxmlloaddevtypeerror
+msgid "Тип устройства не соответствует типу указанному в параметрах."
+msgstr "Device type does not correspond the type specified in the parameters."
+
+#: exceptionsresstrings.rsxmlloaderror
+msgid "Ошибка загрузки устройства"
+msgstr "Device load error"
+
+#: exceptionsresstrings.rsxmlloadoutofrangeid
+msgid "Не задан идентификатор диапазона адресов."
+msgstr "Not specified the address range ID."
+
+#: exceptionsresstrings.rsxmlloadoutofrangeofaddr
+msgid "Выход за пределы допустимого диапазона адресов."
+msgstr "Out of tolerable range of addresses."
+
+#: exceptionsresstrings.rsxmlloadoutofrangeofreg
+msgid "Выход за пределы допустимого диапазона количества регистров."
+msgstr "Out of tolerable registers number range."
+
+#: exceptionsresstrings.rs_master_buff_not_assignet
+msgid "Передан пустой буфер."
+msgstr "Transmitted an empty buffer."
+
+#: exceptionsresstrings.rs_master_crc
+msgid "Ошибка расчета CRC16 полученного пакета."
+msgstr "Calculation error of the received packet CRC16."
+
+#: exceptionsresstrings.rs_master_device_address
+msgid "Пакет предназначен другому устройству."
+msgstr "Packrt is intended for another device."
+
+#: exceptionsresstrings.rs_master_f3_len
+msgid "Неверная длина пакета."
+msgstr "Incorrect packet length."
+
+#: exceptionsresstrings.rs_master_f72_chkrkey
+msgid "Ключ переданный в ответе не соответствует ожидаемому."
+msgstr "Key transmitted in the reply does not match the expected one."
+
+#: exceptionsresstrings.rs_master_f72_crc
+msgid "Ошибка CRC блока данных."
+msgstr "Error in data block CRC."
+
+#: exceptionsresstrings.rs_master_f72_quantity
+msgid "Количество регистров в ответе выходит за допустимый диапазон."
+msgstr "Number of registers in the reply is out of range."
+
+#: exceptionsresstrings.rs_master_fifo_count
+msgid "Количество FIFO регистров превышает допустимое."
+msgstr "Number of FIFO registers exceeds the tolerable value."
+
+#: exceptionsresstrings.rs_master_function_code
+msgid "Неверный код функции в ответном сообщении."
+msgstr "Incorrect function code in the response message."
+
+#: exceptionsresstrings.rs_master_get_memory
+msgid "Системная ошибка.  Код ошибки: %d. - %s"
+msgstr "System error. Error code: %d. - %s"
+
+#: exceptionsresstrings.rs_master_mei
+msgid "Функция 43. Данный MEI не поддерживается."
+msgstr "Function 43. This MEI is not supported."
+
+#: exceptionsresstrings.rs_master_morefollows
+msgid "Недопустимое значение MoreFollows."
+msgstr "Incorrect value of MoreFollows."
+
+#: exceptionsresstrings.rs_master_quantity
+msgid "Количество записанных регистров превышает допустимое."
+msgstr "Number of recorded registers exceeds the tolerable value."
+
+#: exceptionsresstrings.rs_master_rdic
+msgid "Данный код чтения устройства не реализован."
+msgstr "This device read code is not implemented."
+
+#: exceptionsresstrings.rs_master_word_read
+msgid "Передано нечетное количество байт."
+msgstr "Transmitted an odd number of bytes."
+
+#: exceptionsresstrings.rs_mb_acknowledge
+msgid "Запрос принят. Выполняется длительная операция."
+msgstr "Request is accepted. Executing a long-running operation."
+
+#: exceptionsresstrings.rs_mb_err_custom
+msgid "Ошибка Modbus: %s"
+msgstr "Modbus error: %s"
+
+#: exceptionsresstrings.rs_mb_gatway_path_unavailable
+msgid "Ошибка маршрутизации."
+msgstr "Routing error."
+
+#: exceptionsresstrings.rs_mb_gatway_target_device_failed_respond
+msgid "Запрашиваемое устройство не ответило."
+msgstr "The requested device does not respond."
+
+#: exceptionsresstrings.rs_mb_illegal_data_address
+msgid "Недопустимый адрес данных, полученный в запросе."
+msgstr "Invalid data address received in the query."
+
+#: exceptionsresstrings.rs_mb_illegal_data_value
+msgid "Недопустимые значения, полученные в поле данных запроса."
+msgstr "Invalid values received in the query data field."
+
+#: exceptionsresstrings.rs_mb_illegal_function
+msgid "Недопустимый тип функции, полученных в запросе."
+msgstr "Invalid type of function received in the query."
+
+#: exceptionsresstrings.rs_mb_memory_parity_error
+msgid "При чтении файла обнаружена ошибка четности памяти."
+msgstr "Memory parity error is detected when reading a file."
+
+#: exceptionsresstrings.rs_mb_slave_device_busy
+msgid "Устройство занято. Повторите запрос позже."
+msgstr "Device is busy. Retry a query later."
+
+#: exceptionsresstrings.rs_mb_slave_device_failure
+msgid "Неустранимая ошибка при обработке устройством полученного запроса."
+msgstr "Fatal error occurred when device processed the received query."
+
+#: exceptionsresstrings.rs_mb_uninspacted
+msgid "Нераспознанная ошибка."
+msgstr "Unrecognized error."

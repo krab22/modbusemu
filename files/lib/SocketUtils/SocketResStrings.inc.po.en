@@ -1,0 +1,525 @@
+#: socketresstrings.rsbsrvsockremcl1
+msgid "Клиент удален.Количество соединений: %d"
+msgstr "Client is deleted. Number of connections: %d"
+
+#: socketresstrings.rsclconnect1
+msgid "Присоединился клиент. Количество соединений: %d"
+msgstr "Client is connected. Number of connections: %d"
+
+#: socketresstrings.rsclientconnectionname
+msgid "Клиентское соединение"
+msgstr "Client connection"
+
+#: socketresstrings.rscllasrerrset1
+msgid "Клиент: %s:%d - Ошибка: %s - %s"
+msgstr "Client: %s:%d - Error: %s - %s"
+
+#: socketresstrings.rsclonresdata1
+msgid "ClientObject.OnClientReceiveData. Ошибка: %s"
+msgstr "ClientObject.OnClientReceiveData. Error: %s"
+
+#: socketresstrings.rsclonresdata2
+msgid "ClientObject.OnClientReceiveInfo. Ошибка: %s"
+msgstr "ClientObject.OnClientReceiveInfo. Error: %s"
+
+#: socketresstrings.rsconnected
+msgid "Connected"
+msgstr "Connected"
+
+#: socketresstrings.rsdisconnected
+msgid "Disonnected"
+msgstr "Disonnected"
+
+#: socketresstrings.rserrorcode
+msgid "Код ошибки: %d"
+msgstr "Error code: %d"
+
+#: socketresstrings.rserrorsocketdescr
+msgid "SelectThread. Должен быть передан действующий дескриптор сокета."
+msgstr "SelectThread. Valid socket descriptor shall be sent."
+
+#: socketresstrings.rsformatadminstatus
+msgid "Административный статус: %s"
+msgstr "Administrative status: %s"
+
+#: socketresstrings.rsformatdiscards
+msgid "Пакетов отклонено: %d"
+msgstr "Rejected packets: %d"
+
+#: socketresstrings.rsformaterrors
+msgid "Ошибок пакетов: %d"
+msgstr "Errors of packets: %d"
+
+#: socketresstrings.rsformatgetiferror
+msgid "Ошибки во время вызова GetIfTable. Код ошибки: %d"
+msgstr "Errors during GetIfTable call. Error code: %d"
+
+#: socketresstrings.rsformatin
+msgid "Входящий трафик"
+msgstr "Incoming traffic"
+
+#: socketresstrings.rsformatindex
+msgid "Индекс интерфейса: %d"
+msgstr "Interface index: %d"
+
+#: socketresstrings.rsformatinunknprots
+msgid "Пакетов, полученных по неизвестным протоколам: %d"
+msgstr "Packets received using unknown protocols: %d"
+
+#: socketresstrings.rsformatmacaddress
+msgid "MAC-адрес: %s"
+msgstr "MAC-address: %s"
+
+#: socketresstrings.rsformatmtu
+msgid "MTU: %d"
+msgstr "MTU: %d"
+
+#: socketresstrings.rsformatnunicast
+msgid "Число не одноадресных пакетов: %d"
+msgstr "Number of non-unicast packets: %d"
+
+#: socketresstrings.rsformatoctets
+msgid "Отправлено, байт: %d"
+msgstr "Sent, bytes: %d"
+
+#: socketresstrings.rsformatoctetsm
+msgid "Отправлено, Мбайт: %d"
+msgstr "Sent, Mbytes: %d"
+
+#: socketresstrings.rsformatoperstatus
+msgid "Оперативный статус: %s"
+msgstr "Operation status: %s"
+
+#: socketresstrings.rsformatout
+msgid "Исходящий трафик"
+msgstr "Outgoing traffic"
+
+#: socketresstrings.rsformatoutqlen
+msgid "Байт в очереди на отправку: %d"
+msgstr "Byte in the send queue: %d"
+
+#: socketresstrings.rsformatspeed
+msgid "Cкорость подключения, бит/с.: %d"
+msgstr "Connection speed, bit/s. : %d"
+
+#: socketresstrings.rsformatspeedm
+msgid "Скорость подключения, МБит/с.: %d"
+msgstr "Connection speed, bit/sec.: %d"
+
+#: socketresstrings.rsformattype
+msgid "Тип: %s"
+msgstr "Type: %s"
+
+#: socketresstrings.rsformatunicast
+msgid "Число одноадресных пакетов: %d"
+msgstr "Number of non-unicast packets: %d"
+
+#: socketresstrings.rsgetinf1
+msgid "Имя: %s"
+msgstr "Name: %s"
+
+#: socketresstrings.rsgetinf10
+msgid "Маска первичного: %s"
+msgstr "Mask of primary: %s"
+
+#: socketresstrings.rsgetinf11
+msgid "IP вторичного: %s"
+msgstr "IP of secondary:"
+
+#: socketresstrings.rsgetinf12
+msgid "Маска вторичного: %s"
+msgstr "Mask of secondary: %s"
+
+#: socketresstrings.rsgetinf2
+msgid "IP адреса:"
+msgstr "IP addresses:"
+
+#: socketresstrings.rsgetinf3
+msgid "IP: %s"
+msgstr "IP: %s"
+
+#: socketresstrings.rsgetinf4
+msgid "Маска IP: %s"
+msgstr "IP mask: %s"
+
+#: socketresstrings.rsgetinf5
+msgid "Шлюзы:"
+msgstr "Gateways:"
+
+#: socketresstrings.rsgetinf6
+msgid "DHSP: "
+msgstr "DHSP: "
+
+#: socketresstrings.rsgetinf7
+msgid "Разрешен: %s"
+msgstr "Permitted: %s"
+
+#: socketresstrings.rsgetinf8
+msgid "WINS: "
+msgstr "WINS: "
+
+#: socketresstrings.rsgetinf9
+msgid "IP первичного: %s"
+msgstr "IP of primary: %s"
+
+#: socketresstrings.rslanitfnotchange
+msgid "Не выбран сетевой интерфейс!"
+msgstr "Network interface is not selected!"
+
+#: socketresstrings.rslinnetinfo1
+msgid "Сокет для получения информации не задан."
+msgstr "Socket for data receiving is not specified."
+
+#: socketresstrings.rsmib_if_admin_status_chacked
+msgid "Проверка"
+msgstr "Check"
+
+#: socketresstrings.rsmib_if_admin_status_down
+msgid "Выключен"
+msgstr "Switched on"
+
+#: socketresstrings.rsmib_if_admin_status_up
+msgid "Включен"
+msgstr "Switched off"
+
+#: socketresstrings.rsmib_if_oper_status_connected
+msgid "WAN-адаптер установил соединение"
+msgstr "WAN-adapter has established a connection"
+
+#: socketresstrings.rsmib_if_oper_status_connecting
+msgid "WAN-адаптер в процессе подключения"
+msgstr "WAN-adapter is connecting"
+
+#: socketresstrings.rsmib_if_oper_status_disconnected
+msgid "Кабель отключен или нет сигнала"
+msgstr "Cable is disconnected or there is no signal"
+
+#: socketresstrings.rsmib_if_oper_status_lan_connected
+msgid "Кабель подключен"
+msgstr "Cable is connected"
+
+#: socketresstrings.rsmib_if_oper_status_lan_operational
+msgid "LAN-адаптер OPERATIONAL"
+msgstr "LAN-adapter OPERATIONAL"
+
+#: socketresstrings.rsmib_if_oper_status_lan_unknown
+msgid "Неизвестный статус"
+msgstr "Unknown status"
+
+#: socketresstrings.rsmib_if_oper_status_non_operational
+msgid "LAN-адаптер отключен"
+msgstr "LAN-adapter is disconnected"
+
+#: socketresstrings.rsmib_if_oper_status_unreachable
+msgid "WAN-адаптер отключен"
+msgstr "WAN-adapter is disconnected"
+
+#: socketresstrings.rsmib_if_type_atm
+msgid "ATM"
+msgstr "ATM"
+
+#: socketresstrings.rsmib_if_type_ethernet
+msgid "Ethernet"
+msgstr "Ethernet"
+
+#: socketresstrings.rsmib_if_type_fddi
+msgid "FDDI"
+msgstr "FDDI"
+
+#: socketresstrings.rsmib_if_type_ieee1394
+msgid "An IEEE 1394 (Firewire) high performance serial bus network interface."
+msgstr "An IEEE 1394 (Firewire) high performance serial bus network interface."
+
+#: socketresstrings.rsmib_if_type_ieee80211
+msgid "An IEEE 802.11 wireless network interface"
+msgstr "An IEEE 802.11 wireless network interface"
+
+#: socketresstrings.rsmib_if_type_ieee80216
+msgid "A mobile broadband interface for WiMax devices."
+msgstr "A mobile broadband interface for WiMax devices."
+
+#: socketresstrings.rsmib_if_type_loopback
+msgid "Замыкание на себя"
+msgstr "Loopback"
+
+#: socketresstrings.rsmib_if_type_ppp
+msgid "PPP"
+msgstr "PPP"
+
+#: socketresstrings.rsmib_if_type_slip
+msgid "Подключение к UNIX"
+msgstr "Connecting to UNIX"
+
+#: socketresstrings.rsmib_if_type_tokenring
+msgid "Token ring"
+msgstr "Token ring"
+
+#: socketresstrings.rsmib_if_type_tunnel
+msgid "A tunnel type encapsulation network interface."
+msgstr "A tunnel type encapsulation network interface."
+
+#: socketresstrings.rsmib_if_type_unknown
+msgid "Неизвестный тип"
+msgstr "Unknown type"
+
+#: socketresstrings.rsmib_if_type_wwanp
+msgid "A mobile broadband interface for GSM-based devices."
+msgstr "A mobile broadband interface for GSM-based devices."
+
+#: socketresstrings.rsmib_if_type_wwanp2
+msgid "An mobile broadband interface for CDMA-based devices."
+msgstr "An mobile broadband interface for CDMA-based devices."
+
+#: socketresstrings.rsmsgstatuschange
+msgid "Административный статус изменен."
+msgstr "Administrative status is changed."
+
+#: socketresstrings.rsmsgstatusnotchange
+msgid "Не удалось изменить административный статус интерфейса!"
+msgstr "Unable to change the interface administrative status!"
+
+#: socketresstrings.rsnameerreventaccept
+msgid "Сокет. Ошибки accept"
+msgstr "Socket. Accept errors"
+
+#: socketresstrings.rsnameerreventbind
+msgid "Сокет. Ошибки связывания(eeBind)"
+msgstr "Socket. Binding Errors (eeBind)"
+
+#: socketresstrings.rsnameerreventconnect
+msgid "Сокет. Ошибки при соединении(eeConnect)"
+msgstr "Socket. Errors when connecting (eeConnect)"
+
+#: socketresstrings.rsnameerreventdisconnect
+msgid "Сокет. Ошибки при разъединении(eeDisconnect)"
+msgstr "Socket. Errors when disconnecting (eeDisconnect)"
+
+#: socketresstrings.rsnameerreventgeneral
+msgid "Сокет. Общие ошибки(eeGeneral)"
+msgstr "Socket. Common errors (eeGeneral)"
+
+#: socketresstrings.rsnameerreventlookup
+msgid "Сокет. Ошибки lookup"
+msgstr "Socket. Errors lookup"
+
+#: socketresstrings.rsnameerreventnone
+msgid "Сокет. Не известные ошибки(eeNone)"
+msgstr "Socket. Not known bugs (eeNone)"
+
+#: socketresstrings.rsnameerreventreceive
+msgid "Сокет. Ошибки приема данных(eeReceive)"
+msgstr "Socket. Data reception errors (eeReceive)"
+
+#: socketresstrings.rsnameerreventselect
+msgid "Сокет. Ошибки select"
+msgstr "Socket. Select errors"
+
+#: socketresstrings.rsnameerreventsend
+msgid "Сокет. Ошибки отсылки данных(eeSend)"
+msgstr "Socket. Sending data errors (eeSend)"
+
+#: socketresstrings.rsnameerreventsocket
+msgid "Сокет. Ошибки сокета(eeSocket)"
+msgstr "Socket. Socket errors (eeSocket)"
+
+#: socketresstrings.rsnamesocketeventaccept
+msgid "Сокет. Подтверждение подключения (Accept)"
+msgstr "Socket. Connection verification (Accept)"
+
+#: socketresstrings.rsnamesocketeventbind
+msgid "Сокет. Связывание (Bind)"
+msgstr "Socket. Binding (Bind)"
+
+#: socketresstrings.rsnamesocketeventconnect
+msgid "Сокет. Установка соединения (Connect)"
+msgstr "Socket. Establishing a connection (Connect)"
+
+#: socketresstrings.rsnamesocketeventconnecting
+msgid "Сокет. Установка соединения (Connecting)"
+msgstr "Socket. Establishing a connection (Connecting)"
+
+#: socketresstrings.rsnamesocketeventdisconnect
+msgid "Сокет. Разрыв соединения (Disconnect)"
+msgstr "Socket. Disconnecting (Disconnect)"
+
+#: socketresstrings.rsnamesocketeventlisten
+msgid "Сокет. Ожидание подключения (Listen)"
+msgstr "Socket. Waiting for connection (Listen)"
+
+#: socketresstrings.rsnamesocketeventlookup
+msgid "Сокет. (Lookup)"
+msgstr "Socket. (Lookup)"
+
+#: socketresstrings.rsnamesocketeventread
+msgid "Сокет. Чтение данных (Read)"
+msgstr "Socket. Data reading (Read)"
+
+#: socketresstrings.rsnamesocketeventselect
+msgid "Сокет. Получение состояния (Select)"
+msgstr "Socket. Status receiving (Select)"
+
+#: socketresstrings.rsnamesocketeventwrite
+msgid "Сокет. Запись данных (Write)"
+msgstr "Socket. Data writing (Write)"
+
+#: socketresstrings.rsonudpsign1
+msgid "UDP server"
+msgstr "UDP server"
+
+#: socketresstrings.rsonudpsign2
+msgid "UDP server. Получение пакета"
+msgstr "UDP server. Receiving packet"
+
+#: socketresstrings.rsonudpsign3
+msgid "Пакет отброшен"
+msgstr "Packet is rejected"
+
+#: socketresstrings.rsonudpsign4
+msgid "Не установлен обработчик пакетов."
+msgstr "Not set a packet handler."
+
+#: socketresstrings.rsonudpsign5
+msgctxt "socketresstrings.rsonudpsign5"
+msgid "Ошибка обработчика пришедшего пакета: %s"
+msgstr "Received packet handler error: %s"
+
+#: socketresstrings.rsrownotinstalled
+msgid "Структура параметров интерфейса не установлена."
+msgstr "Interface parameters structure is not set."
+
+#: socketresstrings.rsserversocketname
+msgid "Сервер"
+msgstr "Server"
+
+#: socketresstrings.rssocket
+msgid "Socket %s (%s);"
+msgstr "Socket %s (%s);"
+
+#: socketresstrings.rssocketnotexist
+msgid "Socket is not exists"
+msgstr "Socket does not exist"
+
+#: socketresstrings.rssockserv1
+msgctxt "socketresstrings.rssockserv1"
+msgid "Failed to set linger: %d"
+msgstr "Failed to set linger: %d"
+
+#: socketresstrings.rssockserv2
+msgid "Failed to set SO_REUSEADDR to %d: %d"
+msgstr "Failed to set SO_REUSEADDR to %d: %d"
+
+#: socketresstrings.rssockserv3
+msgctxt "socketresstrings.rssockserv3"
+msgid "Failed to set linger: %d"
+msgstr "Failed to set linger: %d"
+
+#: socketresstrings.rssockserv4
+msgid "Failed to get SO_KEEPALIVE: %d"
+msgstr "Failed to get SO_KEEPALIVE: %d"
+
+#: socketresstrings.rssockserv5
+msgid "Failed to get SO_REUSEADDR to %d: %d"
+msgstr "Failed to get SO_REUSEADDR to %d: %d"
+
+#: socketresstrings.rssrvaccept1
+msgid "Превышено допустимое количество одновременных соединений."
+msgstr "Tolerable number of simultaneous connections is exceeded."
+
+#: socketresstrings.rsudpclgetpack1
+msgid "UDP client. Получение пакета"
+msgstr "UDP client. Receiving packet"
+
+#: socketresstrings.rsudpclgetpack2
+msgctxt "socketresstrings.rsudpclgetpack2"
+msgid "Ошибка обработчика пришедшего пакета: %s"
+msgstr "Receiving packet handler error: %s"
+
+#: socketresstrings.rsudpclsentpack1
+msgid "UDP client. SentPackege"
+msgstr "UDP client. SentPackege"
+
+#: socketresstrings.rsudpclsentpack2
+msgctxt "socketresstrings.rsudpclsentpack2"
+msgid "Попытка отослать пустой пакет"
+msgstr "Attempt to send an empty packet"
+
+#: socketresstrings.rsudpclsentpack3
+msgid "Пакет слишком большой: %d"
+msgstr "Packet is too large: %d"
+
+#: socketresstrings.rsudpsendpackage1
+msgid "UDP server. SentPackege"
+msgstr "UDP server. SentPackege"
+
+#: socketresstrings.rsudpsendpackage2
+msgctxt "socketresstrings.rsudpsendpackage2"
+msgid "Попытка отослать пустой пакет"
+msgstr "Attempt to send an empty packet"
+
+#: socketresstrings.rswrdata1
+msgid "Требуется использовать блокирующий сокет(BlockingSocket = True), без использования потока отслеживания состояний (SelectEnable := False)."
+msgstr "You want to use a blocking socket (BlockingSocket = True), without using  the state tracking flow (SelectEnable: = False)."
+
+#: socketresstrings.serrchunklineendmissing
+msgid "Chunk line end missing"
+msgstr "Chunk line end missing"
+
+#: socketresstrings.serrchunktoobig
+msgid "Chunk too big"
+msgstr "Chunk too big"
+
+#: socketresstrings.serrinvalidprotocol
+msgid "Invalid protocol : \"%s\""
+msgstr "Invalid protocol : \"%s\""
+
+#: socketresstrings.serrinvalidprotocolversion
+msgid "Invalid protocol version in response: \"%s\""
+msgstr "Invalid protocol version in response: \"%s\""
+
+#: socketresstrings.serrinvalidstatuscode
+msgid "Invalid response status code: %s"
+msgstr "Invalid response status code: %s"
+
+#: socketresstrings.serrmaxredirectsreached
+msgid "Maximum allowed redirects reached : %d"
+msgstr "Maximum allowed redirects reached : %d"
+
+#: socketresstrings.serrreadingsocket
+msgid "Error reading data from socket"
+msgstr "Error reading data from socket"
+
+#: socketresstrings.serrunexpectedresponse
+msgid "Unexpected response status code: %d"
+msgstr "Unexpected response status code: %d"
+
+#: socketresstrings.strerrnostream
+msgid "Socket stream not assigned"
+msgstr "Socket stream not assigned"
+
+#: socketresstrings.strhostnotfound
+msgid "Не удалось произвести разрешение имен для \"%s\"."
+msgstr "Unable to make name resolution for \"%s\"."
+
+#: socketresstrings.strsocketacceptfailed
+msgid "Could not accept a client connection on socket: %d, error %d"
+msgstr "Could not accept a client connection on socket: %d, error %d"
+
+#: socketresstrings.strsocketacceptwouldblock
+msgid "Accept would block on socket: %d"
+msgstr "Accept would block on socket: %d"
+
+#: socketresstrings.strsocketbindfailed
+msgid "Binding of socket failed: %s"
+msgstr "Binding of socket failed: %s"
+
+#: socketresstrings.strsocketconnectfailed
+msgid "Не удалось установить соединение с %s."
+msgstr "Failed to connect to the %s."
+
+#: socketresstrings.strsocketcreationfailed
+msgid "Не удалось создать сокет: %s"
+msgstr "Failed to create socket: %s"
+
+#: socketresstrings.strsocketlistenfailed
+msgid "Ошибка ожидания соединения: %d , ошибка: %d"
+msgstr "Connection waiting error: %d, error: %d"

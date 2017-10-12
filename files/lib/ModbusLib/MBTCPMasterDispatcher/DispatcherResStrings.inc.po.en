@@ -1,0 +1,279 @@
+#: dispatcherresstrings.rsdevdebug10
+msgid "Discret. Добавлена единица опроса: %d::%d::%d"
+msgstr "Discrete. Added a poll init: %d::%d::%d"
+
+#: dispatcherresstrings.rsdevdebug12
+msgid "Coil. Добавлена единица опроса: %d::%d::%d"
+msgstr "Coil. Added a poll unit: %d::%d::%d"
+
+#: dispatcherresstrings.rsdevdebug13
+msgid "Holding. Добавлена единица опроса: %d::%d::%d"
+msgstr "Holding. Added a poll unit: %d::%d::%d"
+
+#: dispatcherresstrings.rsdevdebug14
+msgid "Input. Добавлена единица опроса: %d::%d::%d"
+msgstr "Input. Added a poll unit: %d::%d::%d"
+
+#: dispatcherresstrings.rsdevdebug16
+msgid "Добавлено устройство: %d"
+msgstr "Device is added: %d"
+
+#: dispatcherresstrings.rsdevdebug2
+msgid "ARegStart: %d ARegQuantity: %d"
+msgstr "ARegStart: %d ARegQuantity: %d"
+
+#: dispatcherresstrings.rsdevdebug3
+msgid "SendEvent"
+msgstr "SendEvent"
+
+#: dispatcherresstrings.rsdevdebug4
+msgid "ID: %s. Устройство: %d. Code1: %d. Code2: %d Connect."
+msgstr "ID: %s. Device: %d. Code1: %d. Code2: %d Connect."
+
+#: dispatcherresstrings.rsdevdebug5
+msgid "ID: %s. Устройство: %d. Code1: %d. Code2: %d Disconnect."
+msgstr "ID: %s. Device: %d. Code1: %d. Code2: %d Disconnect."
+
+#: dispatcherresstrings.rsdevdebug6
+msgid "ID: %s. Устройство: %d. Code1: %d. Code2: %d Receive."
+msgstr "ID: %s. Device: %d. Code1: %d. Code2: %d Receive."
+
+#: dispatcherresstrings.rsdevdebug7
+msgid "ID: %s. Устройство: %d. Code1: %d. Code2: %d Send."
+msgstr "ID: %s. Device: %d. Code1: %d. Code2: %d Send."
+
+#: dispatcherresstrings.rsdevdebug8
+msgid "ID: %s. Устройство: %d. Code1: %d. Code2: %d MBError."
+msgstr "ID: %s. Device: %d. Code1: %d. Code2: %d MBError."
+
+#: dispatcherresstrings.rsdevdebug9
+msgid "ID: %s. Устройство: %d. Code1: %d. Code2: %d SocketError."
+msgstr "ID: %s. Device: %d. Code1: %d. Code2: %d SocketError."
+
+#: dispatcherresstrings.rsdevexcept1
+msgctxt "dispatcherresstrings.rsdevexcept1"
+msgid "%s"
+msgstr "%s"
+
+#: dispatcherresstrings.rsdevexcept2
+msgctxt "dispatcherresstrings.rsdevexcept2"
+msgid "%s"
+msgstr "%s"
+
+#: dispatcherresstrings.rsdevice1
+msgid "Discret registers - StartAddress."
+msgstr "Discrete registers - StartAddress."
+
+#: dispatcherresstrings.rsdevice2
+msgctxt "dispatcherresstrings.rsdevice2"
+msgid "Discret registers."
+msgstr "Discrete registers."
+
+#: dispatcherresstrings.rsdevice3
+msgid "Discret registers - Quantity."
+msgstr "Discrete registers - Quantity."
+
+#: dispatcherresstrings.rsdevice4
+msgctxt "dispatcherresstrings.rsdevice4"
+msgid "Discret registers."
+msgstr "Discrete registers."
+
+#: dispatcherresstrings.rsdevice5
+msgid "Coil registers."
+msgstr "Coil registers."
+
+#: dispatcherresstrings.rsdevice6
+msgid "Input registers."
+msgstr "Input registers."
+
+#: dispatcherresstrings.rsdevice7
+msgid "Holding registers."
+msgstr "Holding registers."
+
+#: dispatcherresstrings.rsdispessom
+msgid "Диспетчер соединений"
+msgstr "Connection manager"
+
+#: dispatcherresstrings.rsdispessom1
+msgid "Соединение с сервером %s:%d установлено."
+msgstr "Connection with server %s:%d is established."
+
+#: dispatcherresstrings.rsdispessom2
+msgid "Соединение с сервером %s:%d разорвано"
+msgstr "Connection with server %s:%d is broken."
+
+#: dispatcherresstrings.rsdispessom3
+msgctxt "dispatcherresstrings.rsdispessom3"
+msgid "Сокет: %s:%d Ошибка: %d - %s"
+msgstr "Socket: %s:%d Error: %d - %s"
+
+#: dispatcherresstrings.rsdispthread
+msgid "Поток диспетчера соединений"
+msgstr "Connection manager thread"
+
+#: dispatcherresstrings.rseallocpackage
+msgctxt "dispatcherresstrings.rseallocpackage"
+msgid "Функция %d не поддерживается в данный момент."
+msgstr "%d function is not supported at this moment."
+
+#: dispatcherresstrings.rsecreatereader
+msgctxt "dispatcherresstrings.rsecreatereader"
+msgid "Функция %d не поддерживается в данный момент."
+msgstr "%d function is not supported at this moment."
+
+#: dispatcherresstrings.rsedestroy1
+msgid "TDispatcherModbusDevice.Destroy"
+msgstr "TDispatcherModbusDevice.Destroy"
+
+#: dispatcherresstrings.rsedestroy2
+msgid "Ошибка отказа от подписки: %s"
+msgstr "Failed to unsubscribe: %s"
+
+#: dispatcherresstrings.rsedispthread1
+msgid "Соединение с сервером %s разорвано. Пауза до попытки восстановления %d ms."
+msgstr "Connection to the server %s is broken. Pause before restoration attempts in %d ms."
+
+#: dispatcherresstrings.rsedispthread2
+msgid "Не удалось восстановить соединение с сервером %s"
+msgstr "Failed to restore connection with the server %s"
+
+#: dispatcherresstrings.rsedispthread3
+msgid "Ошибка отправки запроса: %u"
+msgstr "Request sending error: %u"
+
+#: dispatcherresstrings.rsedispthread4
+msgid "Не пришел ответ на запрос: %d::%d::%d"
+msgstr "No response to request: %d::%d::%d"
+
+#: dispatcherresstrings.rsedispthread5
+msgid "Ответ нулевой длины"
+msgstr "Zero length response"
+
+#: dispatcherresstrings.rsedispthread6
+msgid "Разбор сообщения. Исключение: %s"
+msgstr "Message parsing. Exception: %s"
+
+#: dispatcherresstrings.rsedispthread7
+msgid "Исключение: %s"
+msgstr "Exception: %s"
+
+#: dispatcherresstrings.rseitfdisp
+msgid "Нет интерфейса диспетчера. Значение изменено в модели."
+msgstr "No manager interface. Value is changed in the model."
+
+#: dispatcherresstrings.rseitfdisp1
+msgid "Не задан интерфейс диспетчера"
+msgstr "Manager interface is not set"
+
+#: dispatcherresstrings.rsepbrcpack1
+msgid "ProcessBitRegChangesPackage"
+msgstr "ProcessBitRegChangesPackage"
+
+#: dispatcherresstrings.rsepbrcpack2
+msgid "Не совпадает номер устройства в пакете обновления. Устройство: %d. Пакет: %d"
+msgstr "Mismatching of the device number in the update packet. Device: %d. Packet: %d"
+
+#: dispatcherresstrings.rsepbrcpack3
+msgid "Количество переменных в обновлении и запросе не совпадает. Запрос: %d. Пакет: %d"
+msgstr "Mismatching of variables number in the update and query. Request: %d. Packet: %d"
+
+#: dispatcherresstrings.rsepbrcpack4
+msgid "Установка значения регистров: %s"
+msgstr "Setting the registers value: %s"
+
+#: dispatcherresstrings.rsepbrcpack6
+msgid "Номер функции не соответствует типу пакета. Функция: %d"
+msgstr "Function number does not match the type of packet. Function: %d"
+
+#: dispatcherresstrings.rsepbrcpack7
+msgid "Ошибка отсылки данных типа Boolean: %s"
+msgstr "Boolean type data sending error: %s"
+
+#: dispatcherresstrings.rsepwrcpack1
+msgid "ProcessWordRegChangesPackage"
+msgstr "ProcessWordRegChangesPackage"
+
+#: dispatcherresstrings.rsepwrcpack2
+msgid "Ошибка отсылки данных типа Word: %s"
+msgstr "Word type data sending error: %s"
+
+#: dispatcherresstrings.rsesetcoilvalue
+msgid "SetCoilValue"
+msgstr "SetCoilValue"
+
+#: dispatcherresstrings.rsesetdiscretvalue
+msgid "SetDiscretValue"
+msgstr "SetDiscretValue"
+
+#: dispatcherresstrings.rsesetholdingvalue
+msgid "SetHoldingValue"
+msgstr "SetHoldingValue"
+
+#: dispatcherresstrings.rsesetinputvalue
+msgid "SetInputValue"
+msgstr "SetInputValue"
+
+#: dispatcherresstrings.rsesetthread1
+msgid "Отправлены не все данные."
+msgstr "Not all data is sent."
+
+#: dispatcherresstrings.rsesetthread2
+msgid "Получение ответа. Ошибка получения данных: %u"
+msgstr "Receving a reply. Data receiving error: %u"
+
+#: dispatcherresstrings.rsesetthread3
+msgid "Получение ответа. Ошибка выделения памяти"
+msgstr "Receiving a reply. Memory allocation error"
+
+#: dispatcherresstrings.rsesetthread4
+msgid "Разбор ответа. Пришел пакет с идентификатором другой транзакции."
+msgstr "Parsing the response. Received a packet with another transaction ID."
+
+#: dispatcherresstrings.rsesetthread5
+msgid "Разбор ответа. Ошибка записи регистра"
+msgstr "Parsing the response. Register write error"
+
+#: dispatcherresstrings.rsesetthread6
+msgid "Execute error: %s"
+msgstr "Execute error: %s"
+
+#: dispatcherresstrings.rsesetthread7
+msgid "InitThread error: %s"
+msgstr "InitThread error: %s"
+
+#: dispatcherresstrings.rsesetthread8
+msgid "CloseThread error: %s"
+msgstr "CloseThread error: %s"
+
+#: dispatcherresstrings.rsesetthread9
+msgctxt "dispatcherresstrings.rsesetthread9"
+msgid "Сокет: %s:%d Ошибка: %d - %s"
+msgstr "Socket: %s:%d Error: %d - %s"
+
+#: dispatcherresstrings.rssetcoilvalue1
+msgid "При записи значения регистра %d возникло исключение: %s"
+msgstr "An exception occurred during the register value %d writing: %s"
+
+#: dispatcherresstrings.rssetcoilvalue11
+msgid "Интерфейс устройства не задан."
+msgstr "Device interface is not set."
+
+#: dispatcherresstrings.rssetcoilvalue12
+msgid "Поток отправки данных не активен."
+msgstr "Data send thread is inactive."
+
+#: dispatcherresstrings.rssetcoilvalue2
+msgid "Не удалось записать значение регистра %d"
+msgstr "Failed to write the value of register %d"
+
+#: dispatcherresstrings.rssetdiskretvalue1
+msgid "Modbus Discret-регистры являются регистрами только для чтения."
+msgstr "Modbus Discrete-registers are read-only-registers."
+
+#: dispatcherresstrings.rssetholdingvalue1
+msgid "Modbus Holding-регистры являются регистрами только для чтения."
+msgstr "Modbus Holding-registers are read-only-registers."
+
+#: dispatcherresstrings.rssetthread
+msgid "Поток записи значений Modbus"
+msgstr "Modbus values writing thread"

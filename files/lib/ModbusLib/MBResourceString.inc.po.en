@@ -1,0 +1,227 @@
+#: mbresourcestring.ermbdeviceaddress
+msgid ""
+"Неверно задан адрес устройства.\n"
+"Адрес должен находиться в диапазоне от 1 до 247\n"
+msgstr ""
+"Incorrect device address.\n"
+"Address must be in the range from 1 to 247\n"
+
+#: mbresourcestring.ermbf110packetbuild
+msgctxt "mbresourcestring.ermbf110packetbuild"
+msgid ""
+"Неверно задано количество регистров.\n"
+"Количество запрашиваемых регистров должно находиться в диапазоне от 1 до 8.\n"
+msgstr ""
+"Incorrect number of registers.\n"
+"Number of requested registers must be in the range from 1 to 8.\n"
+
+#: mbresourcestring.ermbf110packetbuild1
+msgctxt "mbresourcestring.ermbf110packetbuild1"
+msgid ""
+"Неверно задан контрольный ключ.\n"
+"Ключ должен принимать значение 0х55 либо 0хAA.\n"
+msgstr ""
+"Incorrect control key.\n"
+"Key shall be of the value 0x55 or 0xAA.\n"
+
+#: mbresourcestring.ermbf16packetbuild
+msgid ""
+"Неверно задано количество регистров.\n"
+"Количество запрашиваемых регистров должно находиться в диапазоне от 1 до 123.\n"
+msgstr ""
+"Incorrect number of registers.\n"
+"Number of requested registers must be in the range from 1 to 123.\n"
+
+#: mbresourcestring.ermbf1packetbuild
+msgid ""
+"Неверно задано количество регистров.\n"
+"Количество запрашиваемых регистров должно находиться в диапазоне от 1 до 2000.\n"
+msgstr ""
+"Incorrect number of registers.\n"
+"Number of requested registers must be in the range from 1 to 2000.\n"
+
+#: mbresourcestring.ermbf23packetbuild
+msgid "Запрошено значение расположенное за границами массива значений."
+msgstr "Requested value located beyond the boundaries of the array of values."
+
+#: mbresourcestring.ermbf23packetbuild1
+msgid ""
+"Неверно задано количество регистров.\n"
+"Количество запрашиваемых регистров должно находиться в диапазоне от 1 до 121.\n"
+msgstr ""
+"Incorrect number of registers.\n"
+"Number of requested registers must be in the range from 1 to 121.\n"
+
+#: mbresourcestring.ermbf3packetbuild
+msgid ""
+"Неверно задано количество регистров.\n"
+"Количество запрашиваемых регистров должно находиться в диапазоне от 1 до 125.\n"
+msgstr ""
+"Incorrect number of registers.\n"
+"Number of requested registers must be in the range from 1 to 125.\n"
+
+#: mbresourcestring.ermbf43packetbuild
+msgid "Подфункция не реализована"
+msgstr "Sub-function is not implemented"
+
+#: mbresourcestring.ermbf72packetbuild
+msgctxt "mbresourcestring.ermbf72packetbuild"
+msgid ""
+"Неверно задано количество регистров.\n"
+"Количество запрашиваемых регистров должно находиться в диапазоне от 1 до 8.\n"
+msgstr ""
+"Incorrect number of registers.\n"
+"Number of requested registers must be in the range from 1 to 8.\n"
+
+#: mbresourcestring.ermbf72packetbuild1
+msgctxt "mbresourcestring.ermbf72packetbuild1"
+msgid ""
+"Неверно задан контрольный ключ.\n"
+"Ключ должен принимать значение 0х55 либо 0хAA.\n"
+msgstr ""
+"Incorrect control key.\n"
+"Key shall be of the value 0x55 or 0xAA.\n"
+
+#: mbresourcestring.ermbfoutofmemory
+msgid "Ошибка выделения памяти."
+msgstr "Memory allocation error."
+
+#: mbresourcestring.errcs
+msgid "Ошибка контрольной суммы."
+msgstr "Checksum error."
+
+#: mbresourcestring.errdata
+msgid "Ошибка инициализации данных."
+msgstr "Data initialization error."
+
+#: mbresourcestring.errincompatibletype
+msgid "Несовместимый тип данных."
+msgstr "Incompatible data type."
+
+#: mbresourcestring.errinternotinit
+msgid "Интерпретатор не инициализирован данными."
+msgstr "Interpreter is not initialized by data."
+
+#: mbresourcestring.errinternotvalue
+msgid "Не задано одно из значений для инициализации интерпретатора."
+msgstr "Not specified one of the values for interpreter initialization."
+
+#: mbresourcestring.erroutofchar
+msgid "Недопустимый символ в строке."
+msgstr "Incorrect character in string."
+
+#: mbresourcestring.erroutofrange
+msgid "Выход за диапазон допустимых адресов."
+msgstr "Out of tolerable address range."
+
+#: mbresourcestring.errreadonly
+msgid "Регистр предназначен только для чтения."
+msgstr "Register is read-only."
+
+#: mbresourcestring.err_trans_init
+msgid "Не задан конструктор данных для транзакции."
+msgstr "Not specified data constructor for transaction."
+
+#: mbresourcestring.rsbittowordtransformationerror
+msgid "Невозможно преобразовать список битовых регистров в список регистров типа Word"
+msgstr "Unable to convert list of bit registers into Word-type registers list"
+
+#: mbresourcestring.rsdataarrayisempty
+msgid "Массив данных предназначенных для записи пуст."
+msgstr "Data array to be recorded is empty."
+
+#: mbresourcestring.rsdigitalvalue
+msgid "значение : %d."
+msgstr "value : %d"
+
+#: mbresourcestring.rsillegalfunctionnumber
+msgid "Недопустимый номер функции."
+msgstr "Incorrect function number."
+
+#: mbresourcestring.rslisttypeerror
+msgid "Не задан тип списка."
+msgstr "Not specified type of list."
+
+#: mbresourcestring.rsmbtcppacketlenerror
+msgid "Длина пакета не соответствует заявленной"
+msgstr "Packet length does not correspond with the specified one"
+
+#: mbresourcestring.rsmbtcppackettraserror
+msgid "Пакет не принадлежит текущей транзакции."
+msgstr "Packet does not assigned to the the current transaction."
+
+#: mbresourcestring.rsnonameflag
+msgid "Неопределенный флаг."
+msgstr "Undefined flag."
+
+#: mbresourcestring.rsnonameflagvalue
+msgid "%s. Значение : %d"
+msgstr "%s. Value : %d"
+
+#: mbresourcestring.rsnonamestrflagvalue
+msgid "%s значение : %s"
+msgstr "%s value : %s"
+
+#: mbresourcestring.rsregisreadonly
+msgid "Регистры предназначены только для чтения."
+msgstr "Registers are read-only."
+
+#: mbresourcestring.rsregnotexist1
+msgid "Регистр с номером %d не существует."
+msgstr "Register with number %d does not exist."
+
+#: mbresourcestring.rsregnotexists
+msgid "Регистр %d, заданный в параметрах, не найден. Создание массива значений прекращено."
+msgstr "Register %d specified in parameters is not found. Value array creation is stopped."
+
+#: mbresourcestring.rsspcounter
+msgid "Изменен счетчик осей. Значение : "
+msgstr "Axle counter is changed. Value:"
+
+#: mbresourcestring.rssperrorstring
+msgid ""
+"0 = Ошибка теста памяти.\n"
+"1 = Съем датчика.\n"
+"2 = Обрыв датчика.\n"
+msgstr ""
+"0 = Failed memory test.\n"
+"1 = Removing wheel sensor.\n"
+"2 = Wheel sensor breakage.\n"
+
+#: mbresourcestring.rsspinfostring
+msgid ""
+"Нет диагностики\n"
+"Диагностика\n"
+"Температура\n"
+msgstr ""
+"No diagnostics\n"
+"Diagnostics\n"
+"Temperature\n"
+
+#: mbresourcestring.rsspmasterslave
+msgid ""
+"Основной\n"
+"Дублирующий\n"
+msgstr ""
+"Main\n"
+"Duplicated\n"
+
+#: mbresourcestring.rsspmzd
+msgid "Металл в зоне датчика."
+msgstr "Metal in area of wheel sensor."
+
+#: mbresourcestring.rsspnonestate
+msgid "Неопределенное состояние."
+msgstr "Undefined state."
+
+#: mbresourcestring.rssptemperature
+msgid "Температура : "
+msgstr "Temperature : "
+
+#: mbresourcestring.rswordtobittransformationerror
+msgid "Невозможно преобразовать список регистров типа Word в список битовых регистров"
+msgstr "Unable to convert Word-type registers list into bit registers list"
+
+#: mbresourcestring.rs_out_of_range
+msgid "Выход за пределы массива данных"
+msgstr "Out of data array boundaries"

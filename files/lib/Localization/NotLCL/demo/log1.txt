@@ -1,0 +1,151 @@
+Lang: ru_RU.utf8
+FallbackLang: en
+До перевода:
+Тест
+Тест1
+После перевода:
+rsResStr1 : Test
+rsResStr2 : Test1
+ 
+ 
+ 
+1. ErrOutOfRange : Out of the range of valid addresses.
+2. ErrOutofChar : Invalid character in the string.
+3. ErrIncompatibleType : Incompatible data type.
+4. ErrReadOnly : Register is read-only.
+5. ErrInterNotValue : Not one of the meanings given for initializing an interpreter.
+6. ErrInterNotInit : The interpreter is not initialized data.
+7. ErrCS : Checksum error.
+8. ErrData : Data initialization error.
+9. rsSPErrorString : 0 = Failed memory test.
+1 = Removing the sensor.
+2 = Broken sensor.
+
+10. rsDigitalValue : Value: %d.
+11. rsSPMasterSlave : Main
+Duplicate
+
+12. rsSPInfoString : No diagnostics
+Diagnostics
+Temperature
+
+13. rsSPCounter : Changed counter axes. Meaning : 
+14. rsSPTemperature : Temperature : 
+15. rsSPMZD : The metal in the zone of the sensor.
+16. rsSPNoneState : Uncertain state.
+17. rsNoNameFlag : Uncertain flag.
+18. rsNoNameFlagValue : %s. Value : %d
+19. rsNoNameStrFlagValue : %s value : %s
+20. rsBitToWordTransformationError : Unable to convert a list of bit-mapped registers in the register list type Word
+21. rsWordToBitTransformationError : Can not convert type Word registers the list in the list of bit registers
+22. rsListTypeError : Do not set the type of list.
+23. rsRegNotExists : %d register specified in the parameters can not be found. Create an array of values dropped.
+24. rsRegNotExist1 : Register number %d exists.
+25. rsRegIsReadOnly : Registers are read-only.
+26. rsDataArrayIsEmpty : The data set to be recorded is empty.
+27. erMBFOutOfMemory : Memory allocation error.
+28. erMBDeviceAddress : Invalid specified address.
+The address must be in the range from 1 to 247
+
+29. erMBF1PacketBuild : Invalid specified number of registers.
+The number of registers requested must be in the range from 1 to 2000.
+
+30. erMBF3PacketBuild : Invalid specified number of registers.
+The number of registers requested must be in the range from 1 to 125.
+
+31. erMBF16PacketBuild : Invalid specified number of registers.
+The number of registers requested must be in the range from 1 to 125.
+
+32. erMBF23PacketBuild : Requested value located beyond the boundaries of the array of values.
+33. erMBF23PacketBuild1 : Invalid specified number of registers.
+The number of registers requested must be in the range from 1 to 125.
+
+34. erMBF72PacketBuild : Invalid specified number of registers.
+The number of registers requested must be in the range from 1 to 8.
+
+35. erMBF72PacketBuild1 : Invalid set control key.
+The key is to take the value 0x55 or 0xAA.
+
+36. erMBF110PacketBuild : Invalid specified number of registers.
+The number of registers requested must be in the range from 1 to 8.
+
+37. erMBF110PacketBuild1 : Invalid set control key.
+The key is to take the value 0x55 or 0xAA.
+
+38. erMBF43PacketBuild : Sub-function is not implemented
+39. rsIllegalFunctionNumber : Invalid function number.
+40. RS_OUT_OF_RANGE : Going beyond the data set
+41. rsMBTCPPacketLenError : The packet length does not correspond to the declared
+42. rsMBTCPPacketTrasError : The package does not belong to the current transaction.
+43. ERR_TRANS_INIT : Do not set the data constructor for the transaction.
+ 
+ 
+ 
+1. rsECreateReader : Function %d is not supported currently.
+2. rsEAllocPackage : Function %d is not supported currently.
+3. rsDispThread : Thread Connection Manager
+4. rsEDispThread1 : The connection to the server %s is broken. Pause before restoration attempts in %d ms.
+5. rsEDispThread2 : Failed to restore the connection to the server %s
+6. rsEDispThread3 : Error sending request: %u
+7. rsEDispThread4 : I do not come response to a request: %d::%d::%d
+8. rsEDispThread5 : Zero length response
+9. rsEDispThread6 : Posts Analysis. An exception: %s
+10. rsEDispThread7 : Exception: %s
+11. rsDispESSOM : Connection Manager
+12. rsDispESSOM1 : The connection to the server (%s:%d) is established.
+13. rsDispESSOM2 : The connection to the server (%s:%d) is broken.
+14. rsDispESSOM3 : Socket: %s:%d Error: %d - %s
+15. rsEDestroy1 : TDispatcherModbusDevice.Destroy
+16. rsEDestroy2 : Failed to unsubscribe: %s
+17. rsEPBRCPack1 : ProcessBitRegChangesPackage
+18. rsEPBRCPack2 : Not the same as the device number in the update package. Device: %d. Package: %d
+19. rsEPBRCPack3 : The number of variables in the update and query does not match. Request: %d. Package: %d
+20. rsEPBRCPack4 : Setting registers: %s
+21. rsEPBRCPack6 : Function number does not match the type of package. Function: %d
+22. rsEPBRCPack7 : Error sending data type Boolean: %s
+23. rsEPWRCPack1 : ProcessWordRegChangesPackage
+24. rsEPWRCPack2 : Error sending data type Word: %s
+25. rsESetCoilValue : SetCoilValue
+26. rsESetDiscretValue : SetDiscretValue
+27. rsESetHoldingValue : SetHoldingValue
+28. rsESetInputValue : SetInputValue
+29. rsEItfDisp : No Manager interface. Value is changed in the model.
+30. rsEItfDisp1 : Manager interface does not set
+31. rsSetThread : Modbus values recording thread
+32. rsESetThread1 : Sent to all data.
+33. rsESetThread2 : Getting an answer. Error retrieving data: %u
+34. rsESetThread3 : Getting an answer. A memory allocation error
+35. rsESetThread4 : Analysis of the response. Package came with another transaction ID.
+36. rsESetThread5 : Analysis of the response. Register write error
+37. rsESetThread6 : Execute error: %s
+38. rsESetThread7 : InitThread error: %s
+39. rsESetThread8 : CloseThread error: %s
+40. rsESetThread9 : Socket: %s:%d Error: %d - %s
+41. rsSetCoilValue1 : When the values of the register %d records exception occurred: %s
+42. rsSetCoilValue2 : Failed to write the value of register %d
+43. rsSetDiskretValue1 : Modbus Discrete-registers are registers for read-only.
+44. rsSetHoldingValue1 : Modbus Holding-Registers are registers for read-only.
+45. rsSetCoilValue11 : The interface device is not set.
+46. rsSetCoilValue12 : Send data thread is not active.
+47. rsDevDebug2 : ARegStart: %d ARegQuantity: %d
+48. rsDevDebug3 : SendEvent
+49. rsDevDebug4 : ID: %s. Device: %d. Code1: %d. Code2: %d Connect.
+50. rsDevDebug5 : ID: %s. Device: %d. Code1: %d. Code2: %d Disconnect.
+51. rsDevDebug6 : ID: %s. Device: %d. Code1: %d. Code2: %d Receive.
+52. rsDevDebug7 : ID: %s. Device: %d. Code1: %d. Code2: %d Send.
+53. rsDevDebug8 : ID: %s. Device: %d. Code1: %d. Code2: %d MBError.
+54. rsDevDebug9 : ID: %s. Device: %d. Code1: %d. Code2: %d SocketError.
+55. rsDevDebug10 : Discret. Added unit of the survey: %d::%d::%d
+56. rsDevDebug12 : Coil. Added unit of the survey: %d::%d::%d
+57. rsDevDebug13 : Holding. Added unit of the survey: %d::%d::%d
+58. rsDevDebug14 : Input. Added unit of the survey: %d::%d::%d
+59. rsDevDebug16 : Added device: %d
+60. rsDevExcept1 : %s
+61. rsDevExcept2 : %s
+62. rsDevice1 : Discret registers - StartAddress.
+63. rsDevice2 : Discret registers.
+64. rsDevice3 : Discret registers - Quantity.
+65. rsDevice4 : Discret registers.
+66. rsDevice5 : Coil registers.
+67. rsDevice6 : Input registers.
+68. rsDevice7 : Holding registers.

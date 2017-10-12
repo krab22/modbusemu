@@ -1,0 +1,28 @@
+#: logresstrings.rslogfiletype
+msgid "- Файловый"
+msgstr "- File"
+
+#: logresstrings.rslogsteramtype
+msgid "- Потоковый"
+msgstr "- Threads"
+
+#: logresstrings.rsunknowntype
+msgid "не определен"
+msgstr "not defined"
+
+#: logresstrings.rsheader
+msgid "%s (Тип данных лога %s)"
+msgstr "%s (Type of log data %s)"
+
+#: logresstrings.rsfilereopen
+msgid "Перезапуск лога."
+msgstr "Restart log."
+
+#: logresstrings.rsfileclose
+msgid "Остановка ведения лога."
+msgstr "Stop logging."
+
+#: logresstrings.rsgencurfile1
+msgid "Новый файл не создан."
+msgstr "New file is not created."
+

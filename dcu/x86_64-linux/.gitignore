@@ -1,3 +1,10 @@
+*.ppu
+*.lfm
+*.o
+*.compiled
+*.or
+*.res
+*.rsj
 /main.lfm
 /main.o
 /main.ppu

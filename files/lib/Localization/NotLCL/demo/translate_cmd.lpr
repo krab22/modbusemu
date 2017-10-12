@@ -1,0 +1,148 @@
+program translate_cmd;
+
+uses sysutils, LazUTF8, Translations, TranslateResStr, MBResourceString, DispatcherResStrings;
+
+var Lang, FallbackLang : String;
+    FileName : String;
+
+begin
+  Lang := '';
+  FallbackLang := '';
+
+  LazGetLanguageIDs(Lang,FallbackLang);
+
+  FallbackLang := 'en';
+
+  WriteLn(StdOut,Format('Lang: %s',[Lang]));
+  WriteLn(StdOut,Format('FallbackLang: %s',[FallbackLang]));
+
+  FileName := ExtractFileName(ParamStr(0));
+
+  WriteLn(StdOut,'До перевода:');
+  WriteLn(StdOut,rsResStr1);
+  WriteLn(StdOut,rsResStr2);
+
+  Translations.TranslateResourceStrings(Format('locale/%s.%s.po',[FileName,FallbackLang]));
+
+  WriteLn(StdOut,'После перевода:');
+  WriteLn(StdOut,'rsResStr1 : '+ rsResStr1);
+  WriteLn(StdOut,'rsResStr2 : '+ rsResStr2);
+  WriteLn(StdOut,' ');
+  WriteLn(StdOut,' ');
+  WriteLn(StdOut,' ');
+  WriteLn(StdOut,'1. ErrOutOfRange : '+ ErrOutOfRange);
+  WriteLn(StdOut,'2. ErrOutofChar : '+ ErrOutofChar);
+  WriteLn(StdOut,'3. ErrIncompatibleType : '+ ErrIncompatibleType);
+  WriteLn(StdOut,'4. ErrReadOnly : '+ ErrReadOnly);
+  WriteLn(StdOut,'5. ErrInterNotValue : '+ ErrInterNotValue);
+  WriteLn(StdOut,'6. ErrInterNotInit : '+ ErrInterNotInit);
+  WriteLn(StdOut,'7. ErrCS : '+ ErrCS);
+  WriteLn(StdOut,'8. ErrData : '+ ErrData);
+  WriteLn(StdOut,'9. rsSPErrorString : '+ rsSPErrorString);
+  WriteLn(StdOut,'10. rsDigitalValue : '+ rsDigitalValue);
+  WriteLn(StdOut,'11. rsSPMasterSlave : '+ rsSPMasterSlave);
+  WriteLn(StdOut,'12. rsSPInfoString : '+ rsSPInfoString);
+  WriteLn(StdOut,'13. rsSPCounter : '+ rsSPCounter);
+  WriteLn(StdOut,'14. rsSPTemperature : '+ rsSPTemperature);
+  WriteLn(StdOut,'15. rsSPMZD : '+ rsSPMZD);
+  WriteLn(StdOut,'16. rsSPNoneState : '+ rsSPNoneState);
+  WriteLn(StdOut,'17. rsNoNameFlag : '+ rsNoNameFlag);
+  WriteLn(StdOut,'18. rsNoNameFlagValue : '+ rsNoNameFlagValue);
+  WriteLn(StdOut,'19. rsNoNameStrFlagValue : '+ rsNoNameStrFlagValue);
+  WriteLn(StdOut,'20. rsBitToWordTransformationError : '+ rsBitToWordTransformationError);
+  WriteLn(StdOut,'21. rsWordToBitTransformationError : '+ rsWordToBitTransformationError);
+  WriteLn(StdOut,'22. rsListTypeError : '+ rsListTypeError);
+  WriteLn(StdOut,'23. rsRegNotExists : '+ rsRegNotExists);
+  WriteLn(StdOut,'24. rsRegNotExist1 : '+ rsRegNotExist1);
+  WriteLn(StdOut,'25. rsRegIsReadOnly : '+ rsRegIsReadOnly);
+  WriteLn(StdOut,'26. rsDataArrayIsEmpty : '+ rsDataArrayIsEmpty);
+  WriteLn(StdOut,'27. erMBFOutOfMemory : '+ erMBFOutOfMemory);
+  WriteLn(StdOut,'28. erMBDeviceAddress : '+ erMBDeviceAddress);
+  WriteLn(StdOut,'29. erMBF1PacketBuild : '+ erMBF1PacketBuild);
+  WriteLn(StdOut,'30. erMBF3PacketBuild : '+ erMBF3PacketBuild);
+  WriteLn(StdOut,'31. erMBF16PacketBuild : '+ erMBF16PacketBuild);
+  WriteLn(StdOut,'32. erMBF23PacketBuild : '+ erMBF23PacketBuild);
+  WriteLn(StdOut,'33. erMBF23PacketBuild1 : '+ erMBF23PacketBuild1);
+  WriteLn(StdOut,'34. erMBF72PacketBuild : '+ erMBF72PacketBuild);
+  WriteLn(StdOut,'35. erMBF72PacketBuild1 : '+ erMBF72PacketBuild1);
+  WriteLn(StdOut,'36. erMBF110PacketBuild : '+ erMBF110PacketBuild);
+  WriteLn(StdOut,'37. erMBF110PacketBuild1 : '+ erMBF110PacketBuild1);
+  WriteLn(StdOut,'38. erMBF43PacketBuild : '+ erMBF43PacketBuild);
+  WriteLn(StdOut,'39. rsIllegalFunctionNumber : '+ rsIllegalFunctionNumber);
+  WriteLn(StdOut,'40. RS_OUT_OF_RANGE : '+ RS_OUT_OF_RANGE);
+  WriteLn(StdOut,'41. rsMBTCPPacketLenError : '+ rsMBTCPPacketLenError);
+  WriteLn(StdOut,'42. rsMBTCPPacketTrasError : '+ rsMBTCPPacketTrasError);
+  WriteLn(StdOut,'43. ERR_TRANS_INIT : '+ ERR_TRANS_INIT);
+  WriteLn(StdOut,' ');
+  WriteLn(StdOut,' ');
+  WriteLn(StdOut,' ');
+  WriteLn(StdOut,'1. rsECreateReader : ' + rsECreateReader);
+  WriteLn(StdOut,'2. rsEAllocPackage : ' + rsEAllocPackage);
+  WriteLn(StdOut,'3. rsDispThread : ' + rsDispThread);
+  WriteLn(StdOut,'4. rsEDispThread1 : ' + rsEDispThread1);
+  WriteLn(StdOut,'5. rsEDispThread2 : ' + rsEDispThread2);
+  WriteLn(StdOut,'6. rsEDispThread3 : ' + rsEDispThread3);
+  WriteLn(StdOut,'7. rsEDispThread4 : ' + rsEDispThread4);
+  WriteLn(StdOut,'8. rsEDispThread5 : ' + rsEDispThread5);
+  WriteLn(StdOut,'9. rsEDispThread6 : ' + rsEDispThread6);
+  WriteLn(StdOut,'10. rsEDispThread7 : ' + rsEDispThread7);
+  WriteLn(StdOut,'11. rsDispESSOM : ' + rsDispESSOM);
+  WriteLn(StdOut,'12. rsDispESSOM1 : ' + rsDispESSOM1);
+  WriteLn(StdOut,'13. rsDispESSOM2 : ' + rsDispESSOM2);
+  WriteLn(StdOut,'14. rsDispESSOM3 : ' + rsDispESSOM3);
+  WriteLn(StdOut,'15. rsEDestroy1 : ' + rsEDestroy1);
+  WriteLn(StdOut,'16. rsEDestroy2 : ' + rsEDestroy2);
+  WriteLn(StdOut,'17. rsEPBRCPack1 : ' + rsEPBRCPack1);
+  WriteLn(StdOut,'18. rsEPBRCPack2 : ' + rsEPBRCPack2);
+  WriteLn(StdOut,'19. rsEPBRCPack3 : ' + rsEPBRCPack3);
+  WriteLn(StdOut,'20. rsEPBRCPack4 : ' + rsEPBRCPack4);
+  WriteLn(StdOut,'21. rsEPBRCPack6 : ' + rsEPBRCPack6);
+  WriteLn(StdOut,'22. rsEPBRCPack7 : ' + rsEPBRCPack7);
+  WriteLn(StdOut,'23. rsEPWRCPack1 : ' + rsEPWRCPack1);
+  WriteLn(StdOut,'24. rsEPWRCPack2 : ' + rsEPWRCPack2);
+  WriteLn(StdOut,'25. rsESetCoilValue : ' + rsESetCoilValue);
+  WriteLn(StdOut,'26. rsESetDiscretValue : ' + rsESetDiscretValue);
+  WriteLn(StdOut,'27. rsESetHoldingValue : ' + rsESetHoldingValue);
+  WriteLn(StdOut,'28. rsESetInputValue : ' + rsESetInputValue);
+  WriteLn(StdOut,'29. rsEItfDisp : ' + rsEItfDisp);
+  WriteLn(StdOut,'30. rsEItfDisp1 : ' + rsEItfDisp1);
+  WriteLn(StdOut,'31. rsSetThread : ' + rsSetThread);
+  WriteLn(StdOut,'32. rsESetThread1 : ' + rsESetThread1);
+  WriteLn(StdOut,'33. rsESetThread2 : ' + rsESetThread2);
+  WriteLn(StdOut,'34. rsESetThread3 : ' + rsESetThread3);
+  WriteLn(StdOut,'35. rsESetThread4 : ' + rsESetThread4);
+  WriteLn(StdOut,'36. rsESetThread5 : ' + rsESetThread5);
+  WriteLn(StdOut,'37. rsESetThread6 : ' + rsESetThread6);
+  WriteLn(StdOut,'38. rsESetThread7 : ' + rsESetThread7);
+  WriteLn(StdOut,'39. rsESetThread8 : ' + rsESetThread8);
+  WriteLn(StdOut,'40. rsESetThread9 : ' + rsESetThread9);
+  WriteLn(StdOut,'41. rsSetCoilValue1 : ' + rsSetCoilValue1);
+  WriteLn(StdOut,'42. rsSetCoilValue2 : ' + rsSetCoilValue2);
+  WriteLn(StdOut,'43. rsSetDiskretValue1 : ' + rsSetDiskretValue1);
+  WriteLn(StdOut,'44. rsSetHoldingValue1 : ' + rsSetHoldingValue1);
+  WriteLn(StdOut,'45. rsSetCoilValue11 : ' + rsSetCoilValue11);
+  WriteLn(StdOut,'46. rsSetCoilValue12 : ' + rsSetCoilValue12);
+  WriteLn(StdOut,'47. rsDevDebug2 : ' + rsDevDebug2);
+  WriteLn(StdOut,'48. rsDevDebug3 : ' + rsDevDebug3);
+  WriteLn(StdOut,'49. rsDevDebug4 : ' + rsDevDebug4);
+  WriteLn(StdOut,'50. rsDevDebug5 : ' + rsDevDebug5);
+  WriteLn(StdOut,'51. rsDevDebug6 : ' + rsDevDebug6);
+  WriteLn(StdOut,'52. rsDevDebug7 : ' + rsDevDebug7);
+  WriteLn(StdOut,'53. rsDevDebug8 : ' + rsDevDebug8);
+  WriteLn(StdOut,'54. rsDevDebug9 : ' + rsDevDebug9);
+  WriteLn(StdOut,'55. rsDevDebug10 : ' + rsDevDebug10);
+  WriteLn(StdOut,'56. rsDevDebug12 : ' + rsDevDebug12);
+  WriteLn(StdOut,'57. rsDevDebug13 : ' + rsDevDebug13);
+  WriteLn(StdOut,'58. rsDevDebug14 : ' + rsDevDebug14);
+  WriteLn(StdOut,'59. rsDevDebug16 : ' + rsDevDebug16);
+  WriteLn(StdOut,'60. rsDevExcept1 : ' + rsDevExcept1);
+  WriteLn(StdOut,'61. rsDevExcept2 : ' + rsDevExcept2);
+  WriteLn(StdOut,'62. rsDevice1 : ' + rsDevice1);
+  WriteLn(StdOut,'63. rsDevice2 : ' + rsDevice2);
+  WriteLn(StdOut,'64. rsDevice3 : ' + rsDevice3);
+  WriteLn(StdOut,'65. rsDevice4 : ' + rsDevice4);
+  WriteLn(StdOut,'66. rsDevice5 : ' + rsDevice5);
+  WriteLn(StdOut,'67. rsDevice6 : ' + rsDevice6);
+  WriteLn(StdOut,'68. rsDevice7 : ' + rsDevice7);
+end.
+
