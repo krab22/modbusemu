@@ -55,7 +55,7 @@ var LoggerObj : TWinSysEventLogger;
 
 implementation
 
-uses SysUtils,Registry;
+uses SysUtils,Registry, LazUTF8;
 
 const
   csRegEventLogSection = 'SYSTEM\CurrentControlSet\Services\EventLog\Application';
@@ -195,7 +195,7 @@ var P: Pointer;
 begin
  FCSection.Enter;
  try
-  P := PChar(Utf8ToAnsi(Format('(Thread 0x%s)%s',[IntToHex(GetThreadID,8),Message])));
+  P := PChar(UTF8ToWinCP(Format('(Thread 0x%s)%s',[IntToHex(GetThreadID,8),Message])));
   if FEventLog = 0 then FEventLog := RegisterEventSource(nil, PChar(Utf8ToAnsi(FName)));
   if FEventLog = 0 then RaiseLastOSError;
   ReportEvent(FEventLog, EventType, Category, ID, nil, 1, 0, @P, nil);

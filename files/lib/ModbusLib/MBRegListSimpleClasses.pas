@@ -13,10 +13,14 @@ resourcestring
  rsReAddrNotAssign = 'Регистр с адресом %d не существует.';
 
 type
+
+  { TMBRegSimpleList }
+
   TMBRegSimpleList = class
   private
-    FRegListType : TRegMBTypes;                                                 // Тип списка регистров
-    FIsReadOnly  : Boolean;                                                     // Флаг возможности записи значений в регистры. Зависит от типа списка. По умолчанию True
+    FRegListType   : TRegMBTypes;                                                 // Тип списка регистров
+    FIsReadOnly    : Boolean;                                                     // Флаг возможности записи значений в регистры. Зависит от типа списка. По умолчанию True
+    FtoDefragmList : Boolean;
     procedure SetRegListType(const Value: TRegMBTypes);
     procedure SetRegDefType(const Value: TRegTypes);
   protected
@@ -46,6 +50,7 @@ type
     procedure DeleteRange(Range : TMBRegistersRangeClassic); overload;          // удаление диапазона адресов
     procedure DeleteRange(StartAddr: WORD; Count: Word); overload;
 
+    property toDefragmList : Boolean read FtoDefragmList write FtoDefragmList default True;
     property IsReadOnly    : Boolean read FIsReadOnly;
     property RegDefType    : TRegTypes read FRegDefType write SetRegDefType;
     property InfoCountReg  : Word read FRegCount;
@@ -105,9 +110,10 @@ uses SysUtils,
 constructor TMBRegSimpleList.Create;
 var i : Integer;
 begin
-  FRegListType := rgNone;
-  FIsReadOnly  := True;
-  FRegCount    := 0;
+  FRegListType   := rgNone;
+  FIsReadOnly    := True;
+  FRegCount      := 0;
+  FtoDefragmList := True;
   for i := 0 to 65535 do FRegArray[i] := nil;
 end;
 
@@ -172,7 +178,8 @@ begin
    if FRegArray[i] <> nil then FRegArray[i].MBRegType := FRegListType;
 end;
 
-function TMBRegSimpleList.IsRangeOnTheList(StartAddr, Count: Word; out Index : Integer): Boolean;
+function TMBRegSimpleList.IsRangeOnTheList(StartAddr: WORD; Count: Word; out
+  Index: Integer): Boolean;
 var i,TempCount : Integer;
 begin
   Result:=False;
@@ -199,7 +206,7 @@ begin
   DeleteRangeFromArray(Index);
 end;
 
-procedure TMBRegSimpleList.DeleteRange(StartAddr, Count: Word);
+procedure TMBRegSimpleList.DeleteRange(StartAddr: WORD; Count: Word);
 var TempRange : TMBRegistersRangeClassic;
 begin
   TempRange.StartAddres := StartAddr;
@@ -354,7 +361,7 @@ begin
   Result:=True;
 end;
 
-procedure TMBRegSimpleList.AddRangeOfRegs(StartAddr, Count: Word);
+procedure TMBRegSimpleList.AddRangeOfRegs(StartAddr: Word; Count: Word);
 var i,ii,TempCount, TempCount1 : Integer;
     TempRange  : TMBRegistersRangeClassic;
     TempRanges : TMBRegistersRangeClassicArray;
@@ -362,7 +369,9 @@ begin
   TempRange.StartAddres := StartAddr;
   TempRange.Count       := Count;
 
-  if not OptimizeRange(TempRange,TempRanges) then Exit;
+  // если дефрагментация запрещена, то и оптимизацию не проводим
+  if FtoDefragmList then
+   if not OptimizeRange(TempRange,TempRanges) then Exit;
 
   TempCount:=Length(TempRanges)-1;
 
@@ -382,7 +391,11 @@ begin
 
   SortArray(0,Length(FRegRanges)-1,FRegRanges);
 
-  DefragmentationList(FRegRanges);
+  // если деврагментация разрешена
+  if FtoDefragmList then
+   begin
+    DefragmentationList(FRegRanges);
+   end;
 
   TempCount:=Length(FRegRanges)-1;
   for i:=0 to TempCount do
@@ -560,7 +573,7 @@ var TempReg : TMBWordRegister;
 begin
   if FRegArray[Address]<>nil then Exit;
 
-  TempReg:=nil;
+   TempReg:=nil;
  { case FRegDefType of
    rtSimpleWord : TempReg:=TMBWordRegister.Create;
    rtWord       : TempReg:=TMBWordBitRegister.Create;

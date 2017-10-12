@@ -2,11 +2,13 @@ unit COMPortParamTypes;
 
 interface
 
+{$mode objfpc}{$H+}
+
 uses {$IFDEF WINDOWS}
      Windows,
      {$ENDIF}
      Classes, sysutils,
-     COMPortResStr;
+     COMPortResStr, COMPortConsts;
 
 type
  INPCCommLedInterface = interface
@@ -85,6 +87,34 @@ type
  TComPortPrefixPathNames = array [TComPortPrefixPath] of String;
  TComPortPrefixPathValue = array [TComPortPrefixPath] of String;
 
+ TComPortLinuxPrefixEnum = (peStd,peOMAP,peUsb,peCDC_ACM,peGadget,peMOXA,
+                            peMotorolaIMX,peAMBA,peARM,peBluetooth,peIrDA,petty0tty);
+ TComPortLinuxPrefixEnumName = array [TComPortLinuxPrefixEnum] of String;
+ TComPortLinuxPrefixNames = array [TComPortLinuxPrefixEnum] of String;
+
+ TSerialStruct = packed record
+	stype           : Integer;
+	line            : Integer;
+	port            : DWord;
+	irq             : Integer;
+	flags           : Integer;
+	xmit_fifo_size  : Integer;
+	custom_divisor  : Integer;
+	baud_base       : Integer;
+	close_delay     : Word;
+	io_type         : Byte;
+	reserved_char   : Byte;
+	hub6            : Integer;
+	closing_wait    : Word; //* time to wait before closing */
+	closing_wait2   : Word; //* no longer used... */
+	iomem_base      : PByte;
+	iomem_reg_shift : Word;
+	port_high       : DWord;
+	iomap_base      : Int64;//* cookie passed into ioremap */
+  end;
+ PSerialStruct = ^TSerialStruct;
+
+
 const
   ErrPortPathOther    = 15000;
   ErrPortAlreadyOpen  = 15001;
@@ -102,12 +132,14 @@ const
   F_UNLCK = 2;
 
   cCOMPrefixPathWindows = '\\.\COM';
+  cCOMPrefixWindows     = 'COM';
   cCOMPrefixPathLinux   = '/dev/ttyS';
+  cCOMPrefixLinux       = 'ttyS';
   cCOMPrefixPathLinuxOther   = 'other';
 
   //CMSPAR= $40000000; { mark or space (stick) parity }
 
-  {$IFNDEF MSWINDOWS}
+  {$IFNDEF WINDOWS}
   INVALID_HANDLE_VALUE = THandle(-1);
   {$ENDIF}
 
@@ -133,13 +165,30 @@ const
                                                     $0001009, $000100A, $000100B, $000100C, $000100D, $000100E,
                                                     $000100F, $FFFFFFF);
   {$ENDIF}
-  ComPortDataBitsNames   : TComPortDataBitsNames   = ('5 ','6 ','7 ','8 ','0 ');
-  ComPortDataBitsValue   : TComPortDataBitsValue   = (5,6,7,8,0);
-  ComPortStopBitsNames   : TComPortStopBitsNames   = ('1 ','1,5 ','2 ','0 ');
-  ComPortDataBitsSymbol  : TComPortDataBitsNames   = ('5','6','7','8','0');
-  ComPortStopBitsSymbol  : TComPortStopBitsNames   = ('1','1,5','2','0');
-  ComPortPrefixPathNames : TComPortPrefixPathNames = (cCOMPrefixPathLinux,cCOMPrefixPathWindows,rsOther);
-  ComPortPrefixPathValue : TComPortPrefixPathValue = (cCOMPrefixPathLinux,cCOMPrefixPathWindows,'');
+  ComPortDataBitsNames    : TComPortDataBitsNames   = ('5 ','6 ','7 ','8 ','0 ');
+  ComPortDataBitsValue    : TComPortDataBitsValue   = (5,6,7,8,0);
+  ComPortStopBitsNames    : TComPortStopBitsNames   = ('1 ','1,5 ','2 ','0 ');
+  ComPortDataBitsSymbol   : TComPortDataBitsNames   = ('5','6','7','8','0');
+  ComPortStopBitsSymbol   : TComPortStopBitsNames   = ('1','1,5','2','0');
+  ComPortPrefixPathNames  : TComPortPrefixPathNames = (cCOMPrefixPathLinux,cCOMPrefixPathWindows,rsOther);
+  ComPortPrefixPathValue  : TComPortPrefixPathValue = (cCOMPrefixPathLinux,cCOMPrefixPathWindows,'');
+  ComPortLinuxPrefixNames : TComPortLinuxPrefixNames = (csLinuxCOMMPrefix0,
+                                                        csLinuxCOMMPrefix1,
+                                                        csLinuxCOMMPrefix2,
+                                                        csLinuxCOMMPrefix3,
+                                                        csLinuxCOMMPrefix4,
+                                                        csLinuxCOMMPrefix5,
+                                                        csLinuxCOMMPrefix6,
+                                                        csLinuxCOMMPrefix7,
+                                                        csLinuxCOMMPrefix8,
+                                                        csLinuxCOMMPrefix9,
+                                                        csLinuxCOMMPrefix10,
+                                                        csLinuxCOMMPrefix11);
+  ComPortLinuxPrefixEnumNames : TComPortLinuxPrefixEnumName = ('Std','OMAP','Usb','CDC_ACM','Gadget','MOXA',
+                                                               'Motorola IMX','AMBA','ARM','Bluetooth',
+                                                               'IrDA','tty0tty');
+
+  ComPortLinuxPrefixMaxIndex = 11;
 
   dcbFlag_Binary              = $00000001;
   dcbFlag_ParityCheck         = $00000002;
@@ -235,9 +284,101 @@ function  GetPacketAsStringHex(Packet : array of Byte; aLen : Integer; Delimeter
 function  GetBuffAsStringHex(Buff : Pointer; aLen : Integer; Delimeter : String = ':') : String;
 function  GetPacketFromStringHex(AString : string; var aPacket : array of Byte; aLen : Integer; Delimeter : String = ':'): Integer;
 
+function IsPortAvailabilityForUse(APortPath : String) : Boolean;
+{$IFDEF WINDOWS}
+function GetPortListFromRegistry : TStringList;
+{$ENDIF}
+
 implementation
 
-uses strutils;
+uses strutils
+     {$IFDEF LINUX}
+     ,baseunix, termio
+     {$ENDIF}
+     {$IFDEF WINDOWS}
+     ,registry
+     {$ENDIF};
+
+{$IFDEF WINDOWS}
+function GetPortListFromRegistry : TStringList;
+var TempRegistry : TRegistry;
+    TempKeyList : TStringList;
+    i, Count : Integer;
+    TempValue : String;
+begin
+  Result := nil;
+  TempRegistry := TRegistry.Create;
+  TempKeyList  := TStringList.Create;
+  try
+   TempRegistry.RootKey := HKEY_LOCAL_MACHINE;
+   if not TempRegistry.OpenKeyReadOnly(csWindowsCOMMRegKey) then Exit;
+   TempRegistry.GetValueNames(TempKeyList);
+   Count := TempKeyList.Count - 1;
+   if Count = -1 then Exit;
+   Result := TStringList.Create;
+   for i := 0 to Count do
+    begin
+     TempValue := TempRegistry.ReadString(TempKeyList.Strings[i]);
+     if TempValue = '' then Continue;
+     Result.Add(TempValue);
+    end;
+   if Result.Count = 0 then FreeAndNil(Result);
+  finally
+   FreeAndNil(TempKeyList);
+   FreeAndNil(TempRegistry);
+  end;
+end;
+{$ENDIF}
+
+function IsPortAvailabilityForUse(APortPath : String) : Boolean;
+var {$IFDEF LINUX}
+     Res : Integer;
+     TempDescr : integer;
+     TempSer: TSerialStruct;
+    {$ELSE}
+     TempDescr : THandle;
+    {$ENDIF}
+begin
+  Result := False;
+  {$IFDEF LINUX}
+    // проверяем на доступность порта
+    TempDescr := FpOpen(APortPath, O_RDWR or O_NOCTTY or O_NONBLOCK);
+    if TempDescr < 0 then
+     begin
+      Exit;
+     end;
+    FillByte(TempSer,SizeOf(TSerialStruct),0);
+    Res := FpIOCtl(TempDescr,TIOCGSERIAL,@TempSer);
+    FileClose(TempDescr);
+    if Res = 0 then // serial port
+     begin
+      if TempSer.stype = 0 then
+       begin
+        Exit;//неизвестный порт
+       end;
+
+      Result := True;
+     end;
+  {$ENDIF}
+  {$IFDEF WINDOWS}
+    TempDescr := CreateFile(LPCSTR(APortPath),
+                            GENERIC_READ or GENERIC_WRITE,
+                            0,
+                            nil,
+                            OPEN_EXISTING,
+                            FILE_FLAG_OVERLAPPED, // для асихронного ввода-вывода
+                            0);
+    if TempDescr = INVALID_HANDLE_VALUE then
+     begin
+      Result := not (GetLastOSError = ERROR_ACCESS_DENIED); // если кем то занят
+     end
+    else
+     begin
+      Result := True;
+     end;
+    if Result then FileClose(TempDescr);
+  {$ENDIF}
+end;
 
 function GetDataBitsIDFromStr(Value : String): TComPortDataBits;
 begin

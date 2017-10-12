@@ -9,9 +9,11 @@ uses SysUtils, Classes
      ;
 
 const
-  csLocalHostIP   = '127.0.0.1';
-  csBindAllIP     = '0.0.0.0';
-  csLocalHostName = 'localhost';
+  csLocalHostIP      = '127.0.0.1';
+  csBindAllIP        = '0.0.0.0';
+  csLocalHostName    = 'localhost';
+  cwSNMPAgentDefPort = 161;
+  cwSNMPTrapDefPort  = 162;
 {$IFDEF UNIX}
   INVALID_SOCKET = LongInt(-1);
 {$ENDIF}

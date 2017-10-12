@@ -499,7 +499,7 @@ type
    public
     constructor Create(AClassName, ANodeName, AAttrName, AValue : String);
   end;
-  
+
   { EAddDevAlreadyExists }
 
   EAddDevAlreadyExists = class(Exception)

@@ -157,6 +157,8 @@ constructor TDispatcherModbusDevice.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FTCPDevice     := TMBTCPDevice.Create(nil);
+  // запретить деврагментацию иапазонов регистров
+  FTCPDevice.toDefragmentRanges := False;
   FDispatcherItf := nil;
   FDeviceCS      := TCriticalSection.Create;
   FSubscribers   := nil;

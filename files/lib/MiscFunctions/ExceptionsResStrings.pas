@@ -4,6 +4,8 @@ unit ExceptionsResStrings;
 
 interface
 
+// при добавлении строк НЕЗАБУДЬ!!! добавить эти строки в *.inc.po.en
+
 resourcestring
 
   errEmptyParam                              = 'Не задан объект для постановки в очередь.';
@@ -60,14 +62,14 @@ resourcestring
   rsErrChannelParamInvalid                   = 'Ошибка в параметрах канала.';
   rsErrChannelIsntFound                      = 'Запрашиваемый канал не найден';
   rsErrResiveDataTimeout                     = 'Таймаут ожидания ответа устройства.';
-  rsErrResiveDataNull                        = 'Пришел ответ нулевой длинны.';
+  rsErrResiveDataNull                        = 'Пришел ответ нулевой длины.';
   rsErrPortDataWriteTimeout                  = 'Не удалось записать данные в порт.';
   rsErrPortDataWrite                         = 'Ошибка записи данных в порт';
   rsErrPortDataWait                          = 'Ошибка ожидания данных';
   rsErrPortDataRead                          = 'Ошибка чтения данных';
   rsErrPortParityError                       = 'Ошибка паритета.';
-  rsDevErrorCommand                          = 'Ошибка выполнения комманды. %s';
-  rsDevErrorCommandNotAssigned               = 'Комманда не задана.';
+  rsDevErrorCommand                          = 'Ошибка выполнения команды. %s';
+  rsDevErrorCommandNotAssigned               = 'Команда не задана.';
   rsErrDeviceParamInvalid                    = 'Ошибка в параметрах устройства.';
 
   rsDevLoadParamXMLNotAssign                 = 'Не задан узел XML для загрузки параметров устройства.';
@@ -85,7 +87,7 @@ resourcestring
   rsXMLLoadOutOfRangeOfReg                   = 'Выход за пределы допустимого диапазона количества регистров.';
 
   rsCommandDevItfNotInit                     = 'Команда не инициализирована интерфейсом устройства.';
-  rsCommandSrvProtNotMBProt                  = 'Установленный протокол не поддержифает серверный Modbus протокол.';
+  rsCommandSrvProtNotMBProt                  = 'Установленный протокол не поддерживает серверный Modbus протокол.';
 
   rsCommandMBDevNotSet                       = 'Не задан объект Modbus устройства.';
   rsCommandChannelListNotSet                 = 'Не задан список каналов до удаленных устройств.';
@@ -96,10 +98,10 @@ resourcestring
   rsCommandIsAnotherDevice                   = 'Команда предназначается другому устройству.';
 
   rsProtLoadParamXMLNotAssign                = 'Не задан узел XML для загрузки параметров протокола.';
-  rsProtDoesNotSupportThisCmd                = 'Протокол не поддерживает даттый тип команд.';
+  rsProtDoesNotSupportThisCmd                = 'Протокол не поддерживает данный тип команд.';
   rsProtIDMissing                            = 'В параметрах отсутствует идентификатор протокола.';
   rsProtIDRefersAnotherProtocol              = 'Идентификатор относится к другому протоколу.';
-  rsProtTypeIsIncorrect                      = 'Тип протокола задан не верно.';
+  rsProtTypeIsIncorrect                      = 'Тип протокола задан неверно.';
   rsProtNotSupport                           = 'Протокол не поддерживается.';
 
   rsChannelIsNotActive                       = 'Канал не открыт.';
@@ -140,7 +142,7 @@ resourcestring
   rsErrObjectListParamInvalid                = 'Ошибка в параметрах списка объектов наблюдения';
 
   RS_MB_ERR_CUSTOM                           = 'Ошибка Modbus: %s';
-  RS_MB_ILLEGAL_FUNCTION                     = 'Недопустимый тип функции, полученный в запросе.';
+  RS_MB_ILLEGAL_FUNCTION                     = 'Недопустимый тип функции, полученных в запросе.';
   RS_MB_ILLEGAL_DATA_ADDRESS                 = 'Недопустимый адрес данных, полученный в запросе.';
   RS_MB_ILLEGAL_DATA_VALUE                   = 'Недопустимые значения, полученные в поле данных запроса.';
   RS_MB_SLAVE_DEVICE_FAILURE                 = 'Неустранимая ошибка при обработке устройством полученного запроса.';
@@ -155,7 +157,7 @@ resourcestring
   RS_MASTER_GET_MEMORY                       = 'Системная ошибка.  Код ошибки: %d. - %s';
   RS_MASTER_CRC                              = 'Ошибка расчета CRC16 полученного пакета.';
 
-  RS_MASTER_WORD_READ                        = 'Передано не четное количество байт.';
+  RS_MASTER_WORD_READ                        = 'Передано нечетное количество байт.';
   RS_MASTER_F3_LEN                           = 'Неверная длина пакета.';
   RS_MASTER_QUANTITY                         = 'Количество записанных регистров превышает допустимое.';
   RS_MASTER_DEVICE_ADDRESS                   = 'Пакет предназначен другому устройству.';
@@ -166,14 +168,14 @@ resourcestring
 
   RS_MASTER_FUNCTION_CODE                    = 'Неверный код функции в ответном сообщении.';
 
-  RS_MASTER_F72_CHKRKEY                      = 'Ключь переданный в ответе не соответствует ожидаемому.';
-  RS_MASTER_F72_QUANTITY                     = 'Количество регистров в ответе выходит за допустимый дапазон.';
+  RS_MASTER_F72_CHKRKEY                      = 'Ключ переданный в ответе не соответствует ожидаемому.';
+  RS_MASTER_F72_QUANTITY                     = 'Количество регистров в ответе выходит за допустимый диапазон.';
   RS_MASTER_F72_CRC                          = 'Ошибка CRC блока данных.';
 
   rsExceptXmlNotAssigned                     = 'Объект XML документа не задан.';
   rsExceptXlmNoNode                          = '%s Тег %s отсутствует в документе';
   rsExceptXlmNoAttr                          = '%s Тег %s. Отсутствует обязательный атрибут %s';
-  rsExceptSyetemType                         = '%s Данный компилятор расчитан на тип системы %s. В конфигурационном файле содержится иной тип - %s';
+  rsExceptSyetemType                         = '%s Данный компилятор раcсчитан на тип системы %s. В конфигурационном файле содержится иной тип - %s';
   rsExceptSessionID                          = 'Идентификатор сессии не задан';
   rsExceptXMLAttrVal                         = '%s Тег %s. Атрибут %s имеет недопустимое значение %s';
 

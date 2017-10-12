@@ -12,7 +12,7 @@ type
 
 const
 
-  MBDispEventEnumStrings : TMBDispEventEnumStringArray = ('mdeeConnect','mdeeDisconnect','mdeeSend','mdeeReceive','mdeeSocketError','mdeeMBError');
+  MBDispEventEnumStrings : TMBDispEventEnumStringArray = ('mdeeConnect','mdeeDisconnect','mdeeSend','mdeeReceive','mdeeSocketError','mdeeMBError','mdeeRSWriteErr');
 
 type
   IMBDispDevSubscriberItf = interface

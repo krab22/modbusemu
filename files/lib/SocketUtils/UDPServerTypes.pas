@@ -235,6 +235,7 @@ begin
     FreeAndNil(FSelectThread);
    end;
 
+  if FSocket <> INVALID_SOCKET then
   try
    Res := {$IFDEF UNIX}FpClose{$ELSE}closesocket{$ENDIF}(FSocket);
    if Res = -1 then

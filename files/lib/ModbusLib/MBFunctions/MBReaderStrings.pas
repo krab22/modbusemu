@@ -9,4 +9,4 @@ resourcestring
 
 implementation
 
-end.
+end.

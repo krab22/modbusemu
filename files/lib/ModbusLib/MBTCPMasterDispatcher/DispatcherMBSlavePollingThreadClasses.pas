@@ -428,10 +428,10 @@ end;
 procedure TMBSlavePollingThread.SendErrorToAll(ErrorType: TMBDispEventEnum; ErrorCode: Cardinal);
 var TempItem : TObject;
 begin
- for TempItem in FItemDictinary.Values do
-  begin
-   SendError(TMBSlavePollingItem(TempItem),ErrorType,ErrorCode);
-  end;
+  for TempItem in FItemDictinary.Values do
+   begin
+     SendError(TMBSlavePollingItem(TempItem),ErrorType,ErrorCode);
+   end;
 end;
 
 procedure TMBSlavePollingThread.SetLastAllItemError(ErrorCode : Cardinal);
@@ -462,7 +462,7 @@ begin
   on E : Exception do
    begin
     SendLogMessage(llError,rsDispESSOM,Format(rsEPWRCPack2,[E.Message]));
-end;
+	 end;
  end;
 end;
 
@@ -476,7 +476,7 @@ begin
   on E : Exception do
    begin
     SendLogMessage(llError,rsDispESSOM,Format(rsEPBRCPack7,[E.Message]));
-   end;
+	 end;
  end;
 end;
 

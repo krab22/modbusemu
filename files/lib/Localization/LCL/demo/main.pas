@@ -62,13 +62,13 @@ type
 
   // inherit from TLocalizedForm, .lfm file begins with "inherited" instead of "object"
   TMainForm = class(TLocalizedForm)
-    Bevel1: TBevel;
-    Button1: TButton;
-    Button2: TButton;
-    CbLanguage: TComboBox;
-    Label1: TLabel;
-    LblCurrentSelection: TLabel;
-    RgDrinks: TRadioGroup;
+    Bevel1              : TBevel;
+    Button1             : TButton;
+    Button2             : TButton;
+    CbLanguage          : TComboBox;
+    Label1              : TLabel;
+    LblCurrentSelection : TLabel;
+    RgDrinks            : TRadioGroup;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure CbLanguageChange(Sender: TObject);
@@ -189,18 +189,19 @@ begin
 
   // Select the new language in the language combobox.
   ALang := lowercase(ALang);
-  for i:=0 to CbLanguage.Items.Count-1 do begin
+  for i:=0 to CbLanguage.Items.Count-1 do
+   begin
     lang := CbLanguage.Items[i];
     p := pos(' ', lang);
     if p = 0 then p := pos('-', lang);
-    if p = 0 then
-      raise Exception.Create('Language items are not properly formatted.');
+    if p = 0 then raise Exception.Create('Language items are not properly formatted.');
     lang := lowercase(copy(lang, 1, p-1));
-    if lang = ALang then begin
+    if lang = ALang then
+     begin
       CbLanguage.ItemIndex := i;
       break;
-    end;
-  end;
+     end;
+   end;
 
   { Remember the new language. Forms may want to check in UpdateTranslation
     whether the new language has a different BiDiMode. }

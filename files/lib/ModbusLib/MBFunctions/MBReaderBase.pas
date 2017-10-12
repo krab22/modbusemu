@@ -8,7 +8,7 @@ uses Classes,
      MBInterfaces, MBDefine;
 
 type
-   
+
    TReaderBase = class(TComponent, IReaderPacket)
     protected
      FErrorCode      : Cardinal;

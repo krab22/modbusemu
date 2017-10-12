@@ -20,9 +20,9 @@ uses
 
 type
   TLocalizedForm = class(TForm)
-  protected
+   protected
     procedure UpdateTranslation(ALang: String); virtual;
-  public
+   public
     (* Activate for Lazarus version older than 1.2
     procedure FlipChildren(AllLevels: Boolean); override;
     *)
@@ -60,15 +60,12 @@ uses
 {$IFDEF MSWINDOWS}
 function GetLocaleStr(LCID, LT: Longint; const Def: string): ShortString;
 // borrowed from SysUtils
-var
-  L: Integer;
-  Buf: array[0..255] of Char;
+var  L: Integer;
+     Buf: array[0..255] of Char;
 begin
   L := GetLocaleInfo(LCID, LT, Buf, SizeOf(Buf));
-  if L > 0 then
-    SetString(Result, @Buf[0], L - 1)
-  else
-    Result := Def;
+  if L > 0 then SetString(Result, @Buf[0], L - 1)
+   else Result := Def;
 end;
 {$ENDIF}
 
@@ -80,8 +77,7 @@ end;
   Works only for Windows.
   See also: GetFullLangCode}
 function GetLangCodeFromLCID(LCID: Integer): String;
-var
-  language: PAnsiChar;
+var language: PAnsiChar;
 begin
   language := StrAlloc(255);
   try
@@ -100,8 +96,7 @@ end;
   or http://delphi.cjcsoft.net/viewthread.php?tid=45881
   or http://msdn.microsoft.com/en-us/library/dd318101%28VS.85%29.aspx }
 function GetFullLangCodeFromLCID(LCID: Integer): String;
-var
-  language, country: PAnsiChar;
+var language, country: PAnsiChar;
 begin
   language := StrAlloc(255);
   country := StrAlloc(255);
@@ -171,10 +166,8 @@ end;
 
 procedure UpdateBiDiMode(ALang: String);
 begin
-  if Application.IsRTLLang(ALang) then
-    Application.BidiMode := bdRightToLeft
-  else
-    Application.BiDiMode := bdLeftToRight;
+  if Application.IsRTLLang(ALang) then Application.BidiMode := bdRightToLeft
+   else Application.BiDiMode := bdLeftToRight;
 end;
 
 
@@ -218,12 +211,14 @@ var
   i: Integer;
   F: TLocalizedForm;
 begin
+  // перевод элементов форм не переведенных автоматически
   if Application.MainForm = self then
-    for i:=0 to Screen.FormCount-1 do
-      if Screen.Forms[i] is TLocalizedForm then begin
-        F := TLocalizedForm(Screen.Forms[i]);
-        if F <> self then F.UpdateTranslation(ALang);
-      end;
+   for i:=0 to Screen.FormCount-1 do
+    if Screen.Forms[i] is TLocalizedForm then
+     begin
+      F := TLocalizedForm(Screen.Forms[i]);
+      if F <> self then F.UpdateTranslation(ALang);
+     end;
 
   if Application.IsRTLLang(ALang) <> Application.IsRTLLang(CurrentLang) then
     FlipChildren(true);

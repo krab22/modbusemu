@@ -67,27 +67,29 @@ end;
 constructor TGTKApplicationLogger.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-  FCSection    := TCriticalSection.Create;
-  FLocalBuff   := TStringList.Create;
-  FEnableDebug := True;
-  FEnableError := True;
-  FEnableInfo  := True;
-  FEnableWarn  := True;
-  FBuffTimer   := TTimer.Create(Nil);
+  FCSection      := TCriticalSection.Create;
+  FLocalBuff     := TStringList.Create;
+  FLoggerStrings := nil;
+  FEnableDebug   := True;
+  FEnableError   := True;
+  FEnableInfo    := True;
+  FEnableWarn    := True;
+  FBuffTimer     := TTimer.Create(Nil);
   FBuffTimer.OnTimer := @OnTimerProc;
 end;
 
 destructor TGTKApplicationLogger.Destroy;
 begin
-  FBuffTimer.Free;
-  FCSection.Free;
-  FLocalBuff.Free;
+  FBuffTimer.Enabled := False;
+  FreeAndNil(FBuffTimer);
+  FreeAndNil(FCSection);
+  FreeAndNil(FLocalBuff);
   inherited Destroy;
 end;
 
 procedure TGTKApplicationLogger.SetLoggerStrings(AValue: TStrings);
 begin
-  if FLoggerStrings=AValue then Exit;
+  if FLoggerStrings = AValue then Exit;
   FCSection.Enter;
   try
    if not Assigned(AValue) then OnTimerProc(Self);
@@ -146,16 +148,51 @@ var TempRep  : String;
 begin
  FCSection.Enter;
  try
+  try
   while FLocalBuff.Count > 0 do
    begin
+
+    try
     TempRep := FLocalBuff.Strings[0];
     FLocalBuff.Delete(0);
+    except
+     on E : Exception do
+      begin
+       WriteLn(StdErr,Format('[error] %s',[E.Message]));
+       Exit;
+      end;
+    end;
+
+    try
     if Assigned(FLoggerStrings) then FLoggerStrings.Add(TempRep)
      else
        if Pos('[error]', TempRep) = 0 then WriteLn(StdOut,TempRep)
         else WriteLn(StdErr,TempRep);
+    except
+     on E : Exception do
+      begin
+       WriteLn(StdErr,Format('[error] %s',[E.Message]));
+       Exit;
+      end;
+    end;
+
+    try
     if FLoggerStrings.Count > 10000 then FLoggerStrings.Delete(0);
+    except
+     on E : Exception do
+      begin
+       WriteLn(StdErr,Format('[error] %s',[E.Message]));
+       Exit;
+      end;
+    end;
+
    end;
+  except
+   on E : Exception do
+    begin
+     WriteLn(StdErr,Format('[error] %s',[E.Message]));
+    end;
+  end;
  finally
   FCSection.Leave;
  end;

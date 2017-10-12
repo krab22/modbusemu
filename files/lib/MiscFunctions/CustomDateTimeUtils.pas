@@ -19,11 +19,13 @@ uses  dateutils
 
 function DateTimeToUnixMSecs(const AValue: TDateTime; const ToUTC: Boolean): Int64;
 begin
+  Result := 0;
+  if AValue = 0  then Exit;
   Result := Round((AValue - UnixDateDelta) * MSecsPerDay);
-  if ToUTC then
-  begin
-   Result := Result + TimeZoneBiasMSecs;
-  end;
+  if not ToUTC then
+   begin
+    Result := Result - TimeZoneBiasMSecs;
+   end;
 end;
 
 function TimeZoneBiasMSecs: Integer;

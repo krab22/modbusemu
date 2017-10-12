@@ -201,6 +201,11 @@ const
 
   csXMLAttrIPAddress              = 'IPAddress';
   csXMLAttrAddress                = 'Address';
+  csXMLAttrProtocol               = 'Protocol';
+  csXMLAttrHttpBuffDepth          = 'HttpBuffDepth';
+  dXMLAttrHttpBuffDepthDef        = 100;
+  csXMLProtocolHTTP               = 'http';
+  csXMLProtocolHTTPS              = 'https';
   csXMLAttrTCPport                = 'TCPport';
   csXMLAttrPort                   = 'Port';
   csXMLAttrApiPath                = 'ApiPath';

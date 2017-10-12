@@ -17,6 +17,8 @@ const
 
   csLogDestSysName    = 'Syslog';
   csLogDestFileName   = 'File';
+  csLogDestFilePath   = 'Path';
+  csLogDestFileMaxSize= 'FileMaxSize';
   csLogDestMemoName   = 'Memo';
 
   csDefLogEnable      = True;

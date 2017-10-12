@@ -2,6 +2,8 @@ unit SocketErrorRString;
 
 interface
 
+// при добавлении строк НЕЗАБУДЬ!!! добавить эти строки в *.inc.po.en
+
 resourcestring
   rsMiscSocketErrEvent1  = 'Неизвестное событие.';
   rsMiscSocketErrEvent2  = 'Общее.';
@@ -13,6 +15,7 @@ resourcestring
   rsMiscSocketErrEvent8  = 'Поиск.';
 
   rsUNKNOWN_ERR                = 'Ошибка: %d - %s';
+
 // взято с http://msdn.microsoft.com/en-us/library/ms740668(VS.85).aspx
 
   rsWSA_INVALID_HANDLE         = 'Specified event object handle is invalid.';
@@ -211,6 +214,7 @@ resourcestring
   rsLongWSA_QOS_ESHAPERATEOBJ      = 'An invalid shaping rate object was found in the QOS provider-specific buffer.';
   rsLongWSA_QOS_RESERVED_PETYPE    = 'A reserved policy element was found in the QOS provider-specific buffer.';
 {$ENDIF}
+
 
 implementation
 

@@ -4,18 +4,13 @@ unit LogConst;
 
 interface
 
-resourcestring
-  rsDebug       = 'Debug';
-  rsInfo        = 'Info';
-  rsWarning     = 'Warning';
-  rsError       = 'Error';
-  rsUnknownHost = 'unknown_host'; //< Имя компьютера извлечь не удалось.
-  rsUnknownApp  = 'unknown_app';  //< Имя приложения извлечь не удалось.
-
 const
-  logExtension = 'csv';  //< Расширение файла журнала.
-  msgDelimiter = ';';    //< Разделитель параметров в сообщении журнала.
-  msgEOL       = #13#10; //< Признак конца строки.
+  logExtension   = 'csv';     //< Расширение файла журнала.
+  msgDelimiter   = ';';       //< Разделитель параметров в сообщении журнала.
+  msgEOL         = #13#10;    //< Признак конца строки.
+  defFileLogPrx  = 'filelog'; //< Префикс файла лога
+  defFileLogExt  = '.log';    //< Расширение файла лога
+  defFileMaxSize = 1048576;   //< Максимальный размер лог-файла по умолчанию.
 
 implementation
 

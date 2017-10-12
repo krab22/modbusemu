@@ -4,11 +4,10 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Debug"/>
-    <Units Count="5">
+    <Units Count="8">
       <Unit0>
         <Filename Value="translation_demo.lpr"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <UsageCount Value="21"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -19,9 +18,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Main"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="32"/>
-        <CursorPos X="30" Y="219"/>
+        <TopLine Value="121"/>
+        <CursorPos X="3" Y="178"/>
         <UsageCount Value="21"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -33,11 +33,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="LocalizedForms"/>
-        <EditorIndex Value="2"/>
-        <TopLine Value="17"/>
-        <CursorPos X="3" Y="33"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="194"/>
+        <CursorPos X="3" Y="221"/>
         <UsageCount Value="21"/>
-        <Loaded Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="unit2.pas"/>
@@ -51,11 +50,34 @@
         <Filename Value="stringsunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="StringsUnit"/>
-        <EditorIndex Value="3"/>
-        <CursorPos X="9" Y="12"/>
+        <EditorIndex Value="2"/>
+        <CursorPos X="26" Y="12"/>
         <UsageCount Value="21"/>
         <Loaded Value="True"/>
       </Unit4>
+      <Unit5>
+        <Filename Value="..\..\..\..\..\..\..\..\..\..\..\..\..\usr\local\codetyphon\typhon\lcl\forms.pp"/>
+        <UnitName Value="Forms"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="1498"/>
+        <CursorPos X="14" Y="1500"/>
+        <UsageCount Value="10"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="..\..\..\..\..\..\..\..\..\..\..\..\..\usr\local\codetyphon\typhon\lcl\include\application.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="2364"/>
+        <CursorPos X="3" Y="2377"/>
+        <UsageCount Value="10"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="..\..\..\..\..\..\..\..\..\..\..\..\..\usr\local\codetyphon\typhon\lcl\lcltranslator.pas"/>
+        <UnitName Value="LCLTranslator"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="184"/>
+        <CursorPos X="10" Y="90"/>
+        <UsageCount Value="10"/>
+      </Unit7>
     </Units>
     <JumpHistory Count="5" HistoryIndex="4">
       <Position1>
@@ -71,11 +93,11 @@
       </Position3>
       <Position4>
         <Filename Value="main.pas"/>
-        <Caret Line="178" Column="3" TopLine="199"/>
+        <Caret Line="6" Column="54"/>
       </Position4>
       <Position5>
         <Filename Value="main.pas"/>
-        <Caret Line="6" Column="54"/>
+        <Caret Line="178" Column="3" TopLine="166"/>
       </Position5>
     </JumpHistory>
   </ProjectSession>

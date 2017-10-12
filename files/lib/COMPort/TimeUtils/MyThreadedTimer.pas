@@ -32,6 +32,7 @@ type
   TSimpleThreadedTimer = class(TObjectLogged)
   private
    FInterval          : Integer;
+   FIsExecuteOnce     : Boolean;
    FIsSyncroTimerProc : Boolean;
    FOnTimer           : TNotifyEvent;
    FTimerThread       : TTimerThread;
@@ -48,6 +49,7 @@ type
    destructor  Destroy; override;
 
    property IsSyncroTimerProc : Boolean read FIsSyncroTimerProc write FIsSyncroTimerProc;
+   property IsExecuteOnce     : Boolean read FIsExecuteOnce write FIsExecuteOnce;
    property Enabled           : Boolean read GetEnable write SetEnable;
    property Interval          : Integer read FInterval write FInterval;
    property OnTimer           : TNotifyEvent read FOnTimer write FOnTimer;
@@ -66,6 +68,7 @@ begin
   {$ELSE}
   FIsSyncroTimerProc:= False;
   {$ENDIF}
+  FIsExecuteOnce := False;
 end;
 
 destructor TSimpleThreadedTimer.Destroy;
@@ -109,7 +112,7 @@ begin
   FTimerThread.Event.SetEvent;
 
   FTimerThread.Terminate;
-//  FTimerThread.WaitFor;
+  FTimerThread.WaitFor;
   FreeAndNil(FTimerThread);
 end;
 
@@ -123,16 +126,31 @@ end;
 
 procedure TTimerThread.Execute;
 var Res : TWaitResult;
+    Executed : Boolean;
 begin
+  Executed := False;
   while not Terminated do
    begin
     Res := FEvent.WaitFor(FTimerObj.Interval);
     case Res of
      wrSignaled : Continue;
      wrTimeout  : begin
-                   if FTimerObj.IsSyncroTimerProc then Synchronize(@Timer)
-                    else
-                      Timer;
+                   if not FTimerObj.IsExecuteOnce then
+                    begin
+                     if FTimerObj.IsSyncroTimerProc then Synchronize(@Timer)
+                      else
+                        Timer;
+                    end
+                   else
+                    begin
+                     if not Executed then
+                      begin
+                       if FTimerObj.IsSyncroTimerProc then Synchronize(@Timer)
+                        else
+                         Timer;
+                       Executed := true;
+                      end;
+                    end;
                   end;
     else
      Sleep(10);

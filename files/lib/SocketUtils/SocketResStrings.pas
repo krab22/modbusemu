@@ -4,6 +4,8 @@ unit SocketResStrings;
 
 interface
 
+// при добавлении строк НЕЗАБУДЬ!!! добавить эти строки в *.inc.po.en
+
 resourcestring
   rsServerSocketName     = 'Сервер';
   rsClientConnectionName = 'Клиентское соединение';
@@ -31,7 +33,7 @@ resourcestring
   rsNameSocketEventWrite      = 'Сокет. Запись данных (Write)';
   rsNameSocketEventRead       = 'Сокет. Чтение данных (Read)';
   rsNameSocketEventSelect     = 'Сокет. Получение состояния (Select)';
-  rsNameSocketEventBind       = 'Сокет. Связываение (Bind)';
+  rsNameSocketEventBind       = 'Сокет. Связывание (Bind)';
 
   rsUDPSendPackage1 = 'UDP server. SentPackege';
   rsUDPSendPackage2 = 'Попытка отослать пустой пакет';
@@ -39,7 +41,7 @@ resourcestring
   rsOnUDPSign1 = 'UDP server';
   rsOnUDPSign2 = 'UDP server. Получение пакета';
   rsOnUDPSign3 = 'Пакет отброшен';
-  rsOnUDPSign4 = 'Не установлен робработчик пакетов.';
+  rsOnUDPSign4 = 'Не установлен обработчик пакетов.';
   rsOnUDPSign5 = 'Ошибка обработчика пришедшего пакета: %s';
 
   rsUDPClSentPack1 = 'UDP client. SentPackege';
@@ -60,7 +62,7 @@ resourcestring
 
   rsClLasrErrSet1 = 'Клиент: %s:%d - Ошибка: %s - %s';
 
-  rsClConnect1 = 'Присоеденился клиент. Количество соединений: %d';
+  rsClConnect1 = 'Присоединился клиент. Количество соединений: %d';
 
   rsSocketNotExist = 'Socket is not exists';
   rsConnected      = 'Connected';
@@ -93,7 +95,7 @@ resourcestring
   rsMIB_IF_OPER_STATUS_CONNECTED       = 'WAN-адаптер установил соединение';
   rsMIB_IF_OPER_STATUS_LAN_CONNECTED   = 'Кабель подключен';
   rsMIB_IF_OPER_STATUS_LAN_OPERATIONAL = 'LAN-адаптер OPERATIONAL';
-  rsMIB_IF_OPER_STATUS_LAN_UNKNOWN     = 'Не известный статус';
+  rsMIB_IF_OPER_STATUS_LAN_UNKNOWN     = 'Неизвестный статус';
 
   rsMIB_IF_ADMIN_STATUS_UP      = 'Включен';
   rsMIB_IF_ADMIN_STATUS_DOWN    = 'Выключен';
@@ -141,7 +143,7 @@ resourcestring
   strHostNotFound           = 'Не удалось произвести разрешение имен для "%s".';
   strSocketCreationFailed   = 'Не удалось создать сокет: %s';
   strSocketBindFailed       = 'Binding of socket failed: %s';
-  strSocketListenFailed     = 'Ошибка ожидания соединения #%d , ошибка: %d';
+  strSocketListenFailed     = 'Ошибка ожидания соединения: %d , ошибка: %d';
   strSocketConnectFailed    = 'Не удалось установить соединение с %s.';
   strSocketAcceptFailed     = 'Could not accept a client connection on socket: %d, error %d';
   strSocketAcceptWouldBlock = 'Accept would block on socket: %d';

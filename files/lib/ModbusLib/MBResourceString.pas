@@ -4,6 +4,8 @@ unit MBResourceString;
 
 interface
 
+// при добавлении строк НЕЗАБУДЬ!!! добавить эти строки в *.inc.po.en
+
 resourcestring
  ErrOutOfRange       = 'Выход за диапазон допустимых адресов.';
  ErrOutofChar        = 'Недопустимый символ в строке.';
@@ -14,11 +16,11 @@ resourcestring
  ErrCS               = 'Ошибка контрольной суммы.';
  ErrData             = 'Ошибка инициализации данных.';
 
- rsSPErrorString     = '0 = Ошибка теста памяти.'#13'1 = Съем датчика.'#13'2 = Обрыв датчика.';
+ rsSPErrorString     = '0 = Ошибка теста памяти.'#10#13'1 = Съем датчика.'#10#13'2 = Обрыв датчика.';
 
  rsDigitalValue      = 'значение : %d.';
- rsSPMasterSlave     = 'Основной'#13'Дублирующий';
- rsSPInfoString      = 'Нет диагностики'#13'Диагностика'#13'Температура';
+ rsSPMasterSlave     = 'Основной'#10#13'Дублирующий';
+ rsSPInfoString      = 'Нет диагностики'#10#13'Диагностика'#10#13'Температура';
  rsSPCounter         = 'Изменен счетчик осей. Значение : ';
  rsSPTemperature     = 'Температура : ';
  rsSPMZD             = 'Металл в зоне датчика.';
@@ -27,13 +29,13 @@ resourcestring
  rsNoNameFlagValue   = '%s. Значение : %d';
  rsNoNameStrFlagValue = '%s значение : %s';
 
- rsBitToWordTransformationError = 'Не возможно преобразовать список битовых регистров в список регистров типа Word';
- rsWordToBitTransformationError = 'Не возможно преобразовать список регистров типа Word в список битовых регистров';
+ rsBitToWordTransformationError = 'Невозможно преобразовать список битовых регистров в список регистров типа Word';
+ rsWordToBitTransformationError = 'Невозможно преобразовать список регистров типа Word в список битовых регистров';
  rsListTypeError                = 'Не задан тип списка.';
  rsRegNotExists                 = 'Регистр %d, заданный в параметрах, не найден. Создание массива значений прекращено.';
  rsRegNotExist1                 = 'Регистр с номером %d не существует.';
  rsRegIsReadOnly                = 'Регистры предназначены только для чтения.';
- rsDataArrayIsEmpty             = 'Масив данных предназначенных для записи пуст.';
+ rsDataArrayIsEmpty             = 'Массив данных предназначенных для записи пуст.';
 
  erMBFOutOfMemory     = 'Ошибка выделения памяти.';
  erMBDeviceAddress    = 'Неверно задан адрес устройства.'#10#13'Адрес должен находиться в диапазоне от 1 до 247';
@@ -48,11 +50,11 @@ resourcestring
  erMBF110PacketBuild1 = 'Неверно задан контрольный ключ.'#10#13'Ключ должен принимать значение 0х55 либо 0хAA.';
  erMBF43PacketBuild   = 'Подфункция не реализована';
 
- rsIllegalFunctionNumber = 'Не допустимый номер функции.';
+ rsIllegalFunctionNumber = 'Недопустимый номер функции.';
 
  RS_OUT_OF_RANGE = 'Выход за пределы массива данных';
 
- rsMBTCPPacketLenError  = 'Длинна пакета не соответствует заявленной';
+ rsMBTCPPacketLenError  = 'Длина пакета не соответствует заявленной';
  rsMBTCPPacketTrasError = 'Пакет не принадлежит текущей транзакции.';
 
  ERR_TRANS_INIT  = 'Не задан конструктор данных для транзакции.';

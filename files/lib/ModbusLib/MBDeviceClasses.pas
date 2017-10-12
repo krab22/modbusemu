@@ -76,6 +76,7 @@ type
     FLastUpdateTime      : TDateTime;
     FLastErrorTime       : TDateTime;
     FLastErrorCounter    : Cardinal;
+    FtoDefragmentRanges  : Boolean;
     procedure SetDeviceFunctions(const Value: TMBFunctionsSet);
     procedure SetDeviceNum(const Value: Byte);
     function  GetCoilCount: Integer;
@@ -95,6 +96,7 @@ type
     function  GetInputRangeCount: Integer;
     function  GetInputsRanges(Index: Integer): TMBRegistersRangeClassic;
     procedure SetLastError(const Value: Cardinal);
+    procedure SettoDefragmentRanges(AValue: Boolean);
   protected
     FDiscretList   : TMBRegBitSimpleList;
     FCoilList      : TMBRegBitSimpleList;
@@ -202,6 +204,7 @@ type
    property InputCount                       : Integer read GetInputCount;
    property HoldingCount                     : Integer read GetHoldingCount;
    // списки диапазонов переменных данного устройства(диапазоны могут пересекаться)
+   property toDefragmentRanges               : Boolean read FtoDefragmentRanges write SettoDefragmentRanges default True;
    property DiscretRangeCount                : Integer read GetDiscretRangeCount;
    property DiscretsRanges[Index : Integer]  : TMBRegistersRangeClassic read GetDiscretsRanges;
    property CoilRangeCount                   : Integer read GetCoilRangeCount;
@@ -307,6 +310,7 @@ begin
   FIsInputChangedData      := False;
   FIsHoldingChangedData    := False;
   FIsPacketUpdate          := False;
+  FtoDefragmentRanges      := True;
 
   FDiscretList             := TMBRegBitSimpleList.Create; // TRegistersListBit.Create;//TMBDiscretRegList.Create;
   FDiscretList.RegListType := rgDiscrete;
@@ -1014,15 +1018,28 @@ begin
   DoSetLastError(Value);
 end;
 
+procedure TMBDevice.SettoDefragmentRanges(AValue: Boolean);
+begin
+  if FtoDefragmentRanges=AValue then Exit;
+  FtoDefragmentRanges := AValue;
+  FDiscretList.toDefragmList := FtoDefragmentRanges;
+  FCoilList.toDefragmList    := FtoDefragmentRanges;
+  FInputList.toDefragmList   := FtoDefragmentRanges;
+  FHoldingList.toDefragmList := FtoDefragmentRanges;
+end;
+
 procedure TMBDevice.DoSetLastError(Error: Cardinal);
 begin
-  if Error <> FLastError then FLastError := Error;
   try
-    if FLastError<>0 then inc(FLastErrorCounter);
+    if Error<>0 then inc(FLastErrorCounter);
   except
     ResetLastErrorCounter;
   end;
-  if FLastError<>0 then OnDeviceErrorProc(Self,Error);
+  if Error <> FLastError then
+   begin
+    FLastError := Error;
+    OnDeviceErrorProc(Self,FLastError);
+   end;
 end;
 
 function TMBDevice.GetSliceOfDeviceStatus: TMBSliceOfDeviceStatus;

@@ -2,12 +2,13 @@
 <CONFIG>
   <ProjectSession>
     <Version Value="10"/>
-    <BuildModes Active="Linux_x64"/>
+    <BuildModes Active="Linux_x86"/>
     <Units Count="13">
       <Unit0>
         <Filename Value="modbusemu.lpr"/>
         <IsPartOfProject Value="True"/>
-        <CursorPos X="22" Y="13"/>
+        <IsVisibleTab Value="True"/>
+        <CursorPos X="14" Y="10"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -70,7 +71,6 @@
         <ComponentName Value="frmDeviceView"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
         <TopLine Value="308"/>
         <CursorPos X="13" Y="326"/>
@@ -163,7 +163,7 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="16" Y="15"/>
-        <UsageCount Value="177"/>
+        <UsageCount Value="178"/>
       </Unit12>
     </Units>
   </ProjectSession>

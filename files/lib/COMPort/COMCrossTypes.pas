@@ -663,7 +663,8 @@ begin
 }
   FHandle := THandle(FpOpen(FPortPath, O_RDWR or O_NOCTTY or O_NDELAY or O_SYNC));
 
-  if FHandle = INVALID_HANDLE_VALUE then
+  if FHandle = 0 then FHandle := INVALID_HANDLE_VALUE;
+  if (FHandle = INVALID_HANDLE_VALUE) then
    begin
     SetLastError(fpgeterrno);
     Exit;
@@ -854,7 +855,6 @@ end;
 function TNPCCustomCOMPort.ReadData(var Buff; Count: Integer): Integer;
 var {$IFDEF UNIX}
     Counter   : Integer;
-    TempBuff  : Byte;
     {$ENDIF}
     {$IFDEF WINDOWS}
     ReadCount,
@@ -862,8 +862,9 @@ var {$IFDEF UNIX}
     ReadRes      : Boolean;
     TempOver     : TOVERLAPPED;
     NumRead      : DWORD;
-    TempCommStat : TCOMSTAT;
-    TempLastErr  : Cardinal;
+    WaitRes      : DWORD;
+    //TempCommStat : TCOMSTAT;
+    //TempLastErr  : Cardinal;
     {$ENDIF}
 begin
   Result   := -1;
@@ -883,28 +884,14 @@ begin
   try
    Result  := -1;
    {$IFDEF UNIX}
-   TempBuff := 0;
    Counter := 0;
-   while Result<>0 do
-    begin;
-     Result := FpRead(FHandle,TempBuff,1);
-     case Result of
-      -1 : begin // ошибка чтения
-            FlushReadBuff;
-            SetLastError(fpgeterrno);
-            Exit;
-           end;
-      0  : begin // таймаут между символами
-            Result := Counter;
-            Break;
-           end;
-      1  : begin // прочитали байт
-            Byte((@Buff+Counter)^) := TempBuff;
-            Inc(Counter);
-            Result := Counter;
-            if Counter = Count then Break;
-           end;
-     end;
+   Counter := GetNumberDataCame;
+   Result := FpRead(FHandle,Buff,Counter);
+   if Result = -1 then
+    begin
+     FlushReadBuff;
+     SetLastError(fpgeterrno);
+     Exit;
     end;
   {$ELSE}
    TempOver.hEvent := 0;
@@ -920,17 +907,27 @@ begin
       LastErr := GetLastOSError;
       if LastErr = ERROR_IO_PENDING then
        begin
-
-        if not GetOverlappedResult(FHandle,TempOver,NumRead,True) then
-         begin
+        WaitRes:=WaitForSingleObject(TempOver.hEvent,1000);
+        case WaitRes of
+         WAIT_OBJECT_0 :begin
+                         if not GetOverlappedResult(TempOver.hEvent,TempOver,NumRead,True) then
+                          begin
+                           LastErr := GetLastError;
+                           SetLastError(LastErr,'TNPCCustomCOMPort.ReadData GetOverlappedResult');
+                           Result := -1;
+                           CancelIo(FHandle);
+                           Exit;
+                          end;
+                        end;
+        else
           LastErr := GetLastError;
-          SetLastError(LastErr,'TNPCCustomCOMPort.ReadData GetOverlappedResult');
+          SetLastError(LastErr,'TNPCCustomCOMPort.ReadData wait read');
           Result := -1;
+          CancelIo(FHandle);
           Exit;
-         end;
+        end;
 
         FlushReadBuff;
-
 //        SendLogMessage(llDebug, 'COMM read overlaped', Format('Read %d bytes',[NumRead]));
 
         Result := NumRead;
@@ -1010,7 +1007,7 @@ begin
    Result := FpWrite(FHandle,Buff,Count);
    if Result = -1 then
     begin
-     SetLastError(GetLastOSError);
+     SetLastError(GetLastOSError,Format('Descriptor: %d',[FHandle]));
      FlushWriteBuff;
     end;
    {$ELSE}
@@ -1026,7 +1023,6 @@ begin
    try
    ByteToWrite := Count;
    WriteCount  := 0;
-
    WriteRes := WriteFile(FHandle,Buff,ByteToWrite,WriteCount,@TempOver);
    if not WriteRes then
     begin  // запись не закончена (асинхронный режим или ошибка)
@@ -1074,10 +1070,10 @@ end;
 
 function TNPCCustomCOMPort.WaitForData(var ATimeOut: QWord): TWaitResult;
 {$IFDEF UNIX}
-var TempReadSet : TFDSet;
-    TempTimeVal : TTimeVal;
-    Res         : Integer;
-    TempTick    : Cardinal;
+var TempReadSet  : TFDSet;
+    TempTimeVal  : TTimeVal;
+    Res          : Integer;
+    Bytes,ByteTras     : Integer;
 {$ELSE}
 var TempOver     : TOVERLAPPED;
     TempErr      : DWORD;
@@ -1085,6 +1081,7 @@ var TempOver     : TOVERLAPPED;
     TempEvent    : DWORD;
     TempCommStat : TCOMSTAT;
     TempRes      : Boolean;
+    WaitRes      : DWORD;
 {$ENDIF}
 begin
   Result := wrError;
@@ -1117,6 +1114,18 @@ begin
    fpFD_CLR(FHandle,TempReadSet);
    Result := wrSignaled;
   end;
+
+  if Result = wrSignaled then
+   begin
+    Bytes := 0;
+    ByteTras := 1;
+    while (Bytes <> ByteTras) do
+     begin
+      Sleep(5);
+      Bytes := ByteTras;
+      FpIOCtl(FHandle,FIONREAD,@ByteTras);
+     end;
+   end;
   {$ELSE}
 
   ByteTras := 0;
@@ -1129,7 +1138,9 @@ begin
 
   FillByte(TempOver,sizeof(TOVERLAPPED),0);
   TempOver.hEvent := CreateEvent(nil,True,False,nil);
+
   try
+
     TempEvent := 0;
     TempRes := WaitCommEvent(FHandle,TempEvent,@TempOver);
 
@@ -1143,22 +1154,30 @@ begin
          Exit;
        end;
 
-      while WaitForSingleObject(TempOver.hEvent,1000) = WAIT_TIMEOUT do Sleep(10);
-      if (TempEvent and EV_RXCHAR) = EV_RXCHAR then
-       begin
-        Result := wrSignaled;
-       end
-      else
-       begin
+      WaitRes := WaitForSingleObject(TempOver.hEvent,1000);
+      case WaitRes of
+        WAIT_OBJECT_0 : begin
+                          if (TempEvent and EV_RXCHAR) = EV_RXCHAR then
+                           begin
+                            Result := wrSignaled;
+                           end
+                           else
+                            begin
+                             Result := wrTimeout;
+                             Exit;
+                            end;
+                        end;
+       else
         Result := wrTimeout;
-        Exit;
-       end;
+      end;
      end;
   finally
-   CloseHandle(TempOver.hEvent);
+  CloseHandle(TempOver.hEvent);
   end;
 
   // ждем прихода всех данных
+  if Result <> wrSignaled then Exit;
+
   TempErr := 0 ;
   ByteTras := 1;
   FillChar(TempCommStat,sizeof(TCOMSTAT),0);
@@ -1238,7 +1257,7 @@ begin
    Exit;
   end;
 {$ELSE}
- raise Exception.Create('SetPortParams. Для Windows не реализовано.')
+ raise Exception.Create('SetPortParams. For Windows not implemented.')
 {$ENDIF}
 end;
 

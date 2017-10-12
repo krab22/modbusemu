@@ -7,11 +7,7 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Interfaces,
-  Forms, main, ModbusEmuResStr, ExceptionsResStrings, DeviceAdd,
-  DeviceView,formChennelAdd,
-  formChennelRSLinuxAdd, formChennelRSWindowsAdd,
-  formChennelTCPAdd, framChennelRSClasses, framChennelTCPClasses,
-  formRahgeEdit;
+  Forms, main;
 
 {$R *.res}
 

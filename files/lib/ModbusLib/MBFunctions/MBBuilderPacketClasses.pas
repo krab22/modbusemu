@@ -134,8 +134,8 @@ begin
    begin
     ClearPacket;
    end
-   else
-    begin
+  else
+   begin
     if FPacket <> nil then
      begin
       FillChar(FPacket^, FLenPacket, 0);
@@ -143,9 +143,9 @@ begin
     else
      begin
       FPacket := AllocMem(FLenPacket);
-    end; 
+     end;
     if FPacket = nil then raise Exception.Create(erMBFOutOfMemory);
-end;
+   end;
 end;
 
 procedure TBuilderMBRTUPacket.ClearPacket;
