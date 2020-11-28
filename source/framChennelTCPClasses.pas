@@ -37,9 +37,9 @@ type
 
 implementation
 
-//uses LoggerLazarusGtkApplication;
+//uses LoggerTyphonGtkApplication;
 
-{$R *.lfm}
+{$R *.frm}
 
 { TframeChennelTCP }
 

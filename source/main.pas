@@ -170,14 +170,14 @@ var frmMain: TfrmMain;
 
 implementation
 
-{$R *.lfm}
+{$R *.frm}
 
 uses DeviceAdd,
      ChennelRSClasses, ChennelTCPClasses,
      formChennelAdd,
      formChennelTCPAdd, {$IFDEF UNIX }formChennelRSLinuxAdd,{$ELSE}formChennelRSWindowsAdd,{$ENDIF}
      ModbusEmuResStr, MBDefine,
-     LoggerLazarusGtkApplication,
+     LoggerTyphonGtkApplication,
      LoggerItf,
      ExceptionsTypes,
      MBEmuLoaderClasses;

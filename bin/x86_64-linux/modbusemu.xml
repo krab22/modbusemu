@@ -11,8 +11,8 @@
 			<HoldingRegs>
 				<Register Adress="0" Value="10" Description=""/>
 				<Register Adress="1" Value="514" Description=""/>
-				<Register Adress="2" Value="2" Description=""/>
-				<Register Adress="3" Value="20" Description=""/>
+				<Register Adress="2" Value="25900" Description=""/>
+				<Register Adress="3" Value="10" Description=""/>
 				<Register Adress="4" Value="771" Description=""/>
 				<Register Adress="5" Value="3" Description=""/>
 				<Register Adress="6" Value="30" Description=""/>

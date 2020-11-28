@@ -54,7 +54,7 @@ var
 
 implementation
 
-{$R *.lfm}
+{$R *.frm}
 
 { TTestThread }
 

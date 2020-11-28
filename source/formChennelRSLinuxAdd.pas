@@ -61,7 +61,7 @@ uses ChennelRSClasses,
      COMPortParamTypes,
      ModbusEmuResStr;
 
-{$R *.lfm}
+{$R *.frm}
 
 
 { TfrmChennelRSAdd }

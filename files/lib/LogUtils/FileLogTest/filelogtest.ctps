@@ -5,7 +5,7 @@
     <BuildModes Active="Windows_x64"/>
     <Units Count="16">
       <Unit0>
-        <Filename Value="filelogtest.lpr"/>
+        <Filename Value="filelogtest.ppr"/>
         <IsPartOfProject Value="True"/>
         <CursorPos Y="17"/>
         <UsageCount Value="43"/>
@@ -76,7 +76,7 @@
         <UsageCount Value="12"/>
       </Unit7>
       <Unit8>
-        <Filename Value="../LoggerLazarusGtkApplication.pas"/>
+        <Filename Value="../LoggerTyphonGtkApplication.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="181"/>
         <CursorPos X="2" Y="166"/>

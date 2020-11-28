@@ -2,7 +2,7 @@
 <CONFIG>
   <MultiProject FileVersion="1">
     <Elements Count="1">
-      <Element0 FileName="filelogtest.lpi">
+      <Element0 FileName="filelogtest.ctpr">
         <BuildModes Count="2"/>
         <Mode1 Name="Linux_x64"/>
         <Mode2 Name="Windows_x64"/>

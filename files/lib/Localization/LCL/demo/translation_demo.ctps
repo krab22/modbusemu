@@ -6,7 +6,7 @@
     <BuildModes Active="Debug"/>
     <Units Count="8">
       <Unit0>
-        <Filename Value="translation_demo.lpr"/>
+        <Filename Value="translation_demo.ppr"/>
         <IsPartOfProject Value="True"/>
         <UsageCount Value="21"/>
         <Loaded Value="True"/>

@@ -1,6 +1,6 @@
 { This is an automatically generated Typhon resource file }
 
-LazarusResources.Add('TfmChoosePort','FORMDATA',[
+TyphonResources.Add('TfmChoosePort','FORMDATA',[
   'TPF0'#13'TfmChoosePort'#12'fmChoosePort'#4'Left'#3'i'#2#6'Height'#3'h'#1#3'T'
   +'op'#3#11#1#5'Width'#3'7'#2#11'BorderStyle'#7#8'bsDialog'#7'Caption'#6'1'#208
   +#159#208#176#209#128#208#176#208#188#208#181#209#130#209#128#209#139' '#209

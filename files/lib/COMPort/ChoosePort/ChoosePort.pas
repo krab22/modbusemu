@@ -98,7 +98,7 @@ function GetCOM_Params(AOwner: TComponent; var Params: TPortParams): boolean;
 
 implementation
 
-{$R *.lfm}
+{$R *.frm}
 
 uses Localize;
 

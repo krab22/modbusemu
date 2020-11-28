@@ -30,7 +30,7 @@ implementation
 
 uses {$IFDEF UNIX}formChennelRSLinuxAdd{$ELSE}formChennelRSWindowsAdd{$ENDIF}, formChennelTCPAdd, ModbusEmuResStr;
 
-{$R *.lfm}
+{$R *.frm}
 
 { TformChenAdd }
 

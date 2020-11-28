@@ -5,7 +5,7 @@
     <BuildModes Active="Default"/>
     <Units Count="20">
       <Unit0>
-        <Filename Value="translate_cmd.lpr"/>
+        <Filename Value="translate_cmd.ppr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
         <TopLine Value="67"/>
@@ -22,14 +22,14 @@
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
-        <Filename Value="translate.lpi"/>
+        <Filename Value="translate.ctpr"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="2"/>
         <UsageCount Value="10"/>
         <DefaultSyntaxHighlighter Value="XML"/>
       </Unit2>
       <Unit3>
-        <Filename Value="../../LCL/demo1/translate.lpi"/>
+        <Filename Value="../../LCL/demo1/translate.ctpr"/>
         <EditorIndex Value="-1"/>
         <UsageCount Value="10"/>
         <DefaultSyntaxHighlighter Value="XML"/>
@@ -168,27 +168,27 @@
         <Caret Line="8" Column="3"/>
       </Position1>
       <Position2>
-        <Filename Value="translate_cmd.lpr"/>
+        <Filename Value="translate_cmd.ppr"/>
         <Caret Line="10" Column="17"/>
       </Position2>
       <Position3>
-        <Filename Value="translate_cmd.lpr"/>
+        <Filename Value="translate_cmd.ppr"/>
         <Caret Line="13" Column="14"/>
       </Position3>
       <Position4>
-        <Filename Value="translate_cmd.lpr"/>
+        <Filename Value="translate_cmd.ppr"/>
         <Caret Line="3" Column="25"/>
       </Position4>
       <Position5>
-        <Filename Value="translate_cmd.lpr"/>
+        <Filename Value="translate_cmd.ppr"/>
         <Caret Line="5" Column="63"/>
       </Position5>
       <Position6>
-        <Filename Value="translate_cmd.lpr"/>
+        <Filename Value="translate_cmd.ppr"/>
         <Caret Line="62" Column="3" TopLine="8"/>
       </Position6>
       <Position7>
-        <Filename Value="translate_cmd.lpr"/>
+        <Filename Value="translate_cmd.ppr"/>
         <Caret Line="12" Column="3" TopLine="67"/>
       </Position7>
     </JumpHistory>

@@ -57,7 +57,7 @@ type
 
 implementation
 
-{$R *.lfm}
+{$R *.frm}
 
 uses Localize;
 

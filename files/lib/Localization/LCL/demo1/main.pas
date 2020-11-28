@@ -31,7 +31,7 @@ implementation
 
 uses TranslateResStr;
 
-{$R *.lfm}
+{$R *.frm}
 
 { TForm1 }
 

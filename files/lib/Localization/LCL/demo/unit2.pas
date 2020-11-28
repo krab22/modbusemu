@@ -34,7 +34,7 @@ var
 
 implementation
 
-{$R *.lfm}
+{$R *.frm}
 
 uses
   LConvEncoding, // for ConvertEncoding - see "UpdateTranslation"

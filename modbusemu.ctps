@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
   <ProjectSession>
-    <Version Value="10"/>
-    <BuildModes Active="Linux_x86"/>
+    <Version Value="12"/>
+    <ManyBuildModesSelection Value="Linux_x64,Linux_x86"/>
+    <BuildModes Active="Linux_x64"/>
     <Units Count="13">
       <Unit0>
-        <Filename Value="modbusemu.lpr"/>
+        <Filename Value="modbusemu.ppr"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <CursorPos X="14" Y="10"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="source/main.pas"/>
+        <FRMtype Value="200"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmMain"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="697"/>
-        <CursorPos X="94" Y="717"/>
+        <TopLine Value="168"/>
+        <CursorPos X="6" Y="180"/>
         <ExtraEditorCount Value="1"/>
         <ExtraEditor1>
           <EditorIndex Value="-1"/>
@@ -57,6 +59,7 @@
       </Unit3>
       <Unit4>
         <Filename Value="source/DeviceAdd.pas"/>
+        <FRMtype Value="200"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmAddDevice"/>
         <HasResources Value="True"/>
@@ -67,6 +70,7 @@
       </Unit4>
       <Unit5>
         <Filename Value="source/DeviceView.pas"/>
+        <FRMtype Value="200"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmDeviceView"/>
         <HasResources Value="True"/>
@@ -86,6 +90,7 @@
       </Unit5>
       <Unit6>
         <Filename Value="source/formChennelAdd.pas"/>
+        <FRMtype Value="200"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="formChenAdd"/>
         <HasResources Value="True"/>
@@ -97,6 +102,7 @@
       </Unit6>
       <Unit7>
         <Filename Value="source/formChennelRSLinuxAdd.pas"/>
+        <FRMtype Value="200"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmChennelRSAdd"/>
         <HasResources Value="True"/>
@@ -112,6 +118,7 @@
       </Unit7>
       <Unit8>
         <Filename Value="source/formChennelRSWindowsAdd.pas"/>
+        <FRMtype Value="200"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmChennelRSAddWin"/>
         <HasResources Value="True"/>
@@ -127,6 +134,7 @@
       </Unit8>
       <Unit9>
         <Filename Value="source/formChennelTCPAdd.pas"/>
+        <FRMtype Value="200"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmChennelTCPAdd"/>
         <HasResources Value="True"/>
@@ -137,6 +145,7 @@
       </Unit9>
       <Unit10>
         <Filename Value="source/framChennelRSClasses.pas"/>
+        <FRMtype Value="400"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frameChennelRS"/>
         <HasResources Value="True"/>
@@ -148,6 +157,7 @@
       </Unit10>
       <Unit11>
         <Filename Value="source/framChennelTCPClasses.pas"/>
+        <FRMtype Value="400"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frameChennelTCP"/>
         <HasResources Value="True"/>
@@ -158,6 +168,7 @@
       </Unit11>
       <Unit12>
         <Filename Value="source/formRahgeEdit.pas"/>
+        <FRMtype Value="200"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmRangeEdit"/>
         <ResourceBaseClass Value="Form"/>
@@ -166,72 +177,76 @@
         <UsageCount Value="178"/>
       </Unit12>
     </Units>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes ActiveMode="default"/>
+    </RunParams>
   </ProjectSession>
   <Debugging>
-    <BreakPoints Count="9">
-      <Item1>
+    <BreakPoints>
+      <Item>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="files/lib/ModbusLib/MBRegistersCalsses.pas"/>
         <Line Value="41"/>
-      </Item1>
-      <Item2>
+      </Item>
+      <Item>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="files/lib/ModbusLib/MBRegistersCalsses.pas"/>
         <Line Value="37"/>
-      </Item2>
-      <Item3>
+      </Item>
+      <Item>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="files/lib/ModbusLib/MBFunctions/MBRequestTypes.pas"/>
         <Line Value="48"/>
-      </Item3>
-      <Item4>
+      </Item>
+      <Item>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="source/ChennelRSClasses.pas"/>
         <Line Value="204"/>
-      </Item4>
-      <Item5>
+      </Item>
+      <Item>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="source/MBEmuLoaderClasses.pas"/>
         <Line Value="200"/>
-      </Item5>
-      <Item6>
+      </Item>
+      <Item>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="files/lib/COMPort/COMCrossTypes.pas"/>
         <Line Value="909"/>
-      </Item6>
-      <Item7>
+      </Item>
+      <Item>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="source/ChennelTCPClasses.pas"/>
         <Line Value="352"/>
-      </Item7>
-      <Item8>
+      </Item>
+      <Item>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="source/DeviceView.pas"/>
         <Line Value="320"/>
-      </Item8>
-      <Item9>
+      </Item>
+      <Item>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="source/DeviceView.pas"/>
         <Line Value="315"/>
-      </Item9>
+      </Item>
     </BreakPoints>
   </Debugging>
 </CONFIG>

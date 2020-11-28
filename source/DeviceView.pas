@@ -219,7 +219,7 @@ var frmDeviceView : TfrmDeviceView;
 
 implementation
 
-{$R *.lfm}
+{$R *.frm}
 
 uses ModbusEmuResStr, MBDefine,
      formRahgeEdit;

@@ -10,7 +10,7 @@
   The include file simdesign.inc defines $D5UP and after the
   uses-clause these types for D5 are defined. This way, many simdesign
   projects are compatible with Delphi 5.
-  fpc: if lazarus + freepascal is defined, Utf8String just reverts to "string".
+  fpc: if typhon + freepascal is defined, Utf8String just reverts to "string".
 
   Author: Nils Haeck M.Sc.
   Original Date: 08nov2010
@@ -64,7 +64,7 @@ type
   PPtrUInt = ^PtrUInt;
 {$endif}
 
-// lazarus compatibility
+// typhon compatibility
 {$ifdef fpc}
 type
   Utf8String = string;

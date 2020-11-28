@@ -4,20 +4,24 @@
     <Version Value="9"/>
     <General>
       <Flags>
-        <MainUnitHasCreateFormStatements Value="False"/>
-        <MainUnitHasTitleStatement Value="False"/>
+        <SaveOnlyProjectUnits Value="True"/>
+        <LRSInOutputDirectory Value="False"/>
       </Flags>
       <SessionStorage Value="InProjectDir"/>
       <MainUnit Value="0"/>
-      <Title Value="translate_cmd"/>
-      <UseAppBundle Value="False"/>
-      <ResourceType Value="res"/>
+      <Title Value="translate"/>
+      <Icon Value="0"/>
     </General>
     <i18n>
       <EnableI18N Value="True"/>
       <OutDir Value="locale"/>
     </i18n>
     <VersionInfo>
+      <UseVersionInfo Value="True"/>
+      <AutoIncrementBuild Value="True"/>
+      <BuildNr Value="16"/>
+      <Language Value="0419"/>
+      <Attributes pvaPreRelease="True"/>
       <StringTable ProductVersion=""/>
     </VersionInfo>
     <BuildModes Count="1">
@@ -33,38 +37,52 @@
     </RunParams>
     <RequiredPackages Count="1">
       <Item1>
-        <PackageName Value="LCLBase"/>
+        <PackageName Value="adLCL"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="4">
+    <Units Count="3">
       <Unit0>
-        <Filename Value="translate_cmd.lpr"/>
+        <Filename Value="translate.ppr"/>
         <IsPartOfProject Value="True"/>
       </Unit0>
       <Unit1>
-        <Filename Value="TranslateResStr.pas"/>
+        <Filename Value="main.pas"/>
         <IsPartOfProject Value="True"/>
+        <ComponentName Value="Form1"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
       </Unit1>
       <Unit2>
-        <Filename Value="../../../ModbusLib/MBResourceString.pas"/>
+        <Filename Value="TranslateResStr.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit2>
-      <Unit3>
-        <Filename Value="../../../ModbusLib/MBTCPMasterDispatcher/DispatcherResStrings.pas"/>
-        <IsPartOfProject Value="True"/>
-      </Unit3>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
     <Version Value="11"/>
     <Target>
-      <Filename Value="translate_cmd"/>
+      <Filename Value="translate" ApplyConventions="False"/>
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="../../../ModbusLib;../../../ModbusLib/MBTCPMasterDispatcher;../../../ModbusLib/MBFunctions"/>
       <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
+    <Parsing>
+      <SyntaxOptions>
+        <UseAnsiStrings Value="False"/>
+      </SyntaxOptions>
+    </Parsing>
+    <CodeGeneration>
+      <TargetCPU Value="x86_64"/>
+      <TargetOS Value="linux"/>
+    </CodeGeneration>
+    <Linking>
+      <Options>
+        <Win32>
+          <GraphicApplication Value="True"/>
+        </Win32>
+      </Options>
+    </Linking>
   </CompilerOptions>
   <Debugging>
     <Exceptions Count="3">

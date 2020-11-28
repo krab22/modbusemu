@@ -54,12 +54,12 @@
     </RunParams>
     <RequiredPackages Count="1">
       <Item1>
-        <PackageName Value="LCL"/>
+        <PackageName Value="adLCL"/>
       </Item1>
     </RequiredPackages>
     <Units Count="3">
       <Unit0>
-        <Filename Value="filelogtest.lpr"/>
+        <Filename Value="filelogtest.ppr"/>
         <IsPartOfProject Value="True"/>
       </Unit0>
       <Unit1>

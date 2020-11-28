@@ -6,7 +6,7 @@ interface
 
 uses
   Classes , SysUtils,
-  // библиотека MiscLib/Generics/Lazarus
+  // библиотека MiscLib/Generics/Typhon
   DictionaryClasses,
   // библиотека ModbusLib
   MBDefine;

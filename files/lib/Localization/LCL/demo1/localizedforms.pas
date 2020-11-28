@@ -23,7 +23,7 @@ type
   protected
     procedure UpdateTranslation(ALang: String); virtual;
   public
-    (* Activate for Lazarus version older than 1.2
+    (* Activate for Typhon version older than 1.2
     procedure FlipChildren(AllLevels: Boolean); override;
     *)
   end;
@@ -46,7 +46,7 @@ function GetLCIDFromLangCode(ALang: String): Integer;
 
 implementation
 
-{$R *.lfm}
+{$R *.frm}
 
 uses
 {$IFDEF MSWINDOWS}
@@ -180,9 +180,9 @@ end;
 
 {  TLocalizedForm  }
 
-{ This is a workaround for older version of Lazarus where FlipChildren does
+{ This is a workaround for older version of Typhon where FlipChildren does
   not work correctly with TRadioGroup and TCheckGroup. Activate this code
-  for versions older than Lazarus 1.2 }
+  for versions older than Typhon 1.2 }
 (*
 procedure TLocalizedForm.FlipChildren(AllLevels: Boolean);
 

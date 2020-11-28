@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
   <ProjectOptions>
-    <Version Value="10"/>
+    <Version Value="12"/>
     <General>
       <Flags>
         <SaveOnlyProjectUnits Value="True"/>
+        <CompatibilityMode Value="True"/>
       </Flags>
       <SessionStorage Value="InProjectDir"/>
-      <MainUnit Value="0"/>
       <Title Value="modbusemu"/>
       <ResourceType Value="res"/>
       <Icon Value="0"/>
@@ -147,22 +147,24 @@
       <Version Value="2"/>
     </PublishOptions>
     <RunParams>
-      <local>
-        <FormatVersion Value="1"/>
-      </local>
+      <FormatVersion Value="2"/>
+      <Modes Count="1">
+        <Mode0 Name="default"/>
+      </Modes>
     </RunParams>
     <RequiredPackages Count="1">
       <Item1>
-        <PackageName Value="LCL"/>
+        <PackageName Value="adLCL"/>
       </Item1>
     </RequiredPackages>
     <Units Count="13">
       <Unit0>
-        <Filename Value="modbusemu.lpr"/>
+        <Filename Value="modbusemu.ppr"/>
         <IsPartOfProject Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="source/main.pas"/>
+        <FRMtype Value="200"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmMain"/>
         <HasResources Value="True"/>
@@ -178,6 +180,7 @@
       </Unit3>
       <Unit4>
         <Filename Value="source/DeviceAdd.pas"/>
+        <FRMtype Value="200"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmAddDevice"/>
         <HasResources Value="True"/>
@@ -185,6 +188,7 @@
       </Unit4>
       <Unit5>
         <Filename Value="source/DeviceView.pas"/>
+        <FRMtype Value="200"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmDeviceView"/>
         <HasResources Value="True"/>
@@ -192,6 +196,7 @@
       </Unit5>
       <Unit6>
         <Filename Value="source/formChennelAdd.pas"/>
+        <FRMtype Value="200"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="formChenAdd"/>
         <HasResources Value="True"/>
@@ -199,6 +204,7 @@
       </Unit6>
       <Unit7>
         <Filename Value="source/formChennelRSLinuxAdd.pas"/>
+        <FRMtype Value="200"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmChennelRSAdd"/>
         <HasResources Value="True"/>
@@ -206,6 +212,7 @@
       </Unit7>
       <Unit8>
         <Filename Value="source/formChennelRSWindowsAdd.pas"/>
+        <FRMtype Value="200"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmChennelRSAddWin"/>
         <HasResources Value="True"/>
@@ -213,6 +220,7 @@
       </Unit8>
       <Unit9>
         <Filename Value="source/formChennelTCPAdd.pas"/>
+        <FRMtype Value="200"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmChennelTCPAdd"/>
         <HasResources Value="True"/>
@@ -220,6 +228,7 @@
       </Unit9>
       <Unit10>
         <Filename Value="source/framChennelRSClasses.pas"/>
+        <FRMtype Value="400"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frameChennelRS"/>
         <HasResources Value="True"/>
@@ -227,6 +236,7 @@
       </Unit10>
       <Unit11>
         <Filename Value="source/framChennelTCPClasses.pas"/>
+        <FRMtype Value="400"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frameChennelTCP"/>
         <HasResources Value="True"/>
@@ -234,6 +244,7 @@
       </Unit11>
       <Unit12>
         <Filename Value="source/formRahgeEdit.pas"/>
+        <FRMtype Value="200"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmRangeEdit"/>
         <ResourceBaseClass Value="Form"/>

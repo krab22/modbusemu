@@ -35,7 +35,7 @@ var frmAddDevice : TfrmAddDevice;
 
 implementation
 
-{$R *.lfm}
+{$R *.frm}
 
 end.
 

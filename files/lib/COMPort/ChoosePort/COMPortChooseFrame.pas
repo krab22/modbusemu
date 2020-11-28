@@ -72,7 +72,7 @@ type
 
 implementation
 
-{$R *.lfm}
+{$R *.frm}
 
 uses COMPortResStr, COMPortConsts,
      Localize;

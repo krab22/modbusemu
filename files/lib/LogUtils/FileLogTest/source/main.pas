@@ -41,7 +41,7 @@ var
 
 implementation
 
-{$R *.lfm}
+{$R *.frm}
 
 { TLogTestThread }
 

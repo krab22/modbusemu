@@ -18,8 +18,8 @@
     (defined in LocalizedForms.pas)
   - For this purpose modify the class declaration of the forms to
       "class(TLocalizedForm)" instead of "class(TForm)"
-    Open the lfm file ("view source (.lfm)") and change the first word to
-    "inherited". See main.lfm and unit2.lfm for examples.
+    Open the lfm file ("view source (.frm)") and change the first word to
+    "inherited". See main.frm and unit2.frm for examples.
   - Create an empty unit to collect all resourcestrings of the project
     (this simplifies cross-form usage of strings).
 
@@ -60,7 +60,7 @@ type
 
   { TMainForm }
 
-  // inherit from TLocalizedForm, .lfm file begins with "inherited" instead of "object"
+  // inherit from TLocalizedForm, .frm file begins with "inherited" instead of "object"
   TMainForm = class(TLocalizedForm)
     Bevel1              : TBevel;
     Button1             : TButton;
@@ -89,7 +89,7 @@ var
 
 implementation
 
-{$R *.lfm}
+{$R *.frm}
 
 uses
   Unit2, StringsUnit;
@@ -120,7 +120,7 @@ begin
       copying the files "lclstrconsts.*.po" to the languages folder.
       LCL/DefaultTranslater then includes these strings as well. Please note that
       we did not copy these files in this demo project to avoid duplication of
-      Lazarus files. }
+      Typhon files. }
 end;
 
 { Event handler fired when a new language is selected in the language combobox.

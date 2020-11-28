@@ -2,16 +2,16 @@
 <CONFIG>
   <MultiProject FileVersion="1">
     <Elements Count="3">
-      <Element0 FileName="LCL/demo1/translate.lpi">
+      <Element0 FileName="LCL/demo1/translate.ctpr">
         <BuildModes Count="1"/>
         <Mode1 Name="Default"/>
       </Element0>
-      <Element1 FileName="LCL/demo/translation_demo.lpi">
+      <Element1 FileName="LCL/demo/translation_demo.ctpr">
         <BuildModes Count="2"/>
         <Mode1 Name="Debug" Compile="True"/>
         <Mode2 Name="Release"/>
       </Element1>
-      <Element2 FileName="NotLCL/demo/translate_cmd.lpi">
+      <Element2 FileName="NotLCL/demo/translate_cmd.ctpr">
         <BuildModes Count="1"/>
         <Mode1 Name="Default"/>
       </Element2>

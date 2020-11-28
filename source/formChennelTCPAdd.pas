@@ -47,7 +47,7 @@ implementation
 uses ChennelTCPClasses, SocketMisc,
      ModbusEmuResStr;
 
-{$R *.lfm}
+{$R *.frm}
 
 { TfrmChennelTCPAdd }
 

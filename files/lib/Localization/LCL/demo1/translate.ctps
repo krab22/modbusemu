@@ -5,7 +5,7 @@
     <BuildModes Active="Default"/>
     <Units Count="3">
       <Unit0>
-        <Filename Value="translate.lpr"/>
+        <Filename Value="translate.ppr"/>
         <IsPartOfProject Value="True"/>
         <UsageCount Value="32"/>
         <Loaded Value="True"/>

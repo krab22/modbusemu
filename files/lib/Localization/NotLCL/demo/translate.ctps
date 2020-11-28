@@ -5,7 +5,7 @@
     <BuildModes Active="Default"/>
     <Units Count="10">
       <Unit0>
-        <Filename Value="translate.lpr"/>
+        <Filename Value="translate.ppr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
         <CursorPos X="21" Y="9"/>
@@ -21,14 +21,14 @@
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
-        <Filename Value="translate.lpi"/>
+        <Filename Value="translate.ctpr"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="2"/>
         <UsageCount Value="10"/>
         <DefaultSyntaxHighlighter Value="XML"/>
       </Unit2>
       <Unit3>
-        <Filename Value="../../LCL/demo1/translate.lpi"/>
+        <Filename Value="../../LCL/demo1/translate.ctpr"/>
         <EditorIndex Value="-1"/>
         <UsageCount Value="10"/>
         <DefaultSyntaxHighlighter Value="XML"/>
@@ -92,11 +92,11 @@
         <Caret Line="8" Column="3"/>
       </Position1>
       <Position2>
-        <Filename Value="translate.lpr"/>
+        <Filename Value="translate.ppr"/>
         <Caret Line="3" Column="14"/>
       </Position2>
       <Position3>
-        <Filename Value="translate.lpr"/>
+        <Filename Value="translate.ppr"/>
         <Caret Line="3" Column="6"/>
       </Position3>
       <Position4>
@@ -104,15 +104,15 @@
         <Caret Line="582" Column="3" TopLine="580"/>
       </Position4>
       <Position5>
-        <Filename Value="translate.lpr"/>
+        <Filename Value="translate.ppr"/>
         <Caret Line="12" Column="22"/>
       </Position5>
       <Position6>
-        <Filename Value="translate.lpr"/>
+        <Filename Value="translate.ppr"/>
         <Caret Line="3" Column="15"/>
       </Position6>
       <Position7>
-        <Filename Value="translate.lpr"/>
+        <Filename Value="translate.ppr"/>
         <Caret Line="9" Column="4"/>
       </Position7>
       <Position8>
@@ -120,11 +120,11 @@
         <Caret Line="84" Column="28" TopLine="82"/>
       </Position8>
       <Position9>
-        <Filename Value="translate.lpr"/>
+        <Filename Value="translate.ppr"/>
         <Caret Line="3" Column="23"/>
       </Position9>
       <Position10>
-        <Filename Value="translate.lpr"/>
+        <Filename Value="translate.ppr"/>
         <Caret Line="12" Column="28"/>
       </Position10>
     </JumpHistory>

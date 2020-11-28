@@ -1,4 +1,4 @@
-unit LoggerLazarusGtkApplication;
+unit LoggerTyphonGtkApplication;
 
 {$mode objfpc}{$H+}
 
